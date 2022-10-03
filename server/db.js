@@ -7,11 +7,5 @@ module.exports = new Sequilize(
     {
         dialect: 'postgres',
         host: process.env.DB_HOST,
-        pool: {
-            max: 100,
-            min: 0,
-            idle: 200000,
-            acquire: 1000000,
-          },
     }
 )
