@@ -6,9 +6,10 @@ async function GetUsers (req, res) {
 }
 
 async function CreateUser (req, res) {
-    const { name, email, phone, password, role, remember_token, lastname } = req.body
-    const newUser = await db.query('INSERT INTO users (name, email, phone, password, lastname) VALUES (?, ?, ?, ?, ?)', [name, email, phone, email_verified_at, password, role, info, remember_token, lastname])
-    res.json(newUser)
+    const { name, email, phone, password, role, lastname } = req.body
+    console.log(req)
+    //const newUser = await db.query('INSERT INTO users (name, email, phone, password, lastname) VALUES ($1, $2, $3, $4, $5)', [name, email, phone, password, lastname])
+    res.json('newUser')
 }
 
 module.exports = {
