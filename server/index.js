@@ -9,7 +9,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-console.log(UserRouter, 'UserRouter')
+
 app.use('/api', UserRouter)
 
 const start = async () => {
