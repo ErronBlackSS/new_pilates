@@ -6,10 +6,8 @@ const users = sequelize.define('users', {
     name: { type: DataTypes.STRING },
     email: { type: DataTypes.STRING, unique: true, allowNull: false },
     phone: { type: DataTypes.STRING, unique: true, allowNull: false },
-    email_verified_at: { type: DataTypes.DATE },
     password: { type: DataTypes.STRING, allowNull: false },
     role: { type: DataTypes.INTEGER, defaultValue: "1" },
-    info: { type: DataTypes.STRING, defaultValue: null },
     remember_token: { type: DataTypes.STRING, defaultValue: null },
     lastname: { type: DataTypes.STRING, allowNull: false }
 })
