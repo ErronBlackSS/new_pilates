@@ -34,7 +34,7 @@ async function bookLesson (req, res) {
         WHERE id = $1`, 
         [lesson_id]
     )
-    if (lesson.rows[0].capacity > 0) {
+    if (availiableToBook(lesson.rows[0].capacity, lesson.rows[0].occupied)) {
         const newBooking = await pool.query(`
             INSERT INTO users_lessons_rel (user_id, lesson_id)
             VALUES ($1, $2)`,
@@ -52,6 +52,27 @@ async function bookLesson (req, res) {
     }
 }
 
+async function removeBooked (req, res) {
+    const { lesson_id, user_id } = req.body
+    const lesson = await pool.query(`
+        SELECT * FROM lessons
+        WHERE id = $1`,
+        [lesson_id]
+    )
+    const newCapacity = await pool.query(`
+        UPDATE lessons
+        SET capacity = capacity + 1
+        WHERE id = $1`,
+        [lesson_id]
+    )
+    const booking = await pool.query(`
+        DELETE FROM users_lessons_rel
+        WHERE lesson_id = $1 AND user_id = $2`,
+        [lesson_id, user_id]
+    )
+    res.json(booking.rows[0])
+}
+    
 async function listBookedUsers (req, res) {
     const { lesson_id } = req.body
     const lessons = await pool.query(`
@@ -72,5 +93,6 @@ module.exports = {
     Update,
     Delete,
     listBookedUsers,
-    bookLesson
+    bookLesson,
+    removeBooked
 }
