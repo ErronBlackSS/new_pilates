@@ -62,6 +62,10 @@ async function listBookedUsers (req, res) {
     res.json(lessons.rows)
 }
 
+function availiableToBook (capacity, occupied) {
+    return capacity - occupied > 0
+}
+
 module.exports = {
     Create,
     GetAll,
