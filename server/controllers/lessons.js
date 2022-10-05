@@ -1,4 +1,5 @@
 const pool = require('../db')
+const helpers = require('../helpers/general')
 
 async function Create (req, res) {
     const { coach_id, lesson_type_id, capacity, date, start_time, end_time } = req.body
