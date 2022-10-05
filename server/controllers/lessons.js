@@ -72,7 +72,7 @@ async function removeBooked (req, res) {
     )
     res.json(booking.rows[0])
 }
-    
+
 async function listBookedUsers (req, res) {
     const { lesson_id } = req.body
     const lessons = await pool.query(`
