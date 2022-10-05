@@ -17,6 +17,7 @@ CREATE TABLE lessons (
     lesson_type_id INT NOT NULL,
     capacity INT NOT NULL,
     occupied INT NOT NULL DEFAULT 0,
+    date DATE NOT NULL,
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     FOREIGN KEY (coach_id) REFERENCES users(id),
