@@ -1,5 +1,6 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
+const ROLES = require('../constance').ROLES
 
 async function GetAll (req, res) {                
     const users = await pool.query('SELECT * from users')
@@ -25,11 +26,15 @@ async function Delete (req, res) {
     res.json(user.rows[0])
 }
 
-// getCoahes - получение всех тренеров
+async function getCoaches (req, res) {
+    const coaches = await pool.query('SELECT * from users WHERE role = $1', [ROLES.COACH])
+    res.json(coaches.rows)
+}
 
 module.exports = {
     GetAll,
     Create,
     Update,
-    Delete
+    Delete,
+    getCoaches
 }

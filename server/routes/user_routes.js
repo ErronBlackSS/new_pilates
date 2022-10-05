@@ -3,6 +3,7 @@ const router = new Router()
 const UserController = require('../controllers/user_controller')
 
 router.get('/users', UserController.GetAll)
+router.get('/users/coaches', UserController.getCoaches)
 router.post('/users', UserController.Create)
 router.patch('/users', UserController.Update)
 router.delete('/users', UserController.Delete)
