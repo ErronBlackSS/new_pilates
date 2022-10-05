@@ -1,7 +1,7 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
 
-async function Get (req, res) {                
+async function GetAll (req, res) {                
     const users = await pool.query('SELECT * from users')
     res.json(users.rows)
 }
@@ -25,8 +25,10 @@ async function Delete (req, res) {
     res.json(user.rows[0])
 }
 
+// getCoahes - получение всех тренеров
+
 module.exports = {
-    Get,
+    GetAll,
     Create,
     Update,
     Delete
