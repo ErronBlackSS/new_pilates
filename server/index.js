@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000
 const UserRouter = require('./routes/users')
 const LessonsRouter = require('./routes/lessons')
 const LessonTypesRouter = require('./routes/lesson_types')
+const AuthRouter = require('./routes/authRouter')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use('/api', UserRouter)
 app.use('/api', LessonsRouter)
 app.use('/api', LessonTypesRouter)
+app.use('/api', AuthRouter)
 
 const start = async () => {
     try {
