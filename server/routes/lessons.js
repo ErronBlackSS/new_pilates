@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = new Router()
-const LessonController = require('../controllers/lesson_controller')
+const LessonController = require('../controllers/lessons')
 
 router.get('/lessons', LessonController.GetAll)
 router.post('/lessons', LessonController.Create)
