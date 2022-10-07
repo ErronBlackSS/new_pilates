@@ -6,7 +6,7 @@ CREATE TABLE users(
     password VARCHAR(255) NOT NULL,
     role INT NOT NULL DEFAULT 1,
     isActivated BOOLEAN NOT NULL DEFAULT FALSE,
-    activationLink VARCHAR(255) NOT NULL,
+    activationLink VARCHAR(255) DEFAULT NULL,
     remember_token VARCHAR(255) DEFAULT NULL,
     lastname VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

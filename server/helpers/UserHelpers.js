@@ -1,10 +1,16 @@
 const pool = require('../db')
 
 async function findOne (params) {
-    return await pool.query(`SELECT * from users WHERE ${params.field} = $1`, [params.value])
+    const user = await pool.query(`SELECT * from users WHERE ${params.field} = $1`, [params.value])
+    return user.rows[0]
 }
 
-async function Create (user) {
+async function getAllUsers () {
+    const users = await pool.query('SELECT * from users')
+    return users.rows
+}
+
+async function create (user) {
     const newUser = await pool.query(`
         INSERT INTO users (name, email, phone, password, lastname, activation_link)) 
         VALUES ($1, $2, $3, $4, $5, $6)`, 
@@ -13,7 +19,7 @@ async function Create (user) {
     return newUser.rows[0]
 }
 
-async function Activate (userId) {
+async function activate (userId) {
     const user = await pool.query(`
         UPDATE users 
         SET is_active = true
@@ -25,5 +31,7 @@ async function Activate (userId) {
 
 module.exports = {
     findOne,
-    Create
+    getAllUsers,
+    create,
+    activate
 }

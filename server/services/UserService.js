@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
-const MailService = require('./mailService')
+const MailService = require('./MailService')
 const TokenService = require('./TokenService')
 const UserHelpers = require('../helpers/UserHelpers')
 const UserDTO = require('../dtos/UserDTO')
@@ -16,18 +16,18 @@ const ApiError = require('../exceptions/ApiError')
     }
 */
 
-async function registration () {
+async function registration (name, email, phone, password, lastname) {
     const candidate = await UserHelpers.findOne({ field: 'email', value: email })
     if (candidate) {
-        throw new ApiError(httpStatus.BAD_REQUEST, 'Пользователь с данным email уже существует')
+        throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
     }
     const hashPassword = await bcrypt.hash(password, 5)
     const activationLink = uuid.v4()
 
-    const user = await UserHelpers.Create({ email, password: hashPassword, activationLink, tokens })
+    const user = await UserHelpers.create({ email, password: hashPassword, name: name, lastname: lastname, phone: phone, activationLink, tokens })
     const userDto = new UserDto(user);
 
-    await MailService.sendActivcationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+    await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
     const tokens = TokenService.generateTokens({ ...userDto })
     await TokenService.saveToken(userDto.id, tokens.refreshToken)
@@ -40,7 +40,7 @@ async function activate(activationLink) {
     if (!user) {
         throw ApiError.BadRequest('Неккоректная ссылка активации')
     }
-    await UserHelpers.Activate(user.id);
+    await UserHelpers.activate(user.id);
 }
 
 async function login(email, password) {
@@ -61,7 +61,7 @@ async function login(email, password) {
 
 async function logout(refreshToken) {
     const token = await TokenService.removeToken(refreshToken)
-    return token;
+    return token
 }
 
 async function refresh(refreshToken) {
@@ -81,10 +81,16 @@ async function refresh(refreshToken) {
     return {...tokens, user: userDto}
 }
 
+async function getAll() {
+    const users = await UserHelpers.getAllUsers()
+    return users.rows
+}
+
 module.exports = {
     registration,
     activate,
     login,
     logout,
-    refresh
+    refresh,
+    getAll
 }

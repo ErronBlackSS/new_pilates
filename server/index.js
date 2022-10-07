@@ -6,7 +6,6 @@ const UserRouter = require('./routes/UserRouter')
 const LessonsRouter = require('./routes/LessonsRouter')
 const LessonTypesRouter = require('./routes/LessonTypesRouter')
 const cookieParser = require('cookie-parser')
-// const UserRouter = require('./routes/UserRouter')
 
 const app = express()
 
@@ -17,7 +16,6 @@ app.use(cookieParser())
 app.use('/api', UserRouter)
 app.use('/api', LessonsRouter)
 app.use('/api', LessonTypesRouter)
-app.use('/api', UserRouter)
 
 const start = async () => {
     try {
