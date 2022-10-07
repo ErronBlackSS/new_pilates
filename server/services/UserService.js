@@ -23,10 +23,10 @@ async function registration (name, email, phone, password, lastname) {
     }
     const hashPassword = await bcrypt.hash(password, 5)
     const activationLink = uuid.v4()
-
-    const user = await UserHelpers.create({ email, password: hashPassword, name: name, lastname: lastname, phone: phone, activationLink, tokens })
-    const userDto = new UserDto(user);
-
+    
+    const user = await UserHelpers.create({ email, password: hashPassword, name: name, lastname: lastname, phone: phone, activationLink })
+    console.log(user, '----------------------------------------------------------------------------------------')
+    const userDto = new UserDTO(user)
     await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
     const tokens = TokenService.generateTokens({ ...userDto })

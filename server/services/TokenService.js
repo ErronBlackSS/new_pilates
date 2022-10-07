@@ -22,12 +22,12 @@ async function saveToken (userId, refreshToken) {
 
 async function removeToken(refreshToken) {
     const tokenData = await TokenHelper.deleteOne({ field: 'refreshToken', value: refreshToken })
-    return tokenData.rows[0]
+    return tokenData
 }
 
 async function findToken(refreshToken) {
     const tokenData = await TokenHelper.findOne({ field: 'refreshToken', value: refreshToken })
-    return tokenData.rows[0]
+    return tokenData
 }
 
 function validateAccessToken(token) {
