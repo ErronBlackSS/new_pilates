@@ -2,9 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const PORT = process.env.PORT || 3000
-const UserRouter = require('./routes/users')
-const LessonsRouter = require('./routes/lessons')
-const LessonTypesRouter = require('./routes/lesson_types')
+const UserRouter = require('./routes/UserRouter')
+const LessonsRouter = require('./routes/LessonsRouter')
+const LessonTypesRouter = require('./routes/LessonTypesRouter')
 const cookieParser = require('cookie-parser')
 // const UserRouter = require('./routes/UserRouter')
 

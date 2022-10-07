@@ -2,11 +2,12 @@ const Router = require('express')
 const router = new Router()
 
 const UserController = require('../controllers/UserController');
+const AuthMiddleware = require('../middlewares/AuthMiddleware');
 
 router.post('/login', UserController.login)
 router.post('/registration', UserController.registration)
 router.post('/logout', UserController.logout)
-// router.get('/auth', authMiddleware, authController.auth)
+router.get('/auth', AuthMiddleware, UserController.auth)
 router.get('refresh', UserController.refresh)
 router.get('activate/:link', UserController.activate)
 

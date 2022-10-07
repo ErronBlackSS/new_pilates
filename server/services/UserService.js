@@ -2,10 +2,9 @@ const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const MailService = require('./mailService')
 const TokenService = require('./TokenService')
-const UserHelpers = require('../helpers/user_helpers')
+const UserHelpers = require('../helpers/UserHelpers')
 const UserDTO = require('../dtos/UserDTO')
-const ApiError = require('../exceptions/api-error');
-const bcrypt = require('bcrypt');
+const ApiError = require('../exceptions/ApiError')
 
 /* 
     {
@@ -49,19 +48,43 @@ async function login(email, password) {
     if (!user) {
         throw ApiError.BadRequest('Пользователь с таким email не найден')
     }
-    const isPassEquals = await bcrypt.compare(password, user.password);
+    const isPassEquals = await bcrypt.compare(password, user.password)
     if (!isPassEquals) {
-        throw ApiError.BadRequest('Неверный пароль');
+        throw ApiError.BadRequest('Неверный пароль')
     }
     const userDto = new UserDto(user);
-    const tokens = tokenService.generateTokens({...userDto});
+    const tokens = TokenService.generateTokens({...userDto})
 
-    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+    await TokenService.saveToken(userDto.id, tokens.refreshToken)
+    return {...tokens, user: userDto}
+}
+
+async function logout(refreshToken) {
+    const token = await TokenService.removeToken(refreshToken)
+    return token;
+}
+
+async function refresh(refreshToken) {
+    if (!refreshToken) {
+        throw ApiError.UnauthorizedError()
+    }
+    const userData = TokenService.validateRefreshToken(refreshToken)
+    const tokenFromDb = await TokenService.findToken(refreshToken)
+    if (!userData || !tokenFromDb) {
+        throw ApiError.UnauthorizedError()
+    }
+    const user = await UserHelpers.findOne({ field: 'id', value: userData.id })
+    const userDto = new UserDto(user)
+    const tokens = TokenService.generateTokens({...userDto})
+
+    await TokenService.saveToken(userDto.id, tokens.refreshToken)
     return {...tokens, user: userDto}
 }
 
 module.exports = {
     registration,
     activate,
-    login
+    login,
+    logout,
+    refresh
 }

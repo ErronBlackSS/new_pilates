@@ -1,7 +1,7 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
 
-async function Create (req, res) {
+async function create (req, res) {
     const { coach_id, lesson_type_id, capacity, date, start_time, end_time } = req.body
     const newLesson = await pool.query(`
         INSERT INTO lessons (coach_id, lesson_type_id, capacity, date, start_time, end_time) 
@@ -11,18 +11,18 @@ async function Create (req, res) {
 }
 
 // Пока хз нужна ли она
-async function GetAll (req, res) {
+async function getAll (req, res) {
     const lessons = await pool.query('SELECT * from lessons')
     res.json(lessons.rows)
 }
 
-async function Update (req, res) {
+async function update (req, res) {
     const query = helpers.parseUpdateData(req.body, 'lessons')
     const lesson = await pool.query(query, [])
     res.json(lesson.rows[0])
 }
 
-async function Delete (req, res) {
+async function remove (req, res) {
     const { id } = req.body
     const lesson = await pool.query('DELETE FROM lessons WHERE id = $1', [id])
     res.json(lesson.rows[0])
@@ -41,7 +41,7 @@ async function bookLesson (req, res) {
             VALUES ($1, $2)`,
             [user_id, lesson_id]
         )
-        const newCapacity = await pool.query(`
+        await pool.query(`
             UPDATE lessons
             SET capacity = capacity - 1
             WHERE id = $1`,
@@ -89,10 +89,10 @@ function availiableToBook (capacity, occupied) {
 }
 
 module.exports = {
-    Create,
-    GetAll,
-    Update,
-    Delete,
+    create,
+    getAll,
+    update,
+    remove,
     listBookedUsers,
     bookLesson,
     removeBooked
