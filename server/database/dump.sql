@@ -5,10 +5,19 @@ CREATE TABLE users(
     phone VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role INT NOT NULL DEFAULT 1,
+    isActivated BOOLEAN NOT NULL DEFAULT FALSE,
+    activationLink VARCHAR(255) NOT NULL,
     remember_token VARCHAR(255) DEFAULT NULL,
     lastname VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tokens (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE lesson_types (
