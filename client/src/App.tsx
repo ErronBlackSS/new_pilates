@@ -1,15 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import './App.css'
+
+interface VanyaPidor { count: number }
 
 function App() {
+
+  const [Pidor, setPidor] = useState(0)
+
+  const incrementPidor = () => {
+    let newPidor = Pidor + 1
+    setPidor(newPidor)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <button onClick={incrementPidor}>
+          Ваня Костенко пидорас x{Pidor}
+        </button>
         <a
           className="App-link"
           href="https://reactjs.org"
