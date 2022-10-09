@@ -5,7 +5,7 @@ import {observer} from "mobx-react-lite";
 const LoginForm: FC = () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const {store} = useContext(Context);
+    const {user} = useContext(Context);
 
     return (
         <div>
@@ -21,7 +21,7 @@ const LoginForm: FC = () => {
                 type="password"
                 placeholder='Пароль'
             />
-            <button onClick={() => store.user.login(email, password)}>
+            <button onClick={() => user.login(email, password)}>
                 Логин
             </button>
         </div>

@@ -9,17 +9,17 @@ const App: FC = () => {
   const {user} = useContext(Context);
 
   useEffect(() => {
-      console.log(user, 'store')
-      if (localStorage.getItem('token')) {
-        user.checkAuth()
-      }
+    console.log(user, 'store')
+    if (localStorage.getItem('token')) {
+      user.checkAuth()
+    }
   }, [user])
 
   return (
     <BrowserRouter>
-        <AppRouter/>
+      <AppRouter/>
     </BrowserRouter>
   )
-};
+}
 
 export default observer(App);

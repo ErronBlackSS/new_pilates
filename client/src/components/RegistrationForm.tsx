@@ -9,7 +9,7 @@ const RegistationForm: FC = () => {
     const [lastname, setLastname] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
 
-    const {store} = useContext(Context);
+    const {user} = useContext(Context);
 
     return (
         <div>
@@ -43,7 +43,7 @@ const RegistationForm: FC = () => {
                 type="password"
                 placeholder='Пароль'
             />
-            <button onClick={() => store.user.registration(name, lastname, phone, email, password)}>
+            <button onClick={() => user.registration(name, lastname, phone, email, password)}>
                 Зарегистрироваться
             </button>
         </div>
