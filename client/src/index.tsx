@@ -1,21 +1,14 @@
 import { createContext } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Store from "./store/store";
+import UserStore from "./store/UserStore";
+import { BrowserRouter } from "react-router-dom";
 
-interface State {
-    store: Store,
-}
-
-export const store = new Store();
-
-export const Context = createContext<State>({
-    store,
-})
+export const Context = createContext(null)
 
 ReactDOM.render(
     <Context.Provider value={{
-        store
+        user: new UserStore()
     }}>
       <App />
     </Context.Provider>,

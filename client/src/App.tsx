@@ -1,33 +1,25 @@
-import {FC, useContext, useEffect} from 'react';
-import { Context } from "./index";
-import {observer} from "mobx-react-lite";
-import LoginForm from './components/LoginForm';
+import { FC, useContext, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { observer } from "mobx-react-lite";
 import AppRouter from './components/AppRouter';
+import { Context } from './index';
 
 const App: FC = () => {
-    const {store} = useContext(Context);
 
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
-            store.user.checkAuth()
-        }
-    }, [store.user])
+  const {user} = useContext(Context);
 
-    if (store.user.isLoading) {
-        return <div>Загрузка...</div>
-    }
+  useEffect(() => {
+      console.log(user, 'store')
+      if (localStorage.getItem('token')) {
+        user.checkAuth()
+      }
+  }, [user])
 
-    if (!store.user.isAuth) {
-      return (
-          <div>
-              <LoginForm/>
-          </div>
-      );
-  }
-
-    return (
-      <AppRouter />
-    );
+  return (
+    <BrowserRouter>
+        <AppRouter/>
+    </BrowserRouter>
+  )
 };
 
 export default observer(App);

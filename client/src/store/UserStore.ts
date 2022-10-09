@@ -4,7 +4,7 @@ import AuthService from "../services/AuthService";
 import axios from 'axios';
 import { AuthResponse } from "../types/response/AuthResponse";
 
-export default class Store {
+export default class UserStore {
     user = {} as UserInterface;
     isAuth = false
     isLoading = false
