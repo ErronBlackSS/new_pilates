@@ -24,9 +24,6 @@ const LoginForm: FC = () => {
             <button onClick={() => store.user.login(email, password)}>
                 Логин
             </button>
-            <button onClick={() => store.user.registration(email, password)}>
-                Регистрация
-            </button>
         </div>
     );
 };
