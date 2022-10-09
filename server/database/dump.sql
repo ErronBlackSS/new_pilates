@@ -5,7 +5,7 @@ CREATE TABLE users(
     phone VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role INT NOT NULL DEFAULT 1,
-    isActivated BOOLEAN NOT NULL DEFAULT FALSE,
+    is_activated BOOLEAN NOT NULL DEFAULT FALSE,
     activation_link VARCHAR(255) DEFAULT NULL,
     lastname VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -15,8 +15,8 @@ CREATE TABLE users(
 CREATE TABLE tokens (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    token VARCHAR(255) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    refreshToken VARCHAR(512) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE lesson_types (

@@ -5,8 +5,9 @@ const TokenService = require('./TokenService')
 const UserHelpers = require('../helpers/UserHelpers')
 const UserDTO = require('../dtos/UserDTO')
 const ApiError = require('../exceptions/ApiError')
+const e = require('express')
 
-/* 
+/*
     {
         "name": "Antonio",
         "email": "antony_band@yandex.ru",
@@ -22,26 +23,23 @@ async function registration (name, email, phone, password, lastname) {
         throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
     }
     const hashPassword = await bcrypt.hash(password, 5)
-    const activationLink = uuid.v4()
-    
-    const user = await UserHelpers.create({ email, password: hashPassword, name: name, lastname: lastname, phone: phone, activationLink })
-    console.log(user, 'user')
+    const activation_link = uuid.v4()
+    const user = await UserHelpers.create({ name, email, hashPassword, lastname, phone, activation_link })
     const userDto = new UserDTO(user)
-    await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+    await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activation_link}`)
 
     const tokens = TokenService.generateTokens({ ...userDto })
-    console.log(userDto, '----------------------------------------------------------------------------------------')
-    await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
+    await TokenService.saveToken(userDto.id, tokens.refreshToken)
     return { ...tokens, user: userDto }
 }
 
 async function activate(activationLink) {
-    const user = await UserHelpers.findOne({field: 'activationLink', value: activationLink})
+    const user = await UserHelpers.findOne({field: 'activation_link', value: activationLink})
     if (!user) {
         throw ApiError.BadRequest('Неккоректная ссылка активации')
     }
-    await UserHelpers.activate(user.id);
+    return await UserHelpers.activate(user.id);
 }
 
 async function login(email, password) {
