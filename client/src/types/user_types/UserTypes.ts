@@ -4,7 +4,6 @@ export interface UserInterface {
     is_activated: boolean
     name: string
     lastname: string
-    phone: string
 }
 
 export interface LoginInterface {
