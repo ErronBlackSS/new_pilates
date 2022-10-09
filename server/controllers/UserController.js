@@ -1,7 +1,9 @@
 const UserService = require('../services/UserService')
+const UserHelpers = require('../helpers/UserHelpers')
 const { validationResult } = require('express-validator')
 const ApiError = require('../exceptions/ApiError')
 const helpers = require('../helpers/general')
+const pool = require('../db')
 
 async function registration (req, res, next) {
   try {
@@ -63,8 +65,8 @@ async function activate (req, res, next) {
 
 async function getUsers (req, res, next) {
   try {
-    const users = UserService.getAll()
-    res.json(users.rows)
+    const users = await UserHelpers.getAllUsers()
+    res.json(users)
   } catch (e) {
     next(e)
   }
@@ -83,12 +85,12 @@ async function update (req, res, next) {
 async function remove (req, res, next) {
   try {
     const { id } = req.body
-    const user = await pool.query(`
+    await pool.query(`
         DELETE FROM users 
         WHERE id = $1`, 
         [id]
     )
-    res.json(user.rows[0])
+    res.json({ message: 'Пользователь удален' })
   } catch (e) {
     next(e)
   }

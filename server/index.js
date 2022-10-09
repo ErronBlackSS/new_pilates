@@ -5,17 +5,23 @@ const PORT = process.env.PORT || 3000
 const UserRouter = require('./routes/UserRouter')
 const LessonsRouter = require('./routes/LessonsRouter')
 const LessonTypesRouter = require('./routes/LessonTypesRouter')
+const ErrorMiddleware = require('./middlewares/ErrorMiddleware')
 const cookieParser = require('cookie-parser')
 
 const app = express()
 
-app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(cors({
+    credentials: true,
+    // origin: process.env.CLIENT_URL
+}));
 
 app.use('/api', UserRouter)
 app.use('/api', LessonsRouter)
 app.use('/api', LessonTypesRouter)
+app.use(ErrorMiddleware);
 
 const start = async () => {
     try {

@@ -25,11 +25,12 @@ async function registration (name, email, phone, password, lastname) {
     const activationLink = uuid.v4()
     
     const user = await UserHelpers.create({ email, password: hashPassword, name: name, lastname: lastname, phone: phone, activationLink })
-    console.log(user, '----------------------------------------------------------------------------------------')
+    console.log(user, 'user')
     const userDto = new UserDTO(user)
     await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
     const tokens = TokenService.generateTokens({ ...userDto })
+    console.log(userDto, '----------------------------------------------------------------------------------------')
     await TokenService.saveToken(userDto.id, tokens.refreshToken)
 
     return { ...tokens, user: userDto }
@@ -81,16 +82,10 @@ async function refresh(refreshToken) {
     return {...tokens, user: userDto}
 }
 
-async function getAll() {
-    const users = await UserHelpers.getAllUsers()
-    return users.rows
-}
-
 module.exports = {
     registration,
     activate,
     login,
     logout,
-    refresh,
-    getAll
+    refresh
 }
