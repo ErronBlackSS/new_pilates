@@ -29,63 +29,63 @@ async function remove (req, res) {
 }
 
 async function bookLesson (req, res) {
-    const { user_id, lesson_id } = req.body
-    const lesson = await pool.query(`
-        SELECT * FROM lessons 
-        WHERE id = $1`, 
-        [lesson_id]
+  const { user_id, lesson_id } = req.body
+  const lesson = await pool.query(`
+    SELECT * FROM lessons 
+    WHERE id = $1`, 
+    [lesson_id]
+  )
+  if (availiableToBook(lesson.rows[0].capacity, lesson.rows[0].occupied)) {
+    const newBooking = await pool.query(`
+      INSERT INTO users_lessons_rel (user_id, lesson_id)
+      VALUES ($1, $2)`,
+      [user_id, lesson_id]
     )
-    if (availiableToBook(lesson.rows[0].capacity, lesson.rows[0].occupied)) {
-        const newBooking = await pool.query(`
-            INSERT INTO users_lessons_rel (user_id, lesson_id)
-            VALUES ($1, $2)`,
-            [user_id, lesson_id]
-        )
-        await pool.query(`
-            UPDATE lessons
-            SET capacity = capacity - 1
-            WHERE id = $1`,
-            [lesson_id]
-        )
-        res.json(newBooking.rows[0])
-    } else {
-        res.json({ message: 'Lesson is full' })
-    }
+    await pool.query(`
+      UPDATE lessons
+      SET capacity = capacity - 1
+      WHERE id = $1`,
+      [lesson_id]
+    )
+    res.json(newBooking.rows[0])
+  } else {
+    res.json({ message: 'Lesson is full' })
+  }
 }
 
 async function removeBooked (req, res) {
-    const { lesson_id, user_id } = req.body
-    const lesson = await pool.query(`
-        SELECT * FROM lessons
-        WHERE id = $1`,
-        [lesson_id]
-    )
-    const newCapacity = await pool.query(`
-        UPDATE lessons
-        SET capacity = capacity + 1
-        WHERE id = $1`,
-        [lesson_id]
-    )
-    const booking = await pool.query(`
-        DELETE FROM users_lessons_rel
-        WHERE lesson_id = $1 AND user_id = $2`,
-        [lesson_id, user_id]
-    )
-    res.json(booking.rows[0])
+  const { lesson_id, user_id } = req.body
+  const lesson = await pool.query(`
+    SELECT * FROM lessons
+    WHERE id = $1`,
+    [lesson_id]
+  )
+  const newCapacity = await pool.query(`
+    UPDATE lessons
+    SET capacity = capacity + 1
+    WHERE id = $1`,
+    [lesson_id]
+  )
+  const booking = await pool.query(`
+    DELETE FROM users_lessons_rel
+    WHERE lesson_id = $1 AND user_id = $2`,
+    [lesson_id, user_id]
+  )
+  res.json(booking.rows[0])
 }
 
 async function listBookedUsers (req, res) {
-    const { lesson_id } = req.body
-    const lessons = await pool.query(`
-        SELECT * FROM lessons 
-        INNER JOIN users_lessons_rel ON lessons.id = users_lessons_rel.lesson_id 
-        WHERE users_lessons_rel.user_id = $1`, 
-        [lesson_id])
-    res.json(lessons.rows)
+  const { lesson_id } = req.body
+  const lessons = await pool.query(`
+    SELECT * FROM lessons 
+    INNER JOIN users_lessons_rel ON lessons.id = users_lessons_rel.lesson_id 
+    WHERE users_lessons_rel.user_id = $1`, 
+    [lesson_id])
+  res.json(lessons.rows)
 }
 
 function availiableToBook (capacity, occupied) {
-    return capacity - occupied > 0
+  return capacity - occupied > 0
 }
 
 module.exports = {

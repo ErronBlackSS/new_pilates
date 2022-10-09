@@ -27,29 +27,29 @@ async function login (req, res, next) {
     res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
     return res.json(userData);
   } catch (e) {
-      next(e);
+    next(e);
   }
 }
 
 async function logout(req, res, next) {
   try {
-      const { refreshToken } = req.cookies
-      const token = await UserService.logout(refreshToken)
-      res.clearCookie('refreshToken')
-      return res.json(token)
+    const { refreshToken } = req.cookies
+    const token = await UserService.logout(refreshToken)
+    res.clearCookie('refreshToken')
+    return res.json(token)
   } catch (e) {
-      next(e)
+    next(e)
   }
 }
 
 async function refresh(req, res, next) {
   try {
-      const {refreshToken} = req.cookies;
-      const userData = await UserService.refresh(refreshToken);
-      res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
-      return res.json(userData);
+    const {refreshToken} = req.cookies;
+    const userData = await UserService.refresh(refreshToken);
+    res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+    return res.json(userData);
   } catch (e) {
-      next(e);
+    next(e);
   }
 }
 
@@ -59,7 +59,7 @@ async function activate (req, res, next) {
     await UserService.activate(activationLink)
     return res.redirect(process.env.CLIENT_URL)
   } catch (e) {
-      next(e)
+    next(e)
   }
 }
 
@@ -86,9 +86,9 @@ async function remove (req, res, next) {
   try {
     const { id } = req.body
     await pool.query(`
-        DELETE FROM users 
-        WHERE id = $1`, 
-        [id]
+      DELETE FROM users 
+      WHERE id = $1`, 
+      [id]
     )
     res.json({ message: 'Пользователь удален' })
   } catch (e) {
