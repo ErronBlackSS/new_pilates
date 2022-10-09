@@ -5,7 +5,6 @@ const TokenService = require('./TokenService')
 const UserHelpers = require('../helpers/UserHelpers')
 const UserDTO = require('../dtos/UserDTO')
 const ApiError = require('../exceptions/ApiError')
-const e = require('express')
 
 /*
     {
@@ -51,7 +50,7 @@ async function login(email, password) {
     if (!isPassEquals) {
         throw ApiError.BadRequest('Неверный пароль')
     }
-    const userDto = new UserDto(user);
+    const userDto = new UserDTO(user);
     const tokens = TokenService.generateTokens({...userDto})
 
     await TokenService.saveToken(userDto.id, tokens.refreshToken)
@@ -73,7 +72,7 @@ async function refresh(refreshToken) {
         throw ApiError.UnauthorizedError()
     }
     const user = await UserHelpers.findOne({ field: 'id', value: userData.id })
-    const userDto = new UserDto(user)
+    const userDto = new UserDTO(user)
     const tokens = TokenService.generateTokens({...userDto})
 
     await TokenService.saveToken(userDto.id, tokens.refreshToken)
