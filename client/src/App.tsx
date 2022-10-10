@@ -6,7 +6,7 @@ import { Context } from './index';
 
 const App: FC = () => {
 
-  const {user} = useContext(Context);
+  const {user} = useContext(Context)
 
   useEffect(() => {
     console.log(user, 'store')
