@@ -1,5 +1,5 @@
 export enum ROUTES {
     MAIN_ROUTE = '/',
-    ADMIN_ROUTE = '/login',
-    AUTH_ROUTE = '/account'
+    AUTH_ROUTE = '/login',
+    ACCOUNT_ROUTE = '/account'
 }

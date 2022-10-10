@@ -1,9 +1,9 @@
-import React from 'react';
+import { ROUTES } from '../utils/constance';
 
 const Header = () => {
     return (
-        <div>
-            Header
+        <div className='text-3xl font-bold underline'>
+            Hello world!
         </div>
     );
 };

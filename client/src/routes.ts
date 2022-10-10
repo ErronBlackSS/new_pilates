@@ -7,7 +7,7 @@ const Account = React.lazy(() => import('./views/Account'))
 
 export const AuthRoutes = [
     {
-        path: ROUTES.ADMIN_ROUTE,
+        path: ROUTES.ACCOUNT_ROUTE,
         Component: Account
     }
 ]

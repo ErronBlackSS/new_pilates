@@ -2,6 +2,7 @@ import { createContext } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import UserStore from "./store/UserStore"
+import './index.css'
 
 interface State {
   user: UserStore
