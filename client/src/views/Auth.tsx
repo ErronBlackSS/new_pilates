@@ -1,7 +1,7 @@
 import RegistrationForm from '../components/RegistrationForm'
 import LoginForm from '../components/LoginForm'
 import { useContext, FC } from 'react'
-import { Context } from '../index';
+import { Context } from '../index'
 
 const Auth: FC = () => {
 

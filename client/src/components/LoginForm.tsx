@@ -22,7 +22,7 @@ const LoginForm: FC = () => {
         <h3
             className="text-2xl font-bold text-center"
         >
-            Login to your account
+            Войти в аккаунт
         </h3>
         <form
             ref={formRef}
@@ -33,7 +33,7 @@ const LoginForm: FC = () => {
                 className="block"
                 htmlFor="email"
                 >
-                Email
+                Почта
                 </label>
                 <input
                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
@@ -46,7 +46,7 @@ const LoginForm: FC = () => {
                 <label
                   className="block"
                 >
-                  Password
+                  Пароль
                 </label>
                 <input
                   className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
@@ -56,7 +56,7 @@ const LoginForm: FC = () => {
                 />
             </div>
             <div className='mt-3'>
-                Забыли пароль? - <a href="/registration">Регистрация</a>
+                Нет аккаунта? - <a href="/registration">Регистрация</a>
             </div>
             <div className="flex items-baseline justify-between">
                 <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Login</button>

@@ -1,11 +1,9 @@
-import React from 'react';
-
 const LinkPropsItem = () => {
-    return (
-        <div>
+  return (
+    <div>
             1232
-        </div>
-    );
+    </div>
+  )
 }
 
-export default LinkPropsItem;
+export default LinkPropsItem

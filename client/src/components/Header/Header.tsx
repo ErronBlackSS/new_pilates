@@ -1,4 +1,4 @@
-import { NAV_LINKS } from './Links';
+import { NAV_LINKS } from './Links'
 
 const Header = () => {
   return (
@@ -33,7 +33,7 @@ const Header = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

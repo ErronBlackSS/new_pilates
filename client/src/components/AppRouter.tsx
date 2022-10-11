@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite';
-import React from 'react';
+import { observer } from 'mobx-react-lite'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AuthRoutes } from '../routes'
 import { PublicRoutes } from '../routes'
@@ -16,7 +16,7 @@ const AppRouter = () => {
         )}
       </Routes>
     </React.Suspense>
-  );
+  )
 }
 
 export default observer(AppRouter)
