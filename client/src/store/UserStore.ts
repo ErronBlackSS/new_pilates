@@ -39,6 +39,7 @@ export default class UserStore {
 
   async registration(name: string, lastname: string, phone: string, email: string, password: string) {
     try {
+      console.log(12222222221212121)
       const response = await AuthService.registration(name, lastname, phone, email, password)
       console.log(response)
       localStorage.setItem('token', response.data.accessToken)
@@ -57,7 +58,7 @@ export default class UserStore {
       this.setUser({} as UserInterface)
     } catch (e) {
       console.log(e.response?.data?.message)
-    }
+    } 
   }
 
   async checkAuth() {

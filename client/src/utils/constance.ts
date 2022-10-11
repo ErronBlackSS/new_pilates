@@ -12,10 +12,10 @@ export const LOGIN_INPUTS = [
     placeholder: 'Email'
   },
   {
-    label: 'Почта',
-    type: 'email',
-    name: 'email',
-    placeholder: 'Email'
+    label: 'Пароль',
+    type: 'password',
+    name: 'password',
+    placeholder: 'Пароль'
   },
 ]
 
