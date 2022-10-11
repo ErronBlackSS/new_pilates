@@ -1,25 +1,43 @@
-import RegistrationForm from '../components/RegistrationForm'
-import LoginForm from '../components/LoginForm'
-import { useContext, FC } from 'react'
-import { Context } from '../index'
+import RegistrationForm from '../components/Auth/RegistrationForm'
+import LoginForm from '../components/Auth/LoginForm'
+import { useState, FC } from 'react'
 
 const Auth: FC = () => {
 
-  const { user } = useContext(Context)
+  const [switchType, SetSwitchType] = useState<string>('login')
 
-  if (!user.isAuth) {
+  const switchToRegistration = () => {
+    SetSwitchType('registration')
+  }
+
+  const switchToLogin = () => {
+    SetSwitchType('login')
+  }
+
+  switch (switchType) {
+  case 'login':
     return (
       <div>
-        <LoginForm />
+        <LoginForm
+          switchToRegistration={switchToRegistration}
+        />
+      </div>
+    )
+  case 'registration':
+    return (
+      <div>
+        <RegistrationForm
+          switchToLogin={switchToLogin}
+        />
+      </div>
+    )
+  default:
+    return (
+      <div>
+          Error
       </div>
     )
   }
-
-  return (
-    <div>
-      <RegistrationForm />
-    </div>
-  )
 }
 
 export default Auth

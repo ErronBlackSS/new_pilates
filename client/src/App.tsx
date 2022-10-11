@@ -1,13 +1,13 @@
-import { FC, useContext, useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { observer } from "mobx-react-lite";
-import AppRouter from './components/AppRouter';
-import { Context } from './index';
-import Header from './components/Header/Header';
+import { FC, useContext, useEffect } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
+import AppRouter from './components/AppRouter'
+import { Context } from './index'
+import Header from './components/Header/Header'
 
 const App: FC = () => {
 
-  const {user} = useContext(Context)
+  const { user } = useContext(Context)
 
   useEffect(() => {
     console.log(user, 'store')
@@ -24,4 +24,4 @@ const App: FC = () => {
   )
 }
 
-export default observer(App);
+export default observer(App)
