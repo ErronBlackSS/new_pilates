@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client';
 import App from './App'
 import UserStore from "./store/UserStore"
 import './index.css'
@@ -14,11 +14,13 @@ export const Context = createContext<State>({
   user
 })
 
-ReactDOM.render(
+const container = document.getElementById('app')
+const root = createRoot(container)
+
+root.render(
   <Context.Provider value={{
     user
   }}>
     <App />
-  </Context.Provider>,
-  document.getElementById('root')
+  </Context.Provider>
 )
