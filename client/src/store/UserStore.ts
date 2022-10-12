@@ -62,7 +62,6 @@ export default class UserStore {
     this.setLoading(true)
     try {
       const response = await AuthService.check()
-      console.log(response, 'CHECK AUTH')
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
