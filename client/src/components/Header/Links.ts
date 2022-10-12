@@ -1,22 +1,22 @@
 export const NAV_LINKS = [
   {
-    link: '#trainers',
+    link: '/#trainers',
     text: 'Тренеры'
   },
   {
-    link: '#directions',
+    link: '/#directions',
     text: 'Направления'
   },
   {
-    link: '#price',
+    link: '/#price',
     text: 'Прайс'
   },
   {
-    link: '#schedule',
+    link: '/#schedule',
     text: 'Расписание'
   },
   {
-    link: '#rules',
+    link: '/#rules',
     text: 'Правила'
   }
 ]

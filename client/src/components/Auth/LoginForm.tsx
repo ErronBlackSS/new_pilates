@@ -26,7 +26,7 @@ const LoginForm: FC<AuthProps> = ({ switchToRegistration }: AuthProps) => {
   }
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex w-100 items-center justify-center">
       <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg">
         <h3
           className="text-2xl font-bold text-center"

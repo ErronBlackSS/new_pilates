@@ -1,8 +1,6 @@
 import { UserInterface } from '../types/user_types/UserTypes'
 import { makeAutoObservable } from 'mobx'
 import AuthService from '../services/AuthService'
-import axios from 'axios'
-import { AuthResponse } from '../types/response/AuthResponse'
 
 export default class UserStore {
   user = {} as UserInterface
@@ -39,7 +37,6 @@ export default class UserStore {
 
   async registration(name: string, lastname: string, phone: string, email: string, password: string) {
     try {
-      console.log(12222222221212121)
       const response = await AuthService.registration(name, lastname, phone, email, password)
       console.log(response)
       localStorage.setItem('token', response.data.accessToken)
@@ -64,8 +61,8 @@ export default class UserStore {
   async checkAuth() {
     this.setLoading(true)
     try {
-      const response = await axios.get<AuthResponse>(`${process.env.API_URL}/refresh`, {withCredentials: true})
-      console.log(response)
+      const response = await AuthService.check()
+      console.log(response, 'CHECK AUTH')
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
