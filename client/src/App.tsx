@@ -10,7 +10,6 @@ const App: FC = () => {
   const { user } = useContext(Context)
 
   useEffect(() => {
-    console.log(user, 'store')
     if (localStorage.getItem('token')) {
       user.checkAuth()
     }
