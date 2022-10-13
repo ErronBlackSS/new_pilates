@@ -6,11 +6,11 @@ const Auth: FC = () => {
 
   const [switchType, SetSwitchType] = useState<string>('login')
 
-  const switchToRegistration = () => {
+  const switchToRegistration = (): void => {
     SetSwitchType('registration')
   }
 
-  const switchToLogin = () => {
+  const switchToLogin = (): void => {
     SetSwitchType('login')
   }
 
