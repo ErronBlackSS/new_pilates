@@ -1,9 +1,7 @@
-import React from 'react'
 import { ROUTES } from './utils/constance'
-
-const Home = React.lazy(() => import('./views/Home'))
-const Auth = React.lazy(() => import('./views/Auth'))
-const Account = React.lazy(() => import('./views/Account'))
+import Home from './views/Home'
+import Account from './views/Account'
+import Auth from './views/Auth'
 
 export const AUTH_ROUTES = [
   {

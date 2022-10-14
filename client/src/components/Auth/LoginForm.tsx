@@ -24,7 +24,7 @@ const LoginForm: FC<AuthProps> = ({ switchToRegistration }: AuthProps) => {
     const email = target.email.value
     const password = target.password.value
     user.login(email, password)
-    navigate('/account')
+    navigate('/')
   }
 
   return (

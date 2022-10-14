@@ -4,7 +4,7 @@ import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
 import { REGISTRATION_INPUTS } from '../../utils/constance'
 import InputItem from './InputItem'
-
+import { useNavigate } from 'react-router-dom'
 interface AuthProps {
   switchToLogin: () => void
 }
@@ -12,7 +12,7 @@ interface AuthProps {
 const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
   
   const { user } = React.useContext(Context)
-
+  const navigate = useNavigate()
   const formRef = React.useRef()
 
   const onSubmit = (e: React.SyntheticEvent) => {
@@ -30,6 +30,7 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
     const lastname = target.lastname.value
     const phone = target.phone.value
     user.registration(name, lastname, phone, email, password)
+    navigate('/')
   }
 
   return (

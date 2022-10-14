@@ -1,8 +1,8 @@
 import RegistrationForm from '../components/Auth/RegistrationForm'
 import LoginForm from '../components/Auth/LoginForm'
-import { useState, FC } from 'react'
+import { useState } from 'react'
 
-const Auth: FC = () => {
+const Auth = () => {
 
   const [switchType, SetSwitchType] = useState<string>('login')
 
