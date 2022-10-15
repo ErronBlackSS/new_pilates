@@ -2,9 +2,9 @@ import { FC } from 'react'
 import React from 'react'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
-import { REGISTRATION_INPUTS } from '../../utils/constance'
 import InputItem from './InputItem'
 import { useNavigate } from 'react-router-dom'
+import { REGISTRATION_INPUTS } from '../../utils/constance'
 interface AuthProps {
   switchToLogin: () => void
 }
@@ -12,6 +12,7 @@ interface AuthProps {
 const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
   
   const { user } = React.useContext(Context)
+  
   const navigate = useNavigate()
   const formRef = React.useRef()
 
@@ -45,17 +46,15 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
           ref={formRef}
           onSubmit={onSubmit}>
           <div className="mt-4">
-            {REGISTRATION_INPUTS.map((input, index) => {
-              return (
-                <InputItem
-                  key={index}
-                  label={input.label}
-                  type={input.type}
-                  name={input.name}
-                  placeholder={input.placeholder}
-                />
-              )
-            })}
+            {REGISTRATION_INPUTS.map((input, index) => (
+              <InputItem
+                key={index}
+                label={input.label}
+                type={input.type}
+                name={input.name}
+                placeholder={input.placeholder}
+              />
+            ))}
             <div className="mt-3">
               <button onClick={switchToLogin}>Войти</button>
             </div>
