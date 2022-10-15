@@ -12,6 +12,8 @@ const InputItem: FC<InputItemProps> = ({ label, type, name, placeholder }: Input
 
   const field = useInput('', INPUT_VALIDATORS[name])
 
+  const showError = !field.inputValid && field.isDirty && field.errorText
+
   return (
     <>
       <div>
@@ -30,7 +32,7 @@ const InputItem: FC<InputItemProps> = ({ label, type, name, placeholder }: Input
           placeholder={placeholder}
         />
       </div>
-      {(!field.inputValid && field.isDirty && field.errorText) && <span className="text-red-500">{field.errorText}</span>}
+      {showError && <span className="text-red-500">{field.errorText}</span>}
     </>
   )
 }

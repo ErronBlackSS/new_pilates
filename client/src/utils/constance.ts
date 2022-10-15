@@ -5,9 +5,9 @@ export enum ROUTES {
 }
 
 export enum INPUT_VALIDATORS {
-  'email' = Object({ isEmpty: true, minLength: 5, isEmail: true }),
-  'password' = Object({ isEmpty: true, minLength: 8, isPassword: true }),
-  'phone' = Object({ isEmpty: true, minLength: 5, isPhone: true }),
+  'email' = Object({ isEmpty: true, isEmail: true }),
+  'password' = Object({ isEmpty: true, minLength: 8, MaxLength: 20 }),
+  'phone' = Object({ isEmpty: true, isPhone: true }),
   'name' = Object({ isEmpty: true, minLength: 2, maxLength: 20 }),
   'lastname' = Object({ isEmpty: true, minLength: 2, maxLength: 20 }),
 }
