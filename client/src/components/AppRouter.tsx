@@ -12,7 +12,7 @@ const AppRouter = () => {
       <Routes>
         <Route element={<AccountNavBar />}>
           {AUTH_ROUTES.map(({ PATH, COMPONENT }) =>
-            <Route path={PATH} element={<COMPONENT />} />
+            <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}
         </Route>
         <Route element={<MainNavBar />}>

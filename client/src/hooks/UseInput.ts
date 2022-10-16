@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import { useValidation } from './UseValidation'
 
 export const useInput = (initialvalue: string, validations: Object) => {
@@ -6,7 +6,7 @@ export const useInput = (initialvalue: string, validations: Object) => {
   const [isDirty, setDirty] = useState(false)
   const valid = useValidation({ value, validations })
 
-  const onChange = (e) => {
+  const onChange = (e: { target: { value: SetStateAction<string> } }) => {
     setValue(e.target.value)
   }
 

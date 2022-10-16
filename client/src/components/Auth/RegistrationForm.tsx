@@ -4,7 +4,7 @@ import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
 import InputItem from './InputItem'
 import { useNavigate } from 'react-router-dom'
-import { REGISTRATION_INPUTS } from '../../utils/constance'
+import { useInput } from '../../hooks/UseInput'
 interface AuthProps {
   switchToLogin: () => void
 }
@@ -13,6 +13,16 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
   
   const { user } = React.useContext(Context)
   
+  const name = useInput('', {isEmpty: true, minLength: 2})
+  const email = useInput('', {isEmpty: true, minLength: 5})
+  const password = useInput('', {isEmpty: true, minLength: 5})
+  const lastname = useInput('', {isEmpty: true, minLength: 2})
+  const phone = useInput('', {isEmpty: true, minLength: 5, isPhone: true})
+  const passwordConfirm = useInput('', {})
+
+  const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid
+  const passwordIdentity = password.value === passwordConfirm.value
+
   const navigate = useNavigate()
   const formRef = React.useRef()
 
@@ -46,20 +56,71 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
           ref={formRef}
           onSubmit={onSubmit}>
           <div className="mt-4">
-            {REGISTRATION_INPUTS.map((input, index) => (
-              <InputItem
-                key={index}
-                label={input.label}
-                type={input.type}
-                name={input.name}
-                placeholder={input.placeholder}
-              />
-            ))}
+            <InputItem
+              label="Имя"
+              type="text"
+              name="name"
+              placeholder="Введите имя"
+              onBlur={name.onBlur}
+              onChange={name.onChange}
+            />
+            {name.isDirty && name.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
+            {name.isDirty && name.minLengthError && <div style={{color: 'red'}}>Минимальная длина 2 символа</div>}
+            <InputItem
+              label="Фамилия"
+              type="text"
+              name="lastname"
+              placeholder="Введите фамилию"
+              onBlur={lastname.onBlur}
+              onChange={lastname.onChange}
+            />
+            {lastname.isDirty && lastname.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
+            {lastname.isDirty && lastname.minLengthError && <div style={{color: 'red'}}>Минимальная длина 2 символа</div>}
+            <InputItem
+              label="Телефон"
+              type="text"
+              name="phone"
+              placeholder="Введите телефон"
+              onBlur={phone.onBlur}
+              onChange={phone.onChange}
+            />
+            {phone.isDirty && phone.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
+            {phone.isDirty && phone.minLengthError && <div style={{color: 'red'}}>Минимальная длина 5 символов</div>}
+            {phone.isDirty && phone.phoneError && <div style={{color: 'red'}}>Некорректный номер телефона</div>}
+            <InputItem
+              label="Email"
+              type="text"
+              name="email"
+              placeholder="Введите email"
+              onBlur={email.onBlur}
+              onChange={email.onChange}
+            />
+            {email.isDirty && email.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
+            {email.isDirty && email.minLengthError && <div style={{color: 'red'}}>Минимальная длина 5 символов</div>}
+            <InputItem
+              label="Пароль"
+              type="password"
+              name="password"
+              placeholder="Введите пароль"
+              onBlur={password.onBlur}
+              onChange={password.onChange}
+            />
+            {password.isDirty && password.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
+            {password.isDirty && password.minLengthError && <div style={{color: 'red'}}>Минимальная длина 5 символов</div>}
+            <InputItem
+              label="Подтвердите пароль"
+              type="password"
+              name="passwordConfirm"
+              placeholder="Подтвердите пароль"
+              onBlur={passwordConfirm.onBlur}
+              onChange={passwordConfirm.onChange}
+            />
+            {!passwordIdentity && password.isDirty && passwordConfirm.isDirty && <div style={{color: 'red'}}>Пароли не совпадают</div>}
             <div className="mt-3">
               <button onClick={switchToLogin}>Войти</button>
             </div>
             <div className="flex items-baseline justify-between">
-              <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Зарегистрироваться</button>
+              <button disabled={formDisabled} className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Зарегистрироваться</button>
             </div>
           </div>
         </form>

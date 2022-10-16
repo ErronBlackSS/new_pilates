@@ -12,7 +12,6 @@ interface IValidation {
     emailError: boolean
     phoneError: boolean
     inputValid: boolean
-    errorText: string
 }
 
 export const useValidation = ({ value, validations }: IUseValidation ) => {
@@ -22,7 +21,6 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
   const [emailError, setEmailError] = useState<boolean>(false)
   const [phoneError, setPhoneError] = useState<boolean>(false)
   const [inputValid, setInputValid] = useState<boolean>(false)
-  const [errorText, setErrorText] = useState<string>('')
 
   useEffect(() => {
     for (const validation in validations) {
@@ -52,11 +50,8 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
 
   useEffect(() => {
     if (isEmptyError || minLengthError || maxLengthError || emailError || phoneError) {
-      const errorText = isEmptyError ? 'Поле не может быть пустым' : minLengthError ? 'Минимальная длина поля 2 символа' : maxLengthError ? 'Максимальная длина поля 20 символов' : emailError ? 'Некорректный email' : phoneError ? 'Некорректный номер телефона' : ''
-      setErrorText(errorText)
       setInputValid(false)
     } else {
-      setErrorText('')
       setInputValid(true)
     }
   }, [isEmptyError, minLengthError, maxLengthError, emailError, phoneError])
@@ -67,7 +62,6 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
     maxLengthError,
     emailError,
     phoneError,
-    inputValid,
-    errorText
+    inputValid
   } as IValidation
 }
