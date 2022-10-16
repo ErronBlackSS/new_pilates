@@ -7,7 +7,7 @@ const AuthLink = () => {
 
   const { user } = useContext(Context)
 
-  if (user.isAuth) {
+  if (user.isAuth && user.user.isActivated) {
     return (
       <Link
         className="nav-link block lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"

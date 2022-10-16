@@ -3,8 +3,8 @@ import React from 'react'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
 import InputItem from './InputItem'
-import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../hooks/UseInput'
+import { useState } from 'react'
 interface AuthProps {
   switchToLogin: () => void
 }
@@ -14,19 +14,19 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
   const { user } = React.useContext(Context)
   
   const name = useInput('', {isEmpty: true, minLength: 2})
-  const email = useInput('', {isEmpty: true, minLength: 5})
+  const email = useInput('', {isEmpty: true, minLength: 5, isEmail: true})
   const password = useInput('', {isEmpty: true, minLength: 5})
   const lastname = useInput('', {isEmpty: true, minLength: 2})
   const phone = useInput('', {isEmpty: true, minLength: 5, isPhone: true})
   const passwordConfirm = useInput('', {})
 
+  const [formSended, setFormSended] = useState(false)
   const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid
   const passwordIdentity = password.value === passwordConfirm.value
 
-  const navigate = useNavigate()
   const formRef = React.useRef()
 
-  const onSubmit = (e: React.SyntheticEvent) => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     const target = e.target as typeof e.target & {
       name: { value: string }
@@ -41,7 +41,7 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
     const lastname = target.lastname.value
     const phone = target.phone.value
     user.registration(name, lastname, phone, email, password)
-    navigate('/')
+    setFormSended(true)
   }
 
   return (
@@ -97,6 +97,7 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
             />
             {email.isDirty && email.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
             {email.isDirty && email.minLengthError && <div style={{color: 'red'}}>Минимальная длина 5 символов</div>}
+            {email.isDirty && email.emailError && <div style={{color: 'red'}}>Некорректный email</div>}
             <InputItem
               label="Пароль"
               type="password"
@@ -120,8 +121,9 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
               <button onClick={switchToLogin}>Войти</button>
             </div>
             <div className="flex items-baseline justify-between">
-              <button disabled={formDisabled} className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Зарегистрироваться</button>
+              <button type="submit" className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Зарегистрироваться</button>
             </div>
+            {formSended && <div style={{color: 'green'}}>Форма отправлена</div>}
           </div>
         </form>
       </div>

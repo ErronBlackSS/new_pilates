@@ -1,7 +1,7 @@
 export interface UserInterface {
   email: string
   id: number
-  is_activated: boolean
+  isActivated: boolean
   name: string
   lastname: string
 }
