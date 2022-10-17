@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-flex {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .form-flex {
+    flex-direction: column;
+  }
+}

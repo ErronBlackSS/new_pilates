@@ -52,8 +52,8 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
           <form
             ref={formRef}
             onSubmit={onSubmit}>
-            <div className="mt-4 flex gap-4 flex-row">
-              <div className="">
+            <div className="mt-4 form-flex gap-3">
+              <div className="flex flex-col">
                 <InputItem
                   label="Имя"
                   type="text"
@@ -74,8 +74,6 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
                 />
                 {lastname.isDirty && lastname.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
                 {lastname.isDirty && lastname.minLengthError && <div className="text-red text-[12px]">Минимальная длина 2 символа</div>}
-              </div>
-              <div className="">
                 <InputItem
                   label="Телефон"
                   type="text"
@@ -86,6 +84,8 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
                 />
                 {phone.isDirty && phone.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
                 {phone.isDirty && phone.phoneError && <div className="text-red text-[12px]">Некорректный номер телефона</div>}
+              </div>
+              <div className="flex flex-col">
                 <InputItem
                   label="Email"
                   type="text"
@@ -96,8 +96,6 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
                 />
                 {email.isDirty && email.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
                 {email.isDirty && email.emailError && <div className="text-red text-[12px]">Некорректный email</div>}
-              </div>
-              <div className="">
                 <InputItem
                   label="Пароль"
                   type="password"
@@ -121,7 +119,7 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
             </div>
             <button
               disabled={formDisabled}
-              className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
+              className="w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] bg-bordo"
             >
                 Зарегистрироваться
             </button>
