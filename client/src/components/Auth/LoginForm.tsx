@@ -12,8 +12,8 @@ const LoginForm: FC<AuthProps> = ({ switchToRegistration }: AuthProps) => {
 
   const { user } = useContext(Context)
 
-  const email = useInput('', {isEmpty: true, minLength: 5})
-  const password = useInput('', {isEmpty: true, minLength: 5})
+  const email = useInput('', {isEmpty: true, isEmail: true})
+  const password = useInput('', {isEmpty: true, minLength: 8})
 
   const formDisabled = !email.inputValid || !password.inputValid
   const navigate = useNavigate()
@@ -32,45 +32,58 @@ const LoginForm: FC<AuthProps> = ({ switchToRegistration }: AuthProps) => {
   }
 
   return (
-    <div className="flex w-100 items-center justify-center">
-      <div className="px-6 py-6 mt-4 text-left bg-white shadow-lg">
-        <h3
-          className="text-2xl font-bold text-center"
-        >
-          Войти в аккаунт
-        </h3>
-        <form
-          ref={formRef}
-          onSubmit={onSubmit}>
-          <div className="mt-4">
-            <InputItem
-              label="Email"
-              type="email"
-              name="email"
-              placeholder="Введите email"
-              onBlur={email.onBlur}
-              onChange={email.onChange} 
-            />
-            {email.isDirty && email.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
-            {email.isDirty && email.minLengthError && <div style={{color: 'red'}}>Минимальная длина 5 символов</div>}
-            <InputItem
-              label="Пароль"
-              type="password"
-              name="password"
-              placeholder="Введите пароль"
-              onBlur={password.onBlur}
-              onChange={password.onChange}
-            />
-            {password.isDirty && password.isEmptyError && <div style={{color: 'red'}}>Поле не может быть пустым</div>}
-            {password.isDirty && password.minLengthError && <div style={{color: 'red'}}>Минимальная длина 5 символов</div>}
-            <div className="mt-3">
-                Нет аккаунта? - <button onClick={switchToRegistration}>Регистрация</button>
+    <div className="flex justify-center text-center">
+      <div>
+        <span className="text-[36px] leading-[56px] text-[#000000]">Вход</span>
+        <div className="text-left min-w-[300px]">
+          <form
+            ref={formRef}
+            onSubmit={onSubmit}>
+            <div className="mt-4">
+              <InputItem
+                label="Почта"
+                type="email"
+                name="email"
+                placeholder="Введите почту"
+                onBlur={email.onBlur}
+                onChange={email.onChange} 
+              />
+              {email.isDirty && email.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
+              {email.isDirty && email.emailError && <div className="text-red text-[12px]">Некорректный email</div>}
+              <InputItem
+                label="Пароль"
+                type="password"
+                name="password"
+                placeholder="Введите пароль"
+                onBlur={password.onBlur}
+                onChange={password.onChange}
+              />
+              {password.isDirty && password.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
+              {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина пароля 8 символов</div>}
+              <div className="mt-3">
+                  Забыли пароль?
+              </div>
+              <button
+                disabled={formDisabled}
+                className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
+              >
+                Войти
+              </button>
+              <div className="mt-3 text-center text-[16px] leading-[20px]">
+                <span className="text-gray">
+                  Ещё нет аккаунта?
+                </span>
+                &nbsp;
+                <button
+                  className="text-[#1B1B1B] underline"
+                  onClick={switchToRegistration}
+                >
+                  Зарегистрироваться
+                </button>
+              </div>
             </div>
-            <div className="flex items-baseline justify-between">
-              <button disabled={formDisabled} className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Войти</button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   )

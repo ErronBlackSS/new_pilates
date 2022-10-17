@@ -10,9 +10,9 @@ interface InputItemProps {
 
 const InputItem: FC<InputItemProps> = ({ label, type, name, placeholder, onBlur, onChange }: InputItemProps) => {
   return (
-    <div>
+    <div className="py-[10px]">
       <label
-        className="block"
+        className="block ml-[10px] text-[12px] leading-[15px] text-[#000000]"
         htmlFor={name}
       >
         {label}
@@ -20,7 +20,7 @@ const InputItem: FC<InputItemProps> = ({ label, type, name, placeholder, onBlur,
       <input
         onBlur={onBlur}
         onChange={onChange}
-        className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+        className="w-full px-4 py-2 mt-2 rounded-md border border-[#8A8E97]"
         type={type}
         name={name}
         placeholder={placeholder}
