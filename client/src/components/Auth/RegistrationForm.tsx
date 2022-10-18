@@ -5,11 +5,9 @@ import { observer } from 'mobx-react-lite'
 import InputItem from './InputItem'
 import { useInput } from '../../hooks/UseInput'
 import { useState } from 'react'
-interface AuthProps {
-  switchToLogin: () => void
-}
+import { Link } from 'react-router-dom'
 
-const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
+const RegistationForm: FC = () => {
   
   const { user } = React.useContext(Context)
   
@@ -40,7 +38,6 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
     const name = target.name.value
     const lastname = target.lastname.value
     const phone = target.phone.value
-    // console.log(email, password, name, lastname, phone)
     user.registration(name, lastname, phone, email, password)
     setFormSended(true)
   }
@@ -48,12 +45,11 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
   return (
     <div className="flex justify-center text-center">
       <div>
-        <span className="text-[36px] leading-[56px] text-[#000000]">Регистрация</span>
         <div className="text-left min-w-[300px]">
           <form
             ref={formRef}
             onSubmit={onSubmit}>
-            <div className="mt-4 form-flex gap-3">
+            <div className="mt-4 form-flex md:gap-1 xl:gap-3">
               <div className="flex flex-col">
                 <InputItem
                   label="Имя"
@@ -129,13 +125,12 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
               <span className="text-gray">
                   Уже есть аккаунт?
               </span>
-                &nbsp;
-              <button
-                className="text-[#1B1B1B] underline"
-                onClick={switchToLogin}
+              &nbsp;
+              <Link
+                to="/login"
               >
-                  Войти
-              </button>
+                Зарегистрироваться
+              </Link>
             </div>
             {formSended && <div style={{color: 'green'}}>Форма отправлена</div>}
           </form>

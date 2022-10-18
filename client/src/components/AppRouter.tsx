@@ -1,12 +1,10 @@
 import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { AUTH_ROUTES } from '../routes'
-import { PUBLIC_ROUTES } from '../routes'
-import AccountNavBar from './Header/NavBars/AccountNavBar'
-import MainNavBar from './Header/NavBars/MainNavBar'
+import { AUTH_ROUTES, SIGN_IN_ROUTES, PUBLIC_ROUTES } from '../routes'
+import AccountNavBar from './Header/NavBars/AccountLayout'
+import MainNavBar from './Header/NavBars/MainLayout'
 import AuthLayout from './Header/NavBars/AuthLayout'
-import Auth from '../views/Auth'
 
 const AppRouter = () => {
   return (
@@ -23,7 +21,9 @@ const AppRouter = () => {
           )}
         </Route>
         <Route element={<AuthLayout />}>
-          <Route path="/login" element={<Auth />} />
+          {SIGN_IN_ROUTES.map(({ PATH, COMPONENT }) =>
+            <Route key={PATH} path={PATH} element={<COMPONENT />} />
+          )}
         </Route>
       </Routes>
     </React.Suspense>

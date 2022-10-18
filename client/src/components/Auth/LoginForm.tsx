@@ -4,11 +4,9 @@ import { Context } from '../../index'
 import {observer} from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../hooks/UseInput'
-interface AuthProps {
-  switchToRegistration: () => void
-}
+import { Link } from 'react-router-dom'
 
-const LoginForm: FC<AuthProps> = ({ switchToRegistration }: AuthProps) => {
+const LoginForm: FC = () => {
 
   const { user } = useContext(Context)
 
@@ -34,7 +32,6 @@ const LoginForm: FC<AuthProps> = ({ switchToRegistration }: AuthProps) => {
   return (
     <div className="flex justify-center text-center">
       <div>
-        <span className="text-[36px] leading-[56px] text-[#000000]">Вход</span>
         <div className="text-left min-w-[300px]">
           <form
             ref={formRef}
@@ -74,12 +71,11 @@ const LoginForm: FC<AuthProps> = ({ switchToRegistration }: AuthProps) => {
                   Ещё нет аккаунта?
                 </span>
                 &nbsp;
-                <button
-                  className="text-[#1B1B1B] underline"
-                  onClick={switchToRegistration}
+                <Link
+                  to="/registration"
                 >
                   Зарегистрироваться
-                </button>
+                </Link>
               </div>
             </div>
           </form>

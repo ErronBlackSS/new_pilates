@@ -1,18 +1,38 @@
 import { ROUTES } from './utils/constance'
 import Home from './views/Home'
 import Account from './views/Account'
-import Auth from './views/Auth'
+import Login from './views/Login'
+import Registration from './views/Registration'
 
 export const AUTH_ROUTES = [
   {
-    PATH: ROUTES.ACCOUNT_ROUTE,
+    PATH: ROUTES.ACCOUNT,
     COMPONENT: Account
   }
 ]
 
 export const PUBLIC_ROUTES = [
   {
-    PATH: ROUTES.MAIN_ROUTE,
+    PATH: ROUTES.MAIN,
+    COMPONENT: Home
+  }
+]
+
+export const SIGN_IN_ROUTES = [
+  {
+    PATH: ROUTES.REGISTRATION,
+    COMPONENT: Registration
+  },
+  {
+    PATH: ROUTES.LOGIN,
+    COMPONENT: Login
+  },
+  {
+    PATH: ROUTES.RESET,
+    COMPONENT: Home
+  },
+  {
+    PATH: ROUTES.RESET_PASSWORD,
     COMPONENT: Home
   }
 ]
