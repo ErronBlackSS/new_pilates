@@ -19,6 +19,13 @@ CREATE TABLE tokens (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE reset_tokens (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    resetToken VARCHAR(512) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE lesson_types (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,

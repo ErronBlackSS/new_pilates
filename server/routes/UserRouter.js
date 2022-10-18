@@ -11,5 +11,6 @@ router.get('/refresh', UserController.refresh)
 router.get('/activate/:link', UserController.activate)
 router.get('/users', UserController.getUsers)
 router.delete('/users', UserController.remove)
+router.get('/reset/:link', UserController.reset)
 
 module.exports = router

@@ -25,9 +25,29 @@ async function login (req, res, next) {
     const {email, password} = req.body
     const userData = await UserService.login(email, password)
     res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
-    return res.json(userData);
+    return res.json(userData)
   } catch (e) {
     next(e);
+  }
+}
+
+async function reset (req, res, next) {
+  try {
+    const { email } = req.body
+    const user = await UserService.reset(email)
+    res.json(user)
+  } catch (e) {
+    next(e)
+  }
+}
+
+async function activateReset (req, res, next) {
+  try {
+    const reset_link = req.params.link
+    await ResetService.activate(reset_link)
+    return res.redirect(process.env.CLIENT_URL + '/reset/' + reset_link)
+  } catch (e) {
+    next(e)
   }
 }
 
@@ -100,9 +120,11 @@ module.exports = {
   registration,
   login,
   logout,
+  reset,
   refresh,
   activate,
   update,
   remove,
+  activateReset,
   getUsers
 }

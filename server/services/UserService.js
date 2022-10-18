@@ -3,6 +3,7 @@ const uuid = require('uuid')
 const MailService = require('./MailService')
 const TokenService = require('./TokenService')
 const UserHelpers = require('../helpers/UserHelpers')
+const ResetService = require('./ResetService')
 const UserDTO = require('../dtos/UserDTO')
 const ApiError = require('../exceptions/ApiError')
 
@@ -31,6 +32,18 @@ async function registration (name, email, phone, password, lastname) {
 
     await TokenService.saveToken(userDto.id, tokens.refreshToken)
     return { ...tokens, user: userDto }
+}
+
+async function reset (email) {
+    const candidate = await UserHelpers.findOne({ field: 'email', value: email })
+    if (!candidate) {
+        throw ApiError.BadRequest('Пользователь с таким email не найден')
+    }
+    const reset_link = uuid.v4()
+    await ResetService.saveToken(user.id, reset_link)
+    await MailService.sendResetMail(email, `${process.env.API_URL}/api/reset/${reset_link}`)
+
+    await ResetService.saveToken()
 }
 
 async function activate(activationLink) {
