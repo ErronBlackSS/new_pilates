@@ -30,7 +30,7 @@ class MailService {
         })
     }
 
-    async sendForgotPasswordMail(to, link) {
+    async sendResetMail(to, link) {
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
             to,

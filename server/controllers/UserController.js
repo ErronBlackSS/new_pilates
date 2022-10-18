@@ -44,7 +44,6 @@ async function reset (req, res, next) {
 async function activateReset (req, res, next) {
   try {
     const reset_link = req.params.link
-    await ResetService.activate(reset_link)
     return res.redirect(process.env.CLIENT_URL + '/reset/' + reset_link)
   } catch (e) {
     next(e)
