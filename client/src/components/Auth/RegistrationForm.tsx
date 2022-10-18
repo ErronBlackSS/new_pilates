@@ -11,12 +11,12 @@ const RegistationForm: FC = () => {
   
   const { user } = React.useContext(Context)
   
-  const name = useInput('', {isEmpty: true, minLength: 2})
-  const email = useInput('', {isEmpty: true, isEmail: true})
-  const password = useInput('', {isEmpty: true, minLength: 8})
-  const lastname = useInput('', {isEmpty: true, minLength: 2})
-  const phone = useInput('', {isEmpty: true, isPhone: true})
-  const passwordConfirm = useInput('', {firstPassword: password.value, isEmpty: true, minLength: 8})
+  const name = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 2 } }) 
+  const email = useInput({initialvalue: '', validations: { isEmpty: true, isEmail: true } })
+  const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 8 } })
+  const lastname = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 2 }})
+  const phone = useInput({initialvalue: '', validations: { isEmpty: true, isPhone: true } })
+  const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 8 } })
 
   const [formSended, setFormSended] = useState(false)
   const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid
@@ -127,9 +127,10 @@ const RegistationForm: FC = () => {
               </span>
               &nbsp;
               <Link
+                className="underline"
                 to="/login"
               >
-                Зарегистрироваться
+                Войти
               </Link>
             </div>
             {formSended && <div style={{color: 'green'}}>Форма отправлена</div>}

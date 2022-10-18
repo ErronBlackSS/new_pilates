@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { AUTH_ROUTES, SIGN_IN_ROUTES, PUBLIC_ROUTES } from '../routes'
-import AccountNavBar from './Header/NavBars/AccountLayout'
-import MainNavBar from './Header/NavBars/MainLayout'
-import AuthLayout from './Header/NavBars/AuthLayout'
+import AccountNavBar from './Layouts/NavBars/AccountLayout'
+import MainNavBar from './Layouts/NavBars/MainLayout'
+import AuthLayout from './Layouts/NavBars/AuthLayout'
 
 const AppRouter = () => {
   return (

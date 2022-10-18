@@ -1,7 +1,12 @@
 import { SetStateAction, useState } from 'react'
 import { useValidation } from './UseValidation'
 
-export const useInput = (initialvalue: string, validations: Object) => {
+interface IUseInput {
+  initialvalue: string
+  validations: Object
+}
+
+export const useInput = ({ initialvalue, validations } : IUseInput) => {
   const [value, setValue] = useState<string>(initialvalue)
   const [isDirty, setDirty] = useState(false)
   const valid = useValidation({ value, validations })
@@ -10,7 +15,7 @@ export const useInput = (initialvalue: string, validations: Object) => {
     setValue(e.target.value)
   }
 
-  const onBlur = () => {
+  const onBlur = (): void => {
     setDirty(true)
   }
 

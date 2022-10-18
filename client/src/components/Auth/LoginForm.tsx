@@ -10,8 +10,8 @@ const LoginForm: FC = () => {
 
   const { user } = useContext(Context)
 
-  const email = useInput('', {isEmpty: true, isEmail: true})
-  const password = useInput('', {isEmpty: true, minLength: 8})
+  const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
+  const password = useInput({initialvalue: '', validations: {isEmpty: true, minLength: 8}})
 
   const formDisabled = !email.inputValid || !password.inputValid
   const navigate = useNavigate()
@@ -57,9 +57,11 @@ const LoginForm: FC = () => {
               />
               {password.isDirty && password.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
               {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина пароля 8 символов</div>}
-              <div className="mt-3">
-                  Забыли пароль?
-              </div>
+              <Link
+                to="/reset"
+              >
+                Забыли пароль?
+              </Link>
               <button
                 disabled={formDisabled}
                 className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
@@ -72,6 +74,7 @@ const LoginForm: FC = () => {
                 </span>
                 &nbsp;
                 <Link
+                  className="underline"
                   to="/registration"
                 >
                   Зарегистрироваться
