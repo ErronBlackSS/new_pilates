@@ -18,7 +18,7 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
   const password = useInput('', {isEmpty: true, minLength: 8})
   const lastname = useInput('', {isEmpty: true, minLength: 2})
   const phone = useInput('', {isEmpty: true, isPhone: true})
-  const passwordConfirm = useInput('', {})
+  const passwordConfirm = useInput('', {firstPassword: password.value, isEmpty: true, minLength: 8})
 
   const [formSended, setFormSended] = useState(false)
   const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid
@@ -40,6 +40,7 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
     const name = target.name.value
     const lastname = target.lastname.value
     const phone = target.phone.value
+    // console.log(email, password, name, lastname, phone)
     user.registration(name, lastname, phone, email, password)
     setFormSended(true)
   }
@@ -119,9 +120,10 @@ const RegistationForm: FC<AuthProps> = ({ switchToLogin }: AuthProps) => {
             </div>
             <button
               disabled={formDisabled}
+              onSubmit={onSubmit}
               className="w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] bg-bordo"
             >
-                Зарегистрироваться
+              Зарегистрироваться
             </button>
             <div className="mt-3 text-center text-[16px] leading-[20px]">
               <span className="text-gray">

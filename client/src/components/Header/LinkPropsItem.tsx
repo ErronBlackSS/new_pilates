@@ -10,7 +10,7 @@ const LinkPropsItem = ({ link, text }: InputItemProps) => {
       className="nav-item"
     >
       <Link
-        className="nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+        className="nav-link block pr-2 lg:px-2 py-2 text-[20px] mx-[10px]"
         to={link}
       >
         {text}

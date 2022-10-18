@@ -10,7 +10,7 @@ const AuthLink = () => {
   if (user.isAuth && user.user.isActivated) {
     return (
       <Link
-        className="nav-link block lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+        className="nav-link block lg:px-2 py-2 text-[20px] text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
         to="/account" 
       >
         {user.user.name}
@@ -19,7 +19,7 @@ const AuthLink = () => {
   } else {
     return (
       <Link
-        className="nav-link block lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
+        className="nav-link block lg:px-2 py-2 text-gray-600 text-[20px] hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out"
         to="/login" 
       >
         Вход

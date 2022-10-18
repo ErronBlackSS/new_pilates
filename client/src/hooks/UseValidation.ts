@@ -21,6 +21,7 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
   const [emailError, setEmailError] = useState<boolean>(false)
   const [phoneError, setPhoneError] = useState<boolean>(false)
   const [inputValid, setInputValid] = useState<boolean>(false)
+  const [firstPassword, setFirstPassword] = useState<string>('')
 
   useEffect(() => {
     for (const validation in validations) {
@@ -42,6 +43,9 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
         const phoneRegExp = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/
         phoneRegExp.test(String(value).toLowerCase()) ? setPhoneError(false) : setPhoneError(true)
         break
+      case 'fistPassword':
+        String(value) === validations[validation] ? setFirstPassword(value) : setFirstPassword('')
+        break
       default:
         break
       }
@@ -62,6 +66,7 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
     maxLengthError,
     emailError,
     phoneError,
+    firstPassword,
     inputValid
   } as IValidation
 }
