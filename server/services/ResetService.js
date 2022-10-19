@@ -6,7 +6,7 @@ async function saveToken (user_id, token) {
   if (!candidate) {
     await removeToken(token)
   }
-  const newToken = await pool.query(`INSERT INTO tokens (user_id, token) VALUES ($1, $2)`, [email, token])
+  const newToken = await pool.query(`INSERT INTO reset_tokens (user_id, resetToken) VALUES ($1, $2)`, [user_id, token])
   return newToken
 }
 

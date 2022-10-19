@@ -34,8 +34,18 @@ async function login (req, res, next) {
 async function reset (req, res, next) {
   try {
     const { email } = req.body
-    const user = await UserService.reset(email)
+    const user = await UserService.resetSendMail(email)
     res.json(user)
+  } catch (e) {
+    next(e)
+  }
+}
+
+async function resetPassword (req, res, next) {
+  try {
+    const { userId, password } = req.body
+    const userData = await UserService.resetPassword(userId, password)
+    res.json(userData)
   } catch (e) {
     next(e)
   }
@@ -115,15 +125,27 @@ async function remove (req, res, next) {
   }
 }
 
+async function getUserByResetToken (req, res, next) {
+  try {
+    const reset_link = req.params.link
+    const user = await UserService.getUserByResetToken(reset_link)
+    res.json(user)
+  } catch (e) {
+    next(e)
+  }
+}
+
 module.exports = {
   registration,
   login,
   logout,
   reset,
+  resetPassword,
   refresh,
   activate,
   update,
   remove,
   activateReset,
+  getUserByResetToken,
   getUsers
 }

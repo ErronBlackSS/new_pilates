@@ -30,9 +30,15 @@ async function activate (userId) {
     return { message: 'Пользователь активирован' }
 }
 
+async function getUserByResetToken (reset_link) {
+    const user = await pool.query(`SELECT * from reset_tokens WHERE reset_link = $1`, [reset_link])
+    return user
+}
+
 module.exports = {
     findOne,
     getAllUsers,
     create,
+    getUserByResetToken,
     activate
 }

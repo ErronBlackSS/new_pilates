@@ -34,16 +34,27 @@ async function registration (name, email, phone, password, lastname) {
     return { ...tokens, user: userDto }
 }
 
-async function reset (email) {
+async function resetSendMail (email) {
     const candidate = await UserHelpers.findOne({ field: 'email', value: email })
     if (!candidate) {
         throw ApiError.BadRequest('Пользователь с таким email не найден')
     }
     const reset_link = uuid.v4()
-    await ResetService.saveToken(user.id, reset_link)
+    const status = await ResetService.saveToken(candidate.id, reset_link)
     await MailService.sendResetMail(email, `${process.env.API_URL}/api/reset/${reset_link}`)
+    console.log(status, 'RESET STATUS')
+    return status
+}
 
-    await ResetService.saveToken()
+async function resetPassword (userId, password) {
+    const candidate = await UserHelpers.findOne({ field: 'id', value: userId })
+    if (!candidate) {
+      throw ApiError.BadRequest('Пользователь с таким id не найден')
+    }
+    const hashPassword = await bcrypt.hash(password, 5)
+    const user = await UserHelpers.update({ id: userId, password: hashPassword })
+    const userDto = new UserDTO(user)
+    return userDto
 }
 
 async function activate(activationLink) {
@@ -97,5 +108,7 @@ module.exports = {
     activate,
     login,
     logout,
+    resetSendMail,
+    resetPassword,
     refresh
 }
