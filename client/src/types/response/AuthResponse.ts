@@ -5,3 +5,8 @@ export interface AuthResponse {
   refreshToken: string
   user: UserInterface
 }
+
+export interface ResetResponse {
+  message: string
+  user: UserInterface
+}

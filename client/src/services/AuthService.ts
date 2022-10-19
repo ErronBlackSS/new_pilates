@@ -1,11 +1,10 @@
 import { AxiosResponse } from 'axios'
-import { AuthResponse } from '../types/response/AuthResponse'
+import { AuthResponse, ResetResponse } from '../types/response/AuthResponse'
 import $api from '../http'
 
 export default class AuthService {
 
   static async login (email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-    console.log(email, password)
     return await $api.post<AuthResponse>('/login', {email, password})
   }
 
@@ -19,5 +18,13 @@ export default class AuthService {
 
   static async check (): Promise<AxiosResponse<AuthResponse>> {
     return await $api.get<AuthResponse>('/refresh')
+  }
+
+  static async resetSendMail (email: string): Promise<AxiosResponse<AuthResponse>> {
+    return await $api.post<AuthResponse>('/reset', { email })
+  }
+
+  static async resetSend (user_id: Number, password: string): Promise<AxiosResponse<ResetResponse>> {
+    return await $api.post<ResetResponse>('/reset', { user_id, password })
   }
 }

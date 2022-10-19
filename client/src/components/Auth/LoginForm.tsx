@@ -11,7 +11,7 @@ const LoginForm: FC = () => {
   const { user } = useContext(Context)
 
   const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
-  const password = useInput({initialvalue: '', validations: {isEmpty: true, minLength: 8}})
+  const password = useInput({initialvalue: '', validations: {isEmpty: true, minLength: 6}})
 
   const formDisabled = !email.inputValid || !password.inputValid
   const navigate = useNavigate()
@@ -19,13 +19,7 @@ const LoginForm: FC = () => {
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    const target = e.target as typeof e.target & {
-      email: { value: string }
-      password: { value: string }
-    }
-    const email = target.email.value
-    const password = target.password.value
-    user.login(email, password)
+    user.login(email.value, password.value)
     navigate('/')
   }
 
@@ -56,7 +50,7 @@ const LoginForm: FC = () => {
                 onChange={password.onChange}
               />
               {password.isDirty && password.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
-              {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина пароля 8 символов</div>}
+              {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина пароля 6 символов</div>}
               <Link
                 to="/reset"
               >

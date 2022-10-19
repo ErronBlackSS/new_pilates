@@ -13,32 +13,18 @@ const RegistationForm: FC = () => {
   
   const name = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 2 } }) 
   const email = useInput({initialvalue: '', validations: { isEmpty: true, isEmail: true } })
-  const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 8 } })
+  const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
   const lastname = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 2 }})
   const phone = useInput({initialvalue: '', validations: { isEmpty: true, isPhone: true } })
-  const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 8 } })
+  const passwordConfirm = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
 
   const [formSended, setFormSended] = useState(false)
-  const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid
   const passwordIdentity = password.value === passwordConfirm.value
-
-  const formRef = React.useRef()
+  const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid || passwordIdentity
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    const target = e.target as typeof e.target & {
-      name: { value: string }
-      lastname: { value: string }
-      email: { value: string }
-      phone: { value: string }
-      password: { value: string }
-    }
-    const email = target.email.value
-    const password = target.password.value
-    const name = target.name.value
-    const lastname = target.lastname.value
-    const phone = target.phone.value
-    user.registration(name, lastname, phone, email, password)
+    user.registration(name.value, lastname.value, phone.value, email.value, password.value)
     setFormSended(true)
   }
 
@@ -47,7 +33,6 @@ const RegistationForm: FC = () => {
       <div>
         <div className="text-left min-w-[300px]">
           <form
-            ref={formRef}
             onSubmit={onSubmit}>
             <div className="mt-4 form-flex md:gap-1 xl:gap-3">
               <div className="flex flex-col">
@@ -102,7 +87,7 @@ const RegistationForm: FC = () => {
                   onChange={password.onChange}
                 />
                 {password.isDirty && password.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
-                {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина 8 символов</div>}
+                {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина 6 символов</div>}
                 <InputItem
                   label="Подтвердите пароль"
                   type="password"
@@ -133,6 +118,14 @@ const RegistationForm: FC = () => {
                 Войти
               </Link>
             </div>
+            {name.inputValid ? <div>true</div> : <div>false</div>}
+            {lastname.inputValid ? <div>true</div> : <div>false</div>}
+            {phone.inputValid ? <div>true</div> : <div>false</div>}
+            {email.inputValid ? <div>true</div> : <div>false</div>}
+            {password.inputValid ? <div>true</div> : <div>false</div>}
+            {passwordConfirm.inputValid ? <div>true</div> : <div>false</div>}
+            {passwordIdentity ? <div>true</div> : <div>false</div>}
+            {formSended && <div style={{color: 'green'}}>Форма отправлена</div>}
             {formSended && <div style={{color: 'green'}}>Форма отправлена</div>}
           </form>
         </div>

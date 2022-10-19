@@ -4,6 +4,7 @@ import Account from './views/Account'
 import Login from './views/Login'
 import Registration from './views/Registration'
 import Reset from './views/Reset'
+import ResetSend from './views/ResetSend'
 
 export const AUTH_ROUTES = [
   {
@@ -34,6 +35,6 @@ export const SIGN_IN_ROUTES = [
   },
   {
     PATH: ROUTES.RESET_PASSWORD,
-    COMPONENT: Home
+    COMPONENT: ResetSend
   }
 ]

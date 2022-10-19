@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
+import ResetForm from '../components/Auth/ResetForm'
 
-const Reset = () => {
+const ResetSend: FC = () => {
   return (
-    <div className="md:mt-[20px] 2xl:mt-[100px] flex justify-center flex-col">
-      <span className="text-[36px] text-center leading-[56px] text-[#000000]">Восстановление пароля</span>
+    <div>
+      <div className="md:mt-[20px] 2xl:mt-[100px] flex justify-center flex-col">
+        <span className="text-[36px] text-center leading-[56px] text-[#000000]">Восстановление пароля</span>
+        <ResetForm />
+      </div>
     </div>
   )
 }
 
-export default Reset
+export default ResetSend

@@ -11,7 +11,7 @@ export const useInput = ({ initialvalue, validations } : IUseInput) => {
   const [isDirty, setDirty] = useState(false)
   const valid = useValidation({ value, validations })
 
-  const onChange = (e: { target: { value: SetStateAction<string> } }) => {
+  const onChange = (e: { target: { value: SetStateAction<string> } }): void => {
     setValue(e.target.value)
   }
 
