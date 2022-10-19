@@ -21,7 +21,7 @@ export default class AuthService {
   }
 
   static async resetSendMail (email: string): Promise<AxiosResponse<AuthResponse>> {
-    return await $api.post<AuthResponse>('/reset', { email })
+    return await $api.post('/reset', { email })
   }
 
   static async resetSend (user_id: Number, password: string): Promise<AxiosResponse<ResetResponse>> {
