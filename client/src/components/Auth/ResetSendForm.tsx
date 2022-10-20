@@ -4,10 +4,10 @@ import { useInput } from '../../hooks/UseInput'
 import AuthService from '../../services/AuthService'
 
 interface IResetSendForm {
-  userId: number
+  user_id: number
 }
 
-const ResetSendForm: FC<IResetSendForm> = ({ userId }) => {
+const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
 
   const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
   const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 8 } })
@@ -15,7 +15,7 @@ const ResetSendForm: FC<IResetSendForm> = ({ userId }) => {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    AuthService.resetSend(userId, password.value)
+    AuthService.resetSend(user_id, password.value)
   }
 
   return (
