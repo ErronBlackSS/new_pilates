@@ -2,20 +2,26 @@ import { useEffect, useState } from 'react'
 import UserService from '../services/UserService'
 import { useParams } from 'react-router-dom'
 import ResetSendForm from '../components/Auth/ResetSendForm'
+import { useNavigate } from 'react-router-dom'
 
 const Reset = () => {
 
   const { token } = useParams()
   const [user, setUser] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchUser = async () => {
       return await UserService.fetchUserByResetToken(token)
     }
     fetchUser().then(resp => {
-      setUser(resp.data)
+      if (resp.data) {
+        setUser(resp.data)
+      } else {
+        navigate('/')
+      }
     })
-  }, [token])
+  }, [navigate, token])
 
   return (
     <div className="md:mt-[20px] 2xl:mt-[100px] flex justify-center flex-col">

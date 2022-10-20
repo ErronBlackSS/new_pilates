@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import InputItem from './InputItem'
 import { useInput } from '../../hooks/UseInput'
 import AuthService from '../../services/AuthService'
@@ -10,12 +11,15 @@ interface IResetSendForm {
 const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
 
   const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
-  const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 8 } })
+  const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 6 } })
   const passwordIdentity = password.value === passwordConfirm.value
+
+  const navigate = useNavigate()
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     AuthService.resetSend(user_id, password.value)
+    navigate('/login')
   }
 
   return (
