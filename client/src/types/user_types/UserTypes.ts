@@ -1,5 +1,6 @@
 export interface UserInterface {
   email: string
+  role: string
   id: number
   isActivated: boolean
   name: string

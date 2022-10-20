@@ -25,7 +25,6 @@ export default class AuthService {
   }
 
   static async resetSend (user_id: Number, password: string): Promise<AxiosResponse<ResetResponse>> {
-    console.log(user_id, password, 'wtf 123123123123')
     return await $api.post<ResetResponse>('/reset/password', { user_id, password })
   }
 }

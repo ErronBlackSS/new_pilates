@@ -4,7 +4,7 @@ CREATE TABLE users(
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role INT NOT NULL DEFAULT 1,
+    role VARCHAR(255) NOT NULL DEFAULT '9bd2b9fc-446b-44ad-bbcd-d97c71004f5d',
     is_activated BOOLEAN NOT NULL DEFAULT FALSE,
     activation_link VARCHAR(255) DEFAULT NULL,
     lastname VARCHAR(255) NOT NULL,
