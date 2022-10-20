@@ -17,15 +17,20 @@ const RegistationForm: FC = () => {
   const lastname = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 2 }})
   const phone = useInput({initialvalue: '', validations: { isEmpty: true, isPhone: true } })
   const passwordConfirm = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
+  const [errorMessage, setErrorMessage] = useState('')
 
   const [formSended, setFormSended] = useState(false)
   const passwordIdentity = password.value === passwordConfirm.value
-  const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid || passwordIdentity
+  const formDisabled = !name.inputValid || !email.inputValid || !password.inputValid || !lastname.inputValid || !phone.inputValid || !passwordConfirm.inputValid || !passwordIdentity
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    user.registration(name.value, lastname.value, phone.value, email.value, password.value)
-    setFormSended(true)
+    const status = await user.registration(name.value, lastname.value, phone.value, email.value, password.value)
+    if (status === 'success') {
+      setFormSended(true)
+    } else {
+      setErrorMessage(status)
+    }
   }
 
   return (
@@ -99,6 +104,7 @@ const RegistationForm: FC = () => {
                 {!passwordIdentity && password.isDirty && passwordConfirm.isDirty && <div style={{color: 'red'}}>Пароли не совпадают</div>}
               </div>
             </div>
+            {errorMessage && <div className="text-red text-[12px]">{errorMessage}</div>}
             <button
               disabled={formDisabled}
               onSubmit={onSubmit}
@@ -118,14 +124,6 @@ const RegistationForm: FC = () => {
                 Войти
               </Link>
             </div>
-            {name.inputValid ? <div>true</div> : <div>false</div>}
-            {lastname.inputValid ? <div>true</div> : <div>false</div>}
-            {phone.inputValid ? <div>true</div> : <div>false</div>}
-            {email.inputValid ? <div>true</div> : <div>false</div>}
-            {password.inputValid ? <div>true</div> : <div>false</div>}
-            {passwordConfirm.inputValid ? <div>true</div> : <div>false</div>}
-            {passwordIdentity ? <div>true</div> : <div>false</div>}
-            {formSended && <div style={{color: 'green'}}>Форма отправлена</div>}
             {formSended && <div style={{color: 'green'}}>Форма отправлена</div>}
           </form>
         </div>

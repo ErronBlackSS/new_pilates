@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import InputItem from './InputItem'
 import { Context } from '../../index'
 import {observer} from 'mobx-react-lite'
@@ -12,15 +12,18 @@ const LoginForm: FC = () => {
 
   const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
   const password = useInput({initialvalue: '', validations: {isEmpty: true, minLength: 6}})
-
+  const [errorMessage, setErrorMessage] = useState('')
   const formDisabled = !email.inputValid || !password.inputValid
   const navigate = useNavigate()
-  const formRef = React.useRef()
 
-  const onSubmit = (e: React.SyntheticEvent) => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    user.login(email.value, password.value)
-    navigate('/')
+    const status = await user.login(email.value, password.value)
+    if (status === 'success') {
+      navigate('/')
+    } else {
+      setErrorMessage(status)
+    }
   }
 
   return (
@@ -28,7 +31,6 @@ const LoginForm: FC = () => {
       <div>
         <div className="text-left min-w-[300px]">
           <form
-            ref={formRef}
             onSubmit={onSubmit}>
             <div className="mt-4">
               <InputItem
@@ -51,6 +53,7 @@ const LoginForm: FC = () => {
               />
               {password.isDirty && password.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
               {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина пароля 6 символов</div>}
+              {errorMessage && <div className="text-red text-[12px]">{errorMessage}</div>}
               <Link
                 to="/reset"
               >

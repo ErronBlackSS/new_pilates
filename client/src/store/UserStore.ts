@@ -25,12 +25,12 @@ export default class UserStore {
   async login(email: string, password: string) {
     try {
       const response = await AuthService.login(email, password)
-      console.log(response)
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
+      return 'success'
     } catch (e) {
-      console.log(e.response?.data?.message)
+      return e.response?.data?.message
     }
   }
 
@@ -41,8 +41,9 @@ export default class UserStore {
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
+      return 'success'
     } catch (e) {
-      console.log(e.response?.data?.message)
+      return e.response?.data?.message
     }
   }
 
