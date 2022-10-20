@@ -53,7 +53,7 @@ async function resetPassword (userId, password) {
     }
     const hashPassword = await bcrypt.hash(password, 5)
     const user = await UserHelpers.update({ id: userId, password: hashPassword })
-    console.log(user, 'userResponse')
+    await ResetService.removeToken(userId)
     const userDto = new UserDTO(user)
     return userDto
 }
