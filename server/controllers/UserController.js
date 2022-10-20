@@ -43,8 +43,10 @@ async function reset (req, res, next) {
 
 async function resetPassword (req, res, next) {
   try {
-    const { userId, password } = req.body
-    const userData = await UserService.resetPassword(userId, password)
+    const { user_id, password } = req.body
+    console.log('DA KAAAk')
+    console.log(user_id, password, req.body)
+    const userData = await UserService.resetPassword(user_id, password)
     res.json(userData)
   } catch (e) {
     next(e)
@@ -128,7 +130,7 @@ async function remove (req, res, next) {
 async function getUserByResetToken (req, res, next) {
   try {
     const reset_link = req.params.link
-    const user = await UserService.getUserByResetToken(reset_link)
+    const user = await UserHelpers.getUserByResetToken(reset_link)
     res.json(user)
   } catch (e) {
     next(e)

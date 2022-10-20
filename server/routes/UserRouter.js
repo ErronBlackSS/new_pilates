@@ -12,7 +12,7 @@ router.get('/activate/:link', UserController.activate)
 router.get('/users', UserController.getUsers)
 router.delete('/users', UserController.remove)
 router.post('/reset', UserController.reset)
-router.post('/reset/password', UserController.activateReset)
+router.post('/reset/password', UserController.resetPassword)
 router.get('/user/:link', UserController.getUserByResetToken)
 router.get('/reset/:link', UserController.activateReset)
 

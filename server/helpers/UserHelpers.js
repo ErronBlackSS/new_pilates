@@ -1,3 +1,4 @@
+const helpers = require('../helpers/general')
 const pool = require('../db')
 
 async function findOne (params) {
@@ -8,6 +9,13 @@ async function findOne (params) {
 async function getAllUsers () {
     const users = await pool.query('SELECT * from users')
     return users.rows
+}
+
+async function update (user) {
+  const query = helpers.parseUpdateData(user, 'users')
+  const updatedUser = await pool.query(query + 'RETURNING *', [])
+  console.log(updatedUser, 'updatedUser')
+  return updatedUser.rows[0]
 }
 
 async function create (user) {
@@ -31,14 +39,15 @@ async function activate (userId) {
 }
 
 async function getUserByResetToken (reset_link) {
-    const user = await pool.query(`SELECT * from reset_tokens WHERE reset_link = $1`, [reset_link])
-    return user
+    const user = await pool.query(`SELECT * from reset_tokens WHERE resetToken = $1`, [reset_link])
+    return user.rows[0]
 }
 
 module.exports = {
     findOne,
     getAllUsers,
     create,
+    update,
     getUserByResetToken,
     activate
 }
