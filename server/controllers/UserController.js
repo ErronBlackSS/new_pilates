@@ -4,6 +4,7 @@ const { validationResult } = require('express-validator')
 const ApiError = require('../exceptions/ApiError')
 const helpers = require('../helpers/general')
 const pool = require('../db')
+const logger = require('../logger')
 
 async function registration (req, res, next) {
   try {
@@ -14,6 +15,8 @@ async function registration (req, res, next) {
     const { name, email, phone, password, lastname } = req.body
     const userData = await UserService.registration(name, email, phone, password, lastname)
     res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+    const message = 'Пользователь ' + email + ' зарегистрирован'
+    logger.info(message)
     res.json(userData)
   } catch (e) {
     next(e)
@@ -25,6 +28,8 @@ async function login (req, res, next) {
     const {email, password} = req.body
     const userData = await UserService.login(email, password)
     res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+    const message = 'Пользователь ' + email + ' вошел'
+    logger.info(message)
     return res.json(userData)
   } catch (e) {
     next(e);
@@ -44,8 +49,6 @@ async function reset (req, res, next) {
 async function resetPassword (req, res, next) {
   try {
     const { user_id, password } = req.body
-    console.log('DA KAAAk')
-    console.log(user_id, password, req.body)
     const userData = await UserService.resetPassword(user_id, password)
     res.json(userData)
   } catch (e) {
@@ -97,6 +100,8 @@ async function activate (req, res, next) {
 async function getUsers (req, res, next) {
   try {
     const users = await UserHelpers.getAllUsers()
+    const message = 'Получить всех пользователей'
+    logger.info(message)
     res.json(users)
   } catch (e) {
     next(e)
