@@ -6,7 +6,7 @@ import AccountNavBar from './Layouts/NavBars/AccountLayout'
 import MainNavBar from './Layouts/NavBars/MainLayout'
 import AuthLayout from './Layouts/NavBars/AuthLayout'
 import { Context } from '../index'
-import Home from '../views/Home'
+import Home from '../Pages/Home'
 
 const AppRouter = () => {
 

@@ -1,4 +1,4 @@
-import $api from '../http'
+import $api from '../Api'
 import { AxiosResponse } from 'axios'
 import { UserInterface } from '../types/user_types/UserTypes'
 

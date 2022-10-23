@@ -1,9 +1,9 @@
 import React, { FC, useContext, useState } from 'react'
-import InputItem from './InputItem'
+import InputItem from './Components/InputItem'
 import { Context } from '../../index'
 import {observer} from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
-import { useInput } from '../../hooks/UseInput'
+import { useInput } from '../../Hooks/UseInput'
 import { Link } from 'react-router-dom'
 
 const LoginForm: FC = () => {
@@ -13,7 +13,8 @@ const LoginForm: FC = () => {
   const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
   const password = useInput({initialvalue: '', validations: {isEmpty: true, minLength: 6}})
   const [errorMessage, setErrorMessage] = useState('')
-  const formDisabled = !email.inputValid || !password.inputValid
+  const formDisabled = !email.validations.inputValid || !password.validations.inputValid
+  console.log(formDisabled, 'DEFAULT')
   const navigate = useNavigate()
 
   const onSubmit = async (e: React.SyntheticEvent) => {
@@ -37,22 +38,22 @@ const LoginForm: FC = () => {
                 label="Почта"
                 type="email"
                 name="email"
+                validations={email.validations}
+                dirty={email.isDirty}
                 placeholder="Введите почту"
                 onBlur={email.onBlur}
                 onChange={email.onChange} 
               />
-              {email.isDirty && email.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
-              {email.isDirty && email.emailError && <div className="text-red text-[12px]">Некорректный email</div>}
               <InputItem
                 label="Пароль"
                 type="password"
                 name="password"
+                dirty={password.isDirty}
+                validations={password.validations}
                 placeholder="Введите пароль"
                 onBlur={password.onBlur}
                 onChange={password.onChange}
               />
-              {password.isDirty && password.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
-              {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина пароля 6 символов</div>}
               {errorMessage && <div className="text-red text-[12px]">{errorMessage}</div>}
               <Link
                 to="/reset"

@@ -24,6 +24,6 @@ export const useInput = ({ initialvalue, validations } : IUseInput) => {
     onBlur,
     onChange,
     isDirty,
-    ...valid
+    validations: { ...valid }
   }
 }

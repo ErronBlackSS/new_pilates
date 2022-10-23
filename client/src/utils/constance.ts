@@ -6,4 +6,3 @@ export enum ROUTES {
   RESET = '/reset',
   RESET_PASSWORD = '/reset/:token',
 }
-

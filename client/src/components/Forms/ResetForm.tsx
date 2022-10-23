@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import InputItem from './InputItem'
+import InputItem from './Components/InputItem'
 import { Link } from 'react-router-dom'
-import { useInput } from '../../hooks/UseInput'
-import AuthService from '../../services/AuthService'
+import { useInput } from '../../Hooks/UseInput'
+import AuthService from '../../Services/AuthService'
 
 const ResetForm: FC = () => {
 
@@ -24,14 +24,14 @@ const ResetForm: FC = () => {
                 label="Почта"
                 type="email"
                 name="email"
+                validations={email.validations}
+                dirty={email.isDirty}
                 placeholder="Введите почту"
                 onBlur={email.onBlur}
                 onChange={email.onChange} 
               />
-              {email.isDirty && email.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
-              {email.isDirty && email.emailError && <div className="text-red text-[12px]">Некорректный email</div>}
               <button
-                disabled={!email.inputValid}
+                disabled={!email.validations.inputValid}
                 className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
               >
                 Восстановить пароль

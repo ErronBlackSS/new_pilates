@@ -1,14 +1,24 @@
 import { FC } from 'react'
+import { IValidation } from '../../../Hooks/UseValidation'
+
 interface InputItemProps {
   label: string
   type: string
   name: string
   placeholder: string
+  validations: IValidation
+  dirty: boolean
   onBlur: () => void
   onChange: (e: React.FocusEvent<HTMLInputElement>) => void
 }
 
-const InputItem: FC<InputItemProps> = ({ label, type, name, placeholder, onBlur, onChange }: InputItemProps) => {
+const InputItem: FC<InputItemProps> = ( { label, type, name, placeholder, validations, dirty, onBlur, onChange } ) => {
+  
+  const errors = []
+  Object.keys(validations).forEach((key) => { 
+    if(validations[key]?.status === true && dirty) errors.push(validations[key])
+  })
+
   return (
     <div className="py-[10px]">
       <label
@@ -25,6 +35,16 @@ const InputItem: FC<InputItemProps> = ({ label, type, name, placeholder, onBlur,
         name={name}
         placeholder={placeholder}
       />
+      {errors && errors.map((error, index) => {
+        return (
+          <div
+            key={index}
+            className="text-red text-[12px]"
+          >
+            {error.message}
+          </div>
+        )
+      })}
     </div>
   )
 }

@@ -1,10 +1,10 @@
-import { ROUTES } from './utils/constance'
-import Home from './views/Home'
-import Account from './views/Account'
-import Login from './views/Login'
-import Registration from './views/Registration'
-import Reset from './views/Reset'
-import ResetSend from './views/ResetSend'
+import { ROUTES } from './Utils/constance'
+import Home from './Pages/Home'
+import Account from './Pages/Account'
+import Login from './Pages/Login'
+import Registration from './Pages/Registration'
+import Reset from './Pages/Reset'
+import ResetSend from './Pages/ResetSend'
 
 export const AUTH_ROUTES = [
   {

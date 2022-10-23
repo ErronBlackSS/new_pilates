@@ -1,4 +1,4 @@
-const CoachSideBar = () => {
+const AdminSideBar = () => {
   return (
     <div className="h-full flex flex-col bg-bordo">
       Боковое меню администратора
@@ -6,4 +6,4 @@ const CoachSideBar = () => {
   )
 }
 
-export default CoachSideBar
+export default AdminSideBar

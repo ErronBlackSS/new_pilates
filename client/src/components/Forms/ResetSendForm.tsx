@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import InputItem from './InputItem'
-import { useInput } from '../../hooks/UseInput'
-import AuthService from '../../services/AuthService'
+import InputItem from './Components/InputItem'
+import { useInput } from '../../Hooks/UseInput'
+import AuthService from '../../Services/AuthService'
 
 interface IResetSendForm {
   user_id: number
@@ -34,22 +34,23 @@ const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
                 type="password"
                 name="password"
                 placeholder="Введите пароль"
+                validations={password.validations}
+                dirty={password.isDirty}
                 onBlur={password.onBlur}
                 onChange={password.onChange}
               />
-              {password.isDirty && password.isEmptyError && <div className="text-red text-[12px]">Поле не может быть пустым</div>}
-              {password.isDirty && password.minLengthError && <div className="text-red text-[12px]">Минимальная длина 6 символов</div>}
               <InputItem
                 label="Подтвердите пароль"
                 type="password"
                 name="passwordConfirm"
+                validations={passwordConfirm.validations}
+                dirty={passwordConfirm.isDirty}
                 placeholder="Подтвердите пароль"
                 onBlur={passwordConfirm.onBlur}
                 onChange={passwordConfirm.onChange}
               />
-              {!passwordIdentity && password.isDirty && passwordConfirm.isDirty && <div style={{color: 'red'}}>Пароли не совпадают</div>}
               <button
-                disabled={!passwordIdentity || !password.inputValid || !passwordConfirm.inputValid}
+                disabled={!passwordIdentity || !password.validations.inputValid || !passwordConfirm.validations.inputValid}
                 className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
               >
                 Восстановить пароль
