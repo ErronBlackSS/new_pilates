@@ -30,6 +30,9 @@ const Main = () => {
             <li className="py-[31px]">Абонементы без ограничения сроков</li>
           </ul>
         </div>
+        <div>
+          <img src="../girl.png" alt="mainImage" />
+        </div>
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import AuthService from '../../Services/AuthService'
 const ResetForm: FC = () => {
 
   const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
+  const formDisabled = !email.validations.inputValid
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -32,9 +33,9 @@ const ResetForm: FC = () => {
               />
               <button
                 disabled={!email.validations.inputValid}
-                className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
+                className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-[#D11655] opacity-40' : 'bg-bordo')}
               >
-                Восстановить пароль
+                Продолжить
               </button>
               <div className="mt-3 text-center text-[16px] leading-[20px]">
                 <Link

@@ -14,7 +14,6 @@ const LoginForm: FC = () => {
   const password = useInput({initialvalue: '', validations: {isEmpty: true, minLength: 6}})
   const [errorMessage, setErrorMessage] = useState('')
   const formDisabled = !email.validations.inputValid || !password.validations.inputValid
-  console.log(formDisabled, 'DEFAULT')
   const navigate = useNavigate()
 
   const onSubmit = async (e: React.SyntheticEvent) => {
@@ -62,7 +61,7 @@ const LoginForm: FC = () => {
               </Link>
               <button
                 disabled={formDisabled}
-                className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
+                className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-[#D11655] opacity-40' : 'bg-bordo')}
               >
                 Войти
               </button>

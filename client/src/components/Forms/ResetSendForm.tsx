@@ -13,6 +13,7 @@ const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
   const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
   const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 6 } })
   const passwordIdentity = password.value === passwordConfirm.value
+  const formDisabled = !passwordIdentity || !password.validations.inputValid || !passwordConfirm.validations.inputValid
 
   const navigate = useNavigate()
 
@@ -50,8 +51,8 @@ const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
                 onChange={passwordConfirm.onChange}
               />
               <button
-                disabled={!passwordIdentity || !password.validations.inputValid || !passwordConfirm.validations.inputValid}
-                className="w-[100%] px-6 py-2 mt-4 text-[#fff] rounded-[10px] bg-bordo"
+                disabled={formDisabled}
+                className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-[#D11655] opacity-40' : 'bg-bordo')}
               >
                 Восстановить пароль
               </button>

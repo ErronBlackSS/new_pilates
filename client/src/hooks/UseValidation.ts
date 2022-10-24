@@ -44,8 +44,9 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
         mailRegExp.test(String(value).toLowerCase()) ? setEmailError(DEFAULT) : setEmailError(EMAIL_ERROR)
         break
       case 'isPhone':
-        const phoneRegExp = /^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{7,10}$/
-        phoneRegExp.test(String(value).toLowerCase()) ? setPhoneError(PHONE_ERROR) : setPhoneError(DEFAULT)
+        console.log(value)
+        const phoneRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
+        phoneRegExp.test(String(value).toLowerCase()) ? setPhoneError(DEFAULT) : setPhoneError(PHONE_ERROR)
         break
       default:
         break
