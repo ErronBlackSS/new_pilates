@@ -8,12 +8,11 @@ export const useSideBar = (iconRef, bodyRef) => {
     setSideBarToggled(!isSideBarToggled)
     if (!isSideBarToggled) {
       iconRef.current.classList.add('transform', 'rotate-180')
-      bodyRef.current.classList.add('w-[200px]', 'items-left')
+      bodyRef.current.classList.add('!w-[200px]', '!items-left')
     } else {
       iconRef.current.classList.remove('transform', 'rotate-180')
-      bodyRef.current.classList.remove('w-[200px]', 'items-left')
+      bodyRef.current.classList.remove('!w-[200px]', '!items-left')
     }
-    console.log(bodyRef.current.classList)
   }
 
   return {

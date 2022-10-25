@@ -47,7 +47,7 @@ const UserSideBar = () => {
         <div>
           <Link to="/account/settings"> 
             Настройки
-          </Link> 
+          </Link>
         </div>
         <div>
           <Link to="/account/lessons"> 

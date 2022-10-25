@@ -1,5 +1,7 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { Context } from '../..'
 import Home from '../../Pages/Home'
 import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
 import AccountNavBar from '../Layouts/NavBars/AccountLayout'
@@ -8,10 +10,13 @@ import MainNavBar from '../Layouts/NavBars/MainLayout'
 import UserSideBar from '../SideBars/UserSideBar'
 
 const UserRouter = () => {
+
+  const { user } = useContext(Context)
+
   return (
     <React.Suspense>
       <Routes>
-        <Route element={<AccountNavBar />}>
+        {user.isAuth && <Route element={<AccountNavBar />}>
           <Route element={<UserSideBar />}>  
             {AUTH_ROUTES.map(({ PATH, COMPONENT }) =>
               <Route key={PATH} path={PATH} element={<COMPONENT />} />
@@ -20,16 +25,14 @@ const UserRouter = () => {
               <Route key={PATH} path={PATH} element={<COMPONENT />} />
             )}
           </Route>
-        </Route>
+        </Route>}
         <Route element={<MainNavBar />}>
-          {PUBLIC_ROUTES.map(({ PATH, COMPONENT }) =>
-            <Route key={PATH} path={PATH} element={<COMPONENT />} />
+          {PUBLIC_ROUTES.map(({ PATH, COMPONENT }) => <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}
           <Route path="*" element={<Home />} />
         </Route>
         <Route element={<AuthLayout />}>
-          {SIGN_IN_ROUTES.map(({ PATH, COMPONENT }) =>
-            <Route key={PATH} path={PATH} element={<COMPONENT />} />
+          {SIGN_IN_ROUTES.map(({ PATH, COMPONENT }) => <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}
         </Route>
       </Routes>
@@ -37,4 +40,4 @@ const UserRouter = () => {
   )
 }
 
-export default UserRouter
+export default observer(UserRouter)

@@ -5,6 +5,7 @@ import { ROLES } from '../../Utils/constance'
 import AdminRouter from './AdminRouter'
 import CoachRouter from './CoachRouter'
 import UserRouter from './UserRouter'
+import PublicRouter from './PublicRouter'
 
 const AppRouter = () => {
 
@@ -25,9 +26,9 @@ const AppRouter = () => {
     )
   default:
     return (
-      <UserRouter/>
+      <PublicRouter />
     )
   }
 }
-  
+
 export default observer(AppRouter)
