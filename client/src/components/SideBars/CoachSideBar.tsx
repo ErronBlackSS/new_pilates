@@ -1,10 +1,14 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 const CoachSideBar = () => {
   return (
-    <div>
-      123321      
-    </div>
+    <>
+      <div className="h-full flex flex-col bg-bordo">
+      Боковое меню тренера
+      </div>
+      <Outlet />
+    </>
   )
 }
 

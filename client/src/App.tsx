@@ -1,7 +1,7 @@
 import { FC, useContext, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import AppRouter from './components/AppRouter'
+import AppRouter from './components/Router/AppRouter'
 import { Context } from './index'
 
 const App: FC = () => {
@@ -12,6 +12,7 @@ const App: FC = () => {
     if (localStorage.getItem('token')) {
       user.checkAuth()
     }
+    console.log(user)
   }, [user])
 
   return (

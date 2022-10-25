@@ -14,7 +14,7 @@ const Account = () => {
   }
 
   return (
-    <div>
+    <div className="ml-[400px]">
       <h1>Account</h1>
       <h2>{user.user.email}</h2>
       <button onClick={logoutHandler} className="px-4 py-2 border rounded-[20px] bg-gray-400">
