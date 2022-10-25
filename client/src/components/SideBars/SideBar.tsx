@@ -1,17 +1,17 @@
 import { Outlet, useNavigate, Link } from 'react-router-dom'
-import { useContext, useRef } from 'react' 
+import { useContext, useState } from 'react' 
 import LogoutIcon from '../Icons/LogoutIcon'
 import { Context } from '../../index'
-import { useSideBar } from '../../Hooks/useSideBar'
 
 const UserSideBar = () => {
   const { user } = useContext(Context)
   const navigate = useNavigate()
   
-  const iconRef = useRef(null)
-  const sideBarRef = useRef(null)
+  const [isSideBarToggled, setSideBarToggled] = useState(false)
 
-  const { toggle } = useSideBar(iconRef, sideBarRef)
+  const toggle = () => {
+    setSideBarToggled(!isSideBarToggled)
+  }
 
   const logoutHandler = (): void => {
     user.logout()
@@ -21,13 +21,10 @@ const UserSideBar = () => {
   return (
     <>
       <div
-        className="h-[calc(100%-62px)] absolute flex flex-col bg-[#777] border gap-[20px] items-center w-[50px] transition-all duration-500"
-        ref={sideBarRef}
+        className={ 'h-[calc(100%-62px)] absolute flex flex-col bg-[#777] border gap-[20px] transition-all' + (isSideBarToggled ? ' w-[200px] items-left' : ' w-[50px] items-center') }
       >
         <div>
           <svg
-            ref={iconRef}
-            className="transition-all duration-500"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="14"
