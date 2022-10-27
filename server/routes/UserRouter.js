@@ -15,8 +15,8 @@ router.post('/reset', UserController.reset)
 router.post('/reset/password', UserController.resetPassword)
 router.get('/user/reset/:link', UserController.getUserByResetToken)
 router.get('/reset/:link', UserController.activateReset)
-router.post('user/set/coach', UserController.setCoachRole)
-router.post('user/set/user', UserController.setUserRole)
-router.post('user/set/admin', UserController.setAdminRole)
+router.patch('/users/set/coach', UserController.setCoachRole)
+router.patch('/users/set/user', UserController.setUserRole)
+router.patch('/users/set/admin', UserController.setAdminRole)
 
 module.exports = router

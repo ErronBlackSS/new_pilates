@@ -136,8 +136,8 @@ async function remove (req, res, next) {
 async function setCoachRole (req, res, next) {
   try {
     const { id } = req.body
-    const user = await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.COACH, id])
-    res.json(user)
+    await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.COACH, id])
+    res.json({ message: 'success' })
   } catch (e) {
     next(e)
   }
@@ -146,8 +146,8 @@ async function setCoachRole (req, res, next) {
 async function setUserRole (req, res, next) {
   try {
     const { id } = req.body
-    const user = await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.CLIENT, id])
-    res.json(user)
+    await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.CLIENT, id])
+    res.json({ message: 'success' })
   } catch (e) {
     next(e)
   }
@@ -156,8 +156,8 @@ async function setUserRole (req, res, next) {
 async function setAdminRole (req, res, next) {
   try {
     const { id } = req.body
-    const user = await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.ADMIN, id])
-    res.json(user)
+    await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.ADMIN, id])
+    res.json({ message: 'success' })
   } catch (e) {
     next(e)
   }
