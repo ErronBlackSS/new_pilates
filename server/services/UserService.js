@@ -37,6 +37,7 @@ async function registration (name, email, phone, password, lastname) {
 async function resetSendMail (email) {
     const candidate = await UserHelpers.findOne({ field: 'email', value: email })
     if (!candidate) {
+        console.log(candidate, 'CANDIDATE')
         throw ApiError.BadRequest('Пользователь с таким email не найден')
     }
     const reset_link = uuid.v4()

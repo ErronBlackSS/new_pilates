@@ -5,6 +5,7 @@ const ApiError = require('../exceptions/ApiError')
 const helpers = require('../helpers/general')
 const pool = require('../db')
 const logger = require('../logger')
+const { ROLES } = require('../constants')
 
 async function registration (req, res, next) {
   try {
@@ -132,6 +133,36 @@ async function remove (req, res, next) {
   }
 }
 
+async function setCoachRole (req, res, next) {
+  try {
+    const { id } = req.body
+    const user = await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.COACH, id])
+    res.json(user)
+  } catch (e) {
+    next(e)
+  }
+}
+
+async function setUserRole (req, res, next) {
+  try {
+    const { id } = req.body
+    const user = await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.CLIENT, id])
+    res.json(user)
+  } catch (e) {
+    next(e)
+  }
+}
+
+async function setAdminRole (req, res, next) {
+  try {
+    const { id } = req.body
+    const user = await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.ADMIN, id])
+    res.json(user)
+  } catch (e) {
+    next(e)
+  }
+}
+
 async function getUserByResetToken (req, res, next) {
   try {
     const reset_link = req.params.link
@@ -154,5 +185,8 @@ module.exports = {
   remove,
   activateReset,
   getUserByResetToken,
-  getUsers
+  getUsers,
+  setCoachRole,
+  setUserRole,
+  setAdminRole
 }

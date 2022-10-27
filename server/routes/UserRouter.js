@@ -13,7 +13,10 @@ router.get('/users', UserController.getUsers)
 router.delete('/users', UserController.remove)
 router.post('/reset', UserController.reset)
 router.post('/reset/password', UserController.resetPassword)
-router.get('/user/:link', UserController.getUserByResetToken)
+router.get('/user/reset/:link', UserController.getUserByResetToken)
 router.get('/reset/:link', UserController.activateReset)
+router.post('user/set/coach', UserController.setCoachRole)
+router.post('user/set/user', UserController.setUserRole)
+router.post('user/set/admin', UserController.setAdminRole)
 
 module.exports = router
