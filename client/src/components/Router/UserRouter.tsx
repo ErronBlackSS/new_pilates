@@ -4,9 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Context } from '../..'
 import Home from '../../Pages/Home'
 import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
-import AccountNavBar from '../Layouts/NavBars/AccountLayout'
-import AuthLayout from '../Layouts/NavBars/AuthLayout'
-import MainNavBar from '../Layouts/NavBars/MainLayout'
+import NavBar from '../Layouts/NavBar'
 import UserSideBar from '../SideBars/UserSideBar'
 
 const UserRouter = () => {
@@ -16,7 +14,7 @@ const UserRouter = () => {
   return (
     <React.Suspense>
       <Routes>
-        {user.isAuth && <Route element={<AccountNavBar />}>
+        {user.isAuth && <Route element={<NavBar />}>
           <Route element={<UserSideBar />}>  
             {AUTH_ROUTES.map(({ PATH, COMPONENT }) =>
               <Route key={PATH} path={PATH} element={<COMPONENT />} />
@@ -26,12 +24,12 @@ const UserRouter = () => {
             )}
           </Route>
         </Route>}
-        <Route element={<MainNavBar />}>
+        <Route element={<NavBar />}>
           {PUBLIC_ROUTES.map(({ PATH, COMPONENT }) => <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}
           <Route path="*" element={<Home />} />
         </Route>
-        <Route element={<AuthLayout />}>
+        <Route element={<NavBar />}>
           {SIGN_IN_ROUTES.map(({ PATH, COMPONENT }) => <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}
         </Route>

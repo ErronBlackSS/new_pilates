@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import LogoutIcon from '../Icons/LogoutIcon'
 import { Context } from '../../index'
 
-const UserSideBar = () => {
+const SideBar = () => {
   const { user } = useContext(Context)
   const navigate = useNavigate()
   
@@ -69,4 +69,4 @@ const UserSideBar = () => {
   )
 }
 
-export default UserSideBar
+export default SideBar

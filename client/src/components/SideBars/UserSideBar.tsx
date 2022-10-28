@@ -21,7 +21,7 @@ const UserSideBar = () => {
   return (
     <>
       <div
-        className="h-[calc(100%-62px)] absolute flex flex-col bg-[#777] border gap-[20px] items-center w-[50px] transition-all duration-500"
+        className="h-[calc(100%-62px)] fixed flex flex-col bg-[#777] border gap-[20px] items-center w-[50px] transition-all duration-500"
         ref={sideBarRef}
       >
         <div>
