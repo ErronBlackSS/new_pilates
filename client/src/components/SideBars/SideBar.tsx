@@ -1,17 +1,19 @@
-import { Outlet, useNavigate, Link } from 'react-router-dom'
-import { useContext, useState } from 'react' 
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useContext, useRef } from 'react' 
 import LogoutIcon from '../Icons/LogoutIcon'
 import { Context } from '../../index'
+import { useSideBar } from '../../Hooks/useSideBar'
+import SideBarItem from './SideBarItem'
+import { observer } from 'mobx-react-lite'
 
 const SideBar = () => {
   const { user } = useContext(Context)
   const navigate = useNavigate()
-  
-  const [isSideBarToggled, setSideBarToggled] = useState(false)
 
-  const toggle = () => {
-    setSideBarToggled(!isSideBarToggled)
-  }
+  const iconRef = useRef(null)
+  const bodyRef = useRef(null)
+  
+  const { toggle, menuItems } = useSideBar(iconRef, bodyRef, user.user.role)
 
   const logoutHandler = (): void => {
     user.logout()
@@ -21,14 +23,17 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={ 'h-[calc(100%-62px)] absolute flex flex-col bg-[#777] border gap-[20px] transition-all' + (isSideBarToggled ? ' w-[200px] items-left' : ' w-[50px] items-center') }
+        className={ 'h-screen absolute flex flex-col bg-[#777] border gap-[20px] w-[50px] transition-all duration-500 items-center ' }
+        ref={bodyRef}
       >
         <div>
           <svg
+            className="transition-all duration-500 "
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="14"
             onClick={toggle}
+            ref={iconRef}
           >
             <path
               fill="none"
@@ -41,24 +46,11 @@ const SideBar = () => {
             />
           </svg>
         </div>
-        <div>
-          <Link to="/account/settings"> 
-            Настройки
-          </Link> 
-        </div>
-        <div>
-          <Link to="/account/lessons"> 
-            Занятия
-          </Link> 
-        </div>
-        <div>
-          3
-        </div>
-        <div>
-          4
-        </div>
+        {menuItems ? menuItems.map((item, index) => {
+          return <SideBarItem key={index} title={item.title} path={item.path} />
+        }) : null}
         <div
-          className="bottom-[25px] absolute"
+          className="bottom-[25px] absolute cursor-pointer"
           onClick={logoutHandler}
         >
           <LogoutIcon />
@@ -69,4 +61,4 @@ const SideBar = () => {
   )
 }
 
-export default SideBar
+export default observer(SideBar)

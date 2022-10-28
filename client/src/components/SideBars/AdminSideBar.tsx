@@ -13,14 +13,8 @@ const AdminSideBar = () => {
   const iconRef = useRef(null)
   const sideBarRef = useRef(null)
 
-  const { toggle, isToggled } = useSideBar(iconRef, sideBarRef)
+  // const { toggle, isToggled } = useSideBar(iconRef, sideBarRef)
 
-  useOnClickOutside(sideBarRef, () => {
-    if (isToggled) {
-      toggle()
-    }
-  })
-  
   const logoutHandler = (): void => {
     user.logout()
     navigate('/')
@@ -39,7 +33,6 @@ const AdminSideBar = () => {
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="14"
-            onClick={toggle}
           >
             <path
               fill="none"

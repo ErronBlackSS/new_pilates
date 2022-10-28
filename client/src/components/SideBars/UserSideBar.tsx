@@ -11,7 +11,7 @@ const UserSideBar = () => {
   const iconRef = useRef(null)
   const sideBarRef = useRef(null)
 
-  const { toggle } = useSideBar(iconRef, sideBarRef)
+  // const { toggle } = useSideBar(iconRef, sideBarRef)
 
   const logoutHandler = (): void => {
     user.logout()
@@ -30,8 +30,6 @@ const UserSideBar = () => {
             className="transition-all duration-500"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
-            height="14"
-            onClick={toggle}
           >
             <path
               fill="none"

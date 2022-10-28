@@ -5,7 +5,7 @@ import { Context } from '../..'
 import Home from '../../Pages/Home'
 import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
 import NavBar from '../Layouts/NavBar'
-import UserSideBar from '../SideBars/UserSideBar'
+import SideBar from '../SideBars/SideBar'
 
 const UserRouter = () => {
 
@@ -14,15 +14,13 @@ const UserRouter = () => {
   return (
     <React.Suspense>
       <Routes>
-        {user.isAuth && <Route element={<NavBar />}>
-          <Route element={<UserSideBar />}>  
-            {AUTH_ROUTES.map(({ PATH, COMPONENT }) =>
-              <Route key={PATH} path={PATH} element={<COMPONENT />} />
-            )}
-            {USER_ACCOUNT_ROUTES.map(({ PATH, COMPONENT }) =>
-              <Route key={PATH} path={PATH} element={<COMPONENT />} />
-            )}
-          </Route>
+        {user.isAuth && <Route element={<SideBar />}>  
+          {AUTH_ROUTES.map(({ PATH, COMPONENT }) =>
+            <Route key={PATH} path={PATH} element={<COMPONENT />} />
+          )}
+          {USER_ACCOUNT_ROUTES.map(({ PATH, COMPONENT }) =>
+            <Route key={PATH} path={PATH} element={<COMPONENT />} />
+          )}
         </Route>}
         <Route element={<NavBar />}>
           {PUBLIC_ROUTES.map(({ PATH, COMPONENT }) => <Route key={PATH} path={PATH} element={<COMPONENT />} />
