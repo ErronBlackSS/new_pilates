@@ -1,13 +1,16 @@
 export const SIDEBAR_ITEMS = {
   USER: [
+    { title: 'На главную', path: '/' },
     { title: 'Мои уроки', path: '/account/lessons' },
     { title: 'Настройки', path: '/account/settings' }
   ],
   COACH: [
+    { title: 'На главную', path: '/' },
     { title: 'Мои уроки', path: '/account/lessons' },
     { title: 'Настройки', path: '/account/settings' }
   ],
   ADMIN: [
+    { title: 'На главную', path: '/' },
     { title: 'Мои уроки', path: '/account/lessons' },
     { title: 'Настройки', path: '/account/settings' },
     { title: 'Пользователи', path: '/account/users' },

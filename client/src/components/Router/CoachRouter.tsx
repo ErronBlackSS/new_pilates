@@ -4,7 +4,7 @@ import Home from '../../Pages/Home'
 import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES } from '../../routes'
 import AuthLayout from '../Layouts/NavBars/AuthLayout'
 import MainNavBar from '../Layouts/NavBars/MainLayout'
-import SideBar from '../SideBars/SideBar'
+import SideBar from '../SideBar'
 
 const UserRouter = () => {
   return (

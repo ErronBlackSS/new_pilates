@@ -5,7 +5,7 @@ import { Context } from '../..'
 import Home from '../../Pages/Home'
 import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
 import NavBar from '../Layouts/NavBar'
-import SideBar from '../SideBars/SideBar'
+import SideBar from '../SideBar'
 
 const UserRouter = () => {
 

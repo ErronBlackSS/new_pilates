@@ -1,15 +1,11 @@
 import { observer } from 'mobx-react-lite'
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { Context } from '../../index'
 import AuthLink from './AuthLink'
 import LinkPropsItem from './LinkPropsItem'
 import { NAV_LINKS } from './Links'
 
-const NavBar: FC = () => {
-
-  const { user } = useContext(Context)
-  
+const NavBar: FC = () => {  
   const navigate = useNavigate()
 
   const redirectToMain = () => {
