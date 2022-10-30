@@ -112,6 +112,24 @@ async function listBookedUsers (req, res) {
   }
 }
 
+async function getLessonsByDate(req, res) {
+  try {
+    const start_time = req.body
+    const end_time = req.body
+    const lessons = await pool.query(`
+    select users."name", users.id, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
+    from lessons
+    left join users on lessons.coach_id = users.id
+    left join lesson_types on lessons.lesson_type_id = lesson_types.id
+    where lessons.date BETWEEN $1 and $2`,
+    [start_time, end_time])
+    res.json(lessons.rows)
+  } catch (e) {
+    next(e)
+  }
+}
+
+
 function availiableToBook (capacity, occupied) {
   try {
     return capacity - occupied > 0
