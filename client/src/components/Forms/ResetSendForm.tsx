@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import InputItem from './Components/InputItem'
-import { useInput } from '../../hooks/UseInput'
-import AuthService from '../../services/AuthService'
+import { useInput } from '../../Hooks/UseInput'
+import AuthService from '../../Services/AuthService'
 
 interface IResetSendForm {
   user_id: number

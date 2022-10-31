@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import InputItem from './Components/InputItem'
 import { Link } from 'react-router-dom'
-import { useInput } from '../../hooks/UseInput'
-import AuthService from '../../services/AuthService'
+import { useInput } from '../../Hooks/UseInput'
+import AuthService from '../../Services/AuthService'
 
 const ResetForm: FC = () => {
 

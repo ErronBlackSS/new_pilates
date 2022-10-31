@@ -1,6 +1,8 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import MobileView from './MobileView'
 import DesktopView from './DesktopView'
+import { useState } from 'react'
+import MobileNav from './MobileNav'
 
 const MainNavBar = () => {
 
@@ -10,10 +12,23 @@ const MainNavBar = () => {
     navigate('/')
   }
 
+  const [isOverlayOpened, setIsOverlayOpened] = useState(false)
+
+  const toggleOverlay = () => {
+    setIsOverlayOpened(!isOverlayOpened)
+  }
+
   return (
     <>
-      <DesktopView redirectToMain={redirectToMain}/>
-      <MobileView redirectToMain={redirectToMain}/>
+      {isOverlayOpened && 
+        <MobileNav toggleOverlay={toggleOverlay} redirectToMain={redirectToMain}/>
+      }
+      {!isOverlayOpened &&
+        <>
+          <DesktopView redirectToMain={redirectToMain}/>
+          <MobileView toggleOverlay={toggleOverlay} redirectToMain={redirectToMain}/>
+        </>
+      }
       <Outlet />
     </>
   )

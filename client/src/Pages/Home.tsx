@@ -1,6 +1,6 @@
 const Main = () => {
   return (
-    <div className="flex flex-row justify-left mx-[68px]">
+    <div className="flex mobile-below:flex-col mobile-above:flex-row justify-left">
       <div className="max-w-[500px]">
         <div className="flex flex-col">
           <div className="mt-[52px]">

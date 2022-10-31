@@ -1,4 +1,4 @@
-import { ROUTES } from './utils/constance'
+import { ROUTES } from './Utils/constance'
 import Home from './Pages/Home'
 import Account from './Pages/Account'
 import Login from './Pages/Login'

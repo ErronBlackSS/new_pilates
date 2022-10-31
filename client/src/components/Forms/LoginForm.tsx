@@ -3,7 +3,7 @@ import InputItem from './Components/InputItem'
 import { Context } from '../../index'
 import {observer} from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
-import { useInput } from '../../hooks/UseInput'
+import { useInput } from '../../Hooks/UseInput'
 import { Link } from 'react-router-dom'
 
 const LoginForm: FC = () => {

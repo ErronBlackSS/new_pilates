@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import UserService from '../services/UserService'
+import UserService from '../Services/UserService'
 import { useParams } from 'react-router-dom'
 import ResetSendForm from '../components/Forms/ResetSendForm'
 import { useNavigate } from 'react-router-dom'
