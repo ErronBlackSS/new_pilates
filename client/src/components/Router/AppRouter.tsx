@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { useContext } from 'react'
 import { Context } from '../../index'
-import { ROLES } from '../../Utils/constance'
+import { ROLES } from '../../utils/constance'
 import AdminRouter from './AdminRouter'
 import CoachRouter from './CoachRouter'
 import UserRouter from './UserRouter'

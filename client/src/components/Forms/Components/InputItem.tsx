@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { IValidation } from '../../../Hooks/UseValidation'
+import { IValidation } from '../../../hooks/UseValidation'
 
 interface InputItemProps {
   label: string

@@ -3,7 +3,7 @@ import React from 'react'
 import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
 import InputItem from './Components/InputItem'
-import { useInput } from '../../Hooks/UseInput'
+import { useInput } from '../../hooks/UseInput'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 

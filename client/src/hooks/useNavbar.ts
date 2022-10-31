@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { Context } from '../index'
-import { ROLES } from '../Utils/constance'
-import { SIDEBAR_ITEMS } from '../Utils/navbar_constants'
+import { ROLES } from '../utils/constance'
+import { SIDEBAR_ITEMS } from '../utils/navbar_constants'
 
 export const useNavbar = () => {
 
