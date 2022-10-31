@@ -101,8 +101,7 @@ async function activate (req, res, next) {
 async function getUsers (req, res, next) {
   try {
     const users = await UserHelpers.getAllUsers()
-    const message = 'Получить всех пользователей'
-    logger.info(message)
+    logger.info('Получить всех пользователей')
     res.json(users)
   } catch (e) {
     next(e)
@@ -163,6 +162,15 @@ async function setAdminRole (req, res, next) {
   }
 }
 
+async function getCoaches (req, res, next) {
+  try {
+    const coaches = await pool.query('SELECT * FROM users WHERE role = $1', [ROLES.COACH])
+    res.json(coaches)
+  } catch (e) {
+    next(e)
+  }
+}
+
 async function getUserByResetToken (req, res, next) {
   try {
     const reset_link = req.params.link
@@ -188,5 +196,6 @@ module.exports = {
   getUsers,
   setCoachRole,
   setUserRole,
-  setAdminRole
+  setAdminRole,
+  getCoaches
 }
