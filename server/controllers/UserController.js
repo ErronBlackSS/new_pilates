@@ -146,7 +146,7 @@ async function setCoachRole (req, res, next) {
 async function setUserRole (req, res, next) {
   try {
     const { id } = req.body
-    await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.CLIENT, id])
+    await pool.query('UPDATE users SET role = $1 WHERE id = $2 RETURNING *', [ROLES.USER, id])
     res.json({ message: 'success' })
   } catch (e) {
     next(e)
