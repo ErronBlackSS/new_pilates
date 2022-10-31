@@ -7,6 +7,8 @@ export enum ROUTES {
   RESET_PASSWORD = '/reset/:token',
   SETTINGS = '/account/settings',
   MY_LESSONS = '/account/lessons',
+  USERS = '/account/users',
+  DIRECTIONS = '/account/directions'
 }
 
 export enum ROLES {

@@ -7,6 +7,8 @@ import Reset from './Pages/Reset'
 import ResetSend from './Pages/ResetSend'
 import Settings from './Pages/Settings'
 import Lessons from './Pages/Lessons'
+import Users from './Pages/Users'
+import Directions from './Pages/Directions'
 
 export const AUTH_ROUTES = [
   {
@@ -19,6 +21,25 @@ export const PUBLIC_ROUTES = [
   {
     PATH: ROUTES.MAIN,
     COMPONENT: Home
+  }
+]
+
+export const ADMIN_ROUTES = [
+  {
+    PATH: ROUTES.SETTINGS,
+    COMPONENT: Settings
+  },
+  {
+    PATH: ROUTES.MY_LESSONS,
+    COMPONENT: Lessons
+  },
+  {
+    PATH: ROUTES.USERS,
+    COMPONENT: Users
+  },
+  {
+    PATH: ROUTES.DIRECTIONS,
+    COMPONENT: Directions
   }
 ]
 

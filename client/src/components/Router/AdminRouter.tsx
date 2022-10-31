@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../../Pages/Home'
-import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
+import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES, ADMIN_ROUTES } from '../../routes'
 import NavBar from '../Layouts/NavBar'
 import SideBar from '../SideBar'
 
@@ -13,7 +13,7 @@ const UserRouter = () => {
           {AUTH_ROUTES.map(({ PATH, COMPONENT }) =>
             <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}
-          {USER_ACCOUNT_ROUTES.map(({ PATH, COMPONENT }) =>
+          {ADMIN_ROUTES.map(({ PATH, COMPONENT }) =>
             <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}
         </Route>
