@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import ResetForm from '../components/Forms/ResetForm'
+import ResetForm from '../Components/Forms/ResetForm'
 
 const ResetSend: FC = () => {
   return (

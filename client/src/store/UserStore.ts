@@ -1,4 +1,4 @@
-import { UserInterface } from '../types/user_types/UserTypes'
+import { UserInterface } from '../Types/UserTypes/UserTypes'
 import { makeAutoObservable } from 'mobx'
 import AuthService from '../Services/AuthService'
 export default class UserStore {

@@ -1,4 +1,4 @@
-import { UserInterface } from '../user_types/UserTypes'
+import { UserInterface } from '../UserTypes/UserTypes'
 
 export interface AuthResponse {
   accessToken: string

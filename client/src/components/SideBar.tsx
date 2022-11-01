@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { useContext, useRef } from 'react' 
 import LogoutIcon from './Icons/LogoutIcon'
 import { Context } from '../index'
-import { useSideBar } from '../Hooks/useSideBar'
+import { useSideBar } from '../Hooks/UseSideBar'
 import SideBarItem from './SideBars/SideBarItem'
 import { observer } from 'mobx-react-lite'
 

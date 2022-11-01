@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 import { ROLES } from '../Utils/constance'
 import { SIDEBAR_ITEMS } from '../Utils/navbar_constants'
-import { useOnClickOutside } from './useClickOutside'
+import { useOnClickOutside } from './UseClickOutside'
 
 export const useSideBar = (iconRef: MutableRefObject<any>, bodyRef: MutableRefObject<any>, role: string) => {
     
