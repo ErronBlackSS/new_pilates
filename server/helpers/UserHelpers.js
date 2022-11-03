@@ -28,15 +28,7 @@ async function create (user) {
     return newUser.rows[0]
 }
 
-async function activate (userId) {
-    const user = await pool.query(`
-        UPDATE users 
-        SET is_activated = true
-        WHERE id = $1`, 
-        [userId]
-    )
-    return { message: 'Пользователь активирован' }
-}
+
 
 async function getUserByResetToken (reset_link) {
     const user = await pool.query(`SELECT * from reset_tokens WHERE resetToken = $1`, [reset_link])
@@ -48,6 +40,5 @@ module.exports = {
     getAllUsers,
     create,
     update,
-    getUserByResetToken,
-    activate
+    getUserByResetToken
 }

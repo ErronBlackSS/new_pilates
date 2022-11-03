@@ -59,12 +59,23 @@ async function resetPassword (userId, password) {
     return userDto
 }
 
+async function activate_user (userId) {
+    const user = await pool.query(`
+        UPDATE users 
+        SET is_activated = true
+        WHERE id = $1`, 
+        [userId]
+    )
+    return { message: 'Пользователь активирован' }
+}
+
+
 async function activate(activationLink) {
     const user = await UserHelpers.findOne({field: 'activation_link', value: activationLink})
     if (!user) {
         throw ApiError.BadRequest('Неккоректная ссылка активации')
     }
-    return await UserHelpers.activate(user.id);
+    return await activate_user(user.id);
 }
 
 async function login(email, password) {
@@ -112,5 +123,6 @@ module.exports = {
     logout,
     resetSendMail,
     resetPassword,
-    refresh
+    refresh,
+    activate_user
 }
