@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MIN_LENGTH_ERROR, MAX_LENGTH_ERROR, EMAIL_ERROR, PHONE_ERROR, EMPTY_ERROR, DEFAULT } from './Utils/ValidationActions'
+import { MIN_LENGTH_ERROR, MAX_LENGTH_ERROR, NAME_ERROR, LASTNAME_ERROR, EMAIL_ERROR, PHONE_ERROR, EMPTY_ERROR, DEFAULT } from './Utils/ValidationActions'
 export interface IUseValidation {
   value: string
   validations: Object
@@ -9,6 +9,8 @@ export interface IValidation {
   isEmptyError: IValidator
   minLengthError: IValidator
   maxLengthError: IValidator
+  nameError: IValidator
+  lastNameError: IValidator
   emailError: IValidator
   phoneError: IValidator
   inputValid: boolean
@@ -23,6 +25,8 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
   const [isEmptyError, setEmptyError] = useState<IValidator>()
   const [minLengthError, setMinLengthError] = useState<IValidator>()
   const [maxLengthError, setMaxLengthError] = useState<IValidator>()
+  const [nameError, setNameError] = useState<IValidator>()  
+  const [lastNameError, setLastNameError] = useState<IValidator>()
   const [emailError, setEmailError] = useState<IValidator>()
   const [phoneError, setPhoneError] = useState<IValidator>()
   const [inputValid, setInputValid] = useState<boolean>()
@@ -38,6 +42,14 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
         break
       case 'maxLength':
         value.length > validations[validation] ? setMaxLengthError(MAX_LENGTH_ERROR) : setMaxLengthError(DEFAULT)
+        break
+      case 'isName':
+        const nameRegExp = /^([ \u00c0-\u01ffа-яёА-ЯЁ'\-]|[ \u00c0-\u01ffa-zA-Z'\-])+$/
+        nameRegExp.test(String(value)) ? setNameError(DEFAULT) : setNameError(NAME_ERROR)
+        break
+      case 'isLastName':
+        const lastNameRegExp = /^([ \u00c0-\u01ffа-яёА-ЯЁ'\-]|[ \u00c0-\u01ffa-zA-Z'\-])+$/
+        lastNameRegExp.test(String(value)) ? setLastNameError(DEFAULT) : setLastNameError(LASTNAME_ERROR)
         break
       case 'isEmail':
         const mailRegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -59,6 +71,8 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
       isEmptyError?.status ||
       minLengthError?.status ||
       maxLengthError?.status ||
+      nameError?.status ||
+      lastNameError?.status ||
       emailError?.status ||
       phoneError?.status
     ) {
@@ -66,12 +80,14 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
     } else {
       setInputValid(true)
     }
-  }, [isEmptyError, minLengthError, maxLengthError, emailError, phoneError])
+  }, [isEmptyError, minLengthError, maxLengthError, nameError, lastNameError, emailError, phoneError])
 
   return {
     isEmptyError,
     minLengthError,
     maxLengthError,
+    nameError,
+    lastNameError,
     emailError,
     phoneError,
     inputValid

@@ -11,10 +11,10 @@ const RegistationForm: FC = () => {
   
   const { user } = React.useContext(Context)
   
-  const name = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 2 } }) 
+  const name = useInput({initialvalue: '', validations: { isEmpty: true, isName: true, maxLength: 30} }) 
   const email = useInput({initialvalue: '', validations: { isEmpty: true, isEmail: true } })
   const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
-  const lastname = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 2 }})
+  const lastname = useInput({initialvalue: '', validations: { isEmpty: true, isLastName: true, maxLength: 30}})
   const phone = useInput({initialvalue: '', validations: { isEmpty: true, isPhone: true } })
   const passwordConfirm = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
   const [errorMessage, setErrorMessage] = useState('')
@@ -53,8 +53,8 @@ const RegistationForm: FC = () => {
           <div className="text-left min-w-[300px]">
             <form
               onSubmit={onSubmit}>
-              <div className="mt-4 form-flex md:gap-1 xl:gap-3">
-                <div className="flex flex-col">
+              <div className="mt-4 flex-col md:gap-1 xl:gap-3 align-baseline">
+                <div className="flex form-flex gap-[10px]">
                   <InputItem
                     label="Имя"
                     type="text"
@@ -75,28 +75,30 @@ const RegistationForm: FC = () => {
                     onBlur={lastname.onBlur}
                     onChange={lastname.onChange}
                   />
+                </div>
+                <div className="flex form-flex gap-[10px]">
                   <InputItem
                     label="Телефон"
                     type="text"
                     name="phone"
                     validations={phone.validations}
                     dirty={phone.isDirty}
-                    placeholder="Введите телефон"
+                    placeholder="+7 000 000-00-00"
                     onBlur={phone.onBlur}
                     onChange={phone.onChange}
                   />
-                </div>
-                <div className="flex flex-col">
                   <InputItem
                     label="Email"
                     type="text"
                     name="email"
                     validations={email.validations}
                     dirty={email.isDirty}
-                    placeholder="Введите email"
+                    placeholder="example@example.ru"
                     onBlur={email.onBlur}
                     onChange={email.onChange}
                   />
+                </div>
+                <div className="flex form-flex gap-[10px]">
                   <InputItem
                     label="Пароль"
                     type="password"

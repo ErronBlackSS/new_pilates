@@ -30,7 +30,7 @@ const InputItem: FC<InputItemProps> = ( { label, type, name, placeholder, valida
       <input
         onBlur={onBlur}
         onChange={onChange}
-        className="w-full px-4 py-2 mt-2 rounded-md border border-[#8A8E97]"
+        className={'w-full px-4 py-2 mt-2 rounded-md border border-[#8A8E97]' + (errors.length > 0 ? ' border-[#FF0000]' : '')}
         type={type}
         name={name}
         placeholder={placeholder}
