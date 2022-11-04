@@ -6,6 +6,7 @@ const UserHelpers = require('../helpers/UserHelpers')
 const ResetService = require('./ResetService')
 const UserDTO = require('../dtos/UserDTO')
 const ApiError = require('../exceptions/ApiError')
+const pool = require('../db')
 
 /*
     {
