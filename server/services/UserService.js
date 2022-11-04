@@ -38,13 +38,11 @@ async function registration (name, email, phone, password, lastname) {
 async function resetSendMail (email) {
     const candidate = await UserHelpers.findOne({ field: 'email', value: email })
     if (!candidate) {
-        console.log(candidate, 'CANDIDATE')
-        throw ApiError.BadRequest('Пользователь с таким email не найден')
+        throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} не найден`)
     }
     const reset_link = uuid.v4()
     const status = await ResetService.saveToken(candidate.id, reset_link)
     await MailService.sendResetMail(email, `${process.env.API_URL}/api/reset/${reset_link}`)
-    console.log(status, 'RESET STATUS')
     return status
 }
 

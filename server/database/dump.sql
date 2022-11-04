@@ -5,6 +5,7 @@ CREATE TABLE users(
     phone VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(255) NOT NULL DEFAULT '9bd2b9fc-446b-44ad-bbcd-d97c71004f5d',
+    user_photo BYTEA,
     is_activated BOOLEAN NOT NULL DEFAULT FALSE,
     activation_link VARCHAR(255) DEFAULT NULL,
     lastname VARCHAR(255) NOT NULL,
