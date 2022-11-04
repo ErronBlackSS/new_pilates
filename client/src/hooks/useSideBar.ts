@@ -12,7 +12,6 @@ export const useSideBar = (iconRef: MutableRefObject<any>, bodyRef: MutableRefOb
     setToggled(!isToggled)
     
     if (!isToggled) {
-      console.log(bodyRef.current)
       iconRef.current.classList.add('transform', 'rotate-180')
       bodyRef.current.classList.add('!w-[200px]')
     } else {
@@ -21,7 +20,13 @@ export const useSideBar = (iconRef: MutableRefObject<any>, bodyRef: MutableRefOb
     }
   }
 
-  useOnClickOutside(bodyRef, toggle)
+  const close = () => {
+    setToggled(false)
+    iconRef.current.classList.remove('transform', 'rotate-180')
+    bodyRef.current.classList.remove('!w-[200px]')
+  }
+
+  useOnClickOutside(bodyRef, close)
 
   useEffect(() => {
     switch (role) {

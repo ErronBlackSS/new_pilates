@@ -5,6 +5,7 @@ import {observer} from 'mobx-react-lite'
 import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../Hooks/UseInput'
 import { Link } from 'react-router-dom'
+import { RESPONSE_STATUSES } from '../../Utils/error_statuses'
 
 const LoginForm: FC = () => {
 
@@ -18,11 +19,11 @@ const LoginForm: FC = () => {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    const status = await user.login(email.value, password.value)
-    if (status === 'success') {
+    const response = await user.login(email.value, password.value)
+    if (response.status === RESPONSE_STATUSES.SUCCESS) {
       navigate('/')
     } else {
-      setErrorMessage(status)
+      setErrorMessage(response.message)
     }
   }
 

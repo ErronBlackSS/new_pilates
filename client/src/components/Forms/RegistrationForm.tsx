@@ -4,12 +4,13 @@ import { Context } from '../../index'
 import { observer } from 'mobx-react-lite'
 import InputItem from './Components/InputItem'
 import { useInput } from '../../Hooks/UseInput'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { RESPONSE_STATUSES } from '../../Utils/error_statuses'
 
 const RegistationForm: FC = () => {
   
-  const { user } = React.useContext(Context)
+  const { user } = useContext(Context)
   
   const name = useInput({initialvalue: '', validations: { isEmpty: true, isName: true, maxLength: 30} }) 
   const email = useInput({initialvalue: '', validations: { isEmpty: true, isEmail: true } })
@@ -32,11 +33,11 @@ const RegistationForm: FC = () => {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    const status = await user.registration(name.value, lastname.value, phone.value, email.value, password.value)
-    if (status === 'success') {
+    const response = await user.registration(name.value, lastname.value, phone.value, email.value, password.value)
+    if (response.status === RESPONSE_STATUSES.SUCCESS) {
       setFormSended(true)
     } else {
-      setErrorMessage(status)
+      setErrorMessage(response.message)
     }
   }
 

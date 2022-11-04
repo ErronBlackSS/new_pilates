@@ -1,5 +1,7 @@
 import { UserInterface } from '../Types/UserTypes/UserTypes'
 import { makeAutoObservable } from 'mobx'
+import { RESPONSE_STATUSES } from '../Utils/error_statuses'
+
 import AuthService from '../Services/AuthService'
 export default class UserStore {
   user = {} as UserInterface
@@ -28,9 +30,9 @@ export default class UserStore {
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
-      return 'success'
+      return { status: RESPONSE_STATUSES.SUCCESS }
     } catch (e) {
-      return e.response?.data?.message
+      return { status: RESPONSE_STATUSES.ERROR, message: e.response?.data?.message }
     }
   }
 
@@ -41,9 +43,18 @@ export default class UserStore {
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
-      return 'success'
+      return { status: RESPONSE_STATUSES.SUCCESS }
     } catch (e) {
-      return e.response?.data?.message
+      return { status: RESPONSE_STATUSES.ERROR, message: e.response?.data?.message }
+    }
+  }
+
+  async resetSendMail(email: string) {
+    try {
+      await AuthService.resetSendMail(email)
+      return { status: RESPONSE_STATUSES.SUCCESS }
+    } catch (e) {
+      return { status: RESPONSE_STATUSES.ERROR, message: e.response?.data?.message }
     }
   }
 
