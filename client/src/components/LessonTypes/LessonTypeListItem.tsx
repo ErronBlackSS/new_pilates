@@ -1,15 +1,25 @@
-import React, { FC } from 'react'
-import { ILessonType } from '../../Types/ResponseTypes/LessonTypesResponse'
-
 const LessonTypeListItem = (lessonType) => {
+  
   return (
-    <div className="flex flex-row">
-      {lessonType.title}
-      {lessonType.description}
-      {lessonType.duration}
-      {lessonType.type}
-      {lessonType.image}  
-    </div>
+    <tr
+      className="bg-[#AAA] gap-[5px]"
+    >
+      <th>
+        {lessonType.lessonType.title}
+      </th>
+      <th className="truncate max-w-[40px]">
+        {lessonType.lessonType.description}
+      </th>
+      <th>
+        {lessonType.lessonType.duration}
+      </th>
+      <th>
+        {lessonType.lessonType.type}
+      </th>
+      <th>
+        {lessonType.lessonType.image}
+      </th>
+    </tr>
   )
 }
 

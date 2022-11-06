@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Modal from '../Components/Common/Modal'
 import AddLessonTypeForm from '../Components/Forms/AddLessonTypeForm'
 import LessonTypesService from '../Services/LessonTypesService'
-import LessonTypesList from '../Components/LessonTypesList'
+import LessonTypeListItem from '../Components/LessonTypes/LessonTypeListItem'
 
 const LessonTypes = () => {
   
@@ -10,8 +10,8 @@ const LessonTypes = () => {
   
   const getLessonTypes = async () => {
     const resp = await LessonTypesService.getAll()
+    console.log(resp.data)
     setLessonTypes(resp.data)
-    console.log(lessonTypes)
   }
 
   useEffect(() => {
@@ -41,7 +41,30 @@ const LessonTypes = () => {
           </Modal>
       }
       {
-        lessonTypes && <LessonTypesList lessonTypes={lessonTypes} />
+        lessonTypes && 
+        <table
+          className="bg-[#FFF] p-[25px] gap-[15px] table-fixed"
+        >
+          <thead>
+            <tr>
+              <th>Название</th>
+              <th>Описание</th>
+              <th>Длительность</th>
+              <th>Тип</th>
+              <th>Изображение</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lessonTypes.map((lesson, index) => {
+              return (
+                <LessonTypeListItem
+                  key={index}
+                  lessonType={lesson}
+                />
+              )
+            })}
+          </tbody>
+        </table>
       }
     </div>
   )
