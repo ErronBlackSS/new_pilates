@@ -5,12 +5,12 @@ const LessonTypeDTO = require('../dtos/LessonTypeDTO')
 async function create (req, res) {
   try {
     const { title, description, global_lesson_type, duration } = req.body
-    console.log(req.body)
     const newLessonType = await pool.query(`
-      INSERT INTO lesson_types (title, description, global_lesson_type, duration) VALUES ($1, $2, $3, $4)`, 
+      INSERT INTO lesson_types (title, description, global_lesson_type, duration) VALUES ($1, $2, $3, $4) RETURNING *`, 
       [title, description, global_lesson_type, duration]
     )
-    res.json(newLessonType.rows[0])
+    lessonType = new LessonTypeDTO(newLessonType.rows[0])
+    res.json({ lessonType })
   }  catch (e) {
     next(e)
   }
@@ -20,7 +20,7 @@ async function getAll (req, res) {
   try {
     const lessonTypes = await pool.query('SELECT * from lesson_types')
     const lessonTypesDTO = lessonTypes.rows.map(lessonType => new LessonTypeDTO(lessonType))
-    res.json([...lessonTypesDTO])
+    res.json(lessonTypesDTO)
   } catch (e) {
     next(e)
   }
