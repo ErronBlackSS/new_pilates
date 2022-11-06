@@ -11,8 +11,14 @@ export const useInput = ({ initialvalue, validations } : IUseInput) => {
   const [isDirty, setDirty] = useState(false)
   const valid = useValidation({ value, validations })
 
-  const onChange = (e: { target: { value: SetStateAction<string> } }): void => {
-    setValue(e.target.value)
+  const onChange = (e: { target: {
+    [x: string]: any; value: SetStateAction<string> 
+} }): void => {
+    if (e.target?.files) {
+      setValue(e.target.files[0])
+    } else {
+      setValue(e.target.value)
+    }
   }
 
   const onBlur = (): void => {

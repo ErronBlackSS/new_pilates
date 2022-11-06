@@ -1,8 +1,8 @@
 import { UserInterface } from '../Types/UserTypes/UserTypes'
 import { makeAutoObservable } from 'mobx'
 import { RESPONSE_STATUSES } from '../Utils/error_statuses'
-
 import AuthService from '../Services/AuthService'
+
 export default class UserStore {
   user = {} as UserInterface
   isAuth = false

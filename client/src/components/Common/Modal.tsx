@@ -20,7 +20,7 @@ const Modal: FC<IModal> = ({ showModal, setShowModal, children, width, height })
       onClick={closeModal}
     >
       <div
-        className="bg-[#FFF] h-[400px] w-[300px] rounded-[12px] p-[20px] transition-all duration-500"
+        className="bg-[#FFF] rounded-[12px] p-[20px] transition-all duration-500"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col">

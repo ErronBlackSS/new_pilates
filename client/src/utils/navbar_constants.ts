@@ -9,7 +9,7 @@ export const SIDEBAR_ITEMS = {
     { title: 'Мои уроки', path: '/account/lessons' },
     { title: 'Настройки', path: '/account/settings' }
   ],
-  ADMIN: [
+  ADMIN: [ 
     { title: 'На главную', path: '/' },
     { title: 'Типы занятий', path: '/account/lessonstypes' },
     { title: 'Настройки', path: '/account/settings' },
