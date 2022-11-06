@@ -9,6 +9,7 @@ import Settings from './Pages/Settings'
 import Lessons from './Pages/Lessons'
 import Users from './Pages/Users'
 import Directions from './Pages/Directions'
+import LessonTypes from './Pages/LessonTypes'
 
 export const AUTH_ROUTES = [
   {
@@ -40,6 +41,10 @@ export const ADMIN_ROUTES = [
   {
     PATH: ROUTES.DIRECTIONS,
     COMPONENT: Directions
+  },
+  {
+    PATH: ROUTES.LESSON_TYPES,
+    COMPONENT: LessonTypes
   }
 ]
 

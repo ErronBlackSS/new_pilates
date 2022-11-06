@@ -18,7 +18,7 @@ const Lessons = () => {
 
   return (
     <div className="items-center flex flex-col justify-center h-screen w-full bg-[#ea8df7]">
-      <div className="flex flex-col items-center justify-center w-[80%]">
+      <div className="flex flex-col items-center justify-center w-[80%] text-[#008080]">
         <div>
           Уроки
           {lessons?.map(lesson => (

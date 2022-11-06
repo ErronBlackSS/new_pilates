@@ -8,7 +8,8 @@ export enum ROUTES {
   SETTINGS = '/account/settings',
   MY_LESSONS = '/account/lessons',
   USERS = '/account/users',
-  DIRECTIONS = '/account/directions'
+  DIRECTIONS = '/account/directions',
+  LESSON_TYPES = '/account/lessonstypes'
 }
 
 export enum ROLES {

@@ -11,7 +11,7 @@ export const SIDEBAR_ITEMS = {
   ],
   ADMIN: [
     { title: 'На главную', path: '/' },
-    { title: 'Мои уроки', path: '/account/lessons' },
+    { title: 'Типы занятий', path: '/account/lessonstypes' },
     { title: 'Настройки', path: '/account/settings' },
     { title: 'Пользователи', path: '/account/users' },
     { title: 'Уроки', path: '/account/lessons' },
