@@ -1,12 +1,14 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
+const LessonTypeDTO = require('../dtos/LessonTypeDTO')
 
 async function create (req, res) {
   try {
-    const { name, description } = req.body
+    const { title, description, global_lesson_type, duration } = req.body
+    console.log(req.body)
     const newLessonType = await pool.query(`
-      INSERT INTO lesson_types (name, description) VALUES ($1, $2)`, 
-      [name, description]
+      INSERT INTO lesson_types (title, description, global_lesson_type, duration) VALUES ($1, $2, $3, $4)`, 
+      [title, description, global_lesson_type, duration]
     )
     res.json(newLessonType.rows[0])
   }  catch (e) {
@@ -17,7 +19,8 @@ async function create (req, res) {
 async function getAll (req, res) {
   try {
     const lessonTypes = await pool.query('SELECT * from lesson_types')
-    res.json(lessonTypes.rows)
+    const lessonTypesDTO = lessonTypes.rows.map(lessonType => new LessonTypeDTO(lessonType))
+    res.json(lessonTypesDTO)
   } catch (e) {
     next(e)
   }
