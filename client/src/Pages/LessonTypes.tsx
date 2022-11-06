@@ -10,8 +10,13 @@ const LessonTypes = () => {
   
   const getLessonTypes = async () => {
     const resp = await LessonTypesService.getAll()
-    console.log(resp.data)
     setLessonTypes(resp.data)
+  }
+
+  const addLessonType = (lessonType) => {
+    console.log('addLessonType', lessonType)
+    setLessonTypes([...lessonTypes, lessonType.lessonType])
+    setShowModal(false)
   }
 
   useEffect(() => {
@@ -37,7 +42,9 @@ const LessonTypes = () => {
             width={'300px'}
             height={'400px'}
           >
-            <AddLessonTypeForm />
+            <AddLessonTypeForm
+              onAddLessonType={addLessonType}
+            />
           </Modal>
       }
       {

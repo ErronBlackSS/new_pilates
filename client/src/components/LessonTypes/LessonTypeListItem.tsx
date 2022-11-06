@@ -7,7 +7,7 @@ const LessonTypeListItem = (lessonType) => {
       <th>
         {lessonType.lessonType.title}
       </th>
-      <th className="truncate max-w-[40px]">
+      <th className="truncate max-w-[600px]">
         {lessonType.lessonType.description}
       </th>
       <th>

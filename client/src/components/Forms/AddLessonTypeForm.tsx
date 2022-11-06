@@ -3,7 +3,7 @@ import { useInput } from '../../Hooks/UseInput'
 import LessonTypesService from '../../Services/LessonTypesService'
 import InputItem from './Components/InputItem'
 
-const AddLessonTypeForm = () => {
+const AddLessonTypeForm = ({ onAddLessonType }) => {
  
   const title = useInput({initialvalue: '', validations: { isEmpty: true }})
   const description = useInput({initialvalue: '', validations: { isEmpty: true }})
@@ -18,7 +18,8 @@ const AddLessonTypeForm = () => {
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value)
-    console.log(lessonType)
+    const lessonTypeData = lessonType.data
+    onAddLessonType(lessonTypeData)
   }
 
   return (
