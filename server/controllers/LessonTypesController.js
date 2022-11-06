@@ -20,7 +20,7 @@ async function getAll (req, res) {
   try {
     const lessonTypes = await pool.query('SELECT * from lesson_types')
     const lessonTypesDTO = lessonTypes.rows.map(lessonType => new LessonTypeDTO(lessonType))
-    res.json(lessonTypesDTO)
+    res.json([...lessonTypesDTO])
   } catch (e) {
     next(e)
   }

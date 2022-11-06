@@ -9,6 +9,7 @@ module.exports = class UserDto {
     constructor(model) {
         this.id = model.id
         this.title = model.title
+        this.description = model.description
         this.duration = model.duration
         this.type = model.global_lesson_type
         this.image = model.lesson_image
