@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import Modal from '../Components/Common/Modal'
 import AddLessonTypeForm from '../Components/Forms/AddLessonTypeForm'
 import LessonTypesService from '../Services/LessonTypesService'
-import LessonTypeListItem from '../Components/LessonTypes/LessonTypeListItem'
+import LessonTypeRow from '../Components/LessonTypes/LessonTypeRow'
 
 const LessonTypes = () => {
   
   const [lessonTypes, setLessonTypes] = useState([])
+  const [showModal, setShowModal] = useState(false)
   
   const getLessonTypes = async () => {
     const resp = await LessonTypesService.getAll()
@@ -14,7 +15,6 @@ const LessonTypes = () => {
   }
 
   const addLessonType = (lessonType) => {
-    console.log('addLessonType', lessonType)
     setLessonTypes([...lessonTypes, lessonType.lessonType])
     setShowModal(false)
   }
@@ -22,8 +22,6 @@ const LessonTypes = () => {
   useEffect(() => {
     getLessonTypes()
   }, [])
-
-  const [showModal, setShowModal] = useState(false)
   
   return (
     <div className="items-center flex flex-col h-screen w-full bg-[#ea8df7]">
@@ -50,7 +48,7 @@ const LessonTypes = () => {
       {
         lessonTypes && 
         <table
-          className="bg-[#FFF] p-[25px] gap-[15px] table-fixed"
+          className="bg-[#FFF] p-[25px] gap-[15px] table-fixed border-separate"
         >
           <thead>
             <tr>
@@ -64,7 +62,7 @@ const LessonTypes = () => {
           <tbody>
             {lessonTypes.map((lesson, index) => {
               return (
-                <LessonTypeListItem
+                <LessonTypeRow
                   key={index}
                   lessonType={lesson}
                 />
