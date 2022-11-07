@@ -33,7 +33,7 @@ CREATE TABLE lesson_types (
     description VARCHAR(999) DEFAULT NULL,
     duration SMALLINT NOT NULL,
     global_lesson_type VARCHAR(64),
-    lesson_image BYTEA,
+    lesson_image VARCHAR(511) DEFAULT NULL,
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
