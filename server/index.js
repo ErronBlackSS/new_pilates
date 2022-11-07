@@ -6,11 +6,13 @@ const UserRouter = require('./routes/UserRouter')
 const LessonsRouter = require('./routes/LessonsRouter')
 const LessonTypesRouter = require('./routes/LessonTypesRouter')
 const ErrorMiddleware = require('./middlewares/ErrorMiddleware')
+const fileUpload = require("express-fileupload")
 const cookieParser = require('cookie-parser')
 const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(fileUpload({}))
 
 app.use(cors({
     credentials: true,

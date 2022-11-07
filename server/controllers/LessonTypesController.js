@@ -1,6 +1,7 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
 const LessonTypeDTO = require('../dtos/LessonTypeDTO')
+const logger = require('../logger')
 
 async function create (req, res) {
   try {
@@ -23,6 +24,25 @@ async function getAll (req, res) {
     res.json(lessonTypesDTO)
   } catch (e) {
     next(e)
+  }
+}
+
+async function saveImage (req, res) {
+  try {
+    const { id } = req.body
+    const file = req.files
+    console.log(file)
+    // console.log(image)
+    const lessonType = await pool.query(`
+      UPDATE lesson_types 
+      SET lesson_image = $1 
+      WHERE id = $2 RETURNING *`, 
+      [file, id]
+    )
+    res.json(lessonType.rows[0])
+  } catch (e) {
+    console.log(e)
+    //next(e)
   }
 }
 
@@ -54,5 +74,6 @@ module.exports = {
     create,
     getAll,
     update,
-    remove
+    remove,
+    saveImage
 }
