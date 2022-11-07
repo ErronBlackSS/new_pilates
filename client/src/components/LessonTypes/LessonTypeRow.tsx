@@ -1,15 +1,16 @@
-import LessonTypesService from '../../Services/LessonTypesService'
-
 const LessonTypeRow = (lessonType) => {
   
-  const saveFile = async (e) => {
-    const file = e.target.files[0]
+  const saveFile = async (event) => {
     const formData = new FormData()
-    formData.append('files', file)
+    const files = [...event.target.files]
+    formData.append('file', files[0])
     console.log(formData)
-    const resp = await LessonTypesService.saveFile(formData, lessonType.lessonType.id)
-    console.log(resp.data)
-    return resp.data
+    const resp = await fetch('http://localhost:5000/api/upload/?' + lessonType.lessonType.id, {
+      method: 'POST',
+      body: formData,
+    })
+    console.log(resp)
+    //return resp.data
   }
 
   return (
@@ -38,7 +39,8 @@ const LessonTypeRow = (lessonType) => {
             :
             <input
               type="file"
-              onChange={saveFile}
+              name="uploadFile"
+              onChange={(event) => saveFile(event)}
             >
               
             </input>

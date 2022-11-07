@@ -4,6 +4,7 @@
 
 body {
   background-color: #FEFAFA;
+  box-sizing: border-box;
 }
 
 .form-flex {
