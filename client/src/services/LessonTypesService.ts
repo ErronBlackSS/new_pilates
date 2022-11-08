@@ -11,8 +11,7 @@ export default class LessonTypesService {
     return await $api.post<ILessonType>('/lesson_types', { title, description, global_lesson_type, duration })
   }
 
-  static async saveFile(file, id) {
-    console.log(file)
-    return await $api.post<ILessonType>('/upload', { file, id })
+  static async saveFile(file: FormData, id: number): Promise<AxiosResponse> {
+    return await $api.post('upload?id=' + id, file)
   }
 }

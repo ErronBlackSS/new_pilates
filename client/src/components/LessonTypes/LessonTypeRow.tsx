@@ -1,3 +1,5 @@
+import LessonTypesService from '../../Services/LessonTypesService'
+
 const LessonTypeRow = (lessonType) => {
   
   const saveFile = async (event) => {
@@ -5,12 +7,8 @@ const LessonTypeRow = (lessonType) => {
     const files = [...event.target.files]
     formData.append('file', files[0])
     console.log(formData)
-    const resp = await fetch('http://localhost:5000/api/upload/?' + lessonType.lessonType.id, {
-      method: 'POST',
-      body: formData,
-    })
+    const resp = await LessonTypesService.saveFile(formData, lessonType.lessonType.id)
     console.log(resp)
-    //return resp.data
   }
 
   return (
@@ -31,8 +29,9 @@ const LessonTypeRow = (lessonType) => {
       </th>
       <th>
         {
-          lessonType.lessonType.image ? 
+          lessonType.lessonType.image ?
             <img
+              className="w-[200px] h-[100px]"
               src={lessonType.lessonType.image}
               alt="lessonTypeImage"
             />
