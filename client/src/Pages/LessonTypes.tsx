@@ -32,7 +32,7 @@ const LessonTypes = () => {
 
   useEffect(() => {
     getLessonTypes()
-  })
+  }, [])
   
   return (
     <div className="items-center flex flex-col h-screen w-full bg-[#ea8df7]">

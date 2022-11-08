@@ -26,6 +26,10 @@ export const useLessonTypes = () => {
     setLessonTypes(updatedLessonTypes)
   }
 
+  const removeLessonType = (id) => {
+    setLessonTypes(lessonTypes.filter(lessonType => lessonType.id !== id))
+  }
+
   const removeLessonTypeImage = (id) => {
     const updatedLessonTypes = lessonTypes.map(lessonType => {
       if (lessonType.id === id) {
@@ -43,6 +47,7 @@ export const useLessonTypes = () => {
     setShowModal,
     pushLessonType,
     saveLessonTypeImage,
-    removeLessonTypeImage
+    removeLessonTypeImage,
+    removeLessonType
   }
 }

@@ -42,6 +42,13 @@ const LessonTypeRow = ({lessonType, onSaveFile, onRemoveFile}) => {
             </input>
         }
       </th>
+      <th>
+        <button
+          className="bg-[#008080] text-[#FFF] rounded-[12px]"
+        >
+          Удалить
+        </button>
+      </th>
     </tr>
   )
 }
