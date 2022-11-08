@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useLessonTypes } from '../Hooks/UseLessonTypes'
 import Modal from '../Components/Common/Modal'
 import AddLessonTypeForm from '../Components/Forms/AddLessonTypeForm'
 import LessonTypesService from '../Services/LessonTypesService'
@@ -6,49 +7,32 @@ import LessonTypeRow from '../Components/LessonTypes/LessonTypeRow'
 
 const LessonTypes = () => {
   
-  const [lessonTypes, setLessonTypes] = useState([])
-  const [showModal, setShowModal] = useState(false)
-  
-  const getLessonTypes = async () => {
-    const resp = await LessonTypesService.getAll()
-    console.log(resp)
-    setLessonTypes(resp.data)
-  }
+  const {
+    lessonTypes,
+    getLessonTypes,
+    showModal,
+    setShowModal,
+    pushLessonType,
+    saveLessonTypeImage,
+    removeLessonTypeImage
+  } = useLessonTypes()
 
-  const addLessonType = (lessonType) => {
-    setLessonTypes([...lessonTypes, lessonType.lessonType])
-    setShowModal(false)
-  }
-  
   const saveFile = async (event, id) => {
     const formData = new FormData()
     const files = [...event.target.files]
     formData.append('file', files[0])
     const resp = await LessonTypesService.saveFile(formData, id)
-    const updatedLessonTypes = lessonTypes.map(lessonType => {
-      if (lessonType.id === id) {
-        return { ...lessonType, image_url: resp.data }
-      }
-      return lessonType
-    })
-    console.log(updatedLessonTypes, 'updatedLessonTypes')
-    setLessonTypes(updatedLessonTypes)
+    saveLessonTypeImage(resp.data, id)
   }
 
   const removeFile = async (id) => {
     await LessonTypesService.removeFile(id)
-    const updatedLessonTypes = lessonTypes.map(lessonType => {
-      if (lessonType.id === id) {
-        return { ...lessonType, image_url: null }
-      }
-      return lessonType
-    })
-    setLessonTypes(updatedLessonTypes)
+    removeLessonTypeImage(id)
   }
 
   useEffect(() => {
     getLessonTypes()
-  }, [])
+  })
   
   return (
     <div className="items-center flex flex-col h-screen w-full bg-[#ea8df7]">
@@ -68,7 +52,7 @@ const LessonTypes = () => {
             height={'400px'}
           >
             <AddLessonTypeForm
-              onAddLessonType={addLessonType}
+              onAddLessonType={pushLessonType}
             />
           </Modal>
       }

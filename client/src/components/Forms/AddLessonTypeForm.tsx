@@ -19,7 +19,7 @@ const AddLessonTypeForm = ({ onAddLessonType }) => {
     e.preventDefault()
     const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value)
     const lessonTypeData = lessonType.data
-    onAddLessonType(lessonTypeData)
+    onAddLessonType({...lessonTypeData, image_url: null})
   }
 
   return (
