@@ -13,9 +13,10 @@ async function create (req, res) {
       [title, description, global_lesson_type, duration]
     )
     const lessonType = new LessonTypeDTO(newLessonType.rows[0])
-    res.json({ lessonType })
+    res.json(lessonType)
   }  catch (e) {
-    next(e)
+    console.log(e)
+    //next(e)
   }
 }
 
