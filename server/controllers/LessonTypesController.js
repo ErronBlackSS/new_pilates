@@ -29,20 +29,20 @@ async function getAll (req, res) {
 
 async function saveImage (req, res) {
   try {
-    const { id } = req.body
-    console.log(id, 'id')
+    const id = req.query.id
     const file = req.files
     const fileName = file.file.name
     const path = process.env.FILE_PATH + fileName
     file.file.mv(path)
-    console.log(fileName, 'fileName')
+    const serverPath = process.env.API_URL + '/files/' + fileName
+    console.log(serverPath, 'serverPath')
     const lessonType = await pool.query(`
       UPDATE lesson_types 
       SET lesson_image = $1 
       WHERE id = $2 RETURNING *`, 
-      [fileName, id]
+      [serverPath, id]
     )
-    res.json(lessonType)
+    res.json(serverPath)
   } catch (e) {
     console.log(e)
     //next(e)

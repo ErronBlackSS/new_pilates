@@ -19,6 +19,7 @@ app.use(cors({
     origin: process.env.CLIENT_URL
 }));
 
+app.use('/files', express.static('./files'));
 app.use('/api', UserRouter)
 app.use('/api', LessonsRouter)
 app.use('/api', LessonTypesRouter)
