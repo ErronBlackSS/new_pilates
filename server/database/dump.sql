@@ -33,9 +33,17 @@ CREATE TABLE lesson_types (
     description VARCHAR(999) DEFAULT NULL,
     duration SMALLINT NOT NULL,
     global_lesson_type VARCHAR(64),
-    lesson_image VARCHAR(511) DEFAULT NULL,
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE lesson_type_image (
+    image_id SERIAL PRIMARY KEY,
+    lesson_type_id INT NOT NULL,
+    image_name VARCHAR(511) NOT NULL,
+    image_server_path VARCHAR(511) NOT NULL,
+    image_url VARCHAR(511) NOT NULL,
+    FOREIGN KEY (lesson_type_id) REFERENCES lesson_types(id) ON DELETE CASCADE
 );
 
 CREATE TABLE lessons (

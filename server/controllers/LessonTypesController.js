@@ -1,7 +1,9 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
+const LessonTypeHelper = require('../helpers/LessonTypeHelper')
 const LessonTypeDTO = require('../dtos/LessonTypeDTO')
 const fs = require('fs')
+const e = require('express')
 
 async function create (req, res) {
   try {
@@ -10,7 +12,7 @@ async function create (req, res) {
       INSERT INTO lesson_types (title, description, global_lesson_type, duration) VALUES ($1, $2, $3, $4) RETURNING *`, 
       [title, description, global_lesson_type, duration]
     )
-    lessonType = new LessonTypeDTO(newLessonType.rows[0])
+    const lessonType = new LessonTypeDTO(newLessonType.rows[0])
     res.json({ lessonType })
   }  catch (e) {
     next(e)
@@ -19,7 +21,7 @@ async function create (req, res) {
 
 async function getAll (req, res) {
   try {
-    const lessonTypes = await pool.query('SELECT * from lesson_types')
+    const lessonTypes = await pool.query('SELECT * from lesson_types LEFT JOIN lesson_type_image ON lesson_types.id = lesson_type_image.lesson_type_id')
     const lessonTypesDTO = lessonTypes.rows.map(lessonType => new LessonTypeDTO(lessonType))
     res.json(lessonTypesDTO)
   } catch (e) {
@@ -32,17 +34,41 @@ async function saveImage (req, res) {
     const id = req.query.id
     const file = req.files
     const fileName = file.file.name
-    const path = process.env.FILE_PATH + fileName
-    file.file.mv(path)
-    const serverPath = process.env.API_URL + '/files/' + fileName
-    console.log(serverPath, 'serverPath')
-    const lessonType = await pool.query(`
-      UPDATE lesson_types 
-      SET lesson_image = $1 
-      WHERE id = $2 RETURNING *`, 
-      [serverPath, id]
+    const server_path = process.env.FILE_PATH + fileName
+    file.file.mv(server_path)
+    const api_url = process.env.API_URL + '/files/' + fileName
+
+    await pool.query(`
+      INSERT INTO lesson_type_image (lesson_type_id, image_name, image_server_path, image_url)
+      VALUES ($1, $2, $3, $4) RETURNING *`,
+      [id, fileName, server_path, api_url]
     )
-    res.json(serverPath)
+
+    res.json(api_url)
+  } catch (e) {
+    console.log(e)
+    //next(e)
+  }
+}
+
+async function removeFile (req, res) {
+  try {
+    const id = req.query.id
+    const lessonImage = await LessonTypeHelper.getImagePath(id)
+
+    const isImageDuplicated = await LessonTypeHelper.checkDuplicateImage(lessonImage)
+
+    if (isImageDuplicated) {
+      fs.unlink(lessonImage, (err) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+    }
+
+    await LessonTypeHelper.deleteImage(id)
+
+    res.json({ message: 'File was deleted' })
   } catch (e) {
     console.log(e)
     //next(e)
@@ -78,5 +104,6 @@ module.exports = {
     getAll,
     update,
     remove,
-    saveImage
+    saveImage,
+    removeFile
 }

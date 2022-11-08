@@ -4,7 +4,7 @@ module.exports = class UserDto {
     description
     duration
     global_lesson_type
-    lesson_image
+    image_url
 
     constructor(model) {
         this.id = model.id
@@ -12,6 +12,6 @@ module.exports = class UserDto {
         this.description = model.description
         this.duration = model.duration
         this.type = model.global_lesson_type
-        this.image = model.lesson_image
+        this.image_url = model.image_url
     }
 }
