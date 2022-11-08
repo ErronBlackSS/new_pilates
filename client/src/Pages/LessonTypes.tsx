@@ -11,12 +11,39 @@ const LessonTypes = () => {
   
   const getLessonTypes = async () => {
     const resp = await LessonTypesService.getAll()
+    console.log(resp)
     setLessonTypes(resp.data)
   }
 
   const addLessonType = (lessonType) => {
     setLessonTypes([...lessonTypes, lessonType.lessonType])
     setShowModal(false)
+  }
+  
+  const saveFile = async (event, id) => {
+    const formData = new FormData()
+    const files = [...event.target.files]
+    formData.append('file', files[0])
+    const resp = await LessonTypesService.saveFile(formData, id)
+    const updatedLessonTypes = lessonTypes.map(lessonType => {
+      if (lessonType.id === id) {
+        return { ...lessonType, image_url: resp.data }
+      }
+      return lessonType
+    })
+    console.log(updatedLessonTypes, 'updatedLessonTypes')
+    setLessonTypes(updatedLessonTypes)
+  }
+
+  const removeFile = async (id) => {
+    await LessonTypesService.removeFile(id)
+    const updatedLessonTypes = lessonTypes.map(lessonType => {
+      if (lessonType.id === id) {
+        return { ...lessonType, image_url: null }
+      }
+      return lessonType
+    })
+    setLessonTypes(updatedLessonTypes)
   }
 
   useEffect(() => {
@@ -47,29 +74,35 @@ const LessonTypes = () => {
       }
       {
         lessonTypes && 
-        <table
-          className="bg-[#FFF] p-[25px] gap-[15px] table-fixed border-separate"
+        <div
+          className="h-full overflow-y-scroll mb-[50px]"
         >
-          <thead>
-            <tr>
-              <th>Название</th>
-              <th>Описание</th>
-              <th>Длительность</th>
-              <th>Тип</th>
-              <th>Изображение</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lessonTypes.map((lesson, index) => {
-              return (
-                <LessonTypeRow
-                  key={index}
-                  lessonType={lesson}
-                />
-              )
-            })}
-          </tbody>
-        </table>
+          <table
+            className="bg-[#FFF] p-[25px] gap-[15px] h-full table-fixed border-separate overflow-y-scroll"
+          >
+            <thead>
+              <tr>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Длительность</th>
+                <th>Тип</th>
+                <th>Изображение</th>
+              </tr>
+            </thead>
+            <tbody>
+              {lessonTypes.map((lesson, index) => {
+                return (
+                  <LessonTypeRow
+                    key={index}
+                    lessonType={lesson}
+                    onSaveFile={saveFile}
+                    onRemoveFile={removeFile}
+                  />
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       }
     </div>
   )

@@ -12,6 +12,10 @@ export default class LessonTypesService {
   }
 
   static async saveFile(file: FormData, id: number): Promise<AxiosResponse> {
-    return await $api.post('upload?id=' + id, file)
+    return await $api.post('/lesson_types/upload/file?id=' + id, file)
+  }
+
+  static async removeFile(id: number): Promise<AxiosResponse> {
+    return await $api.post('/lesson_types/remove/file?id=' + id)
   }
 }

@@ -1,45 +1,42 @@
-import LessonTypesService from '../../Services/LessonTypesService'
-
-const LessonTypeRow = (lessonType) => {
-  
-  const saveFile = async (event) => {
-    const formData = new FormData()
-    const files = [...event.target.files]
-    formData.append('file', files[0])
-    console.log(formData)
-    const resp = await LessonTypesService.saveFile(formData, lessonType.lessonType.id)
-    console.log(resp)
-  }
+const LessonTypeRow = ({lessonType, onSaveFile, onRemoveFile}) => {
 
   return (
     <tr
       className="bg-[#AAA] gap-[5px]"
     >
       <th>
-        {lessonType.lessonType.title}
+        {lessonType.title}
       </th>
       <th className="truncate max-w-[600px]">
-        {lessonType.lessonType.description}
+        {lessonType.description}
       </th>
       <th>
-        {lessonType.lessonType.duration}
+        {lessonType.duration}
       </th>
       <th>
-        {lessonType.lessonType.type}
+        {lessonType.type}
       </th>
       <th>
         {
-          lessonType.lessonType.image ?
-            <img
-              className="w-[200px] h-[100px]"
-              src={lessonType.lessonType.image}
-              alt="lessonTypeImage"
-            />
+          lessonType.image_url ?
+            <div className="flex flex-row">
+              <img
+                className="w-[200px] h-[100px]"
+                src={lessonType.image_url}
+                alt="lessonTypeImage"
+              />
+              <button
+                className="bg-[#008080] text-[#FFF] rounded-[12px]"
+                onClick={() => onRemoveFile(lessonType.id)}
+              >
+                X
+              </button>
+            </div>
             :
             <input
               type="file"
               name="uploadFile"
-              onChange={(event) => saveFile(event)}
+              onChange={(event) => onSaveFile(event, lessonType.id)}
             >
               
             </input>
