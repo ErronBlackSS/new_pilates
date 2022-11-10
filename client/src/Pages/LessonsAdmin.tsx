@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
 import Modal from '../Components/Common/Modal'
+import AddLessonForm from '../Components/Forms/AddLessonForm'
+import Select from '../Components/Common/Select'
 
 const LessonsAdmin = () => {
 
   const [showAddModal, setShowAddModal] = useState(false)
+  
+  const options = [
+    '111111111111111',
+    '222222222222222',
+    '333333333333333'
+  ]
 
   return (
     <div className="items-center flex flex-col h-screen w-full bg-[#ea8df7]">
@@ -22,9 +30,15 @@ const LessonsAdmin = () => {
             width={'300px'}
             height={'400px'}
           >
-            567
+            <AddLessonForm />
           </Modal>
       }       
+      <Select options={options}/>
+      <hr />
+      <hr />
+      <hr />
+      <hr />
+      <Select options={options}/>
     </div>
   )
 }
