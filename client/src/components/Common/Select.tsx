@@ -1,14 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { useOnClickOutside } from '../../Hooks/UseClickOutside'
 
-const Select = ({ options }) => {
+const Select = ({ options, label, onSelect }) => {
    
-  const [value, setValue] = useState('Text')
+  const [value, setValue] = useState({ value: '', label: '' })
   const [opened, setOpened] = useState(false)
   const list = useRef(null)
   
   const handleSelect = (option) => {
     setValue(option)
+    onSelect(option)
     setOpened(false)
   }
   
@@ -18,9 +19,14 @@ const Select = ({ options }) => {
 
   return (
     <div className="relative">
+      <label
+        className="block ml-[10px] text-[12px] leading-[15px] text-[#000000]"
+      >
+        {label}
+      </label>
       <div className="flex items-center px-[15px] text-[16px] h-[50px] w-[350px] bg-[#F2F2F3] rounded-[10px]">
         <div className="flex flex-row justify-between items-center w-full">
-          <input value={value} type="text" disabled />
+          <input value={value.label} type="text" disabled />
           <svg
             onClick={() => setOpened(!opened)}
             className="cursor-pointer"
@@ -34,22 +40,23 @@ const Select = ({ options }) => {
               d="M1 1L7.5 7L14 1"
               stroke="#1B1B1B"
               strokeLinecap="round"
-              strokeLinejoin="round"/>
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
       </div>
       {opened && <ul
         ref={list}
-        className="mt-[5px] absolute top-[100%] fixed w-[350px] transition duration-300"
+        className="mt-[5px] absolute top-[100%] w-[350px] transition duration-300 max-h-[300px] overflow-y-auto overflow-x-hidden"
         style={{ zIndex: 100 }}
       >
         {options.map((option, index) => (
           <li
-            key={index}
+            key={option.value}
             className={'flex px-[15px] items-center text-[16px] h-[50px] w-[350px] align-center bg-[#F2F2F3] text-left cursor-pointer' + rounded(index)}
             onClick={() => handleSelect(option)}
           >
-            <p>{option}</p>
+            <p>{option.label}</p>
           </li>
         ))}
       </ul>}

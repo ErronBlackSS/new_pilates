@@ -1,17 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from '../Components/Common/Modal'
 import AddLessonForm from '../Components/Forms/AddLessonForm'
-import Select from '../Components/Common/Select'
+import UserService from '../Services/UserService'
+import LessonTypesService from '../Services/LessonTypesService'
 
 const LessonsAdmin = () => {
 
   const [showAddModal, setShowAddModal] = useState(false)
+  const [trainers, setTrainers] = useState([])
+  const [lessonTypes, setLessonTypes] = useState([])
   
-  const options = [
-    '111111111111111',
-    '222222222222222',
-    '333333333333333'
-  ]
+  const getAndSetTrainers = async () => {
+    const resp = await UserService.getTrainers()
+    const trainers = resp.data.map((item) => {
+      return {
+        value: item.id,
+        label: item.name
+      }
+    })
+    setTrainers(trainers)
+  }
+  
+  const getAndSetLessonTypes = async () => {
+    const resp = await LessonTypesService.getAll()
+    const lessonTypes = resp.data.map((item) => {
+      return {
+        value: item.id,
+        label: item.title
+      }
+    })
+    setLessonTypes(lessonTypes)
+  }
+
+  useEffect(() => {
+    getAndSetTrainers()
+    getAndSetLessonTypes()
+  }, [])
 
   return (
     <div className="items-center flex flex-col h-screen w-full bg-[#ea8df7]">
@@ -30,15 +54,12 @@ const LessonsAdmin = () => {
             width={'300px'}
             height={'400px'}
           >
-            <AddLessonForm />
+            <AddLessonForm
+              trainers={trainers}
+              lessonTypes={lessonTypes}
+            />
           </Modal>
-      }       
-      <Select options={options}/>
-      <hr />
-      <hr />
-      <hr />
-      <hr />
-      <Select options={options}/>
+      }
     </div>
   )
 }

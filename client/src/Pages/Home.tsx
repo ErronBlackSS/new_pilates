@@ -113,7 +113,7 @@ const Main = () => {
       <div className="flex flex-row w-full ml-[36px] gap-[32px]">
         <div className="flex items-center">
           <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 1L2 17L18 33" stroke="#5C5C5C" stroke-width="2" stroke-linecap="round"/>
+            <path d="M18 1L2 17L18 33" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </div>
         <div className="">
@@ -167,7 +167,7 @@ const Main = () => {
         </div>
         <div className="flex items-center">
           <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 33L17 17L1 1" stroke="#5C5C5C" stroke-width="2" stroke-linecap="round"/>
+            <path d="M1 33L17 17L1 1" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </div>
       </div>
@@ -177,7 +177,7 @@ const Main = () => {
       <div className="flex flex-row w-full ml-[36px] gap-[32px]">
         <div className="flex items-center">
           <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 1L2 17L18 33" stroke="#5C5C5C" stroke-width="2" stroke-linecap="round"/>
+            <path d="M18 1L2 17L18 33" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </div>
         <div className="">
@@ -230,7 +230,7 @@ const Main = () => {
         </div>
         <div className="flex items-center">
           <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 33L17 17L1 1" stroke="#5C5C5C" stroke-width="2" stroke-linecap="round"/>
+            <path d="M1 33L17 17L1 1" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </div>
       </div>
