@@ -19,9 +19,9 @@ const MobileView = ({ toggleOverlay, redirectToMain }) => {
         className="flex flex-col justify-center items-center gap-[10px] my-[11px] mr-[22px] cursor-pointer"
         onClick={toggleOverlay}
       >
-        <div className="h-[0px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
-        <div className="h-[0px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
-        <div className="h-[0px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
+        <div className="h-[2px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
+        <div className="h-[2px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
+        <div className="h-[2px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
       </div>
     </div>
   )
