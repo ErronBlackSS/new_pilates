@@ -78,8 +78,13 @@ async function removeFile (req, res) {
 
 async function update (req, res) {
   try {
-    const query = helpers.parseUpdateData(req.body, 'lesson_types')
-    const lessonType = await pool.query(query, [])
+    const { id, title, description, global_lesson_type, duration } = req.body
+    const lessonType = await pool.query(`
+      UPDATE lesson_types 
+      SET title = $1, description = $2, global_lesson_type = $3, duration = $4
+      WHERE id = $5 RETURNING *`, 
+      [title, description, global_lesson_type, duration, id]
+    )
     res.json(lessonType.rows[0])
   } catch (e) {
     next(e)
