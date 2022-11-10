@@ -10,4 +10,8 @@ export default class UserService {
   static async fetchUserByResetToken (token: string): Promise<AxiosResponse<UserInterface>> {
     return $api.get<UserInterface>(`/user/reset/${token}`)
   }
+
+  static async getTrainers (): Promise<AxiosResponse<UserInterface[]>> {
+    return $api.get<UserInterface[]>('/users/trainers')
+  }
 }

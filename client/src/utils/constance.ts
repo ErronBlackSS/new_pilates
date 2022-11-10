@@ -9,7 +9,8 @@ export enum ROUTES {
   MY_LESSONS = '/account/lessons',
   USERS = '/account/users',
   DIRECTIONS = '/account/directions',
-  LESSON_TYPES = '/account/lessonstypes'
+  LESSON_TYPES = '/account/lessonstypes',
+  TRAINERS = '/account/trainers',
 }
 
 export enum ROLES {

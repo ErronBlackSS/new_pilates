@@ -6,10 +6,12 @@ import Registration from './Pages/Registration'
 import Reset from './Pages/Reset'
 import ResetSend from './Pages/ResetSend'
 import Settings from './Pages/Settings'
-import Lessons from './Pages/Lessons'
+import LessonsAdmin from './Pages/LessonsAdmin'
 import Users from './Pages/Users'
 import Directions from './Pages/Directions'
 import LessonTypes from './Pages/LessonTypes'
+import TrainersAdmin from './Pages/TrainersAdmin'
+import Lessons from './Pages/Directions'
 
 export const AUTH_ROUTES = [
   {
@@ -32,7 +34,7 @@ export const ADMIN_ROUTES = [
   },
   {
     PATH: ROUTES.MY_LESSONS,
-    COMPONENT: Lessons
+    COMPONENT: LessonsAdmin
   },
   {
     PATH: ROUTES.USERS,
@@ -45,6 +47,10 @@ export const ADMIN_ROUTES = [
   {
     PATH: ROUTES.LESSON_TYPES,
     COMPONENT: LessonTypes
+  },
+  {
+    PATH: ROUTES.TRAINERS,
+    COMPONENT: TrainersAdmin
   }
 ]
 
