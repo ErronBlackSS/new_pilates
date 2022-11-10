@@ -1,4 +1,4 @@
-const LessonTypeRow = ({lessonType, onSaveFile, onRemoveFile}) => {
+const LessonTypeRow = ({lessonType, onSaveFile, onRemoveFile, onShowEditModal}) => {
 
   return (
     <tr
@@ -47,6 +47,14 @@ const LessonTypeRow = ({lessonType, onSaveFile, onRemoveFile}) => {
           className="bg-[#008080] text-[#FFF] rounded-[12px]"
         >
           Удалить
+        </button>
+      </th>
+      <th>
+        <button
+          className="bg-[#008080] text-[#FFF] rounded-[12px]"
+          onClick={() => onShowEditModal(true)}
+        >
+          Редактировать
         </button>
       </th>
     </tr>

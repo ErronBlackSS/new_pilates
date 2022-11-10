@@ -3,11 +3,12 @@ import LessonTypesService from '../Services/LessonTypesService'
 
 export const useLessonTypes = () => {
   const [lessonTypes, setLessonTypes] = useState([])
-  const [showModal, setShowModal] = useState(false)
-  
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [showEditModal, setShowEditModal] = useState(false)
+
   const pushLessonType = (lessonType: any) => {
     setLessonTypes([...lessonTypes, lessonType])
-    setShowModal(false)
+    setShowAddModal(false)
   }
 
   const getLessonTypes = async () => {
@@ -43,8 +44,10 @@ export const useLessonTypes = () => {
   return {
     lessonTypes,
     getLessonTypes,
-    showModal,
-    setShowModal,
+    showAddModal,
+    setShowAddModal,
+    showEditModal,
+    setShowEditModal,
     pushLessonType,
     saveLessonTypeImage,
     removeLessonTypeImage,

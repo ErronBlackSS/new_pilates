@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLessonTypes } from '../Hooks/UseLessonTypes'
 import Modal from '../Components/Common/Modal'
 import AddLessonTypeForm from '../Components/Forms/AddLessonTypeForm'
+import EditLessonTypeForm from '../Components/Forms/EditLessonTypeForm'
 import LessonTypesService from '../Services/LessonTypesService'
 import LessonTypeRow from '../Components/LessonTypes/LessonTypeRow'
 
@@ -10,8 +11,10 @@ const LessonTypes = () => {
   const {
     lessonTypes,
     getLessonTypes,
-    showModal,
-    setShowModal,
+    showAddModal,
+    setShowAddModal,
+    showEditModal,
+    setShowEditModal,
     pushLessonType,
     saveLessonTypeImage,
     removeLessonTypeImage
@@ -39,20 +42,33 @@ const LessonTypes = () => {
       <h1>Типы занятий</h1>
       <button
         className="bg-[#008080] text-[#FFF] rounded-[12px] p-[10px] m-[10px]"
-        onClick={() => setShowModal(true)}
+        onClick={() => setShowAddModal(true)}
       >
         Добавить тип занятия
       </button>
       {
-        showModal &&
+        showAddModal &&
           <Modal
-            showModal={showModal}
-            setShowModal={setShowModal}
+            showModal={showAddModal}
+            setShowModal={setShowAddModal}
             width={'300px'}
             height={'400px'}
           >
             <AddLessonTypeForm
               onAddLessonType={pushLessonType}
+            />
+          </Modal>
+      }
+      {
+        showEditModal &&
+          <Modal
+            showModal={showEditModal}
+            setShowModal={setShowEditModal}
+            width={'300px'}
+            height={'400px'}
+          >
+            <EditLessonTypeForm
+              onEditLessonType={pushLessonType}
             />
           </Modal>
       }
@@ -81,6 +97,7 @@ const LessonTypes = () => {
                     lessonType={lesson}
                     onSaveFile={saveFile}
                     onRemoveFile={removeFile}
+                    onShowEditModal={setShowEditModal}
                   />
                 )
               })}
