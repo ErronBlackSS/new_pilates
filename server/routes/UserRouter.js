@@ -18,6 +18,6 @@ router.get('/reset/:link', UserController.activateReset)
 router.patch('/users/set/coach', UserController.setCoachRole)
 router.patch('/users/set/user', UserController.setUserRole)
 router.patch('/users/set/admin', UserController.setAdminRole)
-router.get('users/coaches', UserController.getCoaches)
+router.get('/users/trainers', UserController.getTrainsers)
 
 module.exports = router

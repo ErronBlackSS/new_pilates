@@ -162,10 +162,10 @@ async function setAdminRole (req, res, next) {
   }
 }
 
-async function getCoaches (req, res, next) {
+async function getTrainsers (req, res, next) {
   try {
     const coaches = await pool.query('SELECT * FROM users WHERE role = $1', [ROLES.COACH])
-    res.json(coaches)
+    res.json(coaches.rows)
   } catch (e) {
     next(e)
   }
@@ -197,5 +197,5 @@ module.exports = {
   setCoachRole,
   setUserRole,
   setAdminRole,
-  getCoaches
+  getTrainsers
 }
