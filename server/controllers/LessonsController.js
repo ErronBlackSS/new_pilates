@@ -6,7 +6,7 @@ async function create (req, res) {
     const { coach_id, lesson_type_id, capacity, date, start_time, end_time } = req.body
     const newLesson = await pool.query(`
         INSERT INTO lessons (coach_id, lesson_type_id, capacity, date, start_time, end_time) 
-        VALUES ($1, $2, $3, $4, $5, $6)`, 
+        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`, 
         [coach_id, lesson_type_id, capacity, date, start_time, end_time])
     res.json(newLesson.rows[0])
   } catch (e) {
@@ -145,5 +145,6 @@ module.exports = {
     remove,
     listBookedUsers,
     bookLesson,
-    removeBooked
+    removeBooked,
+    getLessonsByDate
 }
