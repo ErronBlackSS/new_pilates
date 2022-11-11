@@ -3,6 +3,7 @@ import Select from '../Common/Select'
 import { TimePicker } from 'react-ios-time-picker'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import LessonService from '../../Services/LessonService'
 
 const AddLessonForm = ({ trainers, lessonTypes }) => {
   
@@ -11,11 +12,22 @@ const AddLessonForm = ({ trainers, lessonTypes }) => {
   const [startTime, setStartTime] = useState('10:00')
   const [endTime, setEndTime] = useState('10:00')
   const [startDate, setStartDate] = useState(new Date())
+  const [capacity, setCapacity] = useState(0)
 
   const formDisabled = !trainer.value || !lessonType.value || !startTime || !endTime || !startDate
 
-  const onSubmit = (value) => {
-    console.log(trainer, lessonType, value)
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    const data = {
+      coach_id: trainer.value,
+      lesson_type_id: lessonType.value,
+      capacity: capacity,
+      date: startDate,
+      start_time: startTime,
+      end_time: endTime
+    }
+    const resp = await LessonService.createLesson(data)
+    console.log(resp)
   }
 
   return (
@@ -42,6 +54,7 @@ const AddLessonForm = ({ trainers, lessonTypes }) => {
               cancelButtonText="Отменить"
             />
           </div>
+          <input value={capacity} onChange={(e) => { setCapacity(+e.target.value) }} type="number" />
           <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
         </div>
         <button
