@@ -12,14 +12,20 @@ body {
   flex-direction: row;
 }
 
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  background: url("C:\\Users\\darknesstovt\\Desktop\\Мои проекты\\newpilates\\client\\public\\ArrowDown.svg") no-repeat right center;
+.react-ios-time-picker-container {
+  background-color: #FEFAFA !important;
 }
 
+.react-ios-time-picker-selected-overlay {
+  background-color: #D11655 !important;
+}
+
+.react-ios-time-picker-btn-container {
+  background-color: #FEFAFA !important;
+}
+.react-ios-time-picker-btn {
+  color: #D11655 !important;
+}
 @media screen and (max-width: 768px) {
   .form-flex {
     flex-direction: column;
