@@ -1,3 +1,5 @@
+import Shedule from '../Components/Shedule'
+
 const Main = () => {
   return (
     <>
@@ -234,8 +236,7 @@ const Main = () => {
           </svg>
         </div>
       </div>
-
-
+      <Shedule />
       <div className="ml-[73px] mt-[110px] mb-[50px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
         <h1 className="text-[44px] mobile-below:text-[24px]">Правила посещения</h1>
       </div>

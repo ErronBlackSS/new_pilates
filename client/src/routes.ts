@@ -33,7 +33,7 @@ export const ADMIN_ROUTES = [
     COMPONENT: Settings
   },
   {
-    PATH: ROUTES.MY_LESSONS,
+    PATH: ROUTES.LESSONS_CONTROL,
     COMPONENT: LessonsAdmin
   },
   {

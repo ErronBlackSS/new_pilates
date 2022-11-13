@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import LessonService from '../../Services/LessonService'
 
-const AddLessonForm = ({ trainers, lessonTypes }) => {
+const AddLessonForm = ({ trainers, lessonTypes, addLesson }) => {
   
   const [trainer, setTrainer] = useState({ value: '', label: '' })
   const [lessonType, setLessonType] = useState({ value: '', label: '' })
@@ -27,7 +27,7 @@ const AddLessonForm = ({ trainers, lessonTypes }) => {
       end_time: endTime
     }
     const resp = await LessonService.createLesson(data)
-    console.log(resp)
+    addLesson(resp)
   }
 
   return (

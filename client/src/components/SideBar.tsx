@@ -12,6 +12,7 @@ const SideBar = () => {
 
   const iconRef = useRef(null)
   const bodyRef = useRef(null)
+  console.log(bodyRef)
   const { toggle, menuItems } = useSideBar(iconRef, bodyRef, user.user.role)
 
   const logoutHandler = (): void => {

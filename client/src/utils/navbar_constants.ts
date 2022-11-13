@@ -15,6 +15,7 @@ export const SIDEBAR_ITEMS = {
     { title: 'Настройки', path: '/account/settings' },
     { title: 'Пользователи', path: '/account/users' },
     { title: 'Уроки', path: '/account/lessons' },
+    { title: 'Управление занятиям', path: '/account/lessons/control' },
     { title: 'Тренеры', path: '/account/trainers' }
   ]
 }
