@@ -11,7 +11,14 @@ body {
   display: flex;
   flex-direction: row;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
+.scrollbar-hide{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 .react-ios-time-picker-container {
   background-color: #FEFAFA !important;
 }
@@ -27,7 +34,7 @@ body {
   color: #D11655 !important;
 }
 @media screen and (max-width: 768px) {
-  .form-flex {
-    flex-direction: column;
-  }
+.form-flex {
+  flex-direction: column;
+}
 }
