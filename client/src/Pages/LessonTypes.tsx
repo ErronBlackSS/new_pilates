@@ -49,6 +49,7 @@ const LessonTypes = () => {
       {
         showAddModal &&
           <Modal
+            title="Добавить тип занятия"
             showModal={showAddModal}
             setShowModal={setShowAddModal}
             width={'300px'}
@@ -62,6 +63,7 @@ const LessonTypes = () => {
       {
         showEditModal &&
           <Modal
+            title="Редактировать тип занятия"
             showModal={showEditModal}
             setShowModal={setShowEditModal}
             width={'300px'}

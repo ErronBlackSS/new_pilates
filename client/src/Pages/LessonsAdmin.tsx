@@ -62,6 +62,7 @@ const LessonsAdmin = () => {
       {
         showAddModal &&
           <Modal
+            title="Добавить занятие"
             showModal={showAddModal}
             setShowModal={setShowAddModal}
             width={'300px'}

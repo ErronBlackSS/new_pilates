@@ -5,7 +5,13 @@
 body {
   background-color: #FEFAFA;
   box-sizing: border-box;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
 }
+
 
 .form-flex {
   display: flex;

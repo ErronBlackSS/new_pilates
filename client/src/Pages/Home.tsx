@@ -277,7 +277,7 @@ const Main = () => {
             </svg>
           </div>
         </div>
-        <div className="hidden overflow-x-hidden">
+        <div className="overflow-x-auto mt-[41px]">
           <Shedule />
         </div>
 
