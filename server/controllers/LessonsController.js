@@ -52,24 +52,29 @@ async function remove (req, res) {
 async function bookLesson (req, res) {
   try {
     const { user_id, lesson_id } = req.body
+    const checkUserAlreadyBooked = await pool.query(`SELECT * FROM users_lessons_rel WHERE user_id = $1 AND lesson_id = $2`, [user_id, lesson_id])
+    if (checkUserAlreadyBooked.rows.length > 0) {
+      res.status(202).json({ message: 'Вы уже записаны на это Занятие' })
+      return
+    }
     const lesson = await pool.query(`
       SELECT * FROM lessons 
       WHERE id = $1`, 
       [lesson_id]
     )
-    if (availiableToBook(lesson.rows[0].capacity, lesson.rows[0].occupied)) {
-      const newBooking = await pool.query(`
+    if (lesson.rows[0].capacity !== 0) {
+      await pool.query(`
         INSERT INTO users_lessons_rel (user_id, lesson_id)
         VALUES ($1, $2)`,
         [user_id, lesson_id]
       )
-      await pool.query(`
+      const newBooking = await pool.query(`
         UPDATE lessons
         SET capacity = capacity - 1
-        WHERE id = $1`,
+        WHERE id = $1 RETURNING *`,
         [lesson_id]
       )
-      res.json(newBooking.rows[0])
+      res.json(newBooking.rows[0].capacity)
     } else {
       res.json({ message: 'Lesson is full' })
     }
@@ -121,7 +126,7 @@ async function getLessonsByDate(req, res) {
   try {
     const { start, end } = req.query.week
     const lessons = await pool.query(`
-      select users."name", lessons.id, users.id as trainer_id, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
+      select users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
       from lessons
       left join users on lessons.coach_id = users.id
       left join lesson_types on lessons.lesson_type_id = lesson_types.id
@@ -148,7 +153,8 @@ async function getLessonsByDate(req, res) {
           start_time: lessonStartTime,
           end_time: lessonEndTime,
           capacity: lesson.capacity,
-          occupied: lesson.occupied
+          occupied: lesson.occupied,
+          description: lesson.description
        }
       }
     })
