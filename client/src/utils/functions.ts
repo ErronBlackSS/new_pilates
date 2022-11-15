@@ -5,19 +5,19 @@ export const getCurrentWeek = () => {
   if (currentDayIndex === 1) {
     const start = date
     let end = new Date(start)
-    end = new Date(end.setDate(end.getDate() + 6))
-    start.setHours(0)
+    end = new Date(end.setDate(end.getDate() + 7))
+    start.setHours(3)
     start.setMinutes(0)
-    end.setHours(23)
+    end.setHours(2)
     end.setMinutes(59)
     return { start: start, end: end }
   } else {
     const start = new Date(date.setDate(date.getDate() - currentDayIndex + 1))
     let end = new Date(start)
-    end = new Date(end.setDate(end.getDate() + 6))
-    start.setHours(0)
+    end = new Date(end.setDate(end.getDate() + 7))
+    start.setHours(3)
     start.setMinutes(0)
-    end.setHours(23)
+    end.setHours(2)
     end.setMinutes(59)
     return { start: start, end: end }
   }

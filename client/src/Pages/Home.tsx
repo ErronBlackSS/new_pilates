@@ -336,7 +336,7 @@ const Main = () => {
               </div>
             </div>
           </footer>
-          : 
+          :
           <footer className="bg-[#FFFEFE] md:p-5 dark:bg-gray-800">          
             <div className="flex flex-col justify-center items-center w-full px-[23px] py-[20px] gap-[14px]">
               <div>

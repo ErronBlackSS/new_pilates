@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 import { getCurrentWeek } from '../Utils/functions'
-import LessonService from '../Services/LessonService'
 import TopButtons from '../Components/Shedule/TopButtons'
 import Modal from './Common/Modal'
 import LessonDetail from './Shedule/LessonDetail'
 import { Context } from '..'
-import { createContext } from 'react'
+import { observer } from 'mobx-react-lite'
+import LessonsStore from '../Store/LessonsStore'
+import SheduleCell from '../Components/Shedule/SheduleCell'
+
 
 interface ILesson {
   capacity: number
@@ -19,14 +21,14 @@ interface ILesson {
   trainer_name: string
   description: string
   weekDay: number
+  show: boolean
 }
 
 const Shedule = () => {
   
   const { user } = useContext(Context)
+
   const [currentWeek, setCurrentWeek] = useState(getCurrentWeek())
-  const [lessons, setLessons] = useState([])
-  const [weekDays, setWeekDays] = useState([])
   const [showDetailModal, setShowDetailModal] = useState(false)
   const [selectedLesson, setSelectedLesson] = useState<ILesson>(null)
 
@@ -35,35 +37,20 @@ const Shedule = () => {
     setShowDetailModal(true)
   }
 
-  const onBook = async (lessonId) => {
-    const resp = await LessonService.book(lessonId, user.user.id)
-    if (resp.status === 202) {
-      alert(resp.data.message)
+  const onBook = (lessonId) => {
+    if(!user.isAuth) {
+      alert('Для записи необходимо авторизоваться')
       setShowDetailModal(false)
       return
     }
-    alert('Вы успешно записались на занятие')
+    LessonsStore.bookLesson(lessonId, user.user.id)
     setShowDetailModal(false)
   }
 
   useEffect(() => {
-    const getLessonsByWeek = async () => {
-      const resp = await LessonService.getByWeek(currentWeek)
-      const trainings = resp.data.trainings.sort(function(a,b){
-        if (a.time > b.time)
-          return 1
-        if (a.time < b.time)
-          return -1
-        return 0
-      })
-      const weekDays = resp.data.weekDays
-      console.log(trainings)
-      setLessons(trainings)
-      setWeekDays(['Время', ...weekDays])
-    }
-
-    getLessonsByWeek()
-  }, [])
+    LessonsStore.getLessonsByWeek(currentWeek)
+    console.log(LessonsStore.lessons)
+  }, [currentWeek])
 
   return (
     <>
@@ -97,36 +84,25 @@ const Shedule = () => {
       >
         <thead>
           <tr>
-            {weekDays && weekDays.map((day, index) => (
+            <th className="w-[155px] h-[40]"><div><p>Время</p></div></th>
+            {LessonsStore.weekDays && LessonsStore.weekDays.map((day, index) => (
               <th className="w-[155px] h-[40]" key={index}><div><p>{day}</p></div></th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {lessons && lessons.map((day, index) => (
+          {LessonsStore.trainings && LessonsStore.trainings.map((day, index) => (
             <tr key={index}>
               <th className="border border-[#F2F2F3] w-[155px] h-[105px]">
                 <div>
                   <p>{day.time}</p>
                 </div>
               </th>
-              {day.lessons && Object.values(day.lessons).map((lesson: ILesson, index) => (
-                <th className="border border-[#F2F2F3] w-[155px] h-[105px]" key={index}>
-                  {
-                    lesson && 
-                  <div className="flex flex-col justify-center items-center">
-                    <p className="text-bordo">{lesson.title}</p>
-                    <span className="text-[12px]">Осталось мест: {lesson.capacity}</span>
-                    <button
-                      onClick={() => { selectLesson(lesson) }}
-                      disabled={lesson.capacity - lesson.occupied === 0}
-                      className="w-[109px] py-[4px] mt-[15px] text-[14px] text-[#FFF] font-[400] bg-bordo rounded-[6px]"
-                    >
-                      Подроднее
-                    </button>
-                  </div>
-                  }
-                </th>
+              {day.lessons && Object.values(day.lessons).map((lesson: ILesson, index) => (      
+                <SheduleCell
+                  lesson={lesson}
+                  selectLesson={selectLesson}
+                />
               ))}
             </tr>
           ))}
@@ -136,4 +112,4 @@ const Shedule = () => {
   )
 }
 
-export default Shedule
+export default observer(Shedule)
