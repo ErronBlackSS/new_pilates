@@ -139,7 +139,7 @@ async function getLessonsByDate(req, res) {
       const lessonEndTime = lesson.end_time.substr(0, 5)
       const lessonFullTime = lessonStartTime + " - " + lessonEndTime
       const lessonDate = lesson.date
-      const formattedDate = lessonDate.getFullYear() + '-' + lessonDate.getDay() + '-' + (+lessonDate.getMonth()+1)
+      const formattedDate = lessonDate.getFullYear() + '-' + lessonDate.getUTCDate() + '-' + (+lessonDate.getMonth()+1)
 
       formattedLessons[lessonFullTime] = {
         time: lessonFullTime,
@@ -154,7 +154,8 @@ async function getLessonsByDate(req, res) {
           end_time: lessonEndTime,
           capacity: lesson.capacity,
           occupied: lesson.occupied,
-          description: lesson.description
+          description: lesson.description,
+          show: true
        }
       }
     })
@@ -162,25 +163,24 @@ async function getLessonsByDate(req, res) {
     const trainings = []
 
     for(const key in formattedLessons) {
+      console.log(formattedLessons[key], 'value')
       const lessonRow = {
         time: formattedLessons[key].time,
         lessons: {
-          'Воскресенье': formattedLessons[key].lesson.weekDay === 0 ? formattedLessons[key].lesson : null,
-          'Понедельник': formattedLessons[key].lesson.weekDay === 1 ? formattedLessons[key].lesson : null,
-          'Вторник': formattedLessons[key].lesson.weekDay === 2 ? formattedLessons[key].lesson : null,
-          'Среда': formattedLessons[key].weekDay === 3 ? formattedLessons[key].lesson : null,
-          'Четверг': formattedLessons[key].lesson.weekDay === 4 ? formattedLessons[key].lesson : null,
-          'Пятница': formattedLessons[key].lesson.weekDay === 5 ? formattedLessons[key].lesson : null,
-          'Суббота': formattedLessons[key].lesson.weekDay === 6 ? formattedLessons[key].lesson : null,
+          'Понедельник': formattedLessons[key].lesson.weekDay === 2 ? formattedLessons[key].lesson : null,
+          'Вторник': formattedLessons[key].lesson.weekDay === 3 ? formattedLessons[key].lesson : null,
+          'Среда': formattedLessons[key].lesson.weekDay === 4 ? formattedLessons[key].lesson : null,
+          'Четверг': formattedLessons[key].lesson.weekDay === 5 ? formattedLessons[key].lesson : null,
+          'Пятница': formattedLessons[key].lesson.weekDay === 6 ? formattedLessons[key].lesson : null,
+          'Суббота': formattedLessons[key].lesson.weekDay === 7 ? formattedLessons[key].lesson : null,
+          'Воскресенье': formattedLessons[key].lesson.weekDay === 1 ? formattedLessons[key].lesson : null,
         }
       }
       trainings.push(lessonRow)
     }
-    //console.log(formattedLessons)
     const weekDays = getWeekDaysWithDate()
     res.json({ trainings, weekDays })
   } catch (e) {
-    //next(e)
     console.log(e)
   }
 }
@@ -202,6 +202,7 @@ function getWeekDaysWithDate() {
     const day = new Date(today.setDate(diff + i))
     weekDaysShedule[i] += ' ' + day.getDate() + '.' + (+day.getMonth()+1)
   }
+  console.log(weekDaysShedule, 'weekDaysShedule')
   return weekDaysShedule
 }
 
