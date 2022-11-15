@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { getCurrentWeek } from '../Utils/functions'
+import { getCurrentWeek, getNextWeek } from '../Utils/functions'
 import TopButtons from '../Components/Shedule/TopButtons'
 import Modal from './Common/Modal'
 import LessonDetail from './Shedule/LessonDetail'
@@ -49,7 +49,6 @@ const Shedule = () => {
 
   useEffect(() => {
     LessonsStore.getLessonsByWeek(currentWeek)
-    console.log(LessonsStore.lessons)
   }, [currentWeek])
 
   return (
@@ -77,7 +76,10 @@ const Shedule = () => {
         <div>
           <span className="text-[44px] leading-[56px]">Расписание</span>
         </div>
-        <TopButtons />
+        <TopButtons
+          onPrev={() => setCurrentWeek(getCurrentWeek())}
+          onNext={() => setCurrentWeek(getNextWeek())}
+        />
       </div>
       <table
         className="bg-[#FFF] p-[25px] gap-[15px] border-separate overflow-y-scroll"
@@ -100,6 +102,7 @@ const Shedule = () => {
               </th>
               {day.lessons && Object.values(day.lessons).map((lesson: ILesson, index) => (      
                 <SheduleCell
+                  key={index}
                   lesson={lesson}
                   selectLesson={selectLesson}
                 />

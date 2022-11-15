@@ -1,10 +1,19 @@
-import React from 'react'
+import { useState } from 'react'
 import LessonsFilter from './LessonsFilter'
 
-const TopButtons = () => {
+const TopButtons = ({onPrev, onNext}) => {
 
-  
+  const [currentWeek, setCurrentWeek] = useState(true)
 
+  const onPrevWeek = () => {
+    setCurrentWeek(true)
+    onPrev()
+  }
+
+  const onNextWeek = () => {
+    setCurrentWeek(false)
+    onNext()
+  }
 
   return (
     <div className="flex w-full flex-row justify-between items-center ">
@@ -13,16 +22,20 @@ const TopButtons = () => {
       </div>
       <div className="flex flex-row justify-center items-center gap-[20px]">
         <button
-          className="px-[16px] py-[4px] cursor-pointer rounded-[10px] bg-white"
+          className={'px-[16px] py-[4px] cursor-pointer rounded-[10px] bg-white' + (currentWeek ? ' opacity-50' : '')}
           style={{border: '1px solid #1B1B1B'}}
-        >
-          Следующая неделя
-        </button>  
-        <button
-          className="px-[16px] py-[4px] cursor-pointer rounded-[10px] bg-white"
-          style={{border: '1px solid #1B1B1B'}}
+          disabled={currentWeek}
+          onClick={onPrevWeek}
         >
           Предыдущая неделя
+        </button>  
+        <button
+          className={'px-[16px] py-[4px] cursor-pointer rounded-[10px] bg-white' + (!currentWeek ? ' opacity-50' : '')}
+          style={{border: '1px solid #1B1B1B'}}
+          disabled={!currentWeek}
+          onClick={onNextWeek}
+        >
+          Следующая неделя
         </button>  
       </div>     
     </div>
