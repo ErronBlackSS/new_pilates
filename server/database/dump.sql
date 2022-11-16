@@ -37,6 +37,15 @@ CREATE TABLE lesson_types (
     updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE user_photo (
+    image_id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    image_name VARCHAR(511) NOT NULL,
+    image_server_path VARCHAR(511) NOT NULL,
+    image_url VARCHAR(511) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 CREATE TABLE lesson_type_image (
     image_id SERIAL PRIMARY KEY,
     lesson_type_id INT NOT NULL,
