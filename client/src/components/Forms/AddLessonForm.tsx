@@ -22,7 +22,7 @@ const AddLessonForm = ({ trainers, lessonTypes, addLesson }) => {
       coach_id: trainer.value,
       lesson_type_id: lessonType.value,
       capacity: capacity,
-      date: startDate,
+      date: new Date(startDate.setDate(startDate.getDate() + 1)),
       start_time: startTime,
       end_time: endTime
     }

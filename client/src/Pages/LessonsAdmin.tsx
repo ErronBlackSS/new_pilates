@@ -51,7 +51,7 @@ const LessonsAdmin = () => {
   }, [])
 
   return (
-    <div className="items-center flex flex-col h-screen w-full bg-[#ea8df7]">
+    <div className="items-center flex flex-col w-[80%] h-screen w-full bg-[#ea8df7]">
       <h1>Занятия</h1>
       <button
         className="bg-[#008080] text-[#FFF] rounded-[12px] p-[10px] m-[10px]"

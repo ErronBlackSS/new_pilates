@@ -41,7 +41,3 @@ export const SIDEBAR_ITEMS = {
     }
   ]
 }
-
-export const SIDEBAR_ITEMS_BOTTOM = [
-  { title: 'На главную', path: '/' }
-]
