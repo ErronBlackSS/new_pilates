@@ -163,7 +163,6 @@ async function getLessonsByDate(req, res) {
     const trainings = []
 
     for(const key in formattedLessons) {
-      console.log(formattedLessons[key], 'value')
       const lessonRow = {
         time: formattedLessons[key].time,
         lessons: {
@@ -172,21 +171,21 @@ async function getLessonsByDate(req, res) {
           'Среда': formattedLessons[key].lesson.weekDay === 4 ? formattedLessons[key].lesson : null,
           'Четверг': formattedLessons[key].lesson.weekDay === 5 ? formattedLessons[key].lesson : null,
           'Пятница': formattedLessons[key].lesson.weekDay === 6 ? formattedLessons[key].lesson : null,
-          'Суббота': formattedLessons[key].lesson.weekDay === 7 ? formattedLessons[key].lesson : null,
+          'Суббота': formattedLessons[key].lesson.weekDay === 0 ? formattedLessons[key].lesson : null,
           'Воскресенье': formattedLessons[key].lesson.weekDay === 1 ? formattedLessons[key].lesson : null,
         }
       }
       trainings.push(lessonRow)
     }
-    const weekDays = getWeekDaysWithDate()
+    const weekDays = getWeekDaysWithDate(start)
     res.json({ trainings, weekDays })
   } catch (e) {
     console.log(e)
   }
 }
 
-function getWeekDaysWithDate() {
-  const today = new Date()
+function getWeekDaysWithDate(start) {
+  const today = new Date(start)
   const day = today.getDay()
   const weekDaysShedule = [
     'Понедельник',
@@ -202,7 +201,7 @@ function getWeekDaysWithDate() {
     const day = new Date(today.setDate(diff + i))
     weekDaysShedule[i] += ' ' + day.getDate() + '.' + (+day.getMonth()+1)
   }
-  console.log(weekDaysShedule, 'weekDaysShedule')
+
   return weekDaysShedule
 }
 
