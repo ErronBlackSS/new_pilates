@@ -35,9 +35,9 @@ async function saveImage (req, res) {
     const id = req.query.id
     const file = req.files
     const fileName = file.file.name
-    const server_path = process.env.FILE_PATH + fileName
+    const server_path = process.env.FILE_PATH + '/lesson_types/' + fileName
     file.file.mv(server_path)
-    const api_url = process.env.API_URL + '/files/' + fileName
+    const api_url = process.env.API_URL + '/files/lesson_types/' + fileName
 
     await pool.query(`
       INSERT INTO lesson_type_image (lesson_type_id, image_name, image_server_path, image_url)

@@ -152,6 +152,27 @@ async function setUserRole (req, res, next) {
   }
 }
 
+async function saveImage (req, res, next) {
+  try {
+    const id = req.query.id
+    const file = req.files
+    const fileName = file.file.name
+    const server_path = process.env.FILE_PATH + '/user_photos/' + fileName
+    file.file.mv(server_path)
+    const api_url = process.env.API_URL + '/files/user_photos/' + fileName
+
+    await pool.query(`
+      INSERT INTO user_photo (user_id, image_name, image_server_path, image_url)
+      VALUES ($1, $2, $3, $4) RETURNING *`,
+      [id, fileName, server_path, api_url]
+    )
+
+    res.json(api_url)
+  } catch (e) {
+    next(e)
+  }
+}
+
 async function setAdminRole (req, res, next) {
   try {
     const { id } = req.body
@@ -197,5 +218,6 @@ module.exports = {
   setCoachRole,
   setUserRole,
   setAdminRole,
-  getTrainsers
+  getTrainsers,
+  saveImage
 }
