@@ -1,21 +1,47 @@
+import IconLessonTypes from '../Components/Common/Icons/IconLessonTypes'
+import IconUser from '../Components/Common/Icons/IconUser'
+import IconTrainers from '../Components/Common/Icons/IconTrainers'
+import IconTrainings from '../Components/Common/Icons/IconTrainings'
+
 export const SIDEBAR_ITEMS = {
   USER: [
-    { title: 'На главную', path: '/' },
-    { title: 'Мои уроки', path: '/account/lessons' },
-    { title: 'Настройки', path: '/account/settings' }
+    {
+      title: 'Мои уроки',
+      path: '/account/lessons',
+      icon: IconTrainings
+    },
   ],
   COACH: [
-    { title: 'На главную', path: '/' },
-    { title: 'Мои уроки', path: '/account/lessons' },
-    { title: 'Настройки', path: '/account/settings' }
+    {
+      title: 'Мои уроки',
+      path: '/account/lessons',
+      icon: IconTrainings
+    },
   ],
   ADMIN: [
-    { title: 'На главную', path: '/' },
-    { title: 'Типы занятий', path: '/account/lessonstypes' },
-    { title: 'Настройки', path: '/account/settings' },
-    { title: 'Пользователи', path: '/account/users' },
-    { title: 'Уроки', path: '/account/lessons' },
-    { title: 'Управление занятиям', path: '/account/lessons/control' },
-    { title: 'Тренеры', path: '/account/trainers' }
+    {
+      title: 'Типы занятий',
+      path: '/account/lessonstypes',
+      icon: IconLessonTypes
+    },
+    {
+      title: 'Пользователи',
+      path: '/account/users',
+      icon: IconUser
+    },
+    {
+      title: 'Список занятий',
+      path: '/account/lessons/control',
+      icon: IconTrainings
+    },
+    {
+      title: 'Тренеры',
+      path: '/account/trainers',
+      icon: IconTrainers
+    }
   ]
 }
+
+export const SIDEBAR_ITEMS_BOTTOM = [
+  { title: 'На главную', path: '/' }
+]

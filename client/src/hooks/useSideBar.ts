@@ -13,17 +13,17 @@ export const useSideBar = (iconRef: MutableRefObject<any>, bodyRef: MutableRefOb
     
     if (!isToggled) {
       iconRef.current.classList.add('transform', 'rotate-180')
-      bodyRef.current.classList.add('!w-[200px]')
+      bodyRef.current.classList.add('!w-[250px]')
     } else {
       iconRef.current.classList.remove('transform', 'rotate-180')
-      bodyRef.current.classList.remove('!w-[200px]')
+      bodyRef.current.classList.remove('!w-[250px]')
     }
   }
 
   const close = () => {
     setToggled(false)
     iconRef.current.classList.remove('transform', 'rotate-180')
-    bodyRef.current.classList.remove('!w-[200px]')
+    bodyRef.current.classList.remove('!w-[250px]')
   }
 
   useOnClickOutside(bodyRef, close)

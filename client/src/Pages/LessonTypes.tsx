@@ -38,7 +38,7 @@ const LessonTypes = () => {
   }, [])
   
   return (
-    <div className="items-center flex flex-col h-screen w-full bg-[#ea8df7]">
+    <div className="items-center flex flex-col h-screen w-full bg-[#FEFAFA]">
       <h1>Типы занятий</h1>
       <button
         className="bg-[#008080] text-[#FFF] rounded-[12px] p-[10px] m-[10px]"
@@ -77,10 +77,10 @@ const LessonTypes = () => {
       {
         lessonTypes && 
         <div
-          className="h-full overflow-y-scroll mb-[50px]"
+          className="h-full overflow-y-auto mb-[50px]"
         >
           <table
-            className="bg-[#FFF] p-[25px] gap-[15px] h-full table-fixed border-separate overflow-y-scroll"
+            className="bg-[#FFF] p-[25px] gap-[15px] h-full table-fixed border-separate overflow-y-auto"
           >
             <thead>
               <tr>
