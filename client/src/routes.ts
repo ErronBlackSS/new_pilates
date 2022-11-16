@@ -5,7 +5,7 @@ import Login from './Pages/Login'
 import Registration from './Pages/Registration'
 import Reset from './Pages/Reset'
 import ResetSend from './Pages/ResetSend'
-import Settings from './Pages/Settings'
+import Profile from './Pages/Profile'
 import LessonsAdmin from './Pages/LessonsAdmin'
 import Users from './Pages/Users'
 import Directions from './Pages/Directions'
@@ -29,8 +29,8 @@ export const PUBLIC_ROUTES = [
 
 export const ADMIN_ROUTES = [
   {
-    PATH: ROUTES.SETTINGS,
-    COMPONENT: Settings
+    PATH: ROUTES.PROFILE,
+    COMPONENT: Profile
   },
   {
     PATH: ROUTES.LESSONS_CONTROL,
@@ -56,8 +56,8 @@ export const ADMIN_ROUTES = [
 
 export const USER_ACCOUNT_ROUTES = [
   {
-    PATH: ROUTES.SETTINGS,
-    COMPONENT: Settings
+    PATH: ROUTES.PROFILE,
+    COMPONENT: Profile
   },
   {
     PATH: ROUTES.MY_LESSONS,

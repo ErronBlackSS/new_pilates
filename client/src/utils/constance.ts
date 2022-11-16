@@ -5,7 +5,7 @@ export enum ROUTES {
   REGISTRATION = '/registration',
   RESET = '/reset',
   RESET_PASSWORD = '/reset/:token',
-  SETTINGS = '/account/settings',
+  PROFILE = '/account/profile',
   MY_LESSONS = '/account/lessons',
   LESSONS_CONTROL = '/account/lessons/control',
   USERS = '/account/users',

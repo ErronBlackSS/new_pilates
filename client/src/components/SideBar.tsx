@@ -15,7 +15,7 @@ const SideBar = () => {
   const navigate = useNavigate()
 
   const bodyRef = useRef(null)
-  console.log(bodyRef)
+
   const { toggle, isToggled, menuItems } = useSideBar(bodyRef, user.user.role)
 
   const [selected, setSelected] = useState('')
@@ -29,13 +29,24 @@ const SideBar = () => {
     navigate('/')
   }
 
+  const toProfile = (): void => {
+    navigate('/account/profile')
+  }
+
   return (
     <>
       <div
         className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' }
         ref={bodyRef}
       >
-        <div className={'flex flex-col gap-[40px] justify-center ' + (isToggled ? ' items-start' : ' items-center')}>
+        <div className={'flex flex-col gap-[40px] mt-[40px] justify-center ' + (isToggled ? ' items-start' : ' items-center')}>
+          <div
+            className={'flex flex-row justify-start gap-[10px] items-center cursor-pointer ' + (isToggled ? ' rounded-[50px] bg-[#F2F2F3] w-full' : '')}
+            onClick={toProfile}
+          >
+            <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo" src="https://avatars.mds.yandex.net/i?id=ade4fa6a374e3c17004dfd1bbadb7820-5492246-images-thumbs&n=13" alt="" />
+            {isToggled && <span className="text-bordo">{user.user.name}</span>}
+          </div>
           {menuItems && menuItems.map((item, index) => {
             return <SideBarItem setSelected={setSelected} selected={selected} key={index} icon={item.icon} isToggled={isToggled} title={item.title} path={item.path} />
           })}
