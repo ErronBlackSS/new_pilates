@@ -4,6 +4,7 @@ export interface UserInterface {
   id: number
   isActivated: boolean
   name: string
+  phone: string
   lastname: string
 }
 

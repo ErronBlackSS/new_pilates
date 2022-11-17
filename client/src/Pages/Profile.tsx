@@ -1,8 +1,13 @@
 import { observer } from 'mobx-react-lite'
+import { useContext } from 'react'
+import EditProfileForm from '../Components/Forms/EditProfileForm'
+import { Context } from '..'
 
 const Profile = () => {
 
+  const { user } = useContext(Context)
 
+  
 
   return (
     <div className="ml-[300px] bg-[#FEFAFA]">
@@ -12,7 +17,12 @@ const Profile = () => {
         </span>
         <div className="flex flex-row">
           <div className="flex flex-col">
-
+            <EditProfileForm
+              curName={user.user.name}
+              curLastname={user.user.lastname}
+              curEmail={user.user.email}
+              curPhone={user.user.phone}
+            />
           </div>
         </div>
       </div>  

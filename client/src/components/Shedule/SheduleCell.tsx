@@ -10,8 +10,8 @@ const SheduleCell = ({lesson, selectLesson}) => {
           <span className="text-[12px]">Осталось мест: {lesson.capacity}</span>
           <button
             onClick={() => { selectLesson(lesson) }}
-            disabled={lesson.capacity - lesson.occupied === 0}
-            className="w-[109px] py-[4px] mt-[15px] text-[14px] text-[#FFF] font-[400] bg-bordo rounded-[6px]"
+            disabled={lesson.capacity === 0}
+            className={ 'w-[109px] py-[4px] mt-[15px] text-[14px] text-[#FFF] font-[400] bg-bordo rounded-[6px]' + (lesson.capacity === 0 ? ' opacity-50 cursor-not-allowed' : '') }
           >
             Подроднее
           </button>
