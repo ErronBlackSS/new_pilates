@@ -13,8 +13,9 @@ const MainNavBar = () => {
   }
 
   const [isOverlayOpened, setIsOverlayOpened] = useState(false)
-
+  
   const toggleOverlay = () => {
+    console.log(isOverlayOpened)
     setIsOverlayOpened(!isOverlayOpened)
   }
 
