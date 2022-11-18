@@ -14,4 +14,8 @@ export default class UserService {
   static async getTrainers (): Promise<AxiosResponse<UserInterface[]>> {
     return $api.get<UserInterface[]>('/users/trainers')
   }
+
+  static async saveUserPhoto (photo: FormData, id: number) {
+    return $api.post('/user/photo?id=' + id, photo)
+  }
 }

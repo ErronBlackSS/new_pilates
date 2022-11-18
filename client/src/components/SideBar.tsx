@@ -22,6 +22,7 @@ const SideBar = () => {
 
   const logoutHandler = (): void => {
     user.logout()
+    console.log('logout')
     navigate('/')
   }
 

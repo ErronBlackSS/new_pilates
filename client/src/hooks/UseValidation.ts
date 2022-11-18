@@ -1,25 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MIN_LENGTH_ERROR, MAX_LENGTH_ERROR, NAME_ERROR, LASTNAME_ERROR, EMAIL_ERROR, PHONE_ERROR, EMPTY_ERROR, DEFAULT } from './Utils/ValidationActions'
-export interface IUseValidation {
-  value: string
-  validations: Object
-}
-
-export interface IValidation {
-  isEmptyError: IValidator
-  minLengthError: IValidator
-  maxLengthError: IValidator
-  nameError: IValidator
-  lastNameError: IValidator
-  emailError: IValidator
-  phoneError: IValidator
-  inputValid: boolean
-}
-
-interface IValidator {
-  status: boolean
-  message: string
-}
+import { IUseValidation, IValidation, IValidator } from '../Types/FormTypes/InputItem'
 
 export const useValidation = ({ value, validations }: IUseValidation ) => {
   const [isEmptyError, setEmptyError] = useState<IValidator>()
@@ -56,7 +37,6 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
         mailRegExp.test(String(value).toLowerCase()) ? setEmailError(DEFAULT) : setEmailError(EMAIL_ERROR)
         break
       case 'isPhone':
-        console.log(value)
         const phoneRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
         phoneRegExp.test(String(value).toLowerCase()) ? setPhoneError(DEFAULT) : setPhoneError(PHONE_ERROR)
         break

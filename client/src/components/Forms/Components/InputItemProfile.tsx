@@ -9,7 +9,7 @@ const InputItem: FC<InputItemProps> = ( { label, type, name, placeholder, valida
   })
 
   return (
-    <div className="py-[10px]">
+    <div className="py-[10px] w-full">
       <label
         className="block ml-[10px] text-[12px] leading-[15px] text-[#000000]"
         htmlFor={name}
@@ -20,7 +20,8 @@ const InputItem: FC<InputItemProps> = ( { label, type, name, placeholder, valida
         value={defaultValue}
         onBlur={onBlur}
         onChange={onChange}
-        className={'w-full px-4 py-2 mt-2 rounded-md border border-[#8A8E97]' + (errors.length > 0 ? ' border-[#FF0000]' : '')}
+        className={'w-full px-4 py-2 mt-2 rounded-md border-[1px] ' + (errors.length > 0 ? ' border-[#FF0000]' : ' border-[#8A8E97]')}
+        style={{borderStyle: 'solid'}}
         type={type}
         name={name}
         placeholder={placeholder}

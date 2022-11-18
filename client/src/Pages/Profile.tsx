@@ -1,13 +1,17 @@
 import { observer } from 'mobx-react-lite'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import EditProfileForm from '../Components/Forms/EditProfileForm'
+import EditPasswordForm from '../Components/Forms/EditPasswordForm'
 import { Context } from '..'
 
 const Profile = () => {
 
   const { user } = useContext(Context)
+  const [showEditPassword, setShowEditPassword] = useState(false)
 
-  
+  const onShowEditPassword = () => {
+    setShowEditPassword(!showEditPassword)
+  }
 
   return (
     <div className="ml-[300px] bg-[#FEFAFA]">
@@ -15,15 +19,19 @@ const Profile = () => {
         <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
           Личные данные
         </span>
-        <div className="flex flex-row">
-          <div className="flex flex-col">
+        <div className="flex flex-row justify-between w-full">
+          <div className="flex flex-col w-full">
             <EditProfileForm
+              showEditPassword={onShowEditPassword}
               curName={user.user.name}
               curLastname={user.user.lastname}
               curEmail={user.user.email}
               curPhone={user.user.phone}
             />
           </div>
+          {showEditPassword && <div className="flex flex-row w-full">
+            <EditPasswordForm />
+          </div>}
         </div>
       </div>  
     </div>

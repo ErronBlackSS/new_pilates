@@ -24,6 +24,10 @@ export default class UserStore {
     this.isLoading = bool
   }
 
+  setUserPhoto(photo_url: string) {
+    this.user.image_url = photo_url
+  }
+
   async login(email: string, password: string) {
     try {
       const response = await AuthService.login(email, password)

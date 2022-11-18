@@ -6,6 +6,7 @@ export interface UserInterface {
   name: string
   phone: string
   lastname: string
+  image_url: string
 }
 
 export interface LoginInterface {
