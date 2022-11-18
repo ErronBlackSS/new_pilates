@@ -16,6 +16,6 @@ export default class UserService {
   }
 
   static async saveUserPhoto (photo: FormData, id: number) {
-    return $api.post('/user/photo?id=' + id, photo)
+    return $api.post('/users/photo?id=' + id, photo)
   }
 }

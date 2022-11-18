@@ -44,6 +44,7 @@ const EditProfileForm = ({curName, curLastname, curEmail, curPhone, showEditPass
             onSubmit={onSubmit}>
             <div className="mt-4">
               <EditPhoto
+                userPhoto={user.user.image_url}
                 onEditPhoto={editPhoto}
               />
               <InputItemProfile
