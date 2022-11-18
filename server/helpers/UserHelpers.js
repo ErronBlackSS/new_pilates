@@ -2,12 +2,17 @@ const helpers = require('../helpers/general')
 const pool = require('../db')
 
 async function findOne (params) {
-    const user = await pool.query(`SELECT * from users WHERE ${params.field} = $1`, [params.value])
+    const user = await pool.query(`
+        SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url, users.is_activated
+        from users LEFT JOIN user_photo ON users.id = user_photo.user_id
+        WHERE users.${params.field} = $1`, [params.value])
     return user.rows[0]
 }
 
 async function getAllUsers () {
-    const users = await pool.query('SELECT * from users')
+    const users = await pool.query(`
+        SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url isActivated
+        from users LEFT JOIN user_photo ON users.id = user_photo.user_id`)
     return users.rows
 }
 
@@ -27,8 +32,6 @@ async function create (user) {
     )
     return newUser.rows[0]
 }
-
-
 
 async function getUserByResetToken (reset_link) {
     const user = await pool.query(`SELECT * from reset_tokens WHERE resetToken = $1`, [reset_link])
