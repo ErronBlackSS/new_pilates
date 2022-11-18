@@ -15,6 +15,10 @@ export default class LessonTypesService {
     return await $api.put<ILessonType>('/lesson_types/update' + id, { title, description, global_lesson_type, duration })
   }
 
+  static async getAllByGroup() {
+    return await $api.get('/lesson_types/bygroup')
+  }
+
   static async saveFile(file: FormData, id: number): Promise<AxiosResponse> {
     return await $api.post('/lesson_types/upload/file?id=' + id, file)
   }

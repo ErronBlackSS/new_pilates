@@ -30,6 +30,25 @@ async function getAll (req, res) {
   }
 }
 
+async function getAllByGroup (req, res) {
+  try {
+    const lessonTypes = await pool.query('SELECT id, title, description, duration, global_lesson_type, lesson_type_image.image_url  from lesson_types LEFT JOIN lesson_type_image ON lesson_types.id = lesson_type_image.lesson_type_id')
+    let arr = {}
+    lessonTypes.rows.forEach((lessonType) => {
+      if (!arr.hasOwnProperty(lessonType.global_lesson_type)) {
+        arr[lessonType.global_lesson_type] = []
+        arr[lessonType.global_lesson_type].push(lessonType)
+      } else {
+        arr[lessonType.global_lesson_type].push(lessonType)
+      }
+    })
+       
+    res.json(arr)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 async function saveImage (req, res) {
   try {
     const id = req.query.id
@@ -111,5 +130,6 @@ module.exports = {
     update,
     remove,
     saveImage,
-    removeFile
+    removeFile,
+    getAllByGroup
 }

@@ -1,5 +1,7 @@
 import Shedule from '../Components/Shedule'
 import useWindowWidth from '../Hooks/UseScreenWidth'
+import TrainersSwipe from '../Components/TrainersSwipe'
+import Directions from '../Components/Directions'
 
 const Main = () => {
   const windowWidth = useWindowWidth()
@@ -26,43 +28,24 @@ const Main = () => {
               </div>
             </div>
           </div>
-          <div className="w-full ml-[40px] mobile-below:hidden">
-            <div className="flex bg-[#FFFEFE] shadow-md mt-[52px] pl-[52px] rounded-[28px]">
-              <ul className="list-none text-[20px] text-[#1B1B1B] mt-[52px] gap-[20px]">
-                <li className="pb-[31px]">Уникальные направления body&mind</li>
-                <li className="py-[32px]">Занятия в формате мини-групп</li>
-                <li className="py-[32px]">Чистота и свежий воздух</li>
-                <li className="pt-[32px] pb-[32px]">Заботливые, опытные тренеры</li>
-                <li className="pt-[32px] pb-[52px]">Абонементы без ограничения сроков</li>
-              </ul>          
-              <div className="flex items-center mobile-below:hidden">
-                <img src="http://localhost:5000/files/girl.png" alt="mainImage" />
-              </div>
+          <div className="w-full px-[16px]">
+            <div className="flex bg-[#FFFEFE] shadow-md mt-[52px] pl-[52px] rounded-[28px] mobile-below:pl-[12px]">
+              <ul className="w-full list-none text-[20px] text-[#1B1B1B] mt-[52px] mobile-below:text-[14px] mobile-below:mt-[16px]">
+                <li className="pb-[31px] mobile-below:pb-[8px]">Уникальные направления body&mind</li>
+                <li className="py-[32px] mobile-below:py-[8px]">Занятия в формате мини-групп</li>
+                <li className="py-[32px] mobile-below:py-[8px]">Чистота и свежий воздух</li>
+                <li className="pt-[32px] pb-[32px] mobile-below:pt-[8px] mobile-below:pb-[8px]">Заботливые, опытные тренеры</li>
+                <li className="pt-[32px] pb-[52px] mobile-below:pt-[8px] mobile-below:pb-[8px]">Абонементы без ограничения сроков</li>
+              </ul>         
+              
             </div>
           </div>
         </div>
         <div id="trainers" className="mt-[117px] mb-[70px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Наши тренеры</h1>
         </div>
-        <div className="flex flex-wrap gap-[32px]">
-          <div className="flex flex-col bg-[#FFFEFE] rounded-[10px] shadow-md w-[284px] h-[491px] ">
-            <div className="relative">
-              <img className="rounded-t-[10px]" src="http://localhost:5000/files/img.png" alt="mainImage" />
-              <div className="flex justify-center items-center w-full h-[44px] rounded-t-[10px] absolute bg-[#464646]/70 top-0 ">
-                <div className="text-[#F2F2F3] text-[20px]">Руководитель студии</div>
-              </div>
-            </div>
-            <div className="p-[9px]">
-              <h1 className="text-center text-[#1B1B1B] text-[20px] mt-[24px] mb-[12px]">Федоровская Екатерина</h1>
-              <div className="w-[82%] h-[3px] bg-[#D11655] m-auto mb-[24px]"></div>    
-              <h2 className="text-[#1B1B1B] text-[16px]">Инструктор групповых программ</h2>          
-              <h3 className="m-auto text-[#1B1B1B] text-[16px]">Персональный тренер</h3>
-            </div>
-            <button className="w-[94%] h-[40px] text-[#fff] text-[16px] bottom-0 cursor-pointer m-auto mb-[12px] rounded-[10px] bg-[#D11655]">
-            Подробнее
-            </button>
-          </div>  
-        </div>
+        
+        <TrainersSwipe />
         
         <div className="mt-[117px] mb-[69px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Прайс-лист</h1>
@@ -132,152 +115,11 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className="mt-[117px] mb-[70px] mobile-below:ml-[19px] mobile-below:mt-[50px] mobile-below:mb-[30px]">
+        <div className="mt-[117px] mobile-below:ml-[19px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Направления</h1>
         </div>
-        <div className="flex mb-[50px] mobile-below:ml-[19px] mobile-below:mb-[28px]">
-          <h1 className="text-[24px] text-[#D11655] mobile-below:text-[16px]">Функциональные тренировки</h1>
-        </div>
-        <div className="flex flex-row w-full justify-between overflow-x-scroll scrollbar-hide mobile-below:ml-[0px]">
-          <div className="flex items-center mobile-below:hidden">
-            <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 1L2 17L18 33" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </div>   
-          <div className="flex flex-row gap-[32px]">   
-            <div>
-              <div className="flex flex-row justify-between text-[16px] mobile-below:text-[12px]">
-                <div>BodyArt</div>
-                <div>55 минут</div>
-              </div>
-              <div>
-                <div className="relative w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]">  
-                  <div className="absolute bottom-0">
-                    <img src="http://localhost:5000/files/test_yoga.png" alt="2" className="rounded-[10px] w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
-                  </div>
-                  <div className="absolute right-0 bottom-0 p-[5px]">
-                    <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-[#D11655] mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
-                  Подробнее
-                    </button>
-                  </div>
-                </div>            
-              </div>
-            </div>
-            <div>
-              <div className="flex flex-row justify-between text-[16px] mobile-below:text-[12px]">
-                <div>Body Skills</div>
-                <div>55 минут</div>
-              </div>
-              <div>
-                <div className="relative w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]">  
-                  <div className="absolute bottom-0">
-                    <img src="http://localhost:5000/files/test_yoga.png" alt="2" className="rounded-[10px] w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
-                  </div>
-                  <div className="absolute right-0 bottom-0 p-[5px]">
-                    <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-[#D11655] mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
-                  Подробнее
-                    </button>
-                  </div>
-                </div>            
-              </div>
-            </div>
-            <div>
-              <div className="flex flex-row justify-between text-[16px] mobile-below:text-[12px]">
-                <div>Deep Work</div>
-                <div>55 минут</div>
-              </div>
-              <div>
-                <div className="relative w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]">  
-                  <div className="absolute bottom-0">
-                    <img src="http://localhost:5000/files/test_yoga.png" alt="2" className="rounded-[10px] w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
-                  </div>
-                  <div className="absolute right-0 bottom-0 p-[5px]">
-                    <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-[#D11655] mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
-                  Подробнее
-                    </button>
-                  </div>
-                </div>            
-              </div>
-            </div>
-          </div>  
-          <div className="flex items-center mobile-below:hidden">
-            <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 33L17 17L1 1" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </div>
-        </div>
-        <div className="flex mb-[50px] mobile-below:ml-[19px] mobile-below:mt-[41px] mobile-below:mb-[28px]">
-          <h1 className="text-[24px] text-[#D11655] mobile-below:text-[16px]">Направления Mind&Body</h1>
-        </div>
-        <div className="flex flex-row w-full justify-between overflow-x-scroll scrollbar-hide mobile-below:ml-[0px]">
-          <div className="flex items-center mobile-below:hidden">
-            <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 1L2 17L18 33" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </div>   
-          <div className="flex flex-row gap-[32px]">   
-            <div>
-              <div className="flex flex-row justify-between text-[16px] mobile-below:text-[12px]">
-                <div>Pilates</div>
-                <div>55 минут</div>
-              </div>
-              <div>
-                <div className="relative w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]">  
-                  <div className="absolute bottom-0">
-                    <img src="http://localhost:5000/files/test_yoga.png" alt="2" className="rounded-[10px] w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
-                  </div>
-                  <div className="absolute right-0 bottom-0 p-[5px]">
-                    <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-[#D11655] mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
-                  Подробнее
-                    </button>
-                  </div>
-                </div>            
-              </div>
-            </div>
-            <div>
-              <div className="flex flex-row justify-between text-[16px] mobile-below:text-[12px]">
-                <div>Stretch</div>
-                <div>55 минут</div>
-              </div>
-              <div>
-                <div className="relative w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]">  
-                  <div className="absolute bottom-0">
-                    <img src="http://localhost:5000/files/test_yoga.png" alt="2" className="rounded-[10px] w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
-                  </div>
-                  <div className="absolute right-0 bottom-0 p-[5px]">
-                    <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-[#D11655] mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
-                  Подробнее
-                    </button>
-                  </div>
-                </div>            
-              </div>
-            </div>
-            <div>
-              <div className="flex flex-row justify-between text-[16px] mobile-below:text-[12px]">
-                <div>Йога</div>
-                <div>90 минут</div>
-              </div>
-              <div>
-                <div className="relative w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]">  
-                  <div className="absolute bottom-0">
-                    <img src="http://localhost:5000/files/test_yoga.png" alt="2" className="rounded-[10px] w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
-                  </div>
-                  <div className="absolute right-0 bottom-0 p-[5px]">
-                    <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-[#D11655] mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
-                  Подробнее
-                    </button>
-                  </div>
-                </div>            
-              </div>
-            </div>
-          </div>  
-          <div className="flex items-center mobile-below:hidden">
-            <svg width="19" height="34" viewBox="0 0 19 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 33L17 17L1 1" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </div>
-        </div>
-        <div className="overflow-x-auto mt-[41px]">
+        <Directions />
+        <div className="hidden overflow-x-hidden">
           <Shedule />
         </div>
 
@@ -336,7 +178,7 @@ const Main = () => {
               </div>
             </div>
           </footer>
-          :
+          : 
           <footer className="bg-[#FFFEFE] md:p-5 dark:bg-gray-800">          
             <div className="flex flex-col justify-center items-center w-full px-[23px] py-[20px] gap-[14px]">
               <div>
