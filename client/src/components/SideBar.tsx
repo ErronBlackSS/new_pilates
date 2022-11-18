@@ -37,7 +37,7 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' }
+        className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-200 items-center' }
         ref={bodyRef}
       >
         <div className={'flex flex-col gap-[40px] mt-[40px] justify-center ' + (isToggled ? ' items-start' : ' items-center')}>
