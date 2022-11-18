@@ -4,7 +4,7 @@ import { NAV_LINKS } from '../Links'
 
 const DesktopView = ({ redirectToMain }) => {
   return (
-    <nav className="navbar navbar-expand-lg py-2 bg-white relative flex items-center w-full justify-between">
+    <nav className="navbar navbar-expand-lg py-2 bg-white relative flex items-center w-full justify-between mobile-below:py-[0px]">
       <div className="px-6 w-full flex flex-wrap items-center justify-between">
         <div className="navbar-collapse collapse grow items-center mobile-below:hidden">
           <ul className="navbar-nav mr-auto lg:flex lg:flex-row">

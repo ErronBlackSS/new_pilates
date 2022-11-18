@@ -10,26 +10,32 @@ const Main = () => {
       <div className="w-[1366px] flex flex-col m-auto mobile-below:w-full">
         <div className="flex mobile-below:flex-col mobile-above:flex-row justify-left">
           <div className="max-w-[500px]">
-            <div className="flex flex-col">
-              <div className="mt-[52px] mobile-below:mt-[22px]">
-                <span className="text-[64px] leading-[88px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
+            <div className="flex flex-col mt-[52px] mobile-below:mt-[0px]">
+              <div className="flex flex-row mobile-below:gap-[10px] mobile-below:px-[16px]">
+                <div className="flex items-center mobile-below:w-[154px]">
+                  <span className="text-[64px] leading-[88px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
               Студия Екатерины Федоровской
-                </span>
+                  </span>
+                </div>
+                <div className="w-[144px] h-[144px] flex justify-center items-center mobile-above:hidden">
+                  <img src="http://localhost:5000/files/girl.png" alt="mainImage" />
+                </div>
               </div>
-              <div className="w-[434px] mt-[28px] mobile-below:w-[190px] mobile-below:h-[40px]">
-                <span className="text-[24px] leading-[40px] text-[#5C5C5C] mobile-below:text-[14px] mobile-below:leading-[20px]">
+              <div className="w-[434px] mt-[28px] mobile-below:w-[190px] mobile-below:h-[40px] mobile-below:ml-[16px] mobile-below:mt-[0px]">
+                <span className="text-[24px] leading-[40px] font-[500] text-[#5C5C5C] mobile-below:text-[14px] mobile-below:leading-[20px]">
               Квалифицированный подход с заботой о Вашем здоровье
                 </span>
               </div>
-              <div className="mt-[52px]">
-                <button className="w-[293px] h-[56px] gap-[10px] px-6 py-2 text-[#FEFAFA] text-[20px] cursor-pointer rounded-[10px] bg-bordo">
+              
+              <div className="mt-[52px] mobile-below:px-[16px] mobile-below:mt-[26px]">
+                <button className="w-[293px] h-[56px] bg-[#D11655] text-[#FEFAFA] text-[20px] cursor-pointer rounded-[10px] mobile-below:w-[220px] mobile-below:h-[40px] mobile-below:text-[16px]">
               Записаться на занятие
                 </button>
               </div>
             </div>
           </div>
           <div className="w-full px-[16px]">
-            <div className="flex bg-[#FFFEFE] shadow-md mt-[52px] pl-[52px] rounded-[28px] mobile-below:pl-[12px]">
+            <div className="flex bg-[#FFFEFE] shadow-md mt-[52px] pl-[52px] rounded-[28px] mobile-below:pl-[12px] mobile-below:mt-[27px] mobile-below:rounded-[10px]">
               <ul className="w-full list-none text-[20px] text-[#1B1B1B] mt-[52px] mobile-below:text-[14px] mobile-below:mt-[16px]">
                 <li className="pb-[31px] mobile-below:pb-[8px]">Уникальные направления body&mind</li>
                 <li className="py-[32px] mobile-below:py-[8px]">Занятия в формате мини-групп</li>
@@ -37,16 +43,17 @@ const Main = () => {
                 <li className="pt-[32px] pb-[32px] mobile-below:pt-[8px] mobile-below:pb-[8px]">Заботливые, опытные тренеры</li>
                 <li className="pt-[32px] pb-[52px] mobile-below:pt-[8px] mobile-below:pb-[8px]">Абонементы без ограничения сроков</li>
               </ul>         
-              
+              <div className="w-full flex items-center mobile-below:hidden">
+                <img src="http://localhost:5000/files/girl.png" alt="mainImage" />
+              </div>
             </div>
           </div>
         </div>
-        <div id="trainers" className="mt-[117px] mb-[70px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
+        <div id="trainers" className="mt-[117px] mb-[65px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Наши тренеры</h1>
         </div>
         
         <TrainersSwipe />
-        
         <div className="mt-[117px] mb-[69px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Прайс-лист</h1>
         </div>

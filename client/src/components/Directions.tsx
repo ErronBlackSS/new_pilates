@@ -9,10 +9,6 @@ const Directions = () => {
     LessonTypesService.getAllByGroup()
       .then(res => {
         setLessonTypes(res.data)
-        console.log(res.data)
-      })
-      .finally(() => {
-        console.log('finally')
       })
   }, [])
 
@@ -21,8 +17,8 @@ const Directions = () => {
     <>
       {lessonTypes && Object.keys(lessonTypes).map((group, indexGroup) => {
         return (
-          <>
-            <div key={indexGroup} className="flex mt-[70px] mb-[40px] mobile-below:ml-[19px] mobile-below:mt-[30px] mobile-below:mb-[28px]">
+          <div key={indexGroup}>
+            <div className="flex mt-[70px] mb-[40px] mobile-below:ml-[19px] mobile-below:mt-[30px] mobile-below:mb-[28px]">
               <h1 className="text-[24px] text-[#D11655] mobile-below:text-[16px]">{group}</h1>
             </div>
             <div className="flex flex-row gap-[16px]">
@@ -50,7 +46,7 @@ const Directions = () => {
                 </svg>
               </div>
             </div>
-          </>
+          </div>
         )
       })
       }
