@@ -6,6 +6,7 @@ const helpers = require('../helpers/general')
 const pool = require('../db')
 const logger = require('../logger')
 const { ROLES } = require('../constants')
+const fs = require('fs')
 
 async function registration (req, res, next) {
   try {
@@ -160,6 +161,17 @@ async function saveImage (req, res, next) {
     const server_path = process.env.FILE_PATH + '/user_photos/' + fileName
     file.file.mv(server_path)
     const api_url = process.env.API_URL + '/files/user_photos/' + fileName
+
+    const currentPhoto = await UserHelpers.checkImageExists(id)
+
+    if (currentPhoto?.image_server_path) {
+      fs.unlink(currentPhoto.image_server_path, (err) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+      await UserHelpers.deleteImage(id)
+    }
 
     await pool.query(`
       INSERT INTO user_photo (user_id, image_name, image_server_path, image_url)

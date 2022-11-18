@@ -3,7 +3,6 @@ const helpers = require('../helpers/general')
 const LessonTypeHelper = require('../helpers/LessonTypeHelper')
 const LessonTypeDTO = require('../dtos/LessonTypeDTO')
 const fs = require('fs')
-const e = require('express')
 
 async function create (req, res) {
   try {

@@ -33,9 +33,19 @@ async function create (user) {
     return newUser.rows[0]
 }
 
+async function checkImageExists (id) {
+    const image = await pool.query(`SELECT image_server_path from user_photo WHERE user_id = $1`, [id])
+    return image.rows[0]
+}
+
 async function getUserByResetToken (reset_link) {
     const user = await pool.query(`SELECT * from reset_tokens WHERE resetToken = $1`, [reset_link])
     return user.rows[0]
+}
+
+async function deleteImage (id) {
+    const image = await pool.query(`DELETE from user_photo WHERE user_id = $1`, [id])
+    return image.rows[0]
 }
 
 module.exports = {
@@ -43,5 +53,7 @@ module.exports = {
     getAllUsers,
     create,
     update,
-    getUserByResetToken
+    getUserByResetToken,
+    checkImageExists,
+    deleteImage
 }
