@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from '../Components/Common/Modal'
 import AddLessonForm from '../Components/Forms/AddLessonForm'
 import UserService from '../Services/UserService'
 import LessonTypesService from '../Services/LessonTypesService'
-import LessonService from '../Services/LessonService'
+import LessonsList from '../Components/Lessons/LessonsList'
+import Button from '../Components/Common/Button'
+import { observer } from 'mobx-react-lite'
+import LessonsStore from '../Store/LessonsStore'
+import { ButtonColors } from '../Utils/constance'
+import FilterButtons from '../Components/Lessons/FilterButtons'
+import SwitchButtons from '../Components/Lessons/SwitchButtons'
 
 const LessonsAdmin = () => {
 
   const [showAddModal, setShowAddModal] = useState(false)
   const [trainers, setTrainers] = useState([])
   const [lessonTypes, setLessonTypes] = useState([])
-  const [lessons, setLessons] = useState([])
 
   const getAndSetTrainers = async () => {
     const resp = await UserService.getTrainers()
@@ -34,31 +39,34 @@ const LessonsAdmin = () => {
     setLessonTypes(lessonTypes)
   }
 
-  const getLessons = async () => {
-    const resp = await LessonService.getAll()
-    setLessons(resp.data)
-  }
-
-  const onAddLesson = async (lesson) => {
-    console.log(lesson.data)
-    setLessons([lesson.data, ...lessons])
-  }
-
   useEffect(() => {
     getAndSetTrainers()
     getAndSetLessonTypes()
-    getLessons()
+    LessonsStore.getAllLessons()
   }, [])
 
   return (
-    <div className="items-center flex flex-col w-[80%] h-screen w-full bg-[#ea8df7]">
-      <h1>Занятия</h1>
-      <button
-        className="bg-[#008080] text-[#FFF] rounded-[12px] p-[10px] m-[10px]"
-        onClick={() => setShowAddModal(true)}
-      >
-        Добавить занятие
-      </button>
+    <div className="ml-[300px] pt-[50px] pr-[60px]">
+      <div className="flex flex-row justify-between">
+        <div className="flex gap-[40px]">
+          <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
+          Список занятий
+          </span>
+          <div className="flex flex-row">
+            <FilterButtons />
+          </div>
+        </div>
+        <SwitchButtons />
+      </div>
+      <div className="w-full flex justify-end mt-[36px]">
+        <Button
+          handler={() => setShowAddModal(true)}
+          color={ButtonColors.white}
+          className="py-[2px] px-[14px]"
+        >
+          Добавить занятие
+        </Button>
+      </div>
       {
         showAddModal &&
           <Modal
@@ -71,45 +79,15 @@ const LessonsAdmin = () => {
             <AddLessonForm
               trainers={trainers}
               lessonTypes={lessonTypes}
-              addLesson={onAddLesson}
+              addLesson={LessonsStore.addLesson}
             />
           </Modal>
       }
       {
-        <table
-          className="bg-[#FFF] p-[25px] gap-[15px] table-fixed border-separate overflow-y-scroll"
-        >
-          <thead>
-            <tr>
-              <th>Тип занятия</th>
-              <th>Тренер</th>
-              <th>Дата</th>
-              <th>Начало</th>
-              <th>Конец</th>
-              <th>Всего мест</th>
-              <th>Занято</th>
-            </tr>
-          </thead>
-          <tbody>
-            {lessons && lessons.map((lesson, index) => (
-              <tr
-                className="bg-[#AAA] gap-[5px]"
-                key={index}
-              >
-                <th>{lesson.title}</th>
-                <th>{lesson.trainer}</th>
-                <th>{lesson.date}</th>
-                <th>{lesson.start_time}</th>
-                <th>{lesson.end_time}</th>
-                <th>{lesson.capacity}</th>
-                <th>{lesson.occupied}</th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <LessonsList />
       }
     </div>
   )
 }
 
-export default LessonsAdmin
+export default observer(LessonsAdmin)

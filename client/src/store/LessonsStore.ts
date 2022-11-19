@@ -27,6 +27,15 @@ class LessonsStore {
     })
   }
 
+  addLesson(lesson) {
+    this.lessons.push(lesson)
+  }
+
+  async getAllLessons() {
+    const resp = await LessonService.getAll()
+    this.lessons = resp.data
+  }
+
   filterCalendar(trainer, lesson) {
     if(trainer) {
       this.filterLessons('trainer_name', trainer)

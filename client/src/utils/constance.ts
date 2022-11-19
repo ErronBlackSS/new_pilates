@@ -19,3 +19,9 @@ export enum ROLES {
   COACH =  'a3ee77b5-dd34-4a63-a460-7eb53eb6e560',
   ADMIN = '1c4f8c85-7a58-4dc9-85cc-d0709820eeea'
 }
+
+export enum ButtonColors {
+  bordo = ' outline outline-bordo bg-bordo text-[#FEFAFA] text-[14px]',
+  white = ' outline-none outline-[#1B1B1B] bg-white text-[#1B1B1B] text-[14px]',
+  red = ' border border-[#FF2E00] text-red-500',
+}

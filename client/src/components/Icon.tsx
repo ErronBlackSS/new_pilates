@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 interface IIcon {
   children: any
   onClick?: () => void
 }
 
-const Icon = ({children, onClick}) => {
+const Icon: FC<IIcon> = ({children, onClick}) => {
   return (
     <div
       onClick={onClick}
