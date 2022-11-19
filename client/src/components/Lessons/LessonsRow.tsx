@@ -1,5 +1,7 @@
 import { FC } from 'react'
 import ListRowBlock from '../Common/List/ListRowBlock'
+import Button from '../Common/Button'
+import { ButtonColors } from '../../Utils/constance'
 
 interface ILessonRow {
   title: string
@@ -44,15 +46,27 @@ const LessonsRow: FC<ILessonRow> = ({title, trainer, date, start_time, end_time}
         />
       </div>
       <div className="flex flex-row justifty-center items-center gap-[30px]">
-        <button className="px-6 py-2 text-[#fff] cursor-pointer rounded-[10px] bg-bordo">
-            123
-        </button>
-        <button className="px-6 py-2 text-[#fff] cursor-pointer rounded-[10px] bg-bordo">
-            123
-        </button>
-        <button className="px-6 py-2 text-[#fff] cursor-pointer rounded-[10px] bg-bordo">
-            123
-        </button>
+        <Button
+          color={ButtonColors.white}
+          className="py-[2px] px-[14px]"
+          handler={() => { console.log('edit') }}
+        >
+            Записи
+        </Button>
+        <Button
+          color={ButtonColors.white}
+          className="py-[2px] px-[14px]"
+          handler={() => { console.log('edit') }}
+        >
+            Изменить
+        </Button>
+        <Button
+          color={ButtonColors.red}
+          className="py-[2px] px-[14px]"
+          handler={() => { console.log('delete') }}
+        >
+            Удалить
+        </Button>
       </div>
     </div>
   )
