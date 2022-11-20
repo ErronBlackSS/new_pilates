@@ -6,23 +6,8 @@ import LessonDetail from './Shedule/LessonDetail'
 import { Context } from '..'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../Store/LessonsStore'
-import SheduleCell from '../Components/Shedule/SheduleCell'
-
-
-interface ILesson {
-  capacity: number
-  date: string
-  end_time: string
-  id: number
-  occupied: number
-  start_time: string
-  title: string
-  trainer_id: number
-  trainer_name: string
-  description: string
-  weekDay: number
-  show: boolean
-}
+import SheduleTable from './Shedule/SheduleTable'
+import { ILesson } from '../Types/LessonsTypes/LessonsTypes'
 
 const Shedule = () => {
   
@@ -81,36 +66,9 @@ const Shedule = () => {
           onNext={() => setCurrentWeek(getNextWeek())}
         />
       </div>
-      <table
-        className="bg-[#FFF] p-[25px] gap-[15px] border-separate overflow-y-scroll"
-      >
-        <thead>
-          <tr>
-            <th className="w-[155px] h-[40]"><div><p>Время</p></div></th>
-            {LessonsStore.weekDays && LessonsStore.weekDays.map((day, index) => (
-              <th className="w-[155px] h-[40]" key={index}><div><p>{day}</p></div></th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {LessonsStore.trainings && LessonsStore.trainings.map((day, index) => (
-            <tr key={index}>
-              <th className="border border-[#F2F2F3] w-[155px] h-[105px]">
-                <div>
-                  <p>{day.time}</p>
-                </div>
-              </th>
-              {day.lessons && Object.values(day.lessons).map((lesson: ILesson, index) => (      
-                <SheduleCell
-                  key={index}
-                  lesson={lesson}
-                  selectLesson={selectLesson}
-                />
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <SheduleTable
+        selectLesson={selectLesson}
+      />
     </>
   )
 }

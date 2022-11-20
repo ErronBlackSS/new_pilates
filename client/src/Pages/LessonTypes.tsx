@@ -38,7 +38,7 @@ const LessonTypes = () => {
   }, [])
   
   return (
-    <div className="ml-[250px] items-center flex flex-col h-screen w-[80%] bg-[#FEFAFA]">
+    <div className="items-center flex flex-col h-screen bg-[#FEFAFA]">
       <h1>Типы занятий</h1>
       <button
         className="bg-[#008080] text-[#FFF] rounded-[12px] p-[10px] m-[10px]"

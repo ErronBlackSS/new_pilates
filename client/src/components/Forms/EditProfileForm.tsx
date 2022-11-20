@@ -37,7 +37,7 @@ const EditProfileForm = ({curName, curLastname, curEmail, curPhone, showEditPass
   }
 
   return (
-    <div className="flex justify-center text-center">
+    <div className="flex justify-start text-center">
       <div>
         <div className="text-left w-[500px]">
           <form

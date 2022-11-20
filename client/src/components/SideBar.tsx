@@ -9,6 +9,7 @@ import IconArrow from './Common/Icons/IconArrow'
 import IconLogo from './Common/Icons/IconLogo'
 import Icon from './Icon'
 import IconArrowBack from './Common/Icons/IconArrowBack'
+import MainSection from './MainSection'
 
 const SideBar = () => {
   const { user } = useContext(Context)
@@ -37,7 +38,7 @@ const SideBar = () => {
   return (
     <>
       <div
-        className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-200 items-center' }
+        className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' }
         id="sidebar"
         ref={bodyRef}
       >
@@ -92,7 +93,11 @@ const SideBar = () => {
           </Icon>
         </div>
       </div>
-      <Outlet />
+      <MainSection
+        isToggled={isToggled}
+      >
+        <Outlet />
+      </MainSection>
     </>
   )
 }

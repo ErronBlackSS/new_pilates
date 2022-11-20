@@ -18,7 +18,7 @@ const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelect
 
   const isCurrentLocation = location.pathname === path
 
-  const SideBarClasses = 'w-full flex flex-row gap-[10px] '
+  const SideBarClasses = 'w-full flex flex-row gap-[10px] whitespace-nowrap '
     + (isToggled ? ' py-[8px] px-[20px] rounded-[6px] justify-start' : ' justify-center ')
 
   const buttonColor = 
@@ -30,7 +30,6 @@ const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelect
     isToggled ? 
       isCurrentLocation ? 'white' : '#1B1B1B' :
       isCurrentLocation ? '#D11655' : '#1B1B1B'
-
 
   return (
     <Link
@@ -44,7 +43,7 @@ const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelect
         color={buttonColor}
       >
         {icon(iconColor)}
-        {isToggled && <span>
+        {isToggled && <span className="break-words">
           {title}
         </span>}
       </Button>

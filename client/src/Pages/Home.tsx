@@ -126,7 +126,7 @@ const Main = () => {
           <h1 className="text-[44px] mobile-below:text-[24px]">Направления</h1>
         </div>
         <Directions />
-        <div className="hidden overflow-x-hidden">
+        <div className="overflow-x-hidden">
           <Shedule />
         </div>
 
