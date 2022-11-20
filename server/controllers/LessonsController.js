@@ -122,6 +122,24 @@ async function listBookedUsers (req, res) {
   }
 }
 
+async function getLessonsByDate(req, res) {
+  try {
+    const { start, end } = req.query.week
+    const lessons = await pool.query(`
+    select users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
+    from lessons
+    left join users on lessons.coach_id = users.id
+    left join lesson_types on lessons.lesson_type_id = lesson_types.id
+    where lessons.date BETWEEN $1 and $2`,
+    [start, end])
+
+    const { trainings, weekDays } = LessonHelper.getFormattedLessons(lessons, start)
+    res.json({ trainings, weekDays })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 async function getLessonsForUserOnThisWeek(req, res) {
   try {    
     const { user_id } = req.body
@@ -134,7 +152,9 @@ async function getLessonsForUserOnThisWeek(req, res) {
       JOIN users ON users.id = lessons.coach_id
       WHERE users_lessons_rel.user_id = $1 and lessons.date BETWEEN $2 and $3`,
       [user_id, start, end])
-    res.json()
+    
+    const { trainings, weekDays } = LessonHelper.getFormattedLessons(lessons, start)
+    res.json({ trainings, weekDays })
   }
   catch (e) {
     next(e)
@@ -150,9 +170,10 @@ async function getLessonsForUserForTheFuture(req, res) {
       JOIN lessons ON lessons.id = users_lessons_rel.lesson_id
       JOIN lesson_types ON lesson_types.id = lessons.lesson_type_id
       JOIN users ON users.id = lessons.coach_id
-      WHERE users_lessons_rel.user_id = $1 and lessons.date > now()`,
+      WHERE users_lessons_rel.user_id = $1 and lessons.date < now()`,
       [user_id])
-    res.json()
+
+    res.json(lessons.rows)
   }
   catch (e) {
     next(e)
@@ -170,70 +191,14 @@ async function getLessonsForUserForThePast(req, res) {
       JOIN users ON users.id = lessons.coach_id
       WHERE users_lessons_rel.user_id = $1 and lessons.date < now()`,
       [user_id])
-    res.json()
+    
+    res.json(lessons.rows)
+
   }
   catch (e) {
     next(e)
   }
 }
-
-async function getLessonsByDate(req, res) {
-  try {
-    const { start, end } = req.query.week
-    const lessons = await pool.query(`
-      select users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
-      from lessons
-      left join users on lessons.coach_id = users.id
-      left join lesson_types on lessons.lesson_type_id = lesson_types.id
-      where lessons.date BETWEEN $1 and $2`,
-    [start, end])
-
-    const { trainings, weekDays } = LessonHelper.getFormattedLessons(lessons, start)
-
-    res.json({ trainings, weekDays })
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-function getWeekDaysWithDate(start) {
-  const today = new Date(start)
-  const day = today.getDay()
-  const weekDaysShedule = [
-    'Понедельник',
-    'Вторник',
-    'Среда',
-    'Четверг',
-    'Пятница',
-    'Суббота',
-    'Воскресенье'
-  ]
-  const diff = today.getDate() - day + (day === 0 ? -6:1)
-  for (let i = 0; i < 7; i++) {
-    const day = new Date(today.setDate(diff + i))
-    weekDaysShedule[i] += ' ' + day.getDate() + '.' + (+day.getMonth()+1)
-  }
-
-  return weekDaysShedule
-}
-
-function availiableToBook (capacity, occupied) {
-  try {
-    return capacity - occupied > 0
-  } catch (e) {
-    next(e)
-  }
-}
-
-const weekDays = [
-  'Воскресенье',
-  'Понедельник',
-  'Вторник',
-  'Среда',
-  'Четверг',
-  'Пятница',
-  'Суббота'
-]
 
 module.exports = {
     create,
@@ -243,5 +208,8 @@ module.exports = {
     listBookedUsers,
     bookLesson,
     removeBooked,
+    getLessonsForUserOnThisWeek,
+    getLessonsForUserForTheFuture,
+    getLessonsForUserForThePast,
     getLessonsByDate
 }
