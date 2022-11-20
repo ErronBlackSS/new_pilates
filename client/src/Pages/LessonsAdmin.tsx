@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import Modal from '../Components/Common/Modal'
 import AddLessonForm from '../Components/Forms/AddLessonForm'
 import UserService from '../Services/UserService'
@@ -10,14 +10,15 @@ import LessonsStore from '../Store/LessonsStore'
 import { ButtonColors } from '../Utils/constance'
 import FilterButtons from '../Components/Lessons/FilterButtons'
 import SwitchButtons from '../Components/Lessons/SwitchButtons'
-import SheduleTable from '../Components/Shedule/SheduleTable'
+import { Context } from '../index'
 
 const LessonsAdmin = () => {
 
+  const { user } = useContext(Context)
+  
   const [showAddModal, setShowAddModal] = useState(false)
   const [trainers, setTrainers] = useState([])
   const [lessonTypes, setLessonTypes] = useState([])
-  const [view, setView] = useState('list')
 
   const getAndSetTrainers = async () => {
     const resp = await UserService.getTrainers()
@@ -44,7 +45,8 @@ const LessonsAdmin = () => {
   useEffect(() => {
     getAndSetTrainers()
     getAndSetLessonTypes()
-    LessonsStore.getAllLessons()
+    LessonsStore.getLessonsCurrentWeek()
+    console.log('how')
   }, [])
 
   return (
@@ -59,7 +61,7 @@ const LessonsAdmin = () => {
           </div>
         </div>
         <SwitchButtons
-          onSwitch={setView}
+          onSwitch={() => {}}
         />
       </div>
       <div className="w-full flex justify-end mt-[36px]">
@@ -88,8 +90,7 @@ const LessonsAdmin = () => {
           </Modal>
       }
       {
-        view === 'list' ? <LessonsList />
-          : <SheduleTable />
+        <LessonsList />
       }
     </div>
   )

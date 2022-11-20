@@ -34,6 +34,7 @@ const Shedule = () => {
 
   useEffect(() => {
     LessonsStore.getLessonsByWeek(currentWeek)
+    console.log(LessonsStore.lessons)
   }, [currentWeek])
 
   return (

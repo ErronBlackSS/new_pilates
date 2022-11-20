@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import LessonService from '../Services/LessonService'
+import { getCurrentWeek } from '../Utils/functions'
 
 class LessonsStore {
   lessons = []
@@ -18,13 +19,15 @@ class LessonsStore {
   }
 
   sortLessonsByTime() {
-    this.lessons.sort(function(a, b){
-      if (a.time > b.time)
-        return 1
-      if (a.time < b.time)
-        return -1
-      return 0
-    })
+    if(this.lessons) {
+      this.lessons.sort(function(a, b){
+        if (a.time > b.time)
+          return 1
+        if (a.time < b.time)
+          return -1
+        return 0
+      })
+    }
   }
 
   addLesson(lesson) {
@@ -84,6 +87,19 @@ class LessonsStore {
     this.setWeekDays(resp.data.weekDays)
     this.setLessons(resp.data.trainings)
     this.sortLessonsByTime()
+  }
+
+  async getAdminPlannedLessons() {
+    const resp = await LessonService.getAdminPlannedLessons()
+    console.log(resp, 'SWITH TO PLANNED')
+    this.setLessons(resp.data)
+    this.sortLessonsByTime()
+  }
+
+  async getLessonsCurrentWeek() {
+    const week = getCurrentWeek()
+    const resp = await LessonService.getLessonsCurrentWeek(week)
+    this.setLessons(resp.data)
   }
 
   get trainings () {
