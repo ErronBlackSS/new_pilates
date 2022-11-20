@@ -122,6 +122,61 @@ async function listBookedUsers (req, res) {
   }
 }
 
+async function getLessonsForUserOnThisWeek(req, res) {
+  try {    
+    const { user_id } = req.body
+    const { start, end } = req.query.week
+    const lessons = await pool.query(`
+      SELECT lessons.coach_id, users."name", users."lastname", lessons.id as lesson_id, lesson_types.title, lesson_types.description, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity
+      FROM users_lessons_rel 
+      JOIN lessons ON lessons.id = users_lessons_rel.lesson_id
+      JOIN lesson_types ON lesson_types.id = lessons.lesson_type_id
+      JOIN users ON users.id = lessons.coach_id
+      WHERE users_lessons_rel.user_id = $1 and lessons.date BETWEEN $2 and $3`,
+      [user_id, start, end])
+    res.json()
+  }
+  catch (e) {
+    next(e)
+  }
+}
+
+async function getLessonsForUserForTheFuture(req, res) {
+  try {    
+    const { user_id } = req.body
+    const lessons = await pool.query(`
+      SELECT lessons.coach_id, users."name", users."lastname", lessons.id as lesson_id, lesson_types.title, lesson_types.description, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity
+      FROM users_lessons_rel 
+      JOIN lessons ON lessons.id = users_lessons_rel.lesson_id
+      JOIN lesson_types ON lesson_types.id = lessons.lesson_type_id
+      JOIN users ON users.id = lessons.coach_id
+      WHERE users_lessons_rel.user_id = $1 and lessons.date > now()`,
+      [user_id])
+    res.json()
+  }
+  catch (e) {
+    next(e)
+  }
+}
+
+async function getLessonsForUserForThePast(req, res) {
+  try {    
+    const { user_id } = req.body
+    const lessons = await pool.query(`
+      SELECT lessons.coach_id, users."name", users."lastname", lessons.id as lesson_id, lesson_types.title, lesson_types.description, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity
+      FROM users_lessons_rel 
+      JOIN lessons ON lessons.id = users_lessons_rel.lesson_id
+      JOIN lesson_types ON lesson_types.id = lessons.lesson_type_id
+      JOIN users ON users.id = lessons.coach_id
+      WHERE users_lessons_rel.user_id = $1 and lessons.date < now()`,
+      [user_id])
+    res.json()
+  }
+  catch (e) {
+    next(e)
+  }
+}
+
 async function getLessonsByDate(req, res) {
   try {
     const { start, end } = req.query.week
