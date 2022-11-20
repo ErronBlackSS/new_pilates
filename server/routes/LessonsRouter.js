@@ -13,7 +13,6 @@ router.delete('/lessons/book', LessonController.removeBooked)
 router.get('/lessons/booked', LessonController.listBookedUsers)
 router.get('/lessons/week', LessonController.getLessonsByDate)
 
-
 router.get('/lessons/week/list', AdminLessonsService.getLessonsCurrentWeek)
 router.get('/lessons/admin/planned', AdminLessonsService.getPlannedLessons)
 

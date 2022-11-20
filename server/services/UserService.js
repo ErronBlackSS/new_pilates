@@ -82,6 +82,7 @@ async function login(email, password) {
     if (!user) {
         throw ApiError.BadRequest('Пользователь с таким email не найден')
     }
+
     const isPassEquals = await bcrypt.compare(password, user.password)
     if (!isPassEquals) {
         throw ApiError.BadRequest('Неверный пароль')

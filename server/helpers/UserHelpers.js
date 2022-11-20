@@ -3,9 +3,10 @@ const pool = require('../db')
 
 async function findOne (params) {
     const user = await pool.query(`
-        SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url, users.is_activated
+        SELECT users.id, users.password, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url, users.is_activated
         from users LEFT JOIN user_photo ON users.id = user_photo.user_id
         WHERE users.${params.field} = $1`, [params.value])
+
     return user.rows[0]
 }
 
