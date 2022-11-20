@@ -1,7 +1,6 @@
 import { MutableRefObject, useEffect, useState } from 'react'
 import { ROLES } from '../Utils/constance'
 import { SIDEBAR_ITEMS } from '../Utils/navbar_constants'
-import { useOnClickOutside } from './UseClickOutside'
 
 export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
     
@@ -17,13 +16,6 @@ export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
       bodyRef.current.classList.remove('!w-[250px]')
     }
   }
-
-  const close = () => {
-    setToggled(false)
-    bodyRef.current.classList.remove('!w-[250px]')
-  }
-
-  useOnClickOutside(bodyRef, close)
 
   useEffect(() => {
     switch (role) {

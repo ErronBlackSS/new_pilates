@@ -1,5 +1,7 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import Button from '../Common/Button'
+import { ButtonColors } from '../../Utils/constance'
 
 interface ISideBarItem {
   title: string
@@ -12,21 +14,40 @@ interface ISideBarItem {
 
 const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelected, selected }) => {
 
+  const location = useLocation()
+
+  const isCurrentLocation = location.pathname === path
+
   const SideBarClasses = 'w-full flex flex-row gap-[10px] '
-    + (isToggled ? ' border py-[8px] px-[20px] rounded-[6px] justify-start' : ' justify-center ')
-    + (selected === path ? ' bg-bordo text-[#FFF]' : '')
+    + (isToggled ? ' py-[8px] px-[20px] rounded-[6px] justify-start' : ' justify-center ')
+
+  const buttonColor = 
+    isToggled ? 
+      (isCurrentLocation ? ButtonColors.bordo : ButtonColors.white) :
+      ButtonColors.borderless
+
+  const iconColor =
+    isToggled ? 
+      isCurrentLocation ? 'white' : '#1B1B1B' :
+      isCurrentLocation ? '#D11655' : '#1B1B1B'
+
+
   return (
     <Link
       to={path}
       className="w-full"
       onClick={() => setSelected(path)}
     >
-      <div className={SideBarClasses}>
-        {icon()}
+      <Button
+        className={SideBarClasses}
+        handler={() => { }}
+        color={buttonColor}
+      >
+        {icon(iconColor)}
         {isToggled && <span>
           {title}
         </span>}
-      </div>
+      </Button>
     </Link>      
   )
 }

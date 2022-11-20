@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useContext, useRef, useState } from 'react' 
+import { createContext, useContext, useRef, useState } from 'react' 
 import IconLogout from './Common/Icons/IconLogout'
 import { Context } from '../index'
 import { useSideBar } from '../Hooks/UseSideBar'
@@ -38,6 +38,7 @@ const SideBar = () => {
     <>
       <div
         className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-200 items-center' }
+        id="sidebar"
         ref={bodyRef}
       >
         <div className={'flex flex-col gap-[40px] mt-[40px] justify-center ' + (isToggled ? ' items-start' : ' items-center')}>
@@ -49,7 +50,17 @@ const SideBar = () => {
             {isToggled && <span className="text-bordo">{user.user.name}</span>}
           </div>
           {menuItems && menuItems.map((item, index) => {
-            return <SideBarItem setSelected={setSelected} selected={selected} key={index} icon={item.icon} isToggled={isToggled} title={item.title} path={item.path} />
+            return (
+              <SideBarItem
+                setSelected={setSelected}
+                selected={selected}
+                key={index}
+                icon={item.icon}
+                isToggled={isToggled}
+                title={item.title}
+                path={item.path}
+              />
+            )
           })}
         </div>
         <div

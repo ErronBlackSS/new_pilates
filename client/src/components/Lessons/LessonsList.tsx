@@ -6,7 +6,7 @@ import LessonsStore from '../../Store/LessonsStore'
 const LessonsList: FC = () => {
   return (
     <div
-      className="flex flex-col bg-[#FEFAFA] p-[25px] overflow-y-scroll mt-[14px]"
+      className="flex flex-col bg-[#FEFAFA] py-[25px] overflow-y-scroll mt-[14px]"
     >
       {LessonsStore.lessons && LessonsStore.lessons.map((lesson, index) => (
         <LessonsRow 

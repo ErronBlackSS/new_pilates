@@ -16,6 +16,11 @@ const LessonsAdmin = () => {
   const [showAddModal, setShowAddModal] = useState(false)
   const [trainers, setTrainers] = useState([])
   const [lessonTypes, setLessonTypes] = useState([])
+  const [sidebarOpened, setSidebarOpened] = useState(false)
+
+  const isSidebarOpen = () => {
+    console.log(document.getElementById('sidebar').classList)
+  }
 
   const getAndSetTrainers = async () => {
     const resp = await UserService.getTrainers()
@@ -40,6 +45,7 @@ const LessonsAdmin = () => {
   }
 
   useEffect(() => {
+    isSidebarOpen()
     getAndSetTrainers()
     getAndSetLessonTypes()
     LessonsStore.getAllLessons()
