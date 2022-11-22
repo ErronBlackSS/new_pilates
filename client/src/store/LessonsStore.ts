@@ -108,8 +108,8 @@ class LessonsStore {
     this.setLessons(resp.data)
   }
 
-  async getUserPlannedLessons() {
-    const resp = await LessonService.getUserPlannedLessons()
+  async getUserPlannedLessons(userId) {
+    const resp = await LessonService.getUserPlannedLessons(userId)
     this.setLessons(resp.data)
   }
 

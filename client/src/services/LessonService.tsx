@@ -26,15 +26,19 @@ export default class AuthService {
     return await $api.get('/lessons/admin/planned')
   }
 
-  static async getUserPlannedLessons(): Promise<AxiosResponse> {
-    return await $api.get('/lessons/user/planned')
+  static async getUserPlannedLessons(user_id): Promise<AxiosResponse> {
+    return await $api.get('/lessons/user/planned', { params: { user_id } })
   }
 
   static async getUserBookedLessons(user_id, week): Promise<AxiosResponse> {
     return await $api.get('/lessons/user', { params: { user_id, week } })
   }
 
-  static async getUserHistoryLessons(userId): Promise<AxiosResponse> {
-    return await $api.get('/lessons/user/history', { params: { userId } })
+  static async getUserHistoryLessons(user_id): Promise<AxiosResponse> {
+    return await $api.get('/lessons/user/history', { params: { user_id } })
+  }
+
+  static async getListBookedUsers(lesson_id): Promise<AxiosResponse> {
+    return await $api.get('/lessons/booked', { params: { lesson_id } })
   }
 }

@@ -27,16 +27,16 @@ const FilterButtons = ({ role, userId }) => {
   const plannedHandler = () => {
     switch (role) {
     case ROLES.USER:
-      LessonsStore.getUserBookedLessons(userId)
+      LessonsStore.getUserPlannedLessons(userId)
       break
     case ROLES.COACH:
-      LessonsStore.getUserBookedLessons(userId)
+      LessonsStore.getUserPlannedLessons(userId)
       break
     case ROLES.ADMIN:
       LessonsStore.getAdminPlannedLessons()
       break
     default:
-      LessonsStore.getUserBookedLessons(userId)
+      LessonsStore.getUserPlannedLessons(userId)
     }
   }
 
@@ -62,26 +62,47 @@ const FilterButtons = ({ role, userId }) => {
     item.handler()
   }
 
-  const buttons = [
-    {
-      content: 'На этой неделе',
-      handler: currentWeekHandler,
-      className: 'py-[2px] px-[14px]',
-      color: ButtonColors.white
-    },
-    {
-      content: 'Запланированные',
-      handler: plannedHandler,
-      className: 'py-[2px] px-[14px]',
-      color: ButtonColors.white
-    },
-    {
-      content: 'История',
-      handler: historyHandler,
-      className: 'py-[2px] px-[14px]',
-      color: ButtonColors.white
+  const getButtons = (role) => {
+    if(role === ROLES.ADMIN) {
+      return [
+        {
+          content: 'На этой неделе',
+          handler: currentWeekHandler,
+          className: 'py-[2px] px-[14px]',
+          color: ButtonColors.white
+        },
+        {
+          content: 'Запланированные',
+          handler: plannedHandler,
+          className: 'py-[2px] px-[14px]',
+          color: ButtonColors.white
+        },
+        {
+          content: 'История',
+          handler: historyHandler,
+          className: 'py-[2px] px-[14px]',
+          color: ButtonColors.white
+        }
+      ]
+    } else if(role === ROLES.USER) {
+      return [
+        {
+          content: 'Будущие',
+          handler: plannedHandler,
+          className: 'py-[2px] px-[14px]',
+          color: ButtonColors.white
+        },
+        {
+          content: 'История',
+          handler: historyHandler,
+          className: 'py-[2px] px-[14px]',
+          color: ButtonColors.white
+        }
+      ]
     }
-  ]
+  }
+
+  const buttons = getButtons(role)
 
   return (
     <div className="flex justify-center items-center gap-[25px]">

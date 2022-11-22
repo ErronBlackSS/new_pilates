@@ -1,7 +1,9 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import ListRowBlock from '../Common/List/ListRowBlock'
-import Button from '../Common/Button'
-import { ButtonColors } from '../../Utils/constance'
+import { Context } from '../../index'
+import { ROLES } from '../../Utils/constance'
+import AdminRowButtonGroup from './AdminRowButtonGroup'
+import UserRowButtonGroup from './UserRowButtonGroup'
 
 interface ILessonRow {
   title: string
@@ -13,6 +15,8 @@ interface ILessonRow {
 }
 
 const LessonsRow: FC<ILessonRow> = ({title, trainer, date, start_time, end_time}) => {
+
+  const { user } = useContext(Context)
 
   const formattedDate = new Date(date).toLocaleString('ru', {
     month: 'long',
@@ -46,27 +50,7 @@ const LessonsRow: FC<ILessonRow> = ({title, trainer, date, start_time, end_time}
         />
       </div>
       <div className="flex flex-row justifty-center items-center gap-[30px]">
-        <Button
-          color={ButtonColors.white}
-          className="py-[2px] px-[14px]"
-          handler={() => { console.log('edit') }}
-        >
-            Записи
-        </Button>
-        <Button
-          color={ButtonColors.white}
-          className="py-[2px] px-[14px]"
-          handler={() => { console.log('edit') }}
-        >
-            Изменить
-        </Button>
-        <Button
-          color={ButtonColors.red}
-          className="py-[2px] px-[14px]"
-          handler={() => { console.log('delete') }}
-        >
-            Удалить
-        </Button>
+        {user.user.role === ROLES.ADMIN ? <AdminRowButtonGroup /> : <UserRowButtonGroup />}
       </div>
     </div>
   )
