@@ -25,4 +25,16 @@ export default class AuthService {
   static async getAdminPlannedLessons(): Promise<AxiosResponse> {
     return await $api.get('/lessons/admin/planned')
   }
+
+  static async getUserPlannedLessons(): Promise<AxiosResponse> {
+    return await $api.get('/lessons/user/planned')
+  }
+
+  static async getUserBookedLessons(user_id, week): Promise<AxiosResponse> {
+    return await $api.get('/lessons/user', { params: { user_id, week } })
+  }
+
+  static async getUserHistoryLessons(userId): Promise<AxiosResponse> {
+    return await $api.get('/lessons/user/history', { params: { userId } })
+  }
 }

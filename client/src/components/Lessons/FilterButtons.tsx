@@ -2,10 +2,59 @@ import { FC, useState } from 'react'
 import Button from '../Common/Button'
 import { ButtonColors } from '../../Utils/constance'
 import LessonsStore from '../../Store/LessonsStore'
+import { ROLES } from '../../Utils/constance'
 
-const FilterButtons: FC = () => {
+const FilterButtons = ({ role, userId }) => {
   
   const [active, setActive] = useState(0)
+
+  const currentWeekHandler = () => {
+    switch (role) {
+    case ROLES.USER:
+      LessonsStore.getUserBookedLessons(userId)
+      break
+    case ROLES.COACH:
+      LessonsStore.getUserBookedLessons(userId)
+      break
+    case ROLES.ADMIN:
+      LessonsStore.getLessonsCurrentWeek()
+      break
+    default:
+      LessonsStore.getUserBookedLessons(userId)
+    }
+  }
+
+  const plannedHandler = () => {
+    switch (role) {
+    case ROLES.USER:
+      LessonsStore.getUserBookedLessons(userId)
+      break
+    case ROLES.COACH:
+      LessonsStore.getUserBookedLessons(userId)
+      break
+    case ROLES.ADMIN:
+      LessonsStore.getAdminPlannedLessons()
+      break
+    default:
+      LessonsStore.getUserBookedLessons(userId)
+    }
+  }
+
+  const historyHandler = () => {
+    switch (role) {
+    case ROLES.USER:
+      LessonsStore.getUserHistoryLessons(userId)
+      break
+    case ROLES.COACH:
+      LessonsStore.getUserHistoryLessons(userId)
+      break
+    case ROLES.ADMIN:
+      LessonsStore.getAllLessons()
+      break
+    default:
+      LessonsStore.getUserHistoryLessons(userId)
+    }
+  }
 
   const onClick = (index, item) => {
     if (active === index) return
@@ -16,19 +65,19 @@ const FilterButtons: FC = () => {
   const buttons = [
     {
       content: 'На этой неделе',
-      handler: () => { LessonsStore.getLessonsCurrentWeek() },
+      handler: currentWeekHandler,
       className: 'py-[2px] px-[14px]',
       color: ButtonColors.white
     },
     {
       content: 'Запланированные',
-      handler: () => { LessonsStore.getAdminPlannedLessons() },
+      handler: plannedHandler,
       className: 'py-[2px] px-[14px]',
       color: ButtonColors.white
     },
     {
       content: 'История',
-      handler: () => { LessonsStore.getAllLessons() },
+      handler: historyHandler,
       className: 'py-[2px] px-[14px]',
       color: ButtonColors.white
     }

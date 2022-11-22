@@ -102,6 +102,22 @@ class LessonsStore {
     this.setLessons(resp.data)
   }
 
+  async getUserBookedLessons(userId) {
+    const week = getCurrentWeek()
+    const resp = await LessonService.getUserBookedLessons(userId, week)
+    this.setLessons(resp.data)
+  }
+
+  async getUserPlannedLessons() {
+    const resp = await LessonService.getUserPlannedLessons()
+    this.setLessons(resp.data)
+  }
+
+  async getUserHistoryLessons(userId) {
+    const resp = await LessonService.getUserHistoryLessons(userId)
+    this.setLessons(resp.data)
+  }
+
   get trainings () {
     return this.lessons
   }
