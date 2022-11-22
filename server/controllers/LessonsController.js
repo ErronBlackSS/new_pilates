@@ -110,9 +110,9 @@ async function removeBooked (req, res) {
 
 async function listBookedUsers (req, res) {
   try {
-    const { lesson_id } = req.body
+    const { lesson_id } = req.params
     const lessons = await pool.query(`
-      SELECT * FROM lessons 
+      SELECT users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity FROM lessons 
       INNER JOIN users_lessons_rel ON lessons.id = users_lessons_rel.lesson_id 
       WHERE users_lessons_rel.user_id = $1`, 
       [lesson_id])
@@ -140,66 +140,6 @@ async function getLessonsByDate(req, res) {
   }
 }
 
-async function getLessonsForUserOnThisWeek(req, res) {
-  try {    
-    const { user_id } = req.body
-    const { start, end } = req.query.week
-    const lessons = await pool.query(`
-      SELECT lessons.coach_id, users."name", users."lastname", lessons.id as lesson_id, lesson_types.title, lesson_types.description, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity
-      FROM users_lessons_rel 
-      JOIN lessons ON lessons.id = users_lessons_rel.lesson_id
-      JOIN lesson_types ON lesson_types.id = lessons.lesson_type_id
-      JOIN users ON users.id = lessons.coach_id
-      WHERE users_lessons_rel.user_id = $1 and lessons.date BETWEEN $2 and $3`,
-      [user_id, start, end])
-    
-    const { trainings, weekDays } = LessonHelper.getFormattedLessons(lessons, start)
-    res.json({ trainings, weekDays })
-  }
-  catch (e) {
-    next(e)
-  }
-}
-
-async function getLessonsForUserForTheFuture(req, res) {
-  try {    
-    const { user_id } = req.body
-    const lessons = await pool.query(`
-      SELECT lessons.coach_id, users."name", users."lastname", lessons.id as lesson_id, lesson_types.title, lesson_types.description, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity
-      FROM users_lessons_rel 
-      JOIN lessons ON lessons.id = users_lessons_rel.lesson_id
-      JOIN lesson_types ON lesson_types.id = lessons.lesson_type_id
-      JOIN users ON users.id = lessons.coach_id
-      WHERE users_lessons_rel.user_id = $1 and lessons.date < now()`,
-      [user_id])
-
-    res.json(lessons.rows)
-  }
-  catch (e) {
-    next(e)
-  }
-}
-
-async function getLessonsForUserForThePast(req, res) {
-  try {    
-    const { user_id } = req.body
-    const lessons = await pool.query(`
-      SELECT lessons.coach_id, users."name", users."lastname", lessons.id as lesson_id, lesson_types.title, lesson_types.description, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity
-      FROM users_lessons_rel 
-      JOIN lessons ON lessons.id = users_lessons_rel.lesson_id
-      JOIN lesson_types ON lesson_types.id = lessons.lesson_type_id
-      JOIN users ON users.id = lessons.coach_id
-      WHERE users_lessons_rel.user_id = $1 and lessons.date < now()`,
-      [user_id])
-    
-    res.json(lessons.rows)
-
-  }
-  catch (e) {
-    next(e)
-  }
-}
-
 module.exports = {
     create,
     getAll,
@@ -208,8 +148,5 @@ module.exports = {
     listBookedUsers,
     bookLesson,
     removeBooked,
-    getLessonsForUserOnThisWeek,
-    getLessonsForUserForTheFuture,
-    getLessonsForUserForThePast,
     getLessonsByDate
 }
