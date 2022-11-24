@@ -41,11 +41,12 @@ async function update (req, res) {
 
 async function remove (req, res) {
   try {
-    const { id } = req.body
-    const lesson = await pool.query('DELETE FROM lessons WHERE id = $1', [id])
+    const { lesson_id } = req.query
+    console.log(req.query, 'ALLO')
+    const lesson = await pool.query('DELETE FROM lessons WHERE id = $1', [lesson_id])
     res.json(lesson.rows[0])
   } catch (e) {
-    next(e)
+    console.log(e)
   }
 }
 
