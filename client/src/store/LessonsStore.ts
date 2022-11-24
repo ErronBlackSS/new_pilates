@@ -118,6 +118,15 @@ class LessonsStore {
     this.setLessons(resp.data)
   }
 
+  async cancelLesson(lessonId, userId) {
+    const resp = await LessonService.cancelLesson(lessonId, userId)
+    if (resp.status === 202) {
+      alert(resp.data.message)
+      return
+    }
+    this.lessons = this.lessons.filter((item) => item.lesson_id !== lessonId)
+  }
+
   get trainings () {
     return this.lessons
   }

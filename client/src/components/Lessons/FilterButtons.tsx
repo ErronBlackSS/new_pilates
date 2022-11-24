@@ -11,16 +11,16 @@ const FilterButtons = ({ role, userId }) => {
   const currentWeekHandler = () => {
     switch (role) {
     case ROLES.USER:
-      LessonsStore.getUserBookedLessons(userId)
+      LessonsStore.getUserPlannedLessons(userId)
       break
     case ROLES.COACH:
-      LessonsStore.getUserBookedLessons(userId)
+      LessonsStore.getUserPlannedLessons(userId)
       break
     case ROLES.ADMIN:
       LessonsStore.getLessonsCurrentWeek()
       break
     default:
-      LessonsStore.getUserBookedLessons(userId)
+      LessonsStore.getUserPlannedLessons(userId)
     }
   }
 

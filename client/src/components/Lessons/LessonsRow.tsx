@@ -11,10 +11,10 @@ interface ILessonRow {
   date: string
   start_time: string
   end_time: string
-  id: number
+  lesson_id: number
 }
 
-const LessonsRow: FC<ILessonRow> = ({title, trainer, date, start_time, end_time}) => {
+const LessonsRow: FC<ILessonRow> = ({lesson_id, title, trainer, date, start_time, end_time}) => {
 
   const { user } = useContext(Context)
 
@@ -50,7 +50,7 @@ const LessonsRow: FC<ILessonRow> = ({title, trainer, date, start_time, end_time}
         />
       </div>
       <div className="flex flex-row justifty-center items-center gap-[30px]">
-        {user.user.role === ROLES.ADMIN ? <AdminRowButtonGroup /> : <UserRowButtonGroup />}
+        {user.user.role === ROLES.ADMIN ? <AdminRowButtonGroup lesson_id={lesson_id} /> : <UserRowButtonGroup lesson_id={lesson_id} />}
       </div>
     </div>
   )

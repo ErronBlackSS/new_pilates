@@ -41,4 +41,8 @@ export default class AuthService {
   static async getListBookedUsers(lesson_id): Promise<AxiosResponse> {
     return await $api.get('/lessons/booked', { params: { lesson_id } })
   }
+
+  static async cancelLesson(lesson_id, user_id): Promise<AxiosResponse> {
+    return await $api.delete('/lessons/book', { params: { lesson_id, user_id } })
+  }
 }

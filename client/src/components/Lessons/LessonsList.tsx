@@ -16,7 +16,7 @@ const LessonsList: FC = () => {
           date={lesson.date}
           start_time={lesson.start_time}
           end_time={lesson.end_time}
-          id={lesson.id}
+          lesson_id={lesson.lesson_id}
         />))}
     </div>
   )

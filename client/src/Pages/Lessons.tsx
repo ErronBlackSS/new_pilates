@@ -45,7 +45,7 @@ const Lessons = () => {
   useEffect(() => {
     switch (user.user.role) {
     case ROLES.USER:
-      LessonsStore.getUserBookedLessons(user.user.id)
+      LessonsStore.getUserPlannedLessons(user.user.id)
       break
     case ROLES.COACH:
       LessonsStore.getUserBookedLessons(user.user.id)

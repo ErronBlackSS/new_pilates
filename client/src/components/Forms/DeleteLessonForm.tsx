@@ -2,7 +2,12 @@ import React from 'react'
 import Button from '../../Components/Common/Button'
 import { ButtonColors } from '../../Utils/constance'
 
-const DeleteLessonForm = () => {
+const DeleteLessonForm = ({ lesson_id }) => {
+
+  const onDeleteLesson = () => {
+    
+  }
+
   return (
     <div
       className="flex justify-center text-left"
@@ -14,7 +19,7 @@ const DeleteLessonForm = () => {
         <Button
           color={ButtonColors.red}
           className="py-[2px] px-[14px]"
-          handler={() => { console.log('edit') }}
+          handler={onDeleteLesson}
         >
           Удалить
         </Button>

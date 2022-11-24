@@ -4,7 +4,7 @@ import DeleteLessonForm from '../Forms/DeleteLessonForm'
 import Modal from '../Common/Modal'
 import { useState } from 'react'
 
-const AdminRowButtonGroup = () => {
+const AdminRowButtonGroup = ({ lesson_id }) => {
   const [showMoldalBooked, setShowMoldalBooked] = useState(false)
   const [showMoldalEdit, setShowMoldalEdit] = useState(false)
   const [showMoldalDelete, setShowMoldalDelete] = useState(false)
@@ -57,7 +57,7 @@ const AdminRowButtonGroup = () => {
         showModal={showMoldalDelete}
         setShowModal={setShowMoldalDelete}
       >
-        <DeleteLessonForm />
+        <DeleteLessonForm lesson_id={lesson_id} />
       </Modal>}
     </>
   )
