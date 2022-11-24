@@ -34,7 +34,6 @@ async function getLessonsForUserForTheFuture(req, res) {
       JOIN users ON users.id = lessons.coach_id
       WHERE users_lessons_rel.user_id = $1 and lessons.date > now()`,
     [user_id])
-    console.log(lessons.rows, 'WTF')
     res.json(lessons.rows)
   }
   catch (e) {
@@ -45,6 +44,7 @@ async function getLessonsForUserForTheFuture(req, res) {
 async function getLessonsForUserForThePast(req, res) {
   try {
     const { user_id } = req.query
+    
     const lessons = await pool.query(`
       SELECT lessons.coach_id, users."name", users."lastname", lessons.id as lesson_id, lesson_types.title, lesson_types.description, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity
       FROM users_lessons_rel 

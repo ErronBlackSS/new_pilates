@@ -85,7 +85,8 @@ async function bookLesson (req, res) {
 
 async function removeBooked (req, res) {
   try {
-    const { lesson_id, user_id } = req.body
+    const { lesson_id, user_id } = req.query
+    console.log({ lesson_id, user_id })
     const lesson = await pool.query(`
       SELECT * FROM lessons
       WHERE id = $1`,
