@@ -3,6 +3,8 @@ import { ButtonColors } from '../../Utils/constance'
 import DeleteLessonForm from '../Forms/DeleteLessonForm'
 import Modal from '../Common/Modal'
 import { useState } from 'react'
+import EditLessonForm from '../Forms/EditLessonForm'
+import BookedUsers from './FormsContent/BookedUsers'
 
 const AdminRowButtonGroup = ({ lesson_id }) => {
   const [showMoldalBooked, setShowMoldalBooked] = useState(false)
@@ -43,14 +45,14 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
         showModal={showMoldalBooked}
         setShowModal={setShowMoldalBooked}
       >
-        <div>123123</div>
+        <BookedUsers lesson_id={lesson_id}/>
       </Modal>}
       {showMoldalEdit && <Modal
         title="Изменить"
         showModal={showMoldalEdit}
         setShowModal={setShowMoldalEdit}
       >
-        <div>123123</div>
+        <EditLessonForm trainers={[]} lessonTypes={[]} lesson_id={lesson_id} />
       </Modal>}
       {showMoldalDelete && <Modal
         title="Удалить"

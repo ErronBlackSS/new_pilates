@@ -48,7 +48,7 @@ const Lessons = () => {
       LessonsStore.getUserPlannedLessons(user.user.id)
       break
     case ROLES.COACH:
-      LessonsStore.getUserBookedLessons(user.user.id)
+      LessonsStore.getUserPlannedLessons(user.user.id)
       break
     case ROLES.ADMIN:
       getAndSetTrainers()
@@ -56,7 +56,7 @@ const Lessons = () => {
       LessonsStore.getLessonsCurrentWeek()
       break
     default:
-      LessonsStore.getUserBookedLessons(user.user.id)
+      LessonsStore.getUserPlannedLessons(user.user.id)
     }
   }, [])
 

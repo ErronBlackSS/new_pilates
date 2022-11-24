@@ -73,6 +73,11 @@ class LessonsStore {
     })
   }
 
+  async deleteLesson(lessonId) {
+    await LessonService.deleteLesson(lessonId)
+    this.lessons = this.lessons.filter((item) => item.lesson_id !== lessonId)
+  }
+
   async bookLesson(lessonId, userId) {
     const resp = await LessonService.book(lessonId, userId)
     if (resp.status === 202) {
@@ -99,12 +104,6 @@ class LessonsStore {
   async getLessonsCurrentWeek() {
     const week = getCurrentWeek()
     const resp = await LessonService.getLessonsCurrentWeek(week)
-    this.setLessons(resp.data)
-  }
-
-  async getUserBookedLessons(userId) {
-    const week = getCurrentWeek()
-    const resp = await LessonService.getUserBookedLessons(userId, week)
     this.setLessons(resp.data)
   }
 

@@ -15,11 +15,11 @@ const WatchDescription = ({ lesson_id }) => {
     >
       <div className="flex flex-col gap-[30px]">
         <div>
-          <span className="text-bordo">Тренер </span>
+          <span className="text-bordo">Тренер: </span>
           {currentLesson?.name + ' ' + currentLesson?.lastname}
         </div>
         <div>
-          <span className="text-bordo">Описание </span>
+          <span className="text-bordo">Описание: </span>
           {currentLesson.description}
         </div>
       </div>

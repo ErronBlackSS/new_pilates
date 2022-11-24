@@ -11,7 +11,6 @@ import Users from './Pages/Users'
 import Directions from './Pages/Directions'
 import LessonTypes from './Pages/LessonTypes'
 import TrainersAdmin from './Pages/TrainersAdmin'
-import LessonsUser from './Pages/LessonsUser'
 
 export const AUTH_ROUTES = [
   {

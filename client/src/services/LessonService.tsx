@@ -6,6 +6,11 @@ export default class AuthService {
     return await $api.post('/lessons', { ...lesson })
   }
 
+  static async deleteLesson(lesson_id): Promise<AxiosResponse> {
+    console.log('ALLO EBATY', lesson_id)
+    return await $api.delete('/lessons', { params: { lesson_id } })
+  }
+
   static async getAll(): Promise<AxiosResponse> {
     return await $api.get('/lessons')
   }

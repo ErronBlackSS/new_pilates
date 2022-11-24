@@ -6,7 +6,7 @@ import LessonsStore from '../../Store/LessonsStore'
 import WatchDescription from './FormsContent/WatchDescription'
 import { observer } from 'mobx-react-lite'
 import { Context } from '../../index'
-
+// TODO: Вынести содержимое модалки удаления записи в отдельный компонент
 const UserRowButtonGroup = ({ lesson_id }) => {
 
   const { user } = useContext(Context)
