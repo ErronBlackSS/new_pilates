@@ -17,7 +17,7 @@ const DirectionItem = ({title, description, duration, image_url}) => {
               <img src={imageLink} alt="2" className="rounded-[10px] w-[389px] h-[178px] object-cover mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
             </div>
             <div className="absolute right-0 bottom-0 p-[5px]">
-              <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-[#D11655] mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
+              <button className="w-[128px] h-[40px] text-[#fff] text-[16px] cursor-pointer rounded-[10px] bg-bordo mobile-below:w-[109px] mobile-below:h-[28px] mobile-below:rounded-[7px] mobile-below:text-[14px]">
                     Подробнее
               </button>
             </div>

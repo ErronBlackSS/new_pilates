@@ -84,7 +84,7 @@ const LessonsFilter = () => {
                 <button
                   disabled={formDisabled}
                   onClick={onFilter}
-                  className={ 'px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-[#D11655] opacity-40' : 'bg-bordo')}
+                  className={ 'px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
                 >
                   Применить
                 </button>

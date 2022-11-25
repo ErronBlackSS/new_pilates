@@ -52,7 +52,7 @@ const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
               />
               <button
                 disabled={formDisabled}
-                className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-[#D11655] opacity-40' : 'bg-bordo')}
+                className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
               >
                 Восстановить пароль
               </button>

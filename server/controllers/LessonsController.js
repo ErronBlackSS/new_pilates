@@ -22,7 +22,7 @@ async function create (req, res) {
 // Пока хз нужна ли она
 async function getAll (req, res) {
   try {
-    const lessons = await pool.query('SELECT lessons.id, users.name as trainer, lesson_types.title, lessons.capacity, lessons.occupied, lessons.start_time, lessons.end_time, lessons.date from lessons JOIN users ON lessons.coach_id = users.id JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id')
+    const lessons = await pool.query('SELECT lessons.id as lesson_id, users.name as trainer, lesson_types.title, lessons.capacity, lessons.occupied, lessons.start_time, lessons.end_time, lessons.date from lessons JOIN users ON lessons.coach_id = users.id JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id')
     res.json(lessons.rows)
   } catch (e) {
     next(e)
@@ -42,7 +42,6 @@ async function update (req, res) {
 async function remove (req, res) {
   try {
     const { lesson_id } = req.query
-    console.log(req.query, 'ALLO')
     const lesson = await pool.query('DELETE FROM lessons WHERE id = $1', [lesson_id])
     res.json(lesson.rows[0])
   } catch (e) {
@@ -112,15 +111,20 @@ async function removeBooked (req, res) {
 
 async function listBookedUsers (req, res) {
   try {
-    const { lesson_id } = req.params
+    const { lesson_id } = req.query
+    console.log(lesson_id)
+    
     const lessons = await pool.query(`
-      SELECT users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity FROM lessons 
-      INNER JOIN users_lessons_rel ON lessons.id = users_lessons_rel.lesson_id 
-      WHERE users_lessons_rel.user_id = $1`, 
+      SELECT lessons.id as lesson_id, users.id as user_id, users.name, users.lastname, users.email
+      FROM lessons 
+      join lesson_types ON lesson_types.id = lessons.lesson_type_id
+      JOIN users_lessons_rel ON lessons.id = users_lessons_rel.lesson_id 
+      JOIN users ON users.id = users_lessons_rel.user_id
+      WHERE users_lessons_rel.lesson_id = $1`, 
       [lesson_id])
     res.json(lessons.rows)
   } catch (e) {
-    next(e)
+    //next(e)
   }
 }
 
@@ -128,7 +132,7 @@ async function getLessonsByDate(req, res) {
   try {
     const { start, end } = req.query.week
     const lessons = await pool.query(`
-    select users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
+    select users."name", lessons.id as lesson_id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
     from lessons
     left join users on lessons.coach_id = users.id
     left join lesson_types on lessons.lesson_type_id = lesson_types.id

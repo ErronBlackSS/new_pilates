@@ -19,7 +19,7 @@ const Directions = () => {
         return (
           <div key={indexGroup}>
             <div className="flex mt-[70px] mb-[40px] mobile-below:ml-[19px] mobile-below:mt-[30px] mobile-below:mb-[28px]">
-              <h1 className="text-[24px] text-[#D11655] mobile-below:text-[16px]">{group}</h1>
+              <h1 className="text-[24px] text-bordo mobile-below:text-[16px]">{group}</h1>
             </div>
             <div className="flex flex-row gap-[16px]">
               <div className="flex items-center mobile-below:hidden">

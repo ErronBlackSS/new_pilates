@@ -100,7 +100,7 @@ const EditProfileForm = ({curName, curLastname, curEmail, curPhone, showEditPass
               </button>
               <button
                 disabled={formDisabled}
-                className={ 'w-full px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-[#D11655] opacity-40' : 'bg-bordo')}
+                className={ 'w-full px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
               >
                 Сохранить изменения
               </button>

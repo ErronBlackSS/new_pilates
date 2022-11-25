@@ -28,7 +28,7 @@ const Main = () => {
               </div>
               
               <div className="mt-[52px] mobile-below:px-[16px] mobile-below:mt-[26px]">
-                <button className="w-[293px] h-[56px] bg-[#D11655] text-[#FEFAFA] text-[20px] cursor-pointer rounded-[10px] mobile-below:w-[220px] mobile-below:h-[40px] mobile-below:text-[16px]">
+                <button className="w-[293px] h-[56px] bg-bordo text-[#FEFAFA] text-[20px] cursor-pointer rounded-[10px] mobile-below:w-[220px] mobile-below:h-[40px] mobile-below:text-[16px]">
               Записаться на занятие
                 </button>
               </div>
@@ -74,7 +74,7 @@ const Main = () => {
                   <div className="">Сплит (2 человека)</div>
                   <div className="w-[105px] mobile-below:w-[79px] text-center">1600р</div>
                 </div>    
-                <div className="w-[2px] h-full right-[121px] bg-[#D11655] absolute mobile-below:right-[79px] mobile-below:w-[1px]"></div>          
+                <div className="w-[2px] h-full right-[121px] bg-bordo absolute mobile-below:right-[79px] mobile-below:w-[1px]"></div>          
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ const Main = () => {
                     <p className="text-[16px] text-[#878787] w-[105px] mobile-below:w-[79px] text-center mobile-below:text-[10px]">(с человека)</p>
                   </div>
                 </div>    
-                <div className="w-[2px] h-full right-[121px] bg-[#D11655] absolute mobile-below:right-[79px] mobile-below:w-[1px]"></div>                     
+                <div className="w-[2px] h-full right-[121px] bg-bordo absolute mobile-below:right-[79px] mobile-below:w-[1px]"></div>                     
               </div>            
             </div>
           </div>
@@ -135,7 +135,7 @@ const Main = () => {
         </div>
         <div className="flex flex-row w-full">
           <div className="ml-[25px] mobile-below:ml-[32px] mobile-below:mr-[16px]">
-            <ul className="w-[672px] list-disc list-[#D11655] text-[19px] text-[#D11655] mobile-below:w-full">
+            <ul className="w-[672px] list-disc list-bordo text-[19px] text-bordo mobile-below:w-full">
               <li> 
                 <div className="text-[#1B1B1B] pb-[10px]">Групповые занятия имеют ограничения по количеству занимающихся.</div>                
               </li>
@@ -169,7 +169,7 @@ const Main = () => {
         {windowWidth > 768 ? 
           <footer className="bg-[#FFFEFE] md:p-5 dark:bg-gray-800">
             <div className="flex flex-row justify-between w-full px-[55px] mobile-below:flex-col">
-              <div className="text-[#D11655]">+7 (905) 636-06-04</div>            
+              <div className="text-bordo">+7 (905) 636-06-04</div>            
               <div className="text-[#1B1B1B]">© 2022 Copyright Студия Екатерины Федоровской</div>             
               <div>
                 <div className="flex flex-row justify-between w-full gap-[30px]">
@@ -200,7 +200,7 @@ const Main = () => {
                   </svg>
                 </div>
               </div>
-              <div className="text-[#D11655] text-[11px]">+7 (905) 636-06-04</div>            
+              <div className="text-bordo text-[11px]">+7 (905) 636-06-04</div>            
               <div className="text-[#1B1B1B] text-[11px]">© 2022 Copyright Студия Екатерины Федоровской</div>             
             </div>
           </footer>}

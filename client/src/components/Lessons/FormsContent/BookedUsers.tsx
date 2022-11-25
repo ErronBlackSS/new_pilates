@@ -5,13 +5,11 @@ import LessonService from '../../../Services/LessonService'
 const BookedUsers = ({ lesson_id }) => {
 
   const [bookedUsers, setBookedUsers] = useState([])
-
-  const getBookedUsers = async () => {
+  
+  const getBookedUsers = async () => {    
     const resp = await LessonService.getListBookedUsers(lesson_id)
-    console.log(resp.data, 'users')
     setBookedUsers(resp.data)
   }
-
   useEffect(() => {
     getBookedUsers()
   }, [])
@@ -21,8 +19,8 @@ const BookedUsers = ({ lesson_id }) => {
       className="flex text-left max-w-[600px]"
     >
       <div className="flex flex-col gap-[30px]">
-        {bookedUsers.map(user => (
-          <div>
+        {bookedUsers.map((user, index) => (
+          <div key={index}>
             {user.name + ' ' + user.lastname}
           </div>
         ))}
