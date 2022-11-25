@@ -59,7 +59,7 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
         showModal={showMoldalDelete}
         setShowModal={setShowMoldalDelete}
       >
-        <DeleteLessonForm lesson_id={lesson_id} />
+        <DeleteLessonForm lesson_id={lesson_id} setShowModal={setShowMoldalDelete}/>
       </Modal>}
     </>
   )

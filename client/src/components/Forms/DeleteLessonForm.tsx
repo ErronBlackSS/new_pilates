@@ -4,12 +4,13 @@ import { ButtonColors } from '../../Utils/constance'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../../Store/LessonsStore'
 
-const DeleteLessonForm = ({ lesson_id }) => {
+const DeleteLessonForm = ({ lesson_id, setShowModal }) => {
   
   const lesson = LessonsStore.lessons.find(lesson => lesson.lesson_id === lesson_id)
 
   const onDeleteLesson = () => {
     LessonsStore.deleteLesson(lesson_id)
+    setShowModal(false)
   }
 
   return (

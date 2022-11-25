@@ -21,7 +21,7 @@ async function getLessonsCurrentWeek(req, res) {
 async function getPlannedLessons(req, res) {
   try {    
     const lessons = await pool.query(`
-      select users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
+      select users."name", lessons.id as lesson_id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
       from lessons
       left join users on lessons.coach_id = users.id
       left join lesson_types on lessons.lesson_type_id = lesson_types.id
@@ -38,7 +38,7 @@ async function getPlannedLessons(req, res) {
 async function getHistoryLessons(req, res) {
   try {    
     const lessons = await pool.query(`
-      select users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
+      select users."name", lessons.id as lesson_id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
       from lessons
       left join users on lessons.coach_id = users.id
       left join lesson_types on lessons.lesson_type_id = lesson_types.id
@@ -56,7 +56,7 @@ async function getLessonsByDate(req, res) {
   try {
     const { start, end } = req.query.week
     const lessons = await pool.query(`
-      select users."name", lessons.id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
+      select users."name", lessons.id as lesson_id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
       from lessons
       left join users on lessons.coach_id = users.id
       left join lesson_types on lessons.lesson_type_id = lesson_types.id

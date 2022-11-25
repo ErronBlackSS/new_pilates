@@ -75,5 +75,5 @@ CREATE TABLE users_lessons_rel (
     user_id INT NOT NULL,
     lesson_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (lesson_id) REFERENCES lessons(id)
+    FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
 );
