@@ -12,8 +12,8 @@ const LessonsFilter = () => {
   const [trainers, setTrainers] = useState([])
   const [lessonTypes, setLessonTypes] = useState([])
 
-  const [selectedTrainer, setSelectedTrainer] = useState({ value: '', label: '' })
-  const [selectedLessonType, setSelectedLessonType] = useState({ value: '', label: '' })
+  const [selectedTrainer, setSelectedTrainer] = useState({ value: 0, label: '' })
+  const [selectedLessonType, setSelectedLessonType] = useState({ value: 0, label: '' })
 
   const formDisabled = !selectedTrainer && !selectedLessonType
 

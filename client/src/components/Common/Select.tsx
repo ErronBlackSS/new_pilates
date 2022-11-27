@@ -1,19 +1,30 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState, FC, useEffect } from 'react'
 import { useOnClickOutside } from '../../Hooks/UseClickOutside'
 
-const Select = ({ options, label, onSelect }) => {
-   
-  const [value, setValue] = useState({ value: '', label: '' })
+interface ISelect {
+  options: Array<{ value: number, label: string }>
+  onSelect: (option: { value: number, label: string }) => void
+  label: string
+  defaultValue?: { value: number, label: string }
+}
+
+const Select: FC<ISelect> = ({ options, label, onSelect, defaultValue }) => {
+
+  const [value, setValue] = useState(defaultValue ?? { value: '', label: '' })
   const [opened, setOpened] = useState(false)
   const list = useRef(null)
-  
+
   const handleSelect = (option) => {
     setValue(option)
     onSelect(option)
     setOpened(false)
   }
-  
+
   useOnClickOutside(list, () => { setOpened(false) })
+
+  useEffect(() => {
+    setValue(defaultValue)
+  }, [defaultValue])
 
   const rounded = (index) => index === 0 ? ' rounded-t-[10px]' : index === options.length-1 ? ' rounded-b-[10px]' : ''
 

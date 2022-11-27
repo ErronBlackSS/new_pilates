@@ -52,7 +52,7 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
         showModal={showMoldalEdit}
         setShowModal={setShowMoldalEdit}
       >
-        <EditLessonForm trainers={[]} lessonTypes={[]} lesson_id={lesson_id} />
+        <EditLessonForm lesson_id={lesson_id} />
       </Modal>}
       {showMoldalDelete && <Modal
         title="Удалить"

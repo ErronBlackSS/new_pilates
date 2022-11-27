@@ -6,8 +6,12 @@ export default class AuthService {
     return await $api.post('/lessons', { ...lesson })
   }
 
+  static async updateLesson(lesson): Promise<AxiosResponse> {
+    console.log('ALLO EBATY', lesson)
+    return await $api.patch('/lessons', { ...lesson })
+  }
+
   static async deleteLesson(lesson_id): Promise<AxiosResponse> {
-    console.log('ALLO EBATY', lesson_id)
     return await $api.delete('/lessons', { params: { lesson_id } })
   }
 

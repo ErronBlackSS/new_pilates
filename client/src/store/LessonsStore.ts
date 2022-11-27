@@ -39,6 +39,16 @@ class LessonsStore {
     this.lessons = resp.data
   }
 
+  async updateLesson(lesson) {
+    const resp = await LessonService.updateLesson(lesson)
+    this.lessons = this.lessons.map((item) => {
+      if (item.lesson_id === lesson.lesson_id) {
+        return resp.data
+      }
+      return item
+    })
+  }
+
   filterCalendar(trainer, lesson) {
     if(trainer) {
       this.filterLessons('trainer_name', trainer)

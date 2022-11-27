@@ -12,12 +12,13 @@ const LessonsList: FC = () => {
         <LessonsRow 
           key={index}
           title={lesson.title}
-          trainer={lesson.trainer}
+          trainer={lesson.name + ' ' + lesson.lastname}
           date={lesson.date}
           start_time={lesson.start_time}
           end_time={lesson.end_time}
           lesson_id={lesson.lesson_id}
-        />))}
+        />
+      ))}
     </div>
   )
 }

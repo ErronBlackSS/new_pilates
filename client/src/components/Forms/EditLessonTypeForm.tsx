@@ -32,7 +32,6 @@ const EditLessonTypeForm = (onEditLessonType, fields: ILessonTypesFields) => {
     onEditLessonType({...lessonTypeData })
   }
 
-
   return (
     <div
       className="flex justify-center text-left"

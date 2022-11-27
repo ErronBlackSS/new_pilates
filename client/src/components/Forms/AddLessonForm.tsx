@@ -7,8 +7,8 @@ import LessonService from '../../Services/LessonService'
 
 const AddLessonForm = ({ trainers, lessonTypes, addLesson }) => {
   
-  const [trainer, setTrainer] = useState({ value: '', label: '' })
-  const [lessonType, setLessonType] = useState({ value: '', label: '' })
+  const [trainer, setTrainer] = useState({ value: 0, label: '' })
+  const [lessonType, setLessonType] = useState({ value: 0, label: '' })
   const [startTime, setStartTime] = useState('10:00')
   const [endTime, setEndTime] = useState('10:00')
   const [startDate, setStartDate] = useState(new Date())
