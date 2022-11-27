@@ -197,10 +197,15 @@ async function setAdminRole (req, res, next) {
 
 async function getTrainsers (req, res, next) {
   try {
-    const coaches = await pool.query('SELECT * FROM users WHERE role = $1', [ROLES.COACH])
+    const coaches = await pool.query(`
+      SELECT users.id, users.name, users.lastname, user_photo.image_url
+      FROM users 
+      JOIN user_photo ON user_photo.user_id = users.id
+      WHERE role = $1`, 
+    [ROLES.COACH])
     res.json(coaches.rows)
   } catch (e) {
-    next(e)
+    //next(e)
   }
 }
 

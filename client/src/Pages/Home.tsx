@@ -54,7 +54,7 @@ const Main = () => {
         </div>
         
         <TrainersSwipe />
-        <div className="mt-[117px] mb-[69px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
+        <div className="mt-[117px] mb-[69px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[40px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Прайс-лист</h1>
         </div>
         <div className="form-flex gap-[32px] mobile-below:mx-[0px]">      

@@ -7,9 +7,9 @@ import EditLessonForm from '../Forms/EditLessonForm'
 import BookedUsers from './FormsContent/BookedUsers'
 
 const AdminRowButtonGroup = ({ lesson_id }) => {
-  const [showMoldalBooked, setShowMoldalBooked] = useState(false)
-  const [showMoldalEdit, setShowMoldalEdit] = useState(false)
-  const [showMoldalDelete, setShowMoldalDelete] = useState(false)
+  const [showModalBooked, setShowModalBooked] = useState(false)
+  const [showModalEdit, setShowModalEdit] = useState(false)
+  const [showModalDelete, setShowModalDelete] = useState(false)
 
   return (
     <>
@@ -17,7 +17,7 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
         color={ButtonColors.white}
         className="py-[2px] px-[14px]"
         handler={() => { 
-          setShowMoldalBooked(true) 
+          setShowModalBooked(true) 
         }}
       >
         Записи
@@ -26,7 +26,7 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
         color={ButtonColors.white}
         className="py-[2px] px-[14px]"
         handler={() => {
-          setShowMoldalEdit(true)
+          setShowModalEdit(true)
         }}
       >
         Изменить
@@ -35,31 +35,31 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
         color={ButtonColors.red}
         className="py-[2px] px-[14px]"
         handler={() => {
-          setShowMoldalDelete(true)
+          setShowModalDelete(true)
         }}
       >
         Удалить
       </Button>
-      {showMoldalBooked && <Modal
+      {showModalBooked && <Modal
         title="Записи"
-        showModal={showMoldalBooked}
-        setShowModal={setShowMoldalBooked}
+        showModal={showModalBooked}
+        setShowModal={setShowModalBooked}
       >
         <BookedUsers lesson_id={lesson_id}/>
       </Modal>}
-      {showMoldalEdit && <Modal
+      {showModalEdit && <Modal
         title="Изменить"
-        showModal={showMoldalEdit}
-        setShowModal={setShowMoldalEdit}
+        showModal={showModalEdit}
+        setShowModal={setShowModalEdit}
       >
-        <EditLessonForm lesson_id={lesson_id} />
+        <EditLessonForm trainers={[]} lessonTypes={[]}lesson_id={lesson_id} />
       </Modal>}
-      {showMoldalDelete && <Modal
+      {showModalDelete && <Modal
         title="Удалить"
-        showModal={showMoldalDelete}
-        setShowModal={setShowMoldalDelete}
+        showModal={showModalDelete}
+        setShowModal={setShowModalDelete}
       >
-        <DeleteLessonForm lesson_id={lesson_id} setShowModal={setShowMoldalDelete}/>
+        <DeleteLessonForm lesson_id={lesson_id} setShowModal={setShowModalDelete}/>
       </Modal>}
     </>
   )

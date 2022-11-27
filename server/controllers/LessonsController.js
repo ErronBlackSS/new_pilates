@@ -15,7 +15,7 @@ async function create (req, res) {
     const lesson = await LessonHelper.getLessonById(id)
     res.json(lesson)
   } catch (e) {
-    next(e)
+    //next(e)
   }
 }
 
