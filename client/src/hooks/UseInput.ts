@@ -2,12 +2,12 @@ import { SetStateAction, useState } from 'react'
 import { useValidation } from './UseValidation'
 
 interface IUseInput {
-  initialvalue: string
+  initialvalue: any
   validations: Object
 }
 
 export const useInput = ({ initialvalue, validations } : IUseInput) => {
-  const [value, setValue] = useState<string>(initialvalue)
+  const [value, setValue] = useState<any>(initialvalue)
   const [isDirty, setDirty] = useState(false)
   const valid = useValidation({ value, validations })
 

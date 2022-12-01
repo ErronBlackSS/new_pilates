@@ -3,16 +3,14 @@ import React, { FC } from 'react'
 import { useInput } from '../../Hooks/UseInput'
 import LessonTypesService from '../../Services/LessonTypesService'
 import InputItem from './Components/InputItem'
+import { ILessonTypesFields } from '../../Types/LessonsTypes/LessonsTypes'
 
-interface ILessonTypesFields {
-  id: number
-  title: string
-  description: string
-  duration: string
-  type: string
+interface IAddLessonTypeForm {
+  onAddLessonType: (lessonType: ILessonTypesFields) => void
+  defaultValue?: ILessonTypesFields
 }
 
-const EditLessonTypeForm = (onEditLessonType, fields: ILessonTypesFields) => {
+const EditLessonTypeForm = (onEditLessonType, fields) => {
 
   const title = useInput({initialvalue: fields.title, validations: { isEmpty: true }})
   const description = useInput({initialvalue: fields.description, validations: { isEmpty: true }})

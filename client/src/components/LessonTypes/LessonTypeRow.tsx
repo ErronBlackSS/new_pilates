@@ -1,63 +1,66 @@
-const LessonTypeRow = ({lessonType, onSaveFile, onRemoveFile, onShowEditModal}) => {
+import { useState } from 'react'
+import { ButtonColors } from '../../Utils/constance'
+import Button from '../Common/Button'
+import ListRowBlock from '../Common/List/ListRowBlock'
+import Modal from '../Common/Modal'
+import AddLessonTypeForm from '../Forms/AddLessonTypeForm' 
+
+const LessonTypeRow = ({lessonType, onEditLessonType }) => {
+   
+  const [showEditModal, setShowEditModal] = useState(false)
 
   return (
-    <tr
-      className="bg-[#AAA] gap-[5px]"
-    >
-      <th>
-        {lessonType.title}
-      </th>
-      <th className="truncate max-w-[600px]">
-        {lessonType.description}
-      </th>
-      <th>
-        {lessonType.duration}
-      </th>
-      <th>
-        {lessonType.type}
-      </th>
-      <th>
-        {
-          lessonType.image_url ?
-            <div className="flex flex-row">
-              <img
-                className="w-[200px] h-[100px]"
-                src={lessonType.image_url}
-                alt="lessonTypeImage"
-              />
-              <button
-                className="bg-[#008080] text-[#FFF] rounded-[12px]"
-                onClick={() => onRemoveFile(lessonType.id)}
-              >
-                X
-              </button>
-            </div>
-            :
-            <input
-              type="file"
-              name="uploadFile"
-              onChange={(event) => onSaveFile(event, lessonType.id)}
-            >
-              
-            </input>
-        }
-      </th>
-      <th>
-        <button
-          className="bg-[#008080] text-[#FFF] rounded-[12px]"
-        >
-          Удалить
-        </button>
-      </th>
-      <th>
-        <button
-          className="bg-[#008080] text-[#FFF] rounded-[12px]"
-          onClick={() => onShowEditModal(true)}
-        >
-          Редактировать
-        </button>
-      </th>
-    </tr>
+    <>
+      {
+        showEditModal &&
+          <Modal
+            title="Редактирование типа занятия"
+            showModal={showEditModal}
+            setShowModal={setShowEditModal}
+            width={'300px'}
+            height={'400px'}
+          >
+            <AddLessonTypeForm
+              onAddLessonType={onEditLessonType}
+              defaultValue={lessonType}
+            />
+          </Modal>
+      }
+      <div
+        className="border-t border-[#D9D9DA] flex flex-row justify-between mobile-below:overflow-x-scroll items-center p-[10px]"
+      >
+        <div className="flex flex-row justifty-between items-center gap-[20px]">
+          <ListRowBlock
+            label="Название занятия"
+            value={lessonType.title}
+          />
+          <ListRowBlock
+            label="Тип занятия:"
+            value={lessonType.type}
+          />
+          <ListRowBlock
+            label="Длительность:"
+            value={lessonType.duration}
+          />
+        </div>
+        <div className="flex flex-row justifty-center items-center gap-[30px]">
+          <Button
+            handler={() => setShowEditModal(true)}
+            color={ButtonColors.white}
+            className={'py-[2px] px-[14px]'}
+          >
+            Изменить
+          </Button>
+          <Button
+            handler={() => setShowEditModal(true)}
+            color={ButtonColors.red}
+            className={'py-[2px] px-[14px]'}
+          >
+            Удалить
+          </Button>
+        </div>
+      </div>
+    </>
   )
 }
 

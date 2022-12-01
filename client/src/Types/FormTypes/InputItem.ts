@@ -26,7 +26,7 @@ export interface InputItemProps {
   placeholder: string
   validations: IValidation
   dirty: boolean
-  defaultValue?: string
+  defaultValue?: any
   onBlur: () => void
   onChange: (e: React.FocusEvent<HTMLInputElement>) => void
 }

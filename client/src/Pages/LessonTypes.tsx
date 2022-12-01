@@ -5,6 +5,8 @@ import AddLessonTypeForm from '../Components/Forms/AddLessonTypeForm'
 import EditLessonTypeForm from '../Components/Forms/EditLessonTypeForm'
 import LessonTypesService from '../Services/LessonTypesService'
 import LessonTypeRow from '../Components/LessonTypes/LessonTypeRow'
+import Button from '../Components/Common/Button'
+import { ButtonColors } from '../Utils/constance'
 
 const LessonTypes = () => {
   
@@ -13,9 +15,8 @@ const LessonTypes = () => {
     getLessonTypes,
     showAddModal,
     setShowAddModal,
-    showEditModal,
-    setShowEditModal,
     pushLessonType,
+    editLessonType,
     saveLessonTypeImage,
     removeLessonTypeImage
   } = useLessonTypes()
@@ -38,14 +39,7 @@ const LessonTypes = () => {
   }, [])
   
   return (
-    <div className="items-center flex flex-col h-screen bg-[#FEFAFA]">
-      <h1>Типы занятий</h1>
-      <button
-        className="bg-[#008080] text-[#FFF] rounded-[12px] p-[10px] m-[10px]"
-        onClick={() => setShowAddModal(true)}
-      >
-        Добавить тип занятия
-      </button>
+    <>
       {
         showAddModal &&
           <Modal
@@ -60,54 +54,32 @@ const LessonTypes = () => {
             />
           </Modal>
       }
-      {
-        showEditModal &&
-          <Modal
-            title="Редактировать тип занятия"
-            showModal={showEditModal}
-            setShowModal={setShowEditModal}
-            width={'300px'}
-            height={'400px'}
+      <div className="pt-[50px] pr-[60px]">
+        <div className="flex flex-row justify-between items-center gap-[40px]">
+          <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
+            Типы занятий
+          </span>
+          <Button
+            handler={() => setShowAddModal(true)}
+            color={ButtonColors.white}
+            className="py-[2px] px-[14px]"
           >
-            <EditLessonTypeForm
-              onEditLessonType={pushLessonType}
-            />
-          </Modal>
-      }
-      {
-        lessonTypes && 
-        <div
-          className="h-full overflow-y-auto mb-[50px]"
-        >
-          <table
-            className="bg-[#FFF] p-[25px] gap-[15px] h-full table-fixed border-separate overflow-y-auto"
-          >
-            <thead>
-              <tr>
-                <th>Название</th>
-                <th>Описание</th>
-                <th>Длительность</th>
-                <th>Тип</th>
-                <th>Изображение</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lessonTypes.map((lesson, index) => {
-                return (
-                  <LessonTypeRow
-                    key={index}
-                    lessonType={lesson}
-                    onSaveFile={saveFile}
-                    onRemoveFile={removeFile}
-                    onShowEditModal={setShowEditModal}
-                  />
-                )
-              })}
-            </tbody>
-          </table>
+            Добавить тип
+          </Button>
         </div>
-      }
-    </div>
+      </div>
+      <div
+        className="flex flex-col bg-[#FEFAFA] mobile-above:py-[25px] mt-[14px]"
+      >
+        {lessonTypes.map((lessonType, index) => (
+          <LessonTypeRow
+            key={index}
+            lessonType={lessonType}
+            onEditLessonType={editLessonType}
+          />
+        ))}
+      </div>
+    </>
   )
 }
 

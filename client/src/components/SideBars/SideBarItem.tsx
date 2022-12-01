@@ -35,12 +35,13 @@ const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelect
     <Link
       to={path}
       className="w-full"
-      onClick={() => setSelected(path)}
+      onClick={() => isCurrentLocation ?? setSelected(path)}
     >
       <Button
         className={SideBarClasses}
         handler={() => { }}
         color={buttonColor}
+        disabled={isCurrentLocation}
       >
         {icon(iconColor)}
         {isToggled && <span className="break-words">

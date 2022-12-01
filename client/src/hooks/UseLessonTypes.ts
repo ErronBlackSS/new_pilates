@@ -6,15 +6,18 @@ export const useLessonTypes = () => {
   const [showAddModal, setShowAddModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
 
-  const pushLessonType = (lessonType: any) => {
+  const pushLessonType = (lessonType) => {
     setLessonTypes([...lessonTypes, lessonType])
     setShowAddModal(false)
   }
 
   const getLessonTypes = async () => {
     const resp = await LessonTypesService.getAll()
-    console.log(resp)
     setLessonTypes(resp.data)
+  }
+
+  const editLessonType = (lessonType) => {
+    setLessonTypes({...lessonTypes, ...lessonType})
   }
 
   const saveLessonTypeImage = (image, id) => {
@@ -49,6 +52,7 @@ export const useLessonTypes = () => {
     showEditModal,
     setShowEditModal,
     pushLessonType,
+    editLessonType,
     saveLessonTypeImage,
     removeLessonTypeImage,
     removeLessonType

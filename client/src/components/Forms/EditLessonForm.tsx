@@ -13,6 +13,7 @@ const EditLessonForm = ({ lesson_id }) => {
 
   const getAndSetTrainers = async () => {
     const resp = await UserService.getTrainers()
+    console.log(resp)
     const trainersArr = resp.data.map((item) => {
       return {
         value: item.id,

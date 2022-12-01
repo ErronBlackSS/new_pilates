@@ -4,5 +4,5 @@ export interface ILessonType {
   description: string;
   duration: number;
   type: string;
-  image: string;
+  image_url: string;
 }
