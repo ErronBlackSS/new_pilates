@@ -10,7 +10,6 @@ import Lessons from './Pages/Lessons'
 import Users from './Pages/Users'
 import Directions from './Pages/Directions'
 import LessonTypes from './Pages/LessonTypes'
-import TrainersAdmin from './Pages/TrainersAdmin'
 
 export const AUTH_ROUTES = [
   {
@@ -49,7 +48,7 @@ export const ADMIN_ROUTES = [
   },
   {
     PATH: ROUTES.TRAINERS,
-    COMPONENT: TrainersAdmin
+    COMPONENT: Users
   }
 ]
 
