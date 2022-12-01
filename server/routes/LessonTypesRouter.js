@@ -7,7 +7,5 @@ router.get('/lesson_types/bygroup', LessonTypesController.getAllByGroup)
 router.post('/lesson_types', LessonTypesController.create)
 router.patch('/lesson_types/update', LessonTypesController.update)
 router.delete('/lesson_types', LessonTypesController.remove)
-router.post('/lesson_types/upload/file', LessonTypesController.saveImage)
-router.post('/lesson_types/remove/file', LessonTypesController.removeFile)
 
 module.exports = router
