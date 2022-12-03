@@ -12,8 +12,11 @@ async function findOne (params) {
 
 async function getAllUsers () {
     const users = await pool.query(`
-        SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url isActivated
-        from users LEFT JOIN user_photo ON users.id = user_photo.user_id`)
+        SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url
+        from users 
+        LEFT JOIN user_photo ON users.id = user_photo.user_id
+        where users.role = '9bd2b9fc-446b-44ad-bbcd-d97c71004f5d'
+        order by users.name, users.lastname`)
     return users.rows
 }
 

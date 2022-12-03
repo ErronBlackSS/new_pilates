@@ -195,10 +195,10 @@ async function setAdminRole (req, res, next) {
   }
 }
 
-async function getTrainsers (req, res, next) {
+async function getTrainers (req, res, next) {
   try {
     const coaches = await pool.query(`
-      SELECT users.id, users.name, users.lastname, user_photo.image_url
+      SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url
       FROM users 
       LEFT JOIN user_photo ON user_photo.user_id = users.id
       WHERE role = $1`, 
@@ -236,6 +236,6 @@ module.exports = {
   setCoachRole,
   setUserRole,
   setAdminRole,
-  getTrainsers,
+  getTrainers,
   saveImage
 }
