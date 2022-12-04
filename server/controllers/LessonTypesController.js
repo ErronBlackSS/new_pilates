@@ -65,7 +65,8 @@ async function update (req, res) {
 
 async function remove (req, res) {
   try {
-    const { id } = req.body
+    const { id } = req.query
+    console.log(id, 'DELETE LESSON TYPE')
     const lessonType = await pool.query(`
       DELETE FROM lesson_types 
       WHERE id = $1`, 
