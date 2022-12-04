@@ -15,6 +15,10 @@ export default class LessonTypesService {
     return await $api.put<ILessonType>('/lesson_types/update' + id, { title, description, global_lesson_type, duration, image })
   }
 
+  static async delete(id: number): Promise<AxiosResponse> {
+    return await $api.delete('/lesson_types?id=' + id)
+  }
+
   static async getAllByGroup() {
     return await $api.get('/lesson_types/bygroup')
   }

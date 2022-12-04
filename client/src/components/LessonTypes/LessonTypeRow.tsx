@@ -4,10 +4,12 @@ import Button from '../Common/Button'
 import ListRowBlock from '../Common/List/ListRowBlock'
 import Modal from '../Common/Modal'
 import AddLessonTypeForm from '../Forms/AddLessonTypeForm' 
+import DeleteLessonTypeForm from '../Forms/DeleteLessonTypeForm'
 
 const LessonTypeRow = ({lessonType, onEditLessonType }) => {
    
   const [showEditModal, setShowEditModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   return (
     <>
@@ -23,6 +25,19 @@ const LessonTypeRow = ({lessonType, onEditLessonType }) => {
             <AddLessonTypeForm
               onAddLessonType={onEditLessonType}
               defaultValue={lessonType}
+            />
+          </Modal>
+      }
+      {
+        showDeleteModal &&
+          <Modal
+            title="Удаление типа занятия"
+            showModal={showDeleteModal}
+            setShowModal={setShowDeleteModal}
+          >
+            <DeleteLessonTypeForm
+              lesson_id={lessonType.id}
+              setShowModal={setShowDeleteModal}
             />
           </Modal>
       }
@@ -52,7 +67,7 @@ const LessonTypeRow = ({lessonType, onEditLessonType }) => {
             Изменить
           </Button>
           <Button
-            handler={() => setShowEditModal(true)}
+            handler={() => setShowDeleteModal(true)}
             color={ButtonColors.red}
             className={'py-[2px] px-[14px]'}
           >

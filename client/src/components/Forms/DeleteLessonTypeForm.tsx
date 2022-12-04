@@ -1,12 +1,13 @@
+import LessonTypesService from '../../Services/LessonTypesService'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 
 const DeleteLessonTypeForm = ({ lesson_id, setShowModal }) => {
   const onDeleteLesson = () => {
-    //LessonsStore.deleteLesson(lesson_id)
+    LessonTypesService.delete(lesson_id)
     setShowModal(false)
   }
-    
+  
   return (
     <div
       className="flex justify-center text-left"
