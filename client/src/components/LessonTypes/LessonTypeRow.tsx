@@ -37,6 +37,7 @@ const LessonTypeRow = ({lessonType, onEditLessonType }) => {
           >
             <DeleteLessonTypeForm
               lesson_id={lessonType.id}
+              lesson_title={lessonType.title}
               setShowModal={setShowDeleteModal}
             />
           </Modal>

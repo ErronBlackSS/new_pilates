@@ -17,7 +17,7 @@ export const useLessonTypes = () => {
   }
 
   const editLessonType = (lessonType) => {
-    setLessonTypes({...lessonTypes, ...lessonType})
+    setLessonTypes([...lessonTypes, lessonType])
   }
 
   const saveLessonTypeImage = (image, id) => {

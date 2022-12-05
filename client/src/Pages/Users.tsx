@@ -4,7 +4,7 @@ import UserCard from '../Components/UsersList/UserCard'
 
 const Users = () => {
   const location = useLocation()
-  const title = location.pathname === '/account/users' ? 'Клиенты' : 'Тренеры'
+  const title = location.pathname === '/account/users' ? 'Клиенты' : 'Клиенты'
 
   const { users } = useUsers()
   console.log(users)
@@ -30,7 +30,6 @@ const Users = () => {
               />
             )
           })
-
           }
         </div>
       </div>

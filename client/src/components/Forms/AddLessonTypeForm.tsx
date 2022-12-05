@@ -25,12 +25,13 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
-    if(defaultValue) {
+    if(!defaultValue) {
       const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value, image)
       const lessonTypeData = lessonType.data
       onAddLessonType({...lessonTypeData})
     } else {
       const lessonType = await LessonTypesService.update(defaultValue.id, title.value, description.value, type.value, duration.value, image)
+      console.log(lessonType, 'lessonType')
       const lessonTypeData = lessonType.data
       onEditLessonType({...lessonTypeData})
     }

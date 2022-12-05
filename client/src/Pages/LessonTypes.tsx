@@ -71,9 +71,9 @@ const LessonTypes = () => {
       <div
         className="flex flex-col bg-[#FEFAFA] mobile-above:py-[25px] mt-[14px]"
       >
-        {lessonTypes.map((lessonType, index) => (
+        {lessonTypes && lessonTypes.map((lessonType) => (
           <LessonTypeRow
-            key={index}
+            key={lessonType.id}
             lessonType={lessonType}
             onEditLessonType={editLessonType}
           />

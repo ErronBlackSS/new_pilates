@@ -2,7 +2,7 @@ import LessonTypesService from '../../Services/LessonTypesService'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 
-const DeleteLessonTypeForm = ({ lesson_id, setShowModal }) => {
+const DeleteLessonTypeForm = ({ lesson_id, lesson_title, setShowModal }) => {
   const onDeleteLesson = () => {
     LessonTypesService.delete(lesson_id)
     setShowModal(false)
@@ -14,7 +14,7 @@ const DeleteLessonTypeForm = ({ lesson_id, setShowModal }) => {
     >
       <div className="flex flex-col justify-center items-center gap-[30px]">
         <div>
-              Вы уверены, что хотите удалить тип занятия?
+              Вы уверены, что хотите удалить тип занятия "{lesson_title}"?
         </div>
         <Button
           color={ButtonColors.red}
