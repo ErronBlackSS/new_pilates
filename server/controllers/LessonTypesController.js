@@ -56,6 +56,8 @@ async function getAllByGroup (req, res) {
 async function update (req, res) {
   try {
     const query = helpers.parseUpdateData(req.body, 'lesson_types')
+    console.log('UPDATE LESSON TYPE')
+    console.log(query)
     const lesson_types = await pool.query(query, [])
     res.json(lesson_types.rows[0])
   } catch (e) {
