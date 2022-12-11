@@ -4,6 +4,7 @@ const fs = require('fs')
 
 async function saveImage (id, file) {
     try {
+        console.log(file)
         const fileName = file.file.name
         const server_path = process.env.FILE_PATH + '/lesson_types/' + fileName
         file.file.mv(server_path)

@@ -85,6 +85,7 @@ async function refresh(req, res, next) {
     res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
     return res.json(userData);
   } catch (e) {
+    console.log(e, 'error')
     next(e);
   }
 }
@@ -203,7 +204,6 @@ async function getTrainers (req, res, next) {
       LEFT JOIN user_photo ON user_photo.user_id = users.id
       WHERE role = $1`, 
     [ROLES.COACH])
-    console.log(coaches)
     res.json(coaches.rows)
   } catch (e) {
     //next(e)

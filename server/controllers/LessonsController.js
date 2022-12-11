@@ -86,7 +86,6 @@ async function bookLesson (req, res) {
 async function removeBooked (req, res) {
   try {
     const { lesson_id, user_id } = req.query
-    console.log({ lesson_id, user_id })
     const lesson = await pool.query(`
       SELECT * FROM lessons
       WHERE id = $1`,
@@ -112,7 +111,6 @@ async function removeBooked (req, res) {
 async function listBookedUsers (req, res) {
   try {
     const { lesson_id } = req.query
-    console.log(lesson_id)
     
     const lessons = await pool.query(`
       SELECT lessons.id as lesson_id, users.id as user_id, users.name, users.lastname, users.email

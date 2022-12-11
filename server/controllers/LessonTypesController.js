@@ -55,20 +55,29 @@ async function getAllByGroup (req, res) {
 
 async function update (req, res) {
   try {
-    const query = helpers.parseUpdateData(req.body, 'lesson_types')
-    console.log('UPDATE LESSON TYPE')
-    console.log(query)
-    const lesson_types = await pool.query(query, [])
-    res.json(lesson_types.rows[0])
+    console.log(req.file, 'req')
+    console.log(req.files, 'req')
+    const { id, title, description, global_lesson_type, duration, image } = req.body
+    const lesson_types = await pool.query(
+      'UPDATE lesson_types SET title = $2, description = $3, global_lesson_type = $4, duration = $5 WHERE id = $1 RETURNING *',
+      [id, title, description, global_lesson_type, duration]
+    )
+    const image_url = null
+    console.log(image)
+    if (image) {
+      image_url = LessonTypesService.saveImage(lesson_types.rows[0].id ,image)
+    }
+    const lessonType = new LessonTypeDTO({...lesson_types.rows[0], image_url})
+    res.json(lessonType)
   } catch (e) {
-    next(e)
+    //next(e)
+    console.log(e)
   }
 }
 
 async function remove (req, res) {
   try {
     const { id } = req.query
-    console.log(id, 'DELETE LESSON TYPE')
     const lessonType = await pool.query(`
       DELETE FROM lesson_types 
       WHERE id = $1`, 

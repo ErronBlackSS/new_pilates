@@ -23,7 +23,6 @@ async function getAllUsers () {
 async function update (user) {
   const query = helpers.parseUpdateData(user, 'users')
   const updatedUser = await pool.query(query + 'RETURNING *', [])
-  console.log(updatedUser, 'updatedUser')
   return updatedUser.rows[0]
 }
 
