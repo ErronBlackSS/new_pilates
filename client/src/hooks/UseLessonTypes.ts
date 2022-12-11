@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import LessonTypesService from '../Services/LessonTypesService'
 
 export const useLessonTypes = () => {
@@ -16,33 +16,19 @@ export const useLessonTypes = () => {
     setLessonTypes(resp.data)
   }
 
-  const editLessonType = (lessonType) => {
-    setLessonTypes([...lessonTypes, lessonType])
-  }
-
-  const saveLessonTypeImage = (image, id) => {
-    const updatedLessonTypes = lessonTypes.map(lessonType => {
-      if (lessonType.id === id) {
-        return { ...lessonType, image_url: image }
-      }
-      return lessonType
-    })
-    setLessonTypes(updatedLessonTypes)
-  }
-
-  const removeLessonType = (id) => {
+  const deleteLessonType = async (id) => {
+    await LessonTypesService.delete(id)
     setLessonTypes(lessonTypes.filter(lessonType => lessonType.id !== id))
   }
 
-  const removeLessonTypeImage = (id) => {
-    const updatedLessonTypes = lessonTypes.map(lessonType => {
-      if (lessonType.id === id) {
-        return { ...lessonType, image_url: null }
-      }
-      return lessonType
-    })
-    setLessonTypes(updatedLessonTypes)
+  const editLessonType = async (id, title, description, type, duration, image) => {
+    const lessonType = await LessonTypesService.update(id, image, title, description, type, duration)
+    setLessonTypes([...lessonTypes, lessonType])
   }
+
+  useEffect(() => {
+    getLessonTypes()
+  }, [lessonTypes])
 
   return {
     lessonTypes,
@@ -53,8 +39,6 @@ export const useLessonTypes = () => {
     setShowEditModal,
     pushLessonType,
     editLessonType,
-    saveLessonTypeImage,
-    removeLessonTypeImage,
-    removeLessonType
+    deleteLessonType
   }
 }

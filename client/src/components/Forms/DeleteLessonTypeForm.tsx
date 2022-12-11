@@ -2,12 +2,8 @@ import LessonTypesService from '../../Services/LessonTypesService'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 
-const DeleteLessonTypeForm = ({ lesson_id, lesson_title, setShowModal }) => {
-  const onDeleteLesson = () => {
-    LessonTypesService.delete(lesson_id)
-    setShowModal(false)
-  }
-  
+const DeleteLessonTypeForm = ({ lesson_id, lesson_title, setShowModal, onDeleteLessonType }) => {
+
   return (
     <div
       className="flex justify-center text-left"
@@ -19,7 +15,7 @@ const DeleteLessonTypeForm = ({ lesson_id, lesson_title, setShowModal }) => {
         <Button
           color={ButtonColors.red}
           className="py-[2px] px-[14px]"
-          handler={onDeleteLesson}
+          handler={() => onDeleteLessonType(lesson_id)}
         >
           Удалить
         </Button>

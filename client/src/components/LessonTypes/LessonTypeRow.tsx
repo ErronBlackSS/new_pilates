@@ -6,10 +6,14 @@ import Modal from '../Common/Modal'
 import AddLessonTypeForm from '../Forms/AddLessonTypeForm' 
 import DeleteLessonTypeForm from '../Forms/DeleteLessonTypeForm'
 
-const LessonTypeRow = ({lessonType, onEditLessonType }) => {
+const LessonTypeRow = ({lessonType, onEditLessonType, onDeleteLessonType }) => {
    
   const [showEditModal, setShowEditModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
+
+  const onEdit = () => {
+    setShowEditModal(true)
+  }
 
   return (
     <>
@@ -23,8 +27,10 @@ const LessonTypeRow = ({lessonType, onEditLessonType }) => {
             height={'400px'}
           >
             <AddLessonTypeForm
-              onAddLessonType={onEditLessonType}
+              onEditLessonType={onEditLessonType}
               defaultValue={lessonType}
+              id={lessonType.id}
+              setShowEditModal={setShowEditModal}
             />
           </Modal>
       }
@@ -39,6 +45,7 @@ const LessonTypeRow = ({lessonType, onEditLessonType }) => {
               lesson_id={lessonType.id}
               lesson_title={lessonType.title}
               setShowModal={setShowDeleteModal}
+              onDeleteLessonType={onDeleteLessonType}
             />
           </Modal>
       }

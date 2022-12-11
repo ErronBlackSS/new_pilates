@@ -6,11 +6,14 @@ import InputItem from './Components/InputItem'
 
 interface IAddLessonTypeForm {
   onAddLessonType?: (lessonType: ILessonTypesFields) => void
-  onEditLessonType?: (lessonType: ILessonTypesFields) => void
+  onEditLessonType?: (id: number,title: string, description: string, type: string, duration: number, image: any) => void
   defaultValue?: ILessonTypesFields
+  setShowEditModal?: (value: boolean) => void
+  setShowAddModal?: (value: boolean) => void
+  id?: number
 }
 
-const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLessonType, defaultValue }) => {
+const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLessonType, setShowEditModal, setShowAddModal, defaultValue, id }) => {
  
   const title = useInput({initialvalue: defaultValue?.title ?? '', validations: { isEmpty: true }})
   const description = useInput({initialvalue: defaultValue?.description ?? '', validations: { isEmpty: true }})
@@ -26,14 +29,20 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     if(!defaultValue) {
+      setShowAddModal(false)
       const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value, image)
       const lessonTypeData = lessonType.data
       onAddLessonType({...lessonTypeData})
     } else {
-      const lessonType = await LessonTypesService.update(defaultValue.id, title.value, description.value, type.value, duration.value, image)
-      console.log(lessonType, 'lessonType')
-      const lessonTypeData = lessonType.data
-      onEditLessonType({...lessonTypeData})
+      setShowEditModal(false)
+      const formData = new FormData()
+      console.log(e.target[0].files[0], 'file~!!!!')
+      if(e.target[0].files[0]) {
+        console.log('adding image')
+        formData.append('file', e.target[0].files[0])
+      }
+      console.log(formData, 'formData')
+      onEditLessonType(id, title.value, description.value, type.value, duration.value, formData)
     }
   }
 
@@ -55,7 +64,6 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
               type="file"
               name="uploadFile"
               onChange={(event) => {
-                defaultValue.image_url = null
                 setImage(event.target.files[0])
               }}
             ></input>

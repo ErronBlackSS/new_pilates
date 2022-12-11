@@ -28,7 +28,9 @@ const EditProfileForm = ({curName, curLastname, curEmail, curPhone, showEditPass
   const editPhoto = async (event) => {
     const formData = new FormData()
     const files = [...event.target.files]
+    console.log(files)
     formData.append('file', files[0])
+    console.log(formData)
     const resp = await UserService.saveUserPhoto(formData, user.user.id)
     const photo = resp.data
     if (photo) {

@@ -2,8 +2,6 @@ import { useEffect } from 'react'
 import { useLessonTypes } from '../Hooks/UseLessonTypes'
 import Modal from '../Components/Common/Modal'
 import AddLessonTypeForm from '../Components/Forms/AddLessonTypeForm'
-import EditLessonTypeForm from '../Components/Forms/EditLessonTypeForm'
-import LessonTypesService from '../Services/LessonTypesService'
 import LessonTypeRow from '../Components/LessonTypes/LessonTypeRow'
 import Button from '../Components/Common/Button'
 import { ButtonColors } from '../Utils/constance'
@@ -15,24 +13,10 @@ const LessonTypes = () => {
     getLessonTypes,
     showAddModal,
     setShowAddModal,
+    deleteLessonType,
     pushLessonType,
     editLessonType,
-    saveLessonTypeImage,
-    removeLessonTypeImage
   } = useLessonTypes()
-
-  const saveFile = async (event, id) => {
-    const formData = new FormData()
-    const files = [...event.target.files]
-    formData.append('file', files[0])
-    const resp = await LessonTypesService.saveFile(formData, id)
-    saveLessonTypeImage(resp.data, id)
-  }
-
-  const removeFile = async (id) => {
-    await LessonTypesService.removeFile(id)
-    removeLessonTypeImage(id)
-  }
 
   useEffect(() => {
     getLessonTypes()
@@ -51,6 +35,7 @@ const LessonTypes = () => {
           >
             <AddLessonTypeForm
               onAddLessonType={pushLessonType}
+              setShowAddModal={setShowAddModal}
             />
           </Modal>
       }
@@ -76,6 +61,7 @@ const LessonTypes = () => {
             key={lessonType.id}
             lessonType={lessonType}
             onEditLessonType={editLessonType}
+            onDeleteLessonType={deleteLessonType}
           />
         ))}
       </div>
