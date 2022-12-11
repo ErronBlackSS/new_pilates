@@ -5,7 +5,7 @@ const LessonTypesController = require('../controllers/LessonTypesController')
 router.get('/lesson_types', LessonTypesController.getAll)
 router.get('/lesson_types/bygroup', LessonTypesController.getAllByGroup)
 router.post('/lesson_types', LessonTypesController.create)
-router.patch('/lesson_types/update', LessonTypesController.update)
+router.post('/lesson_types/update', LessonTypesController.update)
 router.delete('/lesson_types', LessonTypesController.remove)
 
 module.exports = router

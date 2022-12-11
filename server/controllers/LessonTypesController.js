@@ -55,16 +55,16 @@ async function getAllByGroup (req, res) {
 
 async function update (req, res) {
   try {
-    console.log(req.file, 'req')
-    console.log(req.files, 'req')
-    const { id, title, description, global_lesson_type, duration, image } = req.body
+    const { id, title, description, global_lesson_type, duration } = req.body
+    const image = req.file
     const lesson_types = await pool.query(
       'UPDATE lesson_types SET title = $2, description = $3, global_lesson_type = $4, duration = $5 WHERE id = $1 RETURNING *',
       [id, title, description, global_lesson_type, duration]
     )
     const image_url = null
-    console.log(image)
+    console.log(image, 'WTF?')
     if (image) {
+      console.log(image, 'WTFx2?')
       image_url = LessonTypesService.saveImage(lesson_types.rows[0].id ,image)
     }
     const lessonType = new LessonTypeDTO({...lesson_types.rows[0], image_url})
