@@ -38,6 +38,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
       const formData = new FormData()
       console.log(e.target[0].files[0], 'file~!!!!')
       if(e.target[0].files[0]) {
+
         formData.append('file', e.target[0].files[0])
       }
       console.log(formData, 'formData')
@@ -76,7 +77,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
             placeholder="Введите название"
             validations={title.validations}
             dirty={title.isDirty}
-            defaultValue={defaultValue?.title}
+            defaultValue={title.value}
             onBlur={title.onBlur}
             onChange={title.onChange}
           />
@@ -89,7 +90,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
             placeholder="Введите длительность"
             validations={duration.validations}
             dirty={duration.isDirty}
-            defaultValue={defaultValue?.duration}
+            defaultValue={duration.value}
             onBlur={duration.onBlur}
             onChange={duration.onChange}
           />
@@ -100,7 +101,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
             placeholder="Введите тип"
             validations={type.validations}
             dirty={type.isDirty}
-            defaultValue={defaultValue?.type}
+            defaultValue={type.value}
             onBlur={type.onBlur}
             onChange={type.onChange}
           />
