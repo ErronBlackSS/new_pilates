@@ -11,9 +11,8 @@ export default class LessonTypesService {
     return await $api.post<ILessonType>('/lesson_types', { title, description, global_lesson_type, duration, image })
   }
 
-  static async update(id: number, image?: FormData | string, title?: string, description?: string, global_lesson_type?: string, duration?: number): Promise<AxiosResponse<ILessonType>> {
-    console.log(id, image, title, description, global_lesson_type, duration, '--->')
-    return await $api.patch<ILessonType>('/lesson_types/update', { id, title, description, global_lesson_type, duration, image })
+  static async update(id: number, image?: FormData, title?: string, description?: string, global_lesson_type?: string, duration?: number): Promise<AxiosResponse<ILessonType>> {
+    return await $api.post<ILessonType>('/lesson_types/update', { id, title, description, global_lesson_type, duration, image })
   }
 
   static async delete(id: number): Promise<AxiosResponse> {

@@ -32,13 +32,12 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
       setShowAddModal(false)
       const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value, image)
       const lessonTypeData = lessonType.data
-      onAddLessonType({...lessonTypeData})
+      onAddLessonType(lessonTypeData)
     } else {
       setShowEditModal(false)
       const formData = new FormData()
       console.log(e.target[0].files[0], 'file~!!!!')
       if(e.target[0].files[0]) {
-        console.log('adding image')
         formData.append('file', e.target[0].files[0])
       }
       console.log(formData, 'formData')

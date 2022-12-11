@@ -23,12 +23,12 @@ export const useLessonTypes = () => {
 
   const editLessonType = async (id, title, description, type, duration, image) => {
     const lessonType = await LessonTypesService.update(id, image, title, description, type, duration)
-    setLessonTypes([...lessonTypes, lessonType])
+    setLessonTypes(lessonTypes.map(lType => lType.id === lessonType.data.id ? lessonType.data : lType))
   }
 
   useEffect(() => {
     getLessonTypes()
-  }, [lessonTypes])
+  }, [])
 
   return {
     lessonTypes,

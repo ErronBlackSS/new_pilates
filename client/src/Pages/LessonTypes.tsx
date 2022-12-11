@@ -10,18 +10,17 @@ const LessonTypes = () => {
   
   const {
     lessonTypes,
-    getLessonTypes,
     showAddModal,
     setShowAddModal,
     deleteLessonType,
     pushLessonType,
     editLessonType,
   } = useLessonTypes()
-
-  useEffect(() => {
-    getLessonTypes()
-  }, [])
   
+  useEffect(() => {
+    console.log(lessonTypes)
+  }, [])
+
   return (
     <>
       {
