@@ -1,4 +1,4 @@
-const UserService = require('../services/UserService')
+const UserService = require('../Services/UserService')
 const UserHelpers = require('../helpers/UserHelpers')
 const { validationResult } = require('express-validator')
 const ApiError = require('../exceptions/ApiError')

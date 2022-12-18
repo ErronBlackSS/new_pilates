@@ -5,7 +5,7 @@ async function getImagePath (id) {
         SELECT * from lesson_type_image WHERE lesson_type_id = $1`, [id]
     )
     const image = lessonTypeImage.rows[0]
-    return image.image_server_path
+    return image?.image_server_path
 }
 
 async function deleteImage (id) {

@@ -1,7 +1,7 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
 const LessonTypeHelper = require('../helpers/LessonTypeHelper')
-const LessonTypesService = require('../services/LessonTypesService')
+const LessonTypesService = require('../Services/LessonTypesService')
 const LessonTypeDTO = require('../dtos/LessonTypeDTO')
 const fs = require('fs')
 
@@ -89,10 +89,19 @@ async function remove (req, res) {
   }
 }
 
+async function saveLessonTypeImage(req, res) {
+  const id = req.query.id
+  const { file } = req.files
+  const api_url = LessonTypesService.saveImage(id, file)  
+
+  res.json(api_url)
+}
+
 module.exports = {
     create,
     getAll,
     update,
     remove,
-    getAllByGroup
+    getAllByGroup,
+    saveLessonTypeImage
 }
