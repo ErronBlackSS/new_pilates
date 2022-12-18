@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../../Components/Common/Button'
+import Button from '../Common/Button'
 import { ButtonColors } from '../../Utils/constance'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../../Store/LessonsStore'

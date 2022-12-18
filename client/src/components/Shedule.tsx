@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { getCurrentWeek, getNextWeek } from '../Utils/functions'
-import TopButtons from '../Components/Shedule/TopButtons'
+import TopButtons from './Shedule/TopButtons'
 import Modal from './Common/Modal'
 import LessonDetail from './Shedule/LessonDetail'
 import { Context } from '..'
