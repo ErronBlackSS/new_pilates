@@ -5,7 +5,7 @@ const LessonTypesService = require('../Services/LessonTypesService')
 const LessonTypeDTO = require('../dtos/LessonTypeDTO')
 const fs = require('fs')
 
-async function create (req, res) {
+async function create (req, res, next) {
   try {
     const { title, description, global_lesson_type, duration, image } = req.body
     const newLessonType = await pool.query(`
@@ -18,9 +18,8 @@ async function create (req, res) {
     }
     const lessonType = new LessonTypeDTO({...newLessonType.rows[0], image_url})
     res.json(lessonType)
-  }  catch (e) {
-    console.log(e)
-    //next(e)
+  } catch (e) {
+    next(e)
   }
 }
 
@@ -28,6 +27,7 @@ async function getAll (req, res) {
   try {
     const lessonTypes = await pool.query('SELECT * from lesson_types LEFT JOIN lesson_type_image ON lesson_types.id = lesson_type_image.lesson_type_id')
     const lessonTypesDTO = lessonTypes.rows.map(lessonType => new LessonTypeDTO(lessonType))
+    console.log(lessonTypesDTO, 'ALL LESSONS')
     res.json(lessonTypesDTO)
   } catch (e) {
     next(e)
@@ -92,8 +92,8 @@ async function remove (req, res) {
 async function saveLessonTypeImage(req, res) {
   const id = req.query.id
   const { file } = req.files
-  const api_url = LessonTypesService.saveImage(id, file)  
-
+  const api_url = await LessonTypesService.saveImage(id, file)  
+  console.log(api_url, 'IMAGE API URL')
   res.json(api_url)
 }
 

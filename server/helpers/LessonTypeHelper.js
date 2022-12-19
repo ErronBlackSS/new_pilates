@@ -9,21 +9,17 @@ async function getImagePath (id) {
 }
 
 async function deleteImage (id) {
-    await pool.query(`
+   const image = await pool.query(`
         DELETE FROM lesson_type_image WHERE lesson_type_id = $1`, [id]
     )
+    return image.rows[0]
 }
 
-async function checkDuplicateImage (server_path) {
+async function checkDuplicateImage (id) {
     const lessonTypeImage = await pool.query(`
-        SELECT * from lesson_type_image WHERE image_server_path = $1`, [server_path]
+        SELECT * from lesson_type_image WHERE lesson_type_id = $1`, [id]
     )
-    const image = lessonTypeImage.rows
-    if (image.length > 1) {
-        return false
-    } else {
-        return true
-    }
+    return lessonTypeImage.rows[0]
 }
 
 module.exports = {
