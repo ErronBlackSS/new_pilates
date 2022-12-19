@@ -4,6 +4,7 @@ import LessonTypesService from '../../Services/LessonTypesService'
 import { ILessonTypesFields } from '../../Types/LessonsTypes/LessonsTypes'
 import InputItem from './Components/InputItem'
 
+// грубое нарушение солида, надо переделать
 interface IAddLessonTypeForm {
   onAddLessonType?: (lessonType: ILessonTypesFields) => void
   onEditLessonType?: (id: number,title: string, description: string, type: string, duration: number, image: any) => void
@@ -13,6 +14,7 @@ interface IAddLessonTypeForm {
   id?: number
 }
 
+//тут вообще полнейший пиздец
 const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLessonType, setShowEditModal, setShowAddModal, defaultValue, id }) => {
  
   const title = useInput({initialvalue: defaultValue?.title ?? '', validations: { isEmpty: true }})
@@ -30,18 +32,30 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
     e.preventDefault()
     if(!defaultValue) {
       setShowAddModal(false)
-      const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value, image)
+      let formData = new FormData()
+      if(e.target[0].files[0]) {
+        formData.append('file', e.target[0].files[0])
+      } else {
+        formData = null
+      }
+      const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value)
+      if (image instanceof FormData) {
+        const createImage = LessonTypesService.saveLessonTypeImage(image, id)
+        const lessonTypeData = { ...lessonType.data, image: createImage }
+        onAddLessonType(lessonTypeData)
+        return
+      }
       const lessonTypeData = lessonType.data
       onAddLessonType(lessonTypeData)
     } else {
       setShowEditModal(false)
-      const formData = new FormData()
-      console.log(e.target[0].files[0], 'file~!!!!')
+      let formData
       if(e.target[0].files[0]) {
-
+        formData = new FormData()
         formData.append('file', e.target[0].files[0])
+      } else {
+        formData = defaultValue.image_url
       }
-      console.log(formData, 'formData')
       onEditLessonType(id, title.value, description.value, type.value, duration.value, formData)
     }
   }

@@ -7,8 +7,8 @@ export default class LessonTypesService {
     return await $api.get<ILessonType[]>('/lesson_types')
   }
 
-  static async create(title: string, description: string, global_lesson_type: string, duration: string, image: FormData): Promise<AxiosResponse<ILessonType>> {
-    return await $api.post<ILessonType>('/lesson_types', { title, description, global_lesson_type, duration, image })
+  static async create(title: string, description: string, global_lesson_type: string, duration: string): Promise<AxiosResponse<ILessonType>> {
+    return await $api.post<ILessonType>('/lesson_types', { title, description, global_lesson_type, duration })
   }
 
   static async update(id: number, title?: string, description?: string, global_lesson_type?: string, duration?: number): Promise<AxiosResponse<ILessonType>> {

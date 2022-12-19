@@ -13,6 +13,7 @@ export const useLessonTypes = () => {
 
   const getLessonTypes = async () => {
     const resp = await LessonTypesService.getAll()
+    console.log(resp.data, 'ltypes')
     setLessonTypes(resp.data)
   }
 
@@ -23,8 +24,15 @@ export const useLessonTypes = () => {
 
   const editLessonType = async (id, title, description, type, duration, image) => {
     const lessonType = await LessonTypesService.update(id, title, description, type, duration)
-    const lessonTypeImage = await LessonTypesService.saveLessonTypeImage(image, id)
-    const newLessonType = {...lessonType.data, ...lessonTypeImage.data}
+
+    if (image instanceof FormData) {
+      const lessonTypeImage = await LessonTypesService.saveLessonTypeImage(image, id)
+      console.log(lessonTypeImage, 'IMAGEGEGE')
+      const newLessonType = {...lessonType.data, ...lessonTypeImage.data}
+      setLessonTypes(lessonTypes.map(lType => lType.id === newLessonType.id ? newLessonType : lType))
+      return
+    }
+    const newLessonType = {...lessonType.data, image_url: image}
     setLessonTypes(lessonTypes.map(lType => lType.id === newLessonType.id ? newLessonType : lType))
   }
 
