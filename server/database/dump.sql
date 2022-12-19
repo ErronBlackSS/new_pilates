@@ -1,4 +1,4 @@
-CREATE TABLE users(
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
@@ -76,4 +76,15 @@ CREATE TABLE users_lessons_rel (
     lesson_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
+);
+
+CREATE TABLE trainer_info (
+	trainer_id int PRIMARY KEY,
+	education VARCHAR(511),
+	certificates VARCHAR(999),
+	personal_achievements VARCHAR(999),
+	work_experience VARCHAR(100),
+	directions VARCHAR(301),
+	
+	FOREIGN KEY (trainer_id) REFERENCES users(id)
 );
