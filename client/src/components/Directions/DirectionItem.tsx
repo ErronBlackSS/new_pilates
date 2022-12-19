@@ -8,18 +8,36 @@ const DirectionItem = ({title, description, duration, image_url}) => {
 
   const [showModalInfo, setShowModalInfo] = useState(false)
 
-  const imageLink = image_url? image_url : 'http://localhost:5000/files/test_yoga.png'
+  const imageLink = image_url? image_url : 'http://localhost:8080/files/test_yoga.png'
 
   return (
     <>
-      {showModalInfo && <Modal
-        title="Жопа"
-        showModal={showModalInfo}
-        setShowModal={setShowModalInfo}
-      >
-        Инфа
-      </Modal>}
-      <div className="">   
+      <div className="absolute">
+        {showModalInfo && <Modal
+          title=""
+          showModal={showModalInfo}
+          setShowModal={setShowModalInfo}
+          width={'600px'}
+          height={'465px'}
+        >
+          <div className="relative flex flex-col w-[600px] gap-[25px] px-[36px] pb-[20px]">
+            <div>
+              <span className="text-bordo">Название: </span>
+              <span>{title}</span>
+            </div>
+            <div>
+              <span className="text-bordo">Длительность: </span>
+              <span>{duration} минут</span>
+            </div>
+            <div>
+              <span className="text-bordo">Описание: </span>
+              <br></br>
+              <span>{description}</span>
+            </div>
+          </div>
+        </Modal>}
+      </div>
+      <div className="">
         <div>
           <div className="flex flex-row justify-between text-[16px] mobile-below:text-[12px]">
             <div>{title}</div>

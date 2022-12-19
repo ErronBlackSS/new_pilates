@@ -4,7 +4,7 @@ import UserCard from '../Components/UsersList/UserCard'
 
 const Users = () => {
   const location = useLocation()
-  const title = location.pathname === '/account/users' ? 'Клиенты' : 'Клиенты'
+  const title = location.pathname === '/account/users' ? 'Клиенты' : 'Тренеры'
 
   const { users } = useUsers()
   console.log(users)
