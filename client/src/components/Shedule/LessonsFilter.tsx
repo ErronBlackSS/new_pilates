@@ -66,10 +66,7 @@ const LessonsFilter = () => {
         showFilterModal &&
           <Modal
             title={'Фильтры'}
-            showModal={showFilterModal}
             setShowModal={setShowFilterModal}
-            width={'300px'}
-            height={'400px'}
           >
             <div className="flex flex-col justify-center items-center gap-[20px]">
               <Select options={trainers} label="Тренер" onSelect={setSelectedTrainer}/>

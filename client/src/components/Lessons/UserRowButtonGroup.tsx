@@ -37,14 +37,12 @@ const UserRowButtonGroup = ({ lesson_id }) => {
       </Button>
       {showMoldalEdit && <Modal
         title="Описание"
-        showModal={showMoldalEdit}
         setShowModal={setShowMoldalEdit}
       >
         <WatchDescription lesson_id={lesson_id} />
       </Modal>}
       {showMoldalCancel && <Modal
         title="Отменить запись"
-        showModal={showMoldalCancel}
         setShowModal={setShowMoldalCancel}
       >
         <div

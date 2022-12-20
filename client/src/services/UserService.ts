@@ -18,4 +18,8 @@ export default class UserService {
   static async saveUserPhoto (photo: FormData, id: number) {
     return $api.post('/users/photo?id=' + id, photo)
   }
+
+  static async setCoach (userId: number) {
+    return $api.patch('/users/set/coach', { id: userId })
+  }
 }

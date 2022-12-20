@@ -22,6 +22,7 @@ const Users = () => {
             return (
               <UserCard
                 key={user.id}
+                id={user.id}
                 name={user.name}
                 lastname={user.lastname}
                 image_url={user.image_url}

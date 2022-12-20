@@ -2,14 +2,11 @@ import { FC } from 'react'
 
 interface IModal {
   title: string
-  showModal: boolean
   children: any
   setShowModal: (value: boolean) => void
-  width?: string
-  height?: string
 }
 
-const Modal: FC<IModal> = ({ title, showModal, setShowModal, children, width, height }) => {
+const Modal: FC<IModal> = ({ title, setShowModal, children }) => {
 
   const closeModal = () => {
     setShowModal(false)

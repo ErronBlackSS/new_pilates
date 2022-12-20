@@ -43,10 +43,7 @@ const Shedule = () => {
         showDetailModal &&
           <Modal
             title={selectedLesson.title}
-            showModal={showDetailModal}
             setShowModal={setShowDetailModal}
-            width={'300px'}
-            height={'400px'}
           >
             <LessonDetail
               id={selectedLesson.id}

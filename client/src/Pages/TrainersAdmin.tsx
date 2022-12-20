@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import UserService from '../Services/UserService'
 
 const TrainersAdmin = () => {

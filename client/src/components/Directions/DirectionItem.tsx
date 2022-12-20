@@ -14,8 +14,7 @@ const DirectionItem = ({title, description, duration, image_url}) => {
     <>
       <div className="absolute">
         {showModalInfo && <Modal
-          title=""
-          showModal={showModalInfo}
+          title="Направление"
           setShowModal={setShowModalInfo}
         >
           <div className="relative flex flex-col w-[600px] gap-[25px] px-[36px] pb-[20px] text-[14px] mobile-below:w-[288px] mobile-below:text-[12px] mobile-below:px-[0px]">

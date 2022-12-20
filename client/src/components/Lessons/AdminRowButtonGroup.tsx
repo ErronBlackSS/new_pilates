@@ -42,21 +42,18 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
       </Button>
       {showModalBooked && <Modal
         title="Записи"
-        showModal={showModalBooked}
         setShowModal={setShowModalBooked}
       >
         <BookedUsers lesson_id={lesson_id}/>
       </Modal>}
       {showModalEdit && <Modal
         title="Изменить"
-        showModal={showModalEdit}
         setShowModal={setShowModalEdit}
       >
         <EditLessonForm lesson_id={lesson_id} />
       </Modal>}
       {showModalDelete && <Modal
         title="Удалить"
-        showModal={showModalDelete}
         setShowModal={setShowModalDelete}
       >
         <DeleteLessonForm lesson_id={lesson_id} setShowModal={setShowModalDelete}/>

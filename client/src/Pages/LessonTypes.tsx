@@ -27,10 +27,7 @@ const LessonTypes = () => {
         showAddModal &&
           <Modal
             title="Добавить тип занятия"
-            showModal={showAddModal}
             setShowModal={setShowAddModal}
-            width={'300px'}
-            height={'400px'}
           >
             <AddLessonTypeForm
               onAddLessonType={pushLessonType}

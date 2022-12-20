@@ -2,6 +2,7 @@ import { UserInterface } from '../Types/UserTypes/UserTypes'
 import { makeAutoObservable } from 'mobx'
 import { RESPONSE_STATUSES } from '../Utils/error_statuses'
 import AuthService from '../Services/AuthService'
+import { ROLES } from '../Utils/constance'
 
 export default class UserStore {
   user = {} as UserInterface

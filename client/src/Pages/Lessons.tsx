@@ -9,7 +9,6 @@ import { observer } from 'mobx-react-lite'
 import LessonsStore from '../Store/LessonsStore'
 import { ButtonColors } from '../Utils/constance'
 import FilterButtons from '../Components/Lessons/FilterButtons'
-import SwitchButtons from '../Components/Lessons/SwitchButtons'
 import { Context } from '../index'
 import { ROLES } from '../Utils/constance'
 const Lessons = () => {
@@ -85,10 +84,7 @@ const Lessons = () => {
         showAddModal &&
           <Modal
             title="Добавить занятие"
-            showModal={showAddModal}
             setShowModal={setShowAddModal}
-            width={'300px'}
-            height={'400px'}
           >
             <AddLessonForm
               trainers={trainers}

@@ -21,10 +21,7 @@ const LessonTypeRow = ({lessonType, onEditLessonType, onDeleteLessonType }) => {
         showEditModal &&
           <Modal
             title="Редактирование типа занятия"
-            showModal={showEditModal}
             setShowModal={setShowEditModal}
-            width={'300px'}
-            height={'400px'}
           >
             <AddLessonTypeForm
               onEditLessonType={onEditLessonType}
@@ -38,7 +35,6 @@ const LessonTypeRow = ({lessonType, onEditLessonType, onDeleteLessonType }) => {
         showDeleteModal &&
           <Modal
             title="Удаление типа занятия"
-            showModal={showDeleteModal}
             setShowModal={setShowDeleteModal}
           >
             <DeleteLessonTypeForm
