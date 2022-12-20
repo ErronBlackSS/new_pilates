@@ -21,12 +21,9 @@ async function saveImage (id, file) {
     }
 }
 
-async function checkImageExpists (id) {
+async function checkImageExists (id) {
     try {
-
-      const lessonImage = await LessonTypeHelper.getImagePath(id)
-  
-      const isImageDuplicated = await LessonTypeHelper.checkDuplicateImage(lessonImage)
+      const isImageDuplicated = await LessonTypeHelper.checkDuplicateImage(id)
   
       if (isImageDuplicated) {
         fs.unlink(lessonImage, (err) => {
@@ -46,5 +43,5 @@ async function checkImageExpists (id) {
 
 module.exports = {
   saveImage,
-  checkImageExpists
+  checkImageExists
 }

@@ -3,7 +3,7 @@ const pool = require('../db')
 const helpers = require('../helpers/general')
 const LessonHelper = require('../helpers/LessonsHelper')
 
-async function create (req, res) {
+async function create (req, res, next) {
   try {
     const { coach_id, lesson_type_id, capacity, date, start_time, end_time } = req.body
     const newLesson = await pool.query(`
@@ -15,11 +15,10 @@ async function create (req, res) {
     const lesson = await LessonHelper.getLessonById(id)
     res.json(lesson)
   } catch (e) {
-    //next(e)
+    next(e)
   }
 }
 
-// Пока хз нужна ли она
 async function getAll (req, res) {
   try {
     const lessons = await pool.query('SELECT lessons.id as lesson_id, users.name as trainer, lesson_types.title, lessons.capacity, lessons.occupied, lessons.start_time, lessons.end_time, lessons.date from lessons JOIN users ON lessons.coach_id = users.id JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id')
