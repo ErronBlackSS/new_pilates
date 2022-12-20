@@ -199,16 +199,30 @@ async function setAdminRole (req, res, next) {
 async function getTrainers (req, res, next) {
   try {
     const coaches = await pool.query(`
-      SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url
+      SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url, trainer_info.*
       FROM users 
       LEFT JOIN user_photo ON user_photo.user_id = users.id
-      WHERE role = $1`, 
+      LEFT JOIN trainer_info ON trainer_info.trainer_id = users.id
+      WHERE name = 'Екатерина' and lastname = 'Федоровская' and role = 'a3ee77b5-dd34-4a63-a460-7eb53eb6e560'
+      union all
+      SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url, trainer_info.*
+      FROM users 
+      LEFT JOIN user_photo ON user_photo.user_id = users.id
+      LEFT JOIN trainer_info ON trainer_info.trainer_id = users.id
+      WHERE role = $1 and name != 'Екатерина' and lastname != 'Федоровская'`,
     [ROLES.COACH])
+    console.log(coaches.rows)
     res.json(coaches.rows)
   } catch (e) {
     //next(e)
   }
 }
+
+// SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url, trainer_info.*
+// FROM users 
+// LEFT JOIN user_photo ON user_photo.user_id = users.id      
+// LEFT JOIN trainer_info ON trainer_info.trainer_id = users.id
+// WHERE role = $1
 
 async function getUserByResetToken (req, res, next) {
   try {
@@ -237,5 +251,6 @@ module.exports = {
   setUserRole,
   setAdminRole,
   getTrainers,
+  getTrainerInfo,
   saveImage
 }

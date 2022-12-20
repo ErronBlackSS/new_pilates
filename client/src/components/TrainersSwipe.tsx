@@ -26,30 +26,16 @@ const TrainersSwipe = () => {
                 key={coach.id}
                 name={coach.name}
                 lastname={coach.lastname}
-                image_url={coach.image_url}                      
+                image_url={coach.image_url}
+                education={coach.education}
+                certificates={coach.certificates}
+                personal_achievements={coach.personal_achievements}
+                work_experience={coach.work_experience}
+                directions={coach.directions}                      
               />
             )
           })}
-          {trainers.map((coach) => {
-            return (
-              <TrainerItem
-                key={coach.id}
-                name={coach.name}
-                lastname={coach.lastname}
-                image_url={coach.image_url}                      
-              />
-            )
-          })}
-          {trainers.map((coach) => {
-            return (
-              <TrainerItem
-                key={coach.id}
-                name={coach.name}
-                lastname={coach.lastname}
-                image_url={coach.image_url}                      
-              />
-            )
-          })}
+          
           
         </div>        
       </div>
