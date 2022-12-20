@@ -25,4 +25,5 @@ export enum ButtonColors {
   white = ' outline-none outline-[#1B1B1B] bg-white text-[#1B1B1B] text-[14px]',
   red = ' outline-none outline-[#FF2E00] bg-white text-[#FF2E00] text-[14px]',
   borderless = ' bg-white text-[#1B1B1B] text-[14px]',
+  bordo_direcitons = 'outline bg-bordo text-[#FEFAFA]'
 }

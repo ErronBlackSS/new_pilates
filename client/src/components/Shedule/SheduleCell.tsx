@@ -13,7 +13,7 @@ const SheduleCell = ({lesson, selectLesson}) => {
             disabled={lesson.capacity === 0}
             className={ 'w-[109px] py-[4px] mt-[15px] text-[14px] text-[#FFF] font-[400] bg-bordo rounded-[6px]' + (lesson.capacity === 0 ? ' opacity-50 cursor-not-allowed' : '') }
           >
-            Подроднее
+            Подробнее
           </button>
         </div>
       }
