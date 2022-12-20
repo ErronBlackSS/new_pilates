@@ -26,7 +26,7 @@ const Modal: FC<IModal> = ({ title, showModal, setShowModal, children, width, he
       >
         <div className="flex flex-col gap-[20px]">
           <div className="flex flex-row justify-center w-full">    
-            <div className="text-center text-[24px] text-[#1B1B1B] leading-[24px]">
+            <div className="text-center text-[24px] text-[#1B1B1B] leading-[24px] mobile-below:text-[17px]">
               {title}
             </div>
           </div>

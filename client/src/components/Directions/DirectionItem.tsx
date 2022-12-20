@@ -12,7 +12,7 @@ const DirectionItem = ({title, description, duration, image_url}) => {
 
   return (
     <>
-      <div className="absolute">
+      <div className="">
         {showModalInfo && <Modal
           title=""
           showModal={showModalInfo}
