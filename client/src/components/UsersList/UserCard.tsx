@@ -1,7 +1,7 @@
 
 const UserCard = ({ name, lastname, image_url, phone, email }) => {
 
-  const imageLink = image_url? image_url : 'http://localhost:5000/files/user_photos/sss.png'
+  const imageLink = image_url? image_url : 'http://localhost:8080/files/user_photos/sss.png'
 
   return (
     <div className="flex flex-col w-[318px] h-[165px] bg-[#FFFEFE] shadow-md rounded-[10px] gap-[20px] px-[20px] py-[16px]">

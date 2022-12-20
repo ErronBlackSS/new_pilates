@@ -2,7 +2,7 @@ import Modal from '../Common/Modal'
 
 const TrainerItem = ({name, lastname, image_url}) => {
 
-  const imageLink = image_url? image_url : 'http://localhost:5000/files/user_photos/sss.png'
+  const imageLink = image_url? image_url : 'http://localhost:8080/files/user_photos/sss.png'
 
   const isBoss = (name === 'Екатерина' && lastname === 'Федоровская') ? true : false 
 
