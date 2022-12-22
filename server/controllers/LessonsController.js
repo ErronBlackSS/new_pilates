@@ -19,7 +19,7 @@ async function create (req, res, next) {
   }
 }
 
-async function getAll (req, res) {
+async function getAll (req, res, next) {
   try {
     const lessons = await pool.query('SELECT lessons.id as lesson_id, users.name as trainer, lesson_types.title, lessons.capacity, lessons.occupied, lessons.start_time, lessons.end_time, lessons.date from lessons JOIN users ON lessons.coach_id = users.id JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id')
     res.json(lessons.rows)
@@ -28,7 +28,7 @@ async function getAll (req, res) {
   }
 }
 
-async function update (req, res) {
+async function update (req, res, next) {
   try {
     const query = helpers.parseUpdateData(req.body, 'lessons')
     const lesson = await pool.query(query, [])
@@ -38,17 +38,17 @@ async function update (req, res) {
   }
 }
 
-async function remove (req, res) {
+async function remove (req, res, next) {
   try {
     const { lesson_id } = req.query
     const lesson = await pool.query('DELETE FROM lessons WHERE id = $1', [lesson_id])
     res.json(lesson.rows[0])
   } catch (e) {
-    console.log(e)
+    next(e)
   }
 }
 
-async function bookLesson (req, res) {
+async function bookLesson (req, res, next) {
   try {
     const { user_id, lesson_id } = req.body
     const checkUserAlreadyBooked = await pool.query(`SELECT * FROM users_lessons_rel WHERE user_id = $1 AND lesson_id = $2`, [user_id, lesson_id])
@@ -82,7 +82,7 @@ async function bookLesson (req, res) {
   }
 }
 
-async function removeBooked (req, res) {
+async function removeBooked (req, res, next) {
   try {
     const { lesson_id, user_id } = req.query
     const lesson = await pool.query(`
@@ -107,7 +107,7 @@ async function removeBooked (req, res) {
   }
 }
 
-async function listBookedUsers (req, res) {
+async function listBookedUsers (req, res, next) {
   try {
     const { lesson_id } = req.query
     
@@ -121,11 +121,11 @@ async function listBookedUsers (req, res) {
       [lesson_id])
     res.json(lessons.rows)
   } catch (e) {
-    //next(e)
+    next(e)
   }
 }
 
-async function getLessonsByDate(req, res) {
+async function getLessonsByDate(req, res, next) {
   try {
     const { start, end } = req.query.week
     const lessons = await pool.query(`
@@ -139,7 +139,7 @@ async function getLessonsByDate(req, res) {
     const { trainings, weekDays } = LessonHelper.getFormattedLessons(lessons, start)
     res.json({ trainings, weekDays })
   } catch (e) {
-    console.log(e)
+    next(e)
   }
 }
 

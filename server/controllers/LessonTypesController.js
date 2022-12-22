@@ -23,18 +23,17 @@ async function create (req, res, next) {
   }
 }
 
-async function getAll (req, res) {
+async function getAll (req, res, next) {
   try {
     const lessonTypes = await pool.query('SELECT * from lesson_types LEFT JOIN lesson_type_image ON lesson_types.id = lesson_type_image.lesson_type_id')
     const lessonTypesDTO = lessonTypes.rows.map(lessonType => new LessonTypeDTO(lessonType))
-    console.log(lessonTypesDTO, 'ALL LESSONS')
     res.json(lessonTypesDTO)
   } catch (e) {
     next(e)
   }
 }
 
-async function getAllByGroup (req, res) {
+async function getAllByGroup (req, res, next) {
   try {
     const lessonTypes = await pool.query('SELECT id, title, description, duration, global_lesson_type, lesson_type_image.image_url from lesson_types LEFT JOIN lesson_type_image ON lesson_types.id = lesson_type_image.lesson_type_id ORDER by lesson_types.global_lesson_type desc')
     let arr = {}
@@ -49,11 +48,11 @@ async function getAllByGroup (req, res) {
        
     res.json(arr)
   } catch (e) {
-    console.log(e)
+    next(e)
   }
 }
 
-async function update (req, res) {
+async function update (req, res, next) {
   try {
     const { id, title, description, global_lesson_type, duration } = req.body
     const image = req.file
@@ -70,12 +69,11 @@ async function update (req, res) {
     const lessonType = new LessonTypeDTO({...lesson_types.rows[0], image_url})
     res.json(lessonType)
   } catch (e) {
-    //next(e)
-    console.log(e)
+    next(e)
   }
 }
 
-async function remove (req, res) {
+async function remove (req, res, next) {
   try {
     const { id } = req.query
     const lessonType = await pool.query(`

@@ -211,7 +211,7 @@ async function getTrainers (req, res, next) {
       LEFT JOIN trainer_info ON trainer_info.trainer_id = users.id
       WHERE role = $1 and name != 'Екатерина' and lastname != 'Федоровская'`,
     [ROLES.COACH])
-    console.log(coaches.rows)
+    
     res.json(coaches.rows)
   } catch (e) {
     //next(e)
@@ -251,6 +251,5 @@ module.exports = {
   setUserRole,
   setAdminRole,
   getTrainers,
-  getTrainerInfo,
   saveImage
 }

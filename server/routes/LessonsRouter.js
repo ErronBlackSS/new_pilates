@@ -24,5 +24,6 @@ router.get('/lessons/user/history', UserLessonsService.getLessonsForUserForThePa
 // Admin
 router.get('/lessons/week/list', AdminLessonsService.getLessonsCurrentWeek)
 router.get('/lessons/admin/planned', AdminLessonsService.getPlannedLessons)
+router.get('/lessons/admin/history', AdminLessonsService.getHistoryLessons)
 
 module.exports = router
