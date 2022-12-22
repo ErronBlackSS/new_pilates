@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Select from '../Common/Select'
 import { TimePicker } from 'react-ios-time-picker'
 import DatePicker from 'react-datepicker'
@@ -22,12 +22,12 @@ const AddLessonForm = ({ trainers, lessonTypes, addLesson }) => {
       coach_id: trainer.value,
       lesson_type_id: lessonType.value,
       capacity: capacity,
-      date: new Date(startDate.setDate(startDate.getDate() + 1)),
+      date: new Date(startDate.setDate(startDate.getDate())),
       start_time: startTime,
       end_time: endTime
     }
     const resp = await LessonService.createLesson(data)
-    addLesson(resp)
+    addLesson(resp.data)
   }
 
   return (
@@ -54,14 +54,14 @@ const AddLessonForm = ({ trainers, lessonTypes, addLesson }) => {
               cancelButtonText="Отменить"
             />
           </div>
-          <input value={capacity} onChange={(e) => { setCapacity(+e.target.value) }} type="number" />
+          <input value={capacity} onChange={(e) => { setCapacity(+e.target.value) }} />
           <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
         </div>
         <button
           disabled={formDisabled}
           className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
         >
-          Создать тип занятия
+          Создать
         </button>
       </form>
     </div>

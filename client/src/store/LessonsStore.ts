@@ -101,12 +101,18 @@ class LessonsStore {
     const resp = await LessonService.getByWeek(currentWeek)
     this.setWeekDays(resp.data.weekDays)
     this.setLessons(resp.data.trainings)
+    console.log(resp.data.trainings)
     this.sortLessonsByTime()
   }
 
   async getAdminPlannedLessons() {
     const resp = await LessonService.getAdminPlannedLessons()
-    console.log(resp, 'SWITH TO PLANNED')
+    this.setLessons(resp.data)
+    this.sortLessonsByTime()
+  }
+
+  async getAdminHistoryLessons() {
+    const resp = await LessonService.getAdminHistoryLessons()
     this.setLessons(resp.data)
     this.sortLessonsByTime()
   }

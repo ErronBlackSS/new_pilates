@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Context } from '../..'
 import Home from '../../Pages/Home'
-import { AUTH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
+import { PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
 import MainLayout from '../Layouts/NavBars/MainLayout'
 import SideBar from '../SideBar'
 
@@ -15,9 +15,6 @@ const UserRouter = () => {
     <React.Suspense>
       <Routes>
         {user.isAuth && <Route element={<SideBar />}>  
-          {AUTH_ROUTES.map(({ PATH, COMPONENT }) =>
-            <Route key={PATH} path={PATH} element={<COMPONENT />} />
-          )}
           {USER_ACCOUNT_ROUTES.map(({ PATH, COMPONENT }) =>
             <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}

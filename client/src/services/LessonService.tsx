@@ -35,6 +35,10 @@ export default class AuthService {
     return await $api.get('/lessons/admin/planned')
   }
 
+  static async getAdminHistoryLessons(): Promise<AxiosResponse> {
+    return await $api.get('/lessons/admin/history')
+  }
+
   static async getUserPlannedLessons(user_id): Promise<AxiosResponse> {
     return await $api.get('/lessons/user/planned', { params: { user_id } })
   }

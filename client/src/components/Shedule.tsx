@@ -22,7 +22,7 @@ const Shedule = () => {
     setShowDetailModal(true)
   }
 
-  const onBook = (lessonId) => {
+  const onBook = (lessonId: number) => {
     if(!user.isAuth) {
       alert('Для записи необходимо авторизоваться')
       setShowDetailModal(false)
@@ -34,7 +34,6 @@ const Shedule = () => {
 
   useEffect(() => {
     LessonsStore.getLessonsByWeek(currentWeek)
-    console.log(LessonsStore.lessons)
   }, [currentWeek])
 
   return (

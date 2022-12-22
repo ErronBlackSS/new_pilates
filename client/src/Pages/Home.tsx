@@ -2,9 +2,38 @@ import Shedule from '../Components/Shedule'
 import useWindowWidth from '../Hooks/UseScreenWidth'
 import TrainersSwipe from '../Components/TrainersSwipe'
 import Directions from '../Components/Directions'
+import { useLocation } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 
 const Main = () => {
   const windowWidth = useWindowWidth()
+
+  const price = useRef(null)
+  const directions = useRef(null)
+  const trainers = useRef(null)
+  const schedule = useRef(null)
+  const rules = useRef(null)
+
+  const location = useLocation()
+  
+  useEffect(() => {
+    if (location.hash === '#schedule') {
+      schedule.current.scrollIntoView({ behavior: 'smooth' })
+    }
+    if (location.hash === '#directions') {
+      directions.current.scrollIntoView({ behavior: 'smooth' })
+    }
+    if (location.hash === '#price') {
+      price.current.scrollIntoView({ behavior: 'smooth' })
+    }
+    if (location.hash === '#trainers') {
+      trainers.current.scrollIntoView({ behavior: 'smooth' })
+    }
+    if (location.hash === '#rules') {
+      rules.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [location.hash])
+
   return (
     <>
       <div className="w-[1366px] flex flex-col m-auto mobile-below:w-full">
@@ -28,9 +57,9 @@ const Main = () => {
               </div>
               
               <div className="mt-[52px] mobile-below:px-[16px] mobile-below:mt-[26px]">
-                <button className="w-[293px] h-[56px] bg-bordo text-[#FEFAFA] text-[20px] cursor-pointer rounded-[10px] mobile-below:w-[220px] mobile-below:h-[40px] mobile-below:text-[16px]">
+                <a href="#schedule"  className="w-[293px] h-[56px] px-[20px] py-[10px] bg-bordo text-[#FEFAFA] text-[20px] cursor-pointer rounded-[10px] mobile-below:w-[220px] mobile-below:h-[40px] mobile-below:text-[16px]">
               Записаться на занятие
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -49,12 +78,12 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div id="trainers" className="mt-[117px] mb-[65px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
+        <div id="trainers" ref={trainers} className="mt-[117px] mb-[65px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Наши тренеры</h1>
         </div>
         
         <TrainersSwipe />
-        <div className="mt-[117px] mb-[69px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[40px]">
+        <div id="price" ref={price} className="mt-[117px] mb-[69px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[40px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Прайс-лист</h1>
         </div>
         <div className="form-flex gap-[32px] mobile-below:mx-[0px]">      
@@ -122,15 +151,15 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div className="mt-[117px] mobile-below:ml-[19px] mobile-below:mt-[50px]">
+        <div id="directions" ref={directions} className="mt-[117px] mobile-below:ml-[19px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Направления</h1>
         </div>
         <Directions />
-        <div className="overflow-x-hidden">
+        <div id="schedule" ref={schedule} className="overflow-x-hidden">
           <Shedule />
         </div>
 
-        <div className="mt-[110px] mb-[50px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
+        <div id="rules" ref={rules} className="mt-[110px] mb-[50px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">
           <h1 className="text-[44px] mobile-below:text-[24px]">Правила посещения</h1>
         </div>
         <div className="flex flex-row w-full">
@@ -169,7 +198,7 @@ const Main = () => {
         {windowWidth > 768 ? 
           <footer className="bg-[#FFFEFE] md:p-5 dark:bg-gray-800">
             <div className="flex flex-row justify-between w-full px-[55px] mobile-below:flex-col">
-              <div className="text-bordo">+7 (905) 636-06-04</div>            
+              <a href="tel:+7905636060" className="text-bordo">+7 (905) 636-06-04</a>            
               <div className="text-[#1B1B1B]">© 2022 Copyright Студия Екатерины Федоровской</div>             
               <div>
                 <div className="flex flex-row justify-between w-full gap-[30px]">

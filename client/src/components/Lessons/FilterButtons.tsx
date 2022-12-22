@@ -49,7 +49,7 @@ const FilterButtons = ({ role, userId }) => {
       LessonsStore.getUserHistoryLessons(userId)
       break
     case ROLES.ADMIN:
-      LessonsStore.getAllLessons()
+      LessonsStore.getAdminHistoryLessons()
       break
     default:
       LessonsStore.getUserHistoryLessons(userId)
@@ -85,6 +85,21 @@ const FilterButtons = ({ role, userId }) => {
         }
       ]
     } else if(role === ROLES.USER) {
+      return [
+        {
+          content: 'Будущие',
+          handler: plannedHandler,
+          className: 'py-[2px] px-[14px]',
+          color: ButtonColors.white
+        },
+        {
+          content: 'История',
+          handler: historyHandler,
+          className: 'py-[2px] px-[14px]',
+          color: ButtonColors.white
+        }
+      ]
+    } else if(role === ROLES.COACH) {
       return [
         {
           content: 'Будущие',

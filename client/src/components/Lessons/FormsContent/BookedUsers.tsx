@@ -10,6 +10,7 @@ const BookedUsers = ({ lesson_id }) => {
     const resp = await LessonService.getListBookedUsers(lesson_id)
     setBookedUsers(resp.data)
   }
+  
   useEffect(() => {
     getBookedUsers()
   }, [])
@@ -18,7 +19,7 @@ const BookedUsers = ({ lesson_id }) => {
     <div
       className="flex text-left max-w-[600px]"
     >
-      <div className="flex flex-col gap-[30px]">
+      <div className="flex flex-col">
         {bookedUsers.map((user, index) => (
           <div key={index}>
             {user.name + ' ' + user.lastname}

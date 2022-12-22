@@ -41,6 +41,11 @@ const Lessons = () => {
     setLessonTypes(lessonTypes)
   }
 
+  const onAddLesson = (lesson) => {
+    setShowAddModal(false)
+    LessonsStore.addLesson(lesson)
+  }
+
   useEffect(() => {
     switch (user.user.role) {
     case ROLES.USER:
@@ -89,7 +94,7 @@ const Lessons = () => {
             <AddLessonForm
               trainers={trainers}
               lessonTypes={lessonTypes}
-              addLesson={LessonsStore.addLesson}
+              addLesson={onAddLesson}
             />
           </Modal>
       }

@@ -8,7 +8,7 @@ const DirectionItem = ({title, description, duration, image_url}) => {
 
   const [showModalInfo, setShowModalInfo] = useState(false)
 
-  const imageLink = image_url? image_url : 'http://localhost:8080/files/test_yoga.png'
+  const imageLink = image_url? image_url : process.env.FILE_PATH + '/test_yoga.png'
 
   return (
     <>

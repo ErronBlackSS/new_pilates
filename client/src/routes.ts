@@ -1,6 +1,5 @@
 import { ROUTES } from './Utils/constance'
 import Home from './Pages/Home'
-import Account from './Pages/Account'
 import Login from './Pages/Login'
 import Registration from './Pages/Registration'
 import Reset from './Pages/Reset'
@@ -10,13 +9,6 @@ import Lessons from './Pages/Lessons'
 import Users from './Pages/Users'
 import Directions from './Pages/Directions'
 import LessonTypes from './Pages/LessonTypes'
-
-export const AUTH_ROUTES = [
-  {
-    PATH: ROUTES.ACCOUNT,
-    COMPONENT: Account
-  }
-]
 
 export const PUBLIC_ROUTES = [
   {
@@ -50,6 +42,17 @@ export const ADMIN_ROUTES = [
     PATH: ROUTES.TRAINERS,
     COMPONENT: Users
   }
+]
+
+export const COACH_ROUTES = [
+  {
+    PATH: ROUTES.PROFILE,
+    COMPONENT: Profile
+  },
+  {
+    PATH: ROUTES.MY_LESSONS,
+    COMPONENT: Lessons
+  },
 ]
 
 export const USER_ACCOUNT_ROUTES = [

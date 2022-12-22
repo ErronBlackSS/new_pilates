@@ -16,7 +16,6 @@ const TrainerItem = ({name, lastname, image_url, education, certificates, person
       <div>
         {showModalInfo && <Modal
           title={name + ' ' + lastname}
-          showModal={showModalInfo}
           setShowModal={setShowModalInfo}
         >
           <div className="relative flex flex-col w-[600px] gap-[25px] px-[36px] pb-[20px] text-[14px] mobile-below:w-[288px] mobile-below:text-[12px] mobile-below:px-[0px]">
