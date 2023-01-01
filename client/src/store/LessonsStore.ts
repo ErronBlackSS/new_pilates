@@ -1,36 +1,37 @@
 import { makeAutoObservable } from 'mobx'
 import LessonService from '../Services/LessonService'
+import { Lesson } from '../Types/LessonsTypes/LessonsTypes'
 import { getCurrentWeek } from '../Utils/functions'
 
 class LessonsStore {
-  lessons = []
-  weekDays = []
+  lessons = [] as any[]
+  weekDays = [] as any[]
 
   constructor() {
     makeAutoObservable(this)
   }
   
-  setLessons(lessons) {
+  setLessons(lessons: Lesson[]) {
     this.lessons = lessons
   }
 
-  setWeekDays(weekDays) {
+  setWeekDays(weekDays: any[]) {
     this.weekDays = weekDays
   }
 
   sortLessonsByTime() {
     if(this.lessons) {
       this.lessons.sort(function(a, b){
-        if (a.time > b.time)
+        if (a.start_time > b.start_time)
           return 1
-        if (a.time < b.time)
+        if (a.start_time < b.start_time)
           return -1
         return 0
       })
     }
   }
 
-  addLesson(lesson) {
+  addLesson(lesson: Lesson) {
     this.lessons.push(lesson)
   }
 
@@ -39,17 +40,17 @@ class LessonsStore {
     this.lessons = resp.data
   }
 
-  async updateLesson(lesson) {
+  async updateLesson(lesson: any) {
     const resp = await LessonService.updateLesson(lesson)
     this.lessons = this.lessons.map((item) => {
-      if (item.lesson_id === lesson.lesson_id) {
+      if (item.id === lesson.id) {
         return resp.data
       }
       return item
     })
   }
 
-  filterCalendar(trainer, lesson) {
+  filterCalendar(trainer: string, lesson: string) {
     if(trainer) {
       this.filterLessons('trainer_name', trainer)
     }
@@ -59,7 +60,7 @@ class LessonsStore {
     console.log(this.trainings)
   }
 
-  filterLessons(type, value) {
+  filterLessons(type: string, value: string) {
     console.log(type)
     this.lessons = this.lessons.map((item) => {
       Object.keys(item.lessons).forEach((key) => {
@@ -83,12 +84,12 @@ class LessonsStore {
     })
   }
 
-  async deleteLesson(lessonId) {
+  async deleteLesson(lessonId: number) {
     await LessonService.deleteLesson(lessonId)
-    this.lessons = this.lessons.filter((item) => item.lesson_id !== lessonId)
+    this.lessons = this.lessons.filter((item) => item.id !== lessonId)
   }
 
-  async bookLesson(lessonId, userId) {
+  async bookLesson(lessonId: number, userId: number) {
     const resp = await LessonService.book(lessonId, userId)
     if (resp.status === 202) {
       alert(resp.data.message)
@@ -97,7 +98,7 @@ class LessonsStore {
     alert('Вы успешно записались на занятие')
   }
 
-  async getLessonsByWeek(currentWeek) {
+  async getLessonsByWeek(currentWeek: any) {
     const resp = await LessonService.getByWeek(currentWeek)
     this.setWeekDays(resp.data.weekDays)
     this.setLessons(resp.data.trainings)
@@ -123,23 +124,23 @@ class LessonsStore {
     this.setLessons(resp.data)
   }
 
-  async getUserPlannedLessons(userId) {
+  async getUserPlannedLessons(userId: number) {
     const resp = await LessonService.getUserPlannedLessons(userId)
     this.setLessons(resp.data)
   }
 
-  async getUserHistoryLessons(userId) {
+  async getUserHistoryLessons(userId: number) {
     const resp = await LessonService.getUserHistoryLessons(userId)
     this.setLessons(resp.data)
   }
 
-  async cancelLesson(lessonId, userId) {
+  async cancelLesson(lessonId: number, userId: number) {
     const resp = await LessonService.cancelLesson(lessonId, userId)
     if (resp.status === 202) {
       alert(resp.data.message)
       return
     }
-    this.lessons = this.lessons.filter((item) => item.lesson_id !== lessonId)
+    this.lessons = this.lessons.filter((item) => item.id !== lessonId)
   }
 
   get trainings () {

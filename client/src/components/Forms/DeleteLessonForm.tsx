@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Button from '../Common/Button'
 import { ButtonColors } from '../../Utils/constance'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../../Store/LessonsStore'
 
-const DeleteLessonForm = ({ lesson_id, setShowModal }) => {
-  
-  const lesson = LessonsStore.lessons.find(lesson => lesson.lesson_id === lesson_id)
+interface IDeleteLessonForm {
+  lessonId: number
+  setShowModal: (val: boolean) => void
+} 
+
+const DeleteLessonForm: FC<IDeleteLessonForm> = ({ lessonId, setShowModal }) => {
 
   const onDeleteLesson = () => {
-    LessonsStore.deleteLesson(lesson_id)
+    LessonsStore.deleteLesson(lessonId)
     setShowModal(false)
   }
 

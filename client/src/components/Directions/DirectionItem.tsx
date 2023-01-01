@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import Modal from '../Common/Modal'
 
-const DirectionItem = ({title, description, duration, image_url}) => {
+interface IDirectionItem {
+  title: string
+  description: string
+  duration: number
+  image_url: string
+}
+
+const DirectionItem: FC<IDirectionItem> = ({ title, description, duration, image_url }) => {
 
 
   const [showModalInfo, setShowModalInfo] = useState(false)

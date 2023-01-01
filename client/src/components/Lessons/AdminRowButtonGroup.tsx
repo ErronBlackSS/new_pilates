@@ -2,11 +2,15 @@ import Button from '../Common/Button'
 import { ButtonColors } from '../../Utils/constance'
 import DeleteLessonForm from '../Forms/DeleteLessonForm'
 import Modal from '../Common/Modal'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import EditLessonForm from '../Forms/EditLessonForm'
 import BookedUsers from './FormsContent/BookedUsers'
 
-const AdminRowButtonGroup = ({ lesson_id }) => {
+interface IAdminRowButtonGroup {
+  lessonId: number
+}
+
+const AdminRowButtonGroup: FC<IAdminRowButtonGroup> = ({ lessonId }) => {
   const [showModalBooked, setShowModalBooked] = useState(false)
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [showModalDelete, setShowModalDelete] = useState(false)
@@ -44,19 +48,19 @@ const AdminRowButtonGroup = ({ lesson_id }) => {
         title="Записи"
         setShowModal={setShowModalBooked}
       >
-        <BookedUsers lesson_id={lesson_id}/>
+        <BookedUsers lessonId={lessonId}/>
       </Modal>}
       {showModalEdit && <Modal
         title="Изменить"
         setShowModal={setShowModalEdit}
       >
-        <EditLessonForm lesson_id={lesson_id} />
+        <EditLessonForm lessonId={lessonId} />
       </Modal>}
       {showModalDelete && <Modal
         title="Удалить"
         setShowModal={setShowModalDelete}
       >
-        <DeleteLessonForm lesson_id={lesson_id} setShowModal={setShowModalDelete}/>
+        <DeleteLessonForm lessonId={lessonId} setShowModal={setShowModalDelete}/>
       </Modal>}
     </>
   )

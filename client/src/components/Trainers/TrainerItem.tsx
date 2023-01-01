@@ -1,9 +1,20 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import Modal from '../Common/Modal'
 
-const TrainerItem = ({name, lastname, image_url, education, certificates, personal_achievements, work_experience, directions}) => {
+interface ITrainerItem {
+  name: string
+  lastname: string
+  image_url: string
+  education: string
+  certificates: string
+  personal_achievements: string
+  work_experience: string
+  directions: string
+}
+
+const TrainerItem: FC<ITrainerItem> = ({name, lastname, image_url, education, certificates, personal_achievements, work_experience, directions}) => {
 
   const [showModalInfo, setShowModalInfo] = useState(false)
 

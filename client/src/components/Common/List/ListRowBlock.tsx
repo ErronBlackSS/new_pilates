@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 interface IRowBlock {
   label: string
-  value: string
+  value: string | number
 }
 
 const ListRowBlock: FC<IRowBlock> = ({ label, value }) => {

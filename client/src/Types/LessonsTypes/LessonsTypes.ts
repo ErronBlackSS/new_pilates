@@ -4,10 +4,11 @@ export interface Lessons {
 
 export interface ILessonShedule {
   time: string
-  lessons: ILesson
+  lessons: Lesson
 }
 
-export interface ILesson {
+export type Lesson = {
+  lessons(lessons: any): unknown
   capacity: number
   date: string
   end_time: string

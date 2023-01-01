@@ -11,6 +11,8 @@ import { ButtonColors } from '../Utils/constance'
 import FilterButtons from '../Components/Lessons/FilterButtons'
 import { Context } from '../index'
 import { ROLES } from '../Utils/constance'
+import { Lesson } from '../Types/LessonsTypes/LessonsTypes'
+
 const Lessons = () => {
 
   const { user } = useContext(Context)
@@ -41,7 +43,7 @@ const Lessons = () => {
     setLessonTypes(lessonTypes)
   }
 
-  const onAddLesson = (lesson) => {
+  const onAddLesson = (lesson: Lesson) => {
     setShowAddModal(false)
     LessonsStore.addLesson(lesson)
   }

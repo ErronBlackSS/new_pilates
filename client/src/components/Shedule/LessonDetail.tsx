@@ -1,6 +1,15 @@
-import React from 'react'
+import { FC } from 'react'
 
-const LessonDetail = ({ description, trainer, freePlaces, time, book, id }) => {
+interface ILessonDetail {
+  description: string
+  trainer: string
+  freePlaces: number
+  time: string
+  book: (id: number) => void
+  id: number
+}
+
+const LessonDetail: FC<ILessonDetail> = ({ description, trainer, freePlaces, time, book, id }) => {
   return (
     <div className="flex flex-col justify-center text-left gap-[20px]">
       <span className="text-[14px] font-[400] leading-[24px]">

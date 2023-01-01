@@ -1,7 +1,12 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import LessonsFilter from './LessonsFilter'
 
-const TopButtons = ({onPrev, onNext}) => {
+interface ITopButtons {
+  onPrev: () => void
+  onNext: () => void
+}
+
+const TopButtons: FC<ITopButtons> = ({onPrev, onNext}) => {
 
   const [currentWeek, setCurrentWeek] = useState(true)
 

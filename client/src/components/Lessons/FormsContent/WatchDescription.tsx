@@ -1,13 +1,14 @@
-import Button from '../../Common/Button'
-import { ButtonColors } from '../../../Utils/constance'
-import { useContext, useEffect, useState } from 'react'
-import Modal from '../../Common/Modal'
 import LessonsStore from '../../../Store/LessonsStore'
 import { observer } from 'mobx-react-lite'
+import { FC } from 'react'
 
-const WatchDescription = ({ lesson_id }) => {
+interface IWatchDescription {
+  lessonId: number
+}
 
-  const currentLesson = LessonsStore.lessons.find(lesson => lesson.lesson_id === lesson_id)
+const WatchDescription: FC<IWatchDescription> = ({ lessonId }) => {
+
+  const currentLesson = LessonsStore.lessons.find(lesson => lesson.lesson_id === lessonId)
   console.log(LessonsStore.lessons)
   return (
     <div

@@ -1,4 +1,4 @@
-const IconUser = (color) => {
+const IconUser = (color: string) => {
   return (
     <svg width="18" height="23" viewBox="0 0 18 23" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="7.99803" cy="5.00779" r="4.25779" stroke={color} strokeWidth="1.5"/>

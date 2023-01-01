@@ -1,8 +1,14 @@
-import LessonTypesService from '../../Services/LessonTypesService'
+import { FC } from 'react'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 
-const DeleteLessonTypeForm = ({ lesson_id, lesson_title, setShowModal, onDeleteLessonType }) => {
+interface IDeleteLessonTypeForm {
+  lesson_id: number
+  lesson_title: string
+  onDeleteLessonType: (lessonId: number) => void
+}
+
+const DeleteLessonTypeForm: FC<IDeleteLessonTypeForm> = ({ lesson_id, lesson_title, onDeleteLessonType }) => {
 
   return (
     <div

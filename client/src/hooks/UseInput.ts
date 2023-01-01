@@ -1,9 +1,10 @@
 import { SetStateAction, useState } from 'react'
+import { IValidation } from '../Types/FormTypes/InputItem'
 import { useValidation } from './UseValidation'
 
 interface IUseInput {
   initialvalue: any
-  validations: Object
+  validations: IValidation
 }
 
 export const useInput = ({ initialvalue, validations } : IUseInput) => {
@@ -30,6 +31,6 @@ export const useInput = ({ initialvalue, validations } : IUseInput) => {
     onBlur,
     onChange,
     isDirty,
-    validations: { ...valid }
+    validations: valid
   }
 }

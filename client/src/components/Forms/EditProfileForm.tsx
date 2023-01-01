@@ -4,9 +4,17 @@ import { observer } from 'mobx-react-lite'
 import UserService from '../../Services/UserService'
 import InputItemProfile from './Components/InputItemProfile'
 import EditPhoto from './Components/EditPhoto'
-import { useContext } from 'react'
+import { FC, useContext } from 'react'
 
-const EditProfileForm = ({curName, curLastname, curEmail, curPhone, showEditPassword }) => {
+interface IEditProfilePhoto {
+  curName: string
+  curLastname: string
+  curEmail: string
+  curPhone: string
+  showEditPassword: () => void
+}
+
+const EditProfileForm: FC<IEditProfilePhoto> = ({curName, curLastname, curEmail, curPhone, showEditPassword }) => {
 
   const { user } = useContext(Context)
 
@@ -25,7 +33,7 @@ const EditProfileForm = ({curName, curLastname, curEmail, curPhone, showEditPass
     e.preventDefault()
   }
 
-  const editPhoto = async (event) => {
+  const editPhoto = async (event: any) => {
     const formData = new FormData()
     const files = [...event.target.files]
     console.log(files)

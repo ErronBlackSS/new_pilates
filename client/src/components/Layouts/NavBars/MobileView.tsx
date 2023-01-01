@@ -1,4 +1,11 @@
-const MobileView = ({ toggleOverlay, redirectToMain }) => {
+import { FC } from 'react'
+
+interface IMobileView {
+  toggleOverlay: () => void
+  redirectToMain: () => void
+}
+
+const MobileView: FC<IMobileView> = ({ toggleOverlay, redirectToMain }) => {
   return (
     <div className="flex-row justify-between mobile-above:hidden mobile-below:flex">
       <svg

@@ -1,17 +1,18 @@
 import { AxiosResponse } from 'axios'
 import $api from '../Api'
+import { Lesson } from '../Types/LessonsTypes/LessonsTypes'
 
 export default class AuthService {
-  static async createLesson(lesson): Promise<AxiosResponse> {
+  static async createLesson(lesson: any): Promise<AxiosResponse> {
     return await $api.post('/lessons', { ...lesson })
   }
 
-  static async updateLesson(lesson): Promise<AxiosResponse> {
+  static async updateLesson(lesson: Lesson): Promise<AxiosResponse> {
     console.log('ALLO EBATY', lesson)
     return await $api.patch('/lessons', { ...lesson })
   }
 
-  static async deleteLesson(lesson_id): Promise<AxiosResponse> {
+  static async deleteLesson(lesson_id: number): Promise<AxiosResponse> {
     return await $api.delete('/lessons', { params: { lesson_id } })
   }
 
@@ -19,15 +20,15 @@ export default class AuthService {
     return await $api.get('/lessons')
   }
 
-  static async getByWeek(week): Promise<AxiosResponse> {
+  static async getByWeek(week: any): Promise<AxiosResponse> {
     return await $api.get('/lessons/week', { params: { week } })
   }
 
-  static async book(lesson_id, user_id): Promise<AxiosResponse> {
+  static async book(lesson_id: number, user_id: number): Promise<AxiosResponse> {
     return await $api.post('/lessons/book', { lesson_id, user_id })
   }
 
-  static async getLessonsCurrentWeek(week): Promise<AxiosResponse> {
+  static async getLessonsCurrentWeek(week: any): Promise<AxiosResponse> {
     return await $api.get('/lessons/week/list', { params: { week } })
   }
 
@@ -39,23 +40,23 @@ export default class AuthService {
     return await $api.get('/lessons/admin/history')
   }
 
-  static async getUserPlannedLessons(user_id): Promise<AxiosResponse> {
+  static async getUserPlannedLessons(user_id: number): Promise<AxiosResponse> {
     return await $api.get('/lessons/user/planned', { params: { user_id } })
   }
 
-  static async getUserBookedLessons(user_id, week): Promise<AxiosResponse> {
+  static async getUserBookedLessons(user_id: number, week: any): Promise<AxiosResponse> {
     return await $api.get('/lessons/user', { params: { user_id, week } })
   }
 
-  static async getUserHistoryLessons(user_id): Promise<AxiosResponse> {
+  static async getUserHistoryLessons(user_id: number): Promise<AxiosResponse> {
     return await $api.get('/lessons/user/history', { params: { user_id } })
   }
 
-  static async getListBookedUsers(lesson_id): Promise<AxiosResponse> {
+  static async getListBookedUsers(lesson_id: number): Promise<AxiosResponse> {
     return await $api.get('/lessons/booked', { params: { lesson_id } })
   }
 
-  static async cancelLesson(lesson_id, user_id): Promise<AxiosResponse> {
+  static async cancelLesson(lesson_id: number, user_id: number): Promise<AxiosResponse> {
     return await $api.delete('/lessons/book', { params: { lesson_id, user_id } })
   }
 }

@@ -8,9 +8,9 @@ const EditPasswordForm = () => {
   const newPasswordConfirm = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 }})
 
   const formDisabled = 
-    !oldPassword.validations.inputValid ||
-    !newPassord.validations.inputValid || 
-    !newPasswordConfirm.validations.inputValid
+    !oldPassword.validations.status ||
+    !newPassord.validations.status || 
+    !newPasswordConfirm.validations.status
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()

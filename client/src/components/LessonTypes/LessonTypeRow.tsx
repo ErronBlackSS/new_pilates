@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
+import { LessonType } from '../../Types/LessonTypes'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import ListRowBlock from '../Common/List/ListRowBlock'
@@ -6,14 +7,16 @@ import Modal from '../Common/Modal'
 import AddLessonTypeForm from '../Forms/AddLessonTypeForm' 
 import DeleteLessonTypeForm from '../Forms/DeleteLessonTypeForm'
 
-const LessonTypeRow = ({lessonType, onEditLessonType, onDeleteLessonType }) => {
+interface ILessonTypeRow {
+  lessonType: LessonType
+  onEditLessonType: (id: number, title: string, description: string, type: string, duration: number, image_url: string | FormData) => void
+  onDeleteLessonType: (id: number) => void
+} 
+
+const LessonTypeRow: FC<ILessonTypeRow> = ({lessonType, onEditLessonType, onDeleteLessonType }) => {
    
   const [showEditModal, setShowEditModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
-
-  const onEdit = () => {
-    setShowEditModal(true)
-  }
 
   return (
     <>
@@ -40,7 +43,6 @@ const LessonTypeRow = ({lessonType, onEditLessonType, onDeleteLessonType }) => {
             <DeleteLessonTypeForm
               lesson_id={lessonType.id}
               lesson_title={lessonType.title}
-              setShowModal={setShowDeleteModal}
               onDeleteLessonType={onDeleteLessonType}
             />
           </Modal>

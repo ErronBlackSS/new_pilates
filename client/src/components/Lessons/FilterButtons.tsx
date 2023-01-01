@@ -4,7 +4,12 @@ import { ButtonColors } from '../../Utils/constance'
 import LessonsStore from '../../Store/LessonsStore'
 import { ROLES } from '../../Utils/constance'
 
-const FilterButtons = ({ role, userId }) => {
+interface IFilterButtons {
+  role: string
+  userId: number
+} 
+
+const FilterButtons: FC<IFilterButtons> = ({ role, userId }) => {
   
   const [active, setActive] = useState(0)
 
@@ -56,13 +61,13 @@ const FilterButtons = ({ role, userId }) => {
     }
   }
 
-  const onClick = (index, item) => {
+  const onClick = (index: number, item: { content?: string; handler: any; className?: string; color?: ButtonColors }) => {
     if (active === index) return
     setActive(index)
     item.handler()
   }
 
-  const getButtons = (role) => {
+  const getButtons = (role: string) => {
     if(role === ROLES.ADMIN) {
       return [
         {

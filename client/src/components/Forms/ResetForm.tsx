@@ -10,7 +10,7 @@ const ResetForm: FC = () => {
   const { user } = useContext(Context)
 
   const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
-  const formDisabled = !email.validations.inputValid
+  const formDisabled = !email.validations.status
   const [errorMessage, setErrorMessage] = useState('')
   const [formSended, setFormSended] = useState(false)
 
@@ -49,7 +49,7 @@ const ResetForm: FC = () => {
                   onChange={email.onChange} 
                 />
                 <button
-                  disabled={!email.validations.inputValid}
+                  disabled={!email.validations.status}
                   className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
                 >
                 Продолжить

@@ -50,7 +50,7 @@ const LessonsRow: FC<ILessonRow> = ({lesson_id, title, trainer, date, start_time
         />
       </div>
       <div className="flex flex-row justifty-center items-center gap-[30px]">
-        {user.user.role === ROLES.ADMIN ? <AdminRowButtonGroup lesson_id={lesson_id} /> : <UserRowButtonGroup lesson_id={lesson_id} />}
+        {user.user.role === ROLES.ADMIN ? <AdminRowButtonGroup lessonId={lesson_id} /> : <UserRowButtonGroup lessonId={lesson_id} />}
       </div>
     </div>
   )

@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Select from '../Common/Select'
-import { TimePicker } from 'react-ios-time-picker'
 import DatePicker from 'react-datepicker'
 import UserService from '../../Services/UserService'
 import LessonTypesService from '../../Services/LessonTypesService'
 import LessonsStore from '../../Store/LessonsStore'
 import { observer } from 'mobx-react-lite'
 
-const EditLessonForm = ({ lesson_id }) => {
+interface IEditLessonForm {
+  lessonId: number
+}
+
+const EditLessonForm: FC<IEditLessonForm> = ({ lessonId }) => {
   
-  const currentLesson = LessonsStore.lessons.find((item) => item.lesson_id === lesson_id)
+  const currentLesson = LessonsStore.lessons.find((item) => item.lesson_id === lessonId)
 
   const getAndSetTrainers = async () => {
     const resp = await UserService.getTrainers()
@@ -50,10 +53,10 @@ const EditLessonForm = ({ lesson_id }) => {
   
   const formDisabled = !trainer?.value || !lessonType?.value || !startTime || !endTime || !startDate
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault()
     const data = {
-      id: lesson_id,
+      id: lessonId,
       coach_id: trainer.value,
       lesson_type_id: lessonType.value,
       capacity: capacity,
@@ -89,22 +92,8 @@ const EditLessonForm = ({ lesson_id }) => {
             onSelect={setLessonType}
             defaultValue={lessonType}
           />
-          <div className="flex flex-row gap-[30px]">
-            <TimePicker
-              onSave={setStartTime}
-              value={startTime}
-              saveButtonText="Сохранить"
-              cancelButtonText="Отменить"
-            />
-            <TimePicker
-              onSave={setEndTime}
-              value={endTime}
-              saveButtonText="Сохранить"
-              cancelButtonText="Отменить"
-            />
-          </div>
           <input value={capacity} onChange={(e) => { setCapacity(+e.target.value) }} type="number" />
-          <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+          <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} />
         </div>
         <button
           disabled={formDisabled}

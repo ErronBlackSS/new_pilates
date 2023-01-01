@@ -1,14 +1,21 @@
-import { useState, useContext } from 'react'
+import { useState, FC } from 'react'
 import UserService from '../../Services/UserService'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import Modal from '../Common/Modal'
-import { Context } from '../../'
 import { observer } from 'mobx-react-lite'
 
-const UserCard = ({ id, name, lastname, image_url, phone, email }) => {
+interface IUserCard {
+  id: number
+  name: string
+  lastname: string
+  image_url: string
+  phone: string
+  email: string
+}
+
+const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email }) => {
   
-  const { user } = useContext(Context)
   const [showUserProperties, setShowUserProperties] = useState(false)
 
   const onSetCoach = async () => {

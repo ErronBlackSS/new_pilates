@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MIN_LENGTH_ERROR, MAX_LENGTH_ERROR, NAME_ERROR, LASTNAME_ERROR, EMAIL_ERROR, PHONE_ERROR, EMPTY_ERROR, DEFAULT } from './Utils/ValidationActions'
-import { IUseValidation, IValidation, IValidator } from '../Types/FormTypes/InputItem'
+import { IUseValidation, IValidator, IValidatorObject } from '../Types/FormTypes/InputItem'
 
 export const useValidation = ({ value, validations }: IUseValidation ) => {
   const [isEmptyError, setEmptyError] = useState<IValidator>()
@@ -10,7 +10,7 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
   const [lastNameError, setLastNameError] = useState<IValidator>()
   const [emailError, setEmailError] = useState<IValidator>()
   const [phoneError, setPhoneError] = useState<IValidator>()
-  const [inputValid, setInputValid] = useState<boolean>()
+  const [inputValid, setInputValid] = useState<IValidator>()
 
   useEffect(() => {
     for (const validation in validations) {
@@ -56,9 +56,9 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
       emailError?.status ||
       phoneError?.status
     ) {
-      setInputValid(false)
+      setInputValid({ status: false, message: 'Incorrect' })
     } else {
-      setInputValid(true)
+      setInputValid({ status: false, message: 'Incorrect' })
     }
   }, [isEmptyError, minLengthError, maxLengthError, nameError, lastNameError, emailError, phoneError])
 
@@ -71,5 +71,5 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
     emailError,
     phoneError,
     inputValid
-  } as IValidation
+  } as IValidatorObject
 }

@@ -1,4 +1,10 @@
-const IconList = ({ color }) => {
+import { FC } from 'react'
+
+interface IIconList {
+  color: string
+}
+
+const IconList: FC<IIconList> = ({ color }) => {
   return (
     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M12.2188 13.8079V2.39062C12.2181 2.17947 12.134 1.97714 11.9847 1.82783C11.8354 1.67852 11.633 1.59436 11.4219 1.59375H2.39062C2.17947 1.59436 1.97714 1.67852 1.82783 1.82783C1.67852 1.97714 1.59436 2.17947 1.59375 2.39062V14.0781C1.5948 14.43 1.73507 14.7672 1.98391 15.0161C2.23275 15.2649 2.56996 15.4052 2.92188 15.4062H13.8125" stroke={color} strokeLinejoin="round"/>

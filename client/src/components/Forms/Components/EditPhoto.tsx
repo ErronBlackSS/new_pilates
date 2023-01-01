@@ -1,4 +1,11 @@
-const EditPhoto = ({onEditPhoto, userPhoto}) => {
+import { ChangeEventHandler, FC } from 'react'
+
+interface IEditPhoto {
+  onEditPhoto: ChangeEventHandler<HTMLInputElement>
+  userPhoto: string
+}
+
+const EditPhoto: FC<IEditPhoto> = ({onEditPhoto, userPhoto}) => {
   return (
     <div
       className="flex flex-row justify-start gap-[10px] items-center rounded-[50px] bg-[#F2F2F3] w-full relative"

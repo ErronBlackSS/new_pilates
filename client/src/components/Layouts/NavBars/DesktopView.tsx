@@ -1,8 +1,13 @@
+import { FC } from 'react'
 import AuthLink from '../AuthLink'
 import LinkPropsItem from '../LinkPropsItem'
 import { NAV_LINKS } from '../Links'
 
-const DesktopView = ({ redirectToMain }) => {
+interface IDesktopView {
+  redirectToMain: () => void
+} 
+
+const DesktopView: FC<IDesktopView> = ({ redirectToMain }) => {
   return (
     <nav className="navbar navbar-expand-lg py-2 bg-white relative flex items-center w-full justify-between mobile-below:py-[0px]">
       <div className="px-6 w-full flex flex-wrap items-center justify-between">

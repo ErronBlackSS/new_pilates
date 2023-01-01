@@ -22,6 +22,9 @@ const RegistationForm: FC = () => {
 
   const [formSended, setFormSended] = useState(false)
   const passwordIdentity = password.value === passwordConfirm.value
+
+  console.log(name, email, password, lastname, phone, passwordConfirm, passwordIdentity, 'jopa')
+
   const formDisabled = 
     !name.validations.inputValid ||
     !email.validations.inputValid || 

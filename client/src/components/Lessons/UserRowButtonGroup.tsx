@@ -1,13 +1,18 @@
 import Button from '../Common/Button'
 import { ButtonColors } from '../../Utils/constance'
-import { useContext, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import Modal from '../Common/Modal'
 import LessonsStore from '../../Store/LessonsStore'
 import WatchDescription from './FormsContent/WatchDescription'
 import { observer } from 'mobx-react-lite'
 import { Context } from '../../index'
 // TODO: Вынести содержимое модалки удаления записи в отдельный компонент
-const UserRowButtonGroup = ({ lesson_id }) => {
+
+interface IUserRowButtonGroup {
+  lessonId: number
+} 
+
+const UserRowButtonGroup: FC<IUserRowButtonGroup> = ({ lessonId }) => {
 
   const { user } = useContext(Context)
 
@@ -15,7 +20,7 @@ const UserRowButtonGroup = ({ lesson_id }) => {
   const [showMoldalEdit, setShowMoldalEdit] = useState(false)
 
   const onCancelLesson = () => {
-    LessonsStore.cancelLesson(lesson_id, user.user.id)
+    LessonsStore.cancelLesson(lessonId, user.user.id)
     setShowMoldalCancel(false)
   }
 
@@ -39,7 +44,7 @@ const UserRowButtonGroup = ({ lesson_id }) => {
         title="Описание"
         setShowModal={setShowMoldalEdit}
       >
-        <WatchDescription lesson_id={lesson_id} />
+        <WatchDescription lessonId={lessonId} />
       </Modal>}
       {showMoldalCancel && <Modal
         title="Отменить запись"

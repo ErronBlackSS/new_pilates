@@ -1,9 +1,10 @@
 import LessonTypesService from '../Services/LessonTypesService'
 import { useEffect, useState } from 'react'
 import DirectionItem from './Directions/DirectionItem'
+import { LessonTypeGroup } from '../Types/LessonTypes'
 
 const Directions = () => {
-  const [lessonTypes, setLessonTypes] = useState({})
+  const [lessonTypes, setLessonTypes] = useState({} as LessonTypeGroup)
     
   useEffect(() => {
     LessonTypesService.getAllByGroup()
@@ -12,7 +13,6 @@ const Directions = () => {
       })
   }, [])
 
-  
   return (
     <>
       {lessonTypes && Object.keys(lessonTypes).map((group, indexGroup) => {

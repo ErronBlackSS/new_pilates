@@ -2,10 +2,15 @@ import { useRef, useState, FC, useEffect } from 'react'
 import { useOnClickOutside } from '../../Hooks/UseClickOutside'
 
 interface ISelect {
-  options: Array<{ value: number, label: string }>
+  options: option[]
   onSelect: (option: { value: number, label: string }) => void
   label: string
   defaultValue?: { value: number, label: string }
+}
+
+export type option = {
+  value: number,
+  label: string
 }
 
 const Select: FC<ISelect> = ({ options, label, onSelect, defaultValue }) => {
@@ -14,7 +19,7 @@ const Select: FC<ISelect> = ({ options, label, onSelect, defaultValue }) => {
   const [opened, setOpened] = useState(false)
   const list = useRef(null)
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: option) => {
     setValue(option)
     onSelect(option)
     setOpened(false)
@@ -26,7 +31,7 @@ const Select: FC<ISelect> = ({ options, label, onSelect, defaultValue }) => {
     setValue(defaultValue)
   }, [defaultValue])
 
-  const rounded = (index) => index === 0 ? ' rounded-t-[10px]' : index === options.length-1 ? ' rounded-b-[10px]' : ''
+  const rounded = (index: number) => index === 0 ? ' rounded-t-[10px]' : index === options.length-1 ? ' rounded-b-[10px]' : ''
 
   return (
     <div

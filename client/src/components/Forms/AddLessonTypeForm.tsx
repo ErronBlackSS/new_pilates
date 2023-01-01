@@ -1,4 +1,4 @@
-import { useState, FC } from 'react'
+import { useState, FC, FormEvent } from 'react'
 import { useInput } from '../../Hooks/UseInput'
 import LessonTypesService from '../../Services/LessonTypesService'
 import { ILessonTypesFields } from '../../Types/LessonsTypes/LessonsTypes'
@@ -15,6 +15,7 @@ interface IAddLessonTypeForm {
 }
 
 //тут вообще полнейший пиздец
+// Разъеб...
 const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLessonType, setShowEditModal, setShowAddModal, defaultValue, id }) => {
  
   const title = useInput({initialvalue: defaultValue?.title ?? '', validations: { isEmpty: true }})
@@ -24,11 +25,12 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
   const [image, setImage] = useState(null)
 
   const formDisabled =
-    !title.validations.inputValid ||
-    !description.validations.inputValid ||
-    !duration.validations.inputValid
-
-  const onSubmit = async (e: React.SyntheticEvent) => {
+    !title.validations.status ||
+    !description.validations.status ||
+    !duration.validations.status
+  
+  // херово но я не нашел нужный тип
+  const onSubmit = async (e: any) => {
     e.preventDefault()
     if(!defaultValue) {
       setShowAddModal(false)

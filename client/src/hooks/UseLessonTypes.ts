@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import LessonTypesService from '../Services/LessonTypesService'
+import { LessonType } from '../Types/LessonTypes'
 
 export const useLessonTypes = () => {
-  const [lessonTypes, setLessonTypes] = useState([])
+  const [lessonTypes, setLessonTypes] = useState<LessonType[]>([])
   const [showAddModal, setShowAddModal] = useState(false)
   const [showEditModal, setShowEditModal] = useState(false)
 
-  const pushLessonType = (lessonType) => {
+  const pushLessonType = (lessonType: LessonType) => {
     setLessonTypes([...lessonTypes, lessonType])
     setShowAddModal(false)
   }
@@ -17,22 +18,22 @@ export const useLessonTypes = () => {
     setLessonTypes(resp.data)
   }
 
-  const deleteLessonType = async (id) => {
+  const deleteLessonType = async (id: number) => {
     await LessonTypesService.delete(id)
     setLessonTypes(lessonTypes.filter(lessonType => lessonType.id !== id))
   }
 
-  const editLessonType = async (id, title, description, type, duration, image) => {
+  const editLessonType = async (id: number, title: string, description: string, type: string, duration: number, image_url: string | FormData) => {
     const lessonType = await LessonTypesService.update(id, title, description, type, duration)
 
-    if (image instanceof FormData) {
-      const lessonTypeImage = await LessonTypesService.saveLessonTypeImage(image, id)
+    if (image_url instanceof FormData) {
+      const lessonTypeImage = await LessonTypesService.saveLessonTypeImage(image_url, id)
       console.log(lessonTypeImage, 'IMAGEGEGE')
       const newLessonType = {...lessonType.data, ...lessonTypeImage.data}
       setLessonTypes(lessonTypes.map(lType => lType.id === newLessonType.id ? newLessonType : lType))
       return
     }
-    const newLessonType = {...lessonType.data, image_url: image}
+    const newLessonType = {...lessonType.data, image_url: image_url}
     setLessonTypes(lessonTypes.map(lType => lType.id === newLessonType.id ? newLessonType : lType))
   }
 

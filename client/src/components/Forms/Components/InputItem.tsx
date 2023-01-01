@@ -3,8 +3,8 @@ import { InputItemProps } from '../../../Types/FormTypes/InputItem'
 
 const InputItem: FC<InputItemProps> = ( { label, type, name, placeholder, validations, dirty, defaultValue, onBlur, onChange } ) => {
   
-  const errors = []
-  Object.keys(validations).forEach((key) => { 
+  const errors: any[] = []
+  Object.keys(validations).forEach((key: string) => { 
     if(validations[key]?.status === true && dirty) errors.push(validations[key])
   })
 

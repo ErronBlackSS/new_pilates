@@ -2,10 +2,10 @@ import LessonsStore from '../../Store/LessonsStore'
 import SheduleCell from './SheduleCell'
 import { observer } from 'mobx-react-lite'
 import { FC } from 'react'
-import { ILesson } from '../../Types/LessonsTypes/LessonsTypes'
+import { Lesson } from '../../Types/LessonsTypes/LessonsTypes'
 
 interface ISheduleTable {
-  selectLesson?: (lesson) => void
+  selectLesson?: (lesson: Lesson) => void
 }
 
 const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
@@ -29,7 +29,7 @@ const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
                 <p>{day.time}</p>
               </div>
             </th>
-            {day.lessons && Object.values(day.lessons).map((lesson: ILesson, index) => (      
+            {day.lessons && Object.values(day.lessons).map((lesson: Lesson, index) => (      
               <SheduleCell
                 key={index}
                 lesson={lesson}

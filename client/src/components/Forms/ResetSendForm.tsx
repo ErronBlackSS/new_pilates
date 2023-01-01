@@ -13,7 +13,7 @@ const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
   const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
   const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 6 } })
   const passwordIdentity = password.value === passwordConfirm.value
-  const formDisabled = !passwordIdentity || !password.validations.inputValid || !passwordConfirm.validations.inputValid
+  const formDisabled = !passwordIdentity || !password.validations.status || !passwordConfirm.validations.status
 
   const navigate = useNavigate()
 

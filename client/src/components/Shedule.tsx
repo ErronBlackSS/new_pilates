@@ -7,7 +7,7 @@ import { Context } from '..'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../Store/LessonsStore'
 import SheduleTable from './Shedule/SheduleTable'
-import { ILesson } from '../Types/LessonsTypes/LessonsTypes'
+import { Lesson } from '../Types/LessonsTypes/LessonsTypes'
 
 const Shedule = () => {
   
@@ -15,9 +15,9 @@ const Shedule = () => {
 
   const [currentWeek, setCurrentWeek] = useState(getCurrentWeek())
   const [showDetailModal, setShowDetailModal] = useState(false)
-  const [selectedLesson, setSelectedLesson] = useState<ILesson>(null)
+  const [selectedLesson, setSelectedLesson] = useState<Lesson>(null)
 
-  const selectLesson = (lesson) => {
+  const selectLesson = (lesson: Lesson) => {
     setSelectedLesson(lesson)
     setShowDetailModal(true)
   }
