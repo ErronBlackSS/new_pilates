@@ -1,51 +1,23 @@
 import { FC, useEffect, useState } from 'react'
-import Select from '../Common/Select'
+import Select, { option } from '../Common/Select'
 import DatePicker from 'react-datepicker'
-import UserService from '../../Services/UserService'
-import LessonTypesService from '../../Services/LessonTypesService'
 import LessonsStore from '../../Store/LessonsStore'
 import { observer } from 'mobx-react-lite'
+import { UseLessonTypesAndTrainers } from '../../Hooks/UseLessonTypesAndTrainers'
 
 interface IEditLessonForm {
   lessonId: number
+  setShowModal: (val: boolean) => void
 }
 
-const EditLessonForm: FC<IEditLessonForm> = ({ lessonId }) => {
+const EditLessonForm: FC<IEditLessonForm> = ({ lessonId, setShowModal }) => {
   
   const currentLesson = LessonsStore.lessons.find((item) => item.lesson_id === lessonId)
 
-  const getAndSetTrainers = async () => {
-    const resp = await UserService.getTrainers()
-    console.log(resp)
-    const trainersArr = resp.data.map((item) => {
-      return {
-        value: item.id,
-        label: item.name
-      }
-    })
-    setTrainers(trainersArr)
-    const defaultTrainer = trainersArr.find((item) => item.value === currentLesson.coach_id)
-    setTrainer(defaultTrainer)
-  }
-  
-  const getAndSetLessonTypes = async () => {
-    const resp = await LessonTypesService.getAll()
-    const lessonTypesArr = resp.data.map((item) => {
-      return {
-        value: item.id,
-        label: item.title
-      }
-    })
-    setLessonTypes(lessonTypesArr)
-    const defaultLessonType = lessonTypesArr.find((item) => item.label === currentLesson.title)
-    setLessonType(defaultLessonType)
-  }
+  const { trainers, lessonTypes, defaultTrainer, defaultLessonType } = UseLessonTypesAndTrainers(currentLesson)
 
-  const [trainers, setTrainers] = useState([])
-  const [lessonTypes, setLessonTypes] = useState([])
-
-  const [trainer, setTrainer] = useState({ value: 0, label: '' })
-  const [lessonType, setLessonType] = useState({ value: 0, label: '' })
+  const [trainer, setTrainer] = useState<option>(defaultTrainer)
+  const [lessonType, setLessonType] = useState<option>(defaultLessonType)
   const [startTime, setStartTime] = useState(currentLesson.start_time.slice(0, 5))
   const [endTime, setEndTime] = useState(currentLesson.end_time.slice(0, 5))
   const [startDate, setStartDate] = useState(new Date(currentLesson.date))
@@ -60,19 +32,21 @@ const EditLessonForm: FC<IEditLessonForm> = ({ lessonId }) => {
       coach_id: trainer.value,
       lesson_type_id: lessonType.value,
       capacity: capacity,
-      date: new Date(startDate.setDate(startDate.getDate() + 1)),
+      date: new Date(new Date(startDate.setDate(startDate.getDate())).setHours(3)),
       start_time: startTime,
       end_time: endTime
     }
+    setShowModal(false)
     LessonsStore.updateLesson(data)
   }
 
   useEffect(() => {
-    getAndSetTrainers()
-    getAndSetLessonTypes()
-  }, [])
+    setTrainer(defaultTrainer)
+    setLessonType(defaultLessonType)
+  }, [defaultLessonType, defaultTrainer])
 
   return (
+   
     <div
       className="flex justify-center text-left"
     >

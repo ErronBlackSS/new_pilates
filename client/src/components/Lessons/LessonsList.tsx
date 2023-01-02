@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import LessonsStore from '../../Store/LessonsStore'
 
 const LessonsList: FC = () => {
+
   return (
     <div
       className="flex flex-col bg-[#FEFAFA] py-[25px] mt-[14px]"

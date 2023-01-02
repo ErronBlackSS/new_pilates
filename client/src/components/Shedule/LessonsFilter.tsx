@@ -1,42 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../../Store/LessonsStore'
-import LessonTypesService from '../../Services/LessonTypesService'
-import UserService from '../../Services/UserService'
 import Modal from '../Common/Modal'
 import Select from '../Common/Select'
+import { UseLessonTypesAndTrainers } from '../../Hooks/UseLessonTypesAndTrainers'
 
 const LessonsFilter = () => {
 
+  const { trainers, lessonTypes } = UseLessonTypesAndTrainers()
+
   const [showFilterModal, setShowFilterModal] = useState(false)
-  const [trainers, setTrainers] = useState([])
-  const [lessonTypes, setLessonTypes] = useState([])
 
   const [selectedTrainer, setSelectedTrainer] = useState({ value: 0, label: '' })
   const [selectedLessonType, setSelectedLessonType] = useState({ value: 0, label: '' })
 
   const formDisabled = !selectedTrainer && !selectedLessonType
-
-  const getAndSetTrainers = async () => {
-    const resp = await UserService.getTrainers()
-    const trainers = resp.data.map((item) => {
-      return {
-        value: item.id,
-        label: item.name
-      }
-    })
-    setTrainers(trainers)
-  }
-  const getAndSetLessonTypes = async () => {
-    const resp = await LessonTypesService.getAll()
-    const lessonTypes = resp.data.map((item) => {
-      return {
-        value: item.id,
-        label: item.title
-      }
-    })
-    setLessonTypes(lessonTypes)
-  }
 
   const onFilter = () => {
     LessonsStore.filterCalendar(selectedTrainer.label, selectedLessonType.label)
@@ -47,11 +25,6 @@ const LessonsFilter = () => {
     LessonsStore.clearFilter()
     setShowFilterModal(false)
   }
-
-  useEffect(() => {
-    getAndSetTrainers()
-    getAndSetLessonTypes()
-  }, [])
 
   return (
     <>

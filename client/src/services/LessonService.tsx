@@ -8,7 +8,6 @@ export default class AuthService {
   }
 
   static async updateLesson(lesson: Lesson): Promise<AxiosResponse> {
-    console.log('ALLO EBATY', lesson)
     return await $api.patch('/lessons', { ...lesson })
   }
 

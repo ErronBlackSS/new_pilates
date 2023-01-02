@@ -54,7 +54,7 @@ const AdminRowButtonGroup: FC<IAdminRowButtonGroup> = ({ lessonId }) => {
         title="Изменить"
         setShowModal={setShowModalEdit}
       >
-        <EditLessonForm lessonId={lessonId} />
+        <EditLessonForm lessonId={lessonId} setShowModal={setShowModalEdit}/>
       </Modal>}
       {showModalDelete && <Modal
         title="Удалить"

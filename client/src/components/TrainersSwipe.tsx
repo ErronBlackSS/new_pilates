@@ -10,8 +10,6 @@ const TrainersSwipe = () => {
     UserService.getTrainers()
       .then(res => {
         setTrainers(res.data)
-        console.log(res.data)
-        
       })
   }, [])
 

@@ -11,7 +11,7 @@ class LessonsStore {
     makeAutoObservable(this)
   }
   
-  setLessons(lessons: Lesson[]) {
+  setLessons(lessons: any[]) {
     this.lessons = lessons
   }
 
@@ -42,12 +42,12 @@ class LessonsStore {
 
   async updateLesson(lesson: any) {
     const resp = await LessonService.updateLesson(lesson)
-    this.lessons = this.lessons.map((item) => {
-      if (item.id === lesson.id) {
+    this.setLessons(this.lessons.map((item) => {
+      if (item.lesson_id === resp.data.lesson_id) {
         return resp.data
       }
       return item
-    })
+    }))
   }
 
   filterCalendar(trainer: string, lesson: string) {
