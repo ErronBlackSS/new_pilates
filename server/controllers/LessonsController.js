@@ -12,8 +12,18 @@ async function create (req, res, next) {
         [coach_id, lesson_type_id, capacity, date, start_time, end_time])
 
     const id = newLesson.rows[0].id
-    const lesson = await LessonHelper.getLessonById(id)
-    res.json(lesson)
+
+    const lesson = await pool.query(`
+      SELECT lessons.id as lesson_id, users."name", users."lastname",
+        users.id as trainer_id, lesson_types.title, lessons.capacity, lessons.occupied,
+        lessons.start_time, lessons.end_time, lessons.date
+      from lessons
+      JOIN users ON lessons.coach_id = users.id
+      JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id
+      WHERE lessons.id  = $1`,
+      [id])
+
+    res.json(lesson.rows[0])
   } catch (e) {
     next(e)
   }
@@ -21,7 +31,7 @@ async function create (req, res, next) {
 
 async function getAll (req, res, next) {
   try {
-    const lessons = await pool.query('SELECT lessons.id as lesson_id, users.name as trainer, lesson_types.title, lessons.capacity, lessons.occupied, lessons.start_time, lessons.end_time, lessons.date from lessons JOIN users ON lessons.coach_id = users.id JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id')
+    const lessons = await pool.query('SELECT lessons.id as lesson_id, users."name", users."lastname", users.id as trainer_id, lesson_types.title, lessons.capacity, lessons.occupied, lessons.start_time, lessons.end_time, lessons.date from lessons JOIN users ON lessons.coach_id = users.id JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id')
     res.json(lessons.rows)
   } catch (e) {
     next(e)
@@ -31,8 +41,19 @@ async function getAll (req, res, next) {
 async function update (req, res, next) {
   try {
     const query = helpers.parseUpdateData(req.body, 'lessons')
-    const lesson = await pool.query(query, [])
-    res.json(lesson.rows[0])
+    const { id } = req.body
+    await pool.query(query, [])
+    const newLesson = await pool.query(`
+      SELECT lessons.id as lesson_id, users."name", users."lastname",
+        users.id as trainer_id, lesson_types.title, lessons.capacity, lessons.occupied,
+        lessons.start_time, lessons.end_time, lessons.date
+      from lessons
+      JOIN users ON lessons.coach_id = users.id
+      JOIN lesson_types ON lessons.lesson_type_id = lesson_types.id
+      WHERE lessons.id  = $1`,
+      [id])
+    
+    res.json(newLesson.rows[0])
   } catch (e) {
     next(e)
   }
@@ -135,7 +156,7 @@ async function getLessonsByDate(req, res, next) {
     left join lesson_types on lessons.lesson_type_id = lesson_types.id
     where lessons.date BETWEEN $1 and $2`,
     [start, end])
-
+    
     const { trainings, weekDays } = LessonHelper.getFormattedLessons(lessons, start)
     res.json({ trainings, weekDays })
   } catch (e) {

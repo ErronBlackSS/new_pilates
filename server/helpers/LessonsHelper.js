@@ -18,11 +18,10 @@ function getFormattedLessons(lessons, start) {
     const lessonEndTime = lesson.end_time.substr(0, 5)
     const lessonFullTime = lessonStartTime + " - " + lessonEndTime
     const lessonDate = lesson.date
-    const formattedDate = lessonDate.getFullYear() + '-' + lessonDate.getUTCDate() + '-' + (+lessonDate.getMonth()+1)
+    const formattedDate = lessonDate.getFullYear() + '-' + lessonDate.getUTCDate() + '-' + (+lessonDate.getMonth())
 
-    formattedLessons[lessonFullTime] = {
-      time: lessonFullTime,
-      lesson: {
+    if (formattedLessons[lessonFullTime]) {
+      formattedLessons[lessonFullTime].lessons.push({
         weekDay: lessonDate.getDay(),
         trainer_name: lesson.name,
         id: lesson.lesson_id,
@@ -35,29 +34,55 @@ function getFormattedLessons(lessons, start) {
         occupied: lesson.occupied,
         description: lesson.description,
         show: true
+      })
+    } else {
+      formattedLessons[lessonFullTime] = {
+        time: lessonFullTime,
+        lessons: [{
+          weekDay: lessonDate.getDay(),
+          trainer_name: lesson.name,
+          id: lesson.lesson_id,
+          trainer_id: lesson.trainer_id,
+          title: lesson.title,
+          date: formattedDate,
+          start_time: lessonStartTime,
+          end_time: lessonEndTime,
+          capacity: lesson.capacity,
+          occupied: lesson.occupied,
+          description: lesson.description,
+          show: true
+        }]
       }
     }
   })
-
   const trainings = []
 
   for(const key in formattedLessons) {
     const lessonRow = {
       time: formattedLessons[key].time,
       lessons: {
-        'Понедельник': formattedLessons[key].lesson.weekDay === 1 ? formattedLessons[key].lesson : null,
-        'Вторник': formattedLessons[key].lesson.weekDay === 2 ? formattedLessons[key].lesson : null,
-        'Среда': formattedLessons[key].lesson.weekDay === 3 ? formattedLessons[key].lesson : null,
-        'Четверг': formattedLessons[key].lesson.weekDay === 4 ? formattedLessons[key].lesson : null,
-        'Пятница': formattedLessons[key].lesson.weekDay === 5 ? formattedLessons[key].lesson : null,
-        'Суббота': formattedLessons[key].lesson.weekDay === 6 ? formattedLessons[key].lesson : null,
-        'Воскресенье': formattedLessons[key].lesson.weekDay === 0 ? formattedLessons[key].lesson : null,
+        'Понедельник': findFormattedLesson(formattedLessons, key, 1),
+        'Вторник': findFormattedLesson(formattedLessons, key, 2),
+        'Среда': findFormattedLesson(formattedLessons, key, 3),
+        'Четверг': findFormattedLesson(formattedLessons, key, 4),
+        'Пятница': findFormattedLesson(formattedLessons, key, 5),
+        'Суббота': findFormattedLesson(formattedLessons, key, 6),
+        'Воскресенье': findFormattedLesson(formattedLessons, key, 0),
       }
     }
     trainings.push(lessonRow)
   }
   const weekDays = getWeekDaysWithDate(start)
   return {trainings, weekDays}
+}
+
+function findFormattedLesson(formattedLessons, key, weekDay) {
+  const formattedLesson = formattedLessons[key].lessons.find((lesson) => lesson.weekDay === weekDay)
+
+  if(!formattedLesson) {
+    return null
+  }
+  return formattedLesson
 }
 
 function getWeekDaysWithDate(start) {
