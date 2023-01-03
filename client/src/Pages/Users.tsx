@@ -1,6 +1,10 @@
 import { useUsers } from '../Hooks/UseUsers'
 import { useLocation } from 'react-router-dom'
 import UserCard from '../Components/UsersList/UserCard'
+import Button from '../Components/Common/Button'
+import Modal from '../Components/Common/Modal'
+import { useState } from 'react'
+import { ButtonColors } from '../Utils/constance'
 
 const Users = () => {
   const location = useLocation()
@@ -9,14 +13,37 @@ const Users = () => {
   const { users } = useUsers()
   console.log(users)
 
+  const [showTrainerUpdate, setShowTrainerUpdate] = useState(false)
+
   return (
     <>
       <div className="pt-[50px] pr-[60px] mobile-below:pr-[16px]">
-        <div className="flex flex-row justify-between">          
+        <div className="flex flex-row justify-between items-center">          
           <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
             {title}
-          </span>         
+          </span>
+          {(title === 'Тренеры') &&   
+          <div>
+            {showTrainerUpdate &&
+            <Modal
+              title=""
+              setShowModal={setShowTrainerUpdate}
+            >
+            *модалка для описания*
+            </Modal>
+            }
+            <Button
+              className="w-[100%] h-[40px] mx-auto text-[16px] rounded-[10px] bg-bordo text-[#FFFEFE] px-[5px]"
+              
+              handler={()=> {
+                setShowTrainerUpdate(true)
+              }}>
+              Изменить описание
+            </Button>
+          </div>      
+          }
         </div>
+        
         <div className="flex flex-wrap gap-[32px] my-[25px]">
           {users.map((user) => {
             return (
