@@ -7,6 +7,7 @@ const pool = require('../db')
 const logger = require('../logger')
 const { ROLES } = require('../constants')
 const fs = require('fs')
+const e = require('express')
 
 async function registration (req, res, next) {
   try {
@@ -234,6 +235,21 @@ async function getUserByResetToken (req, res, next) {
   }
 }
 
+async function updateUserData(req, res, next) {
+  try {
+    const { id } = req.query
+    const { name, lastname, email, phone } = req.body
+    const user = await pool.query(`
+      UPDATE users SET name = $1, lastname = $2, email = $3, phone = $4 WHERE id = $5
+    `, [name, lastname, email, phone, id])
+
+    console.log(user.rows[0], 'UpdatedUser')
+    return user.rows[0]
+  } catch {
+    next(e)
+  }
+}
+
 module.exports = {
   registration,
   login,
@@ -251,5 +267,6 @@ module.exports = {
   setUserRole,
   setAdminRole,
   getTrainers,
-  saveImage
+  saveImage,
+  updateUserData
 }
