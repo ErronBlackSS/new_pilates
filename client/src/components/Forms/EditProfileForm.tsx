@@ -31,14 +31,21 @@ const EditProfileForm: FC<IEditProfilePhoto> = ({curName, curLastname, curEmail,
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()
+    const userId = user.user.id
+    const data = {
+      name: name.value,
+      lastname: lastname.value,
+      email: email.value,
+      phone: phone.value,
+    }
+    const newData = await user.updateUserData(userId, data)
+    user.setUserData(newData)
   }
 
   const editPhoto = async (event: any) => {
     const formData = new FormData()
     const files = [...event.target.files]
-    console.log(files)
     formData.append('file', files[0])
-    console.log(formData)
     const resp = await UserService.saveUserPhoto(formData, user.user.id)
     const photo = resp.data
     if (photo) {

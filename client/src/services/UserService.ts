@@ -1,6 +1,6 @@
 import $api from '../Api'
 import { AxiosResponse } from 'axios'
-import { UserInterface } from '../Types/UserTypes/UserTypes'
+import { UpdateUserDto, UserInterface } from '../Types/UserTypes/UserTypes'
 
 export default class UserService {
   static async fetchUsers (): Promise<AxiosResponse<UserInterface[]>> {
@@ -17,6 +17,10 @@ export default class UserService {
 
   static async saveUserPhoto (photo: FormData, id: number) {
     return $api.post('/users/photo?id=' + id, photo)
+  }
+
+  static async updateUserData(userId: number, userData: UpdateUserDto) {
+    return await $api.patch('/users?id=' + userId, userData)
   }
 
   static async setCoach (userId: number) {

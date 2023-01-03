@@ -9,6 +9,13 @@ export interface UserInterface {
   image_url: string
 }
 
+export type UpdateUserDto = {
+  email: string
+  name: string
+  phone: string
+  lastname: string
+}
+
 export interface LoginInterface {
   email: string
   password: string
