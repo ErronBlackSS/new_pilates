@@ -45,7 +45,8 @@ const Select: FC<ISelect> = ({ options, label, onSelect, defaultValue }) => {
       </label>
       <div
         onClick={() => setOpened(!opened)}
-        className="flex items-center px-[15px] text-[16px] h-[50px] w-[350px] bg-[#F2F2F3] cursor-pointer rounded-[10px]"
+        className="flex items-center px-[15px] mt-[6px] text-[16px] py-[8px] w-[350px] bg-[#FFFEFE] cursor-pointer rounded-[10px]"
+        style={{ border: '1px solid #8A8E97' }}
       >
         <div className="flex flex-row cursor-pointer justify-between items-center w-full">
           <input value={value?.label} type="text" disabled />

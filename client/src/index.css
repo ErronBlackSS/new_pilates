@@ -3,6 +3,26 @@
 @tailwind utilities;
 @tailwind preflight;
 
+.rc-time-picker-input {
+  @apply h-[42px] border border-[#8A8E97] rounded-[10px] text-[16px] text-[#1B1B1B] px-[15px]
+}
+
+.rc-time-picker {
+  @apply flex flex-row bg-[#FFFEFE];
+}
+
+.rc-time-picker-clear {
+  @apply block top-[20px] hidden
+}
+
+.custom-input {
+  @apply flex justify-center h-[42px] border border-[#8A8E97] rounded-[10px] text-[16px] text-[#1B1B1B] px-[15px]
+}
+
+.react-datepicker__input-container {
+  @apply flex justify-center h-[42px] border border-[#8A8E97] rounded-[10px] text-[16px] text-[#1B1B1B] px-[15px]
+}
+
 body {
   background-color: #FEFAFA;
   box-sizing: border-box;

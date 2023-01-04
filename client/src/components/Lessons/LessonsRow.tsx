@@ -42,11 +42,11 @@ const LessonsRow: FC<ILessonRow> = ({lesson_id, title, trainer, date, start_time
         />
         <ListRowBlock
           label="Время начала:"
-          value={start_time}
+          value={start_time?.slice(0, 5)}
         />
         <ListRowBlock
           label="Время окончания:"
-          value={end_time}
+          value={end_time?.slice(0, 5)}
         />
       </div>
       <div className="flex flex-row justifty-center items-center gap-[30px]">

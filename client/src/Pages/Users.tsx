@@ -4,7 +4,6 @@ import UserCard from '../Components/UsersList/UserCard'
 import Button from '../Components/Common/Button'
 import Modal from '../Components/Common/Modal'
 import { useState } from 'react'
-import { ButtonColors } from '../Utils/constance'
 
 const Users = () => {
   const location = useLocation()

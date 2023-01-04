@@ -5,6 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css'
 import LessonService from '../../Services/LessonService'
 import { option } from '../Common/Select'
 import { Lesson } from '../../Types/LessonsTypes/LessonsTypes'
+import moment from 'moment'
+import TimePicker from 'rc-time-picker'
 
 interface IAddLessonForm {
   trainers: option[]
@@ -44,11 +46,59 @@ const AddLessonForm: FC<IAddLessonForm> = ({ trainers, lessonTypes, addLesson })
       <form
         onSubmit={onSubmit}
       >
-        <div className="flex flex-col gap-[25px]">
-          <Select options={trainers} label="Тренер" onSelect={setTrainer}/>
-          <Select options={lessonTypes} label="Тип занятия" onSelect={setLessonType}/>
-          <input value={capacity} onChange={(e) => { setCapacity(+e.target.value) }} />
-          <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} />
+        <div className="mt-4 flex-col md:gap-1 xl:gap-3 align-baseline">
+          <div className="flex flex-col gap-[25px]">
+            <div className="flex form-flex gap-[10px]">
+              <Select options={trainers} label="Тренер" onSelect={setTrainer}/>
+              <Select options={lessonTypes} label="Тип занятия" onSelect={setLessonType}/>
+            </div>
+            <div className="flex form-flex gap-[10px]">
+              <div className="w-full flex flex-col gap-[7px]">
+                <label
+                  className="block ml-[10px] text-[12px] leading-[15px] text-[#000000]"
+                >
+                Время начала
+                </label>
+                <TimePicker
+                  className="w-full"
+                  defaultValue={moment(startTime, 'HH:mm')}
+                  showSecond={false}
+                  onChange={(val) => setStartTime(val.format('HH:mm'))}
+                />
+              </div>
+              <div className="flex w-full flex-col gap-[7px]">
+                <label
+                  className="block ml-[10px] text-[12px] leading-[15px] text-[#000000]"
+                >
+                Время конца
+                </label>
+                <TimePicker
+                  className="w-full"
+                  defaultValue={moment(endTime, 'HH:mm')}
+                  showSecond={false}
+                  onChange={(val) => setEndTime(val.format('HH:mm'))}
+                />
+              </div>
+            </div>
+            <div className="flex form-flex gap-[10px]">
+              <div className="flex w-full flex-col gap-[7px]">
+                <label
+                  className="block ml-[10px] text-[12px] leading-[15px] text-[#000000]"
+                >
+                  Количество мест
+                </label>
+                <input className="w-full custom-input" value={capacity} onChange={(e) => { setCapacity(+e.target.value) }} />
+              </div>
+              <div className="flex w-full flex-col gap-[7px]">
+                <label
+                  className="block ml-[10px] text-[12px] leading-[15px] text-[#000000]"
+                >
+                  Дата занятия
+                </label>
+                <DatePicker className="w-full" selected={startDate} onChange={(date: Date) => setStartDate(date)} />
+              </div>
+            </div>
+          </div>
         </div>
         <button
           disabled={formDisabled}
