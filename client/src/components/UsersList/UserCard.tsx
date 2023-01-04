@@ -4,6 +4,7 @@ import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import Modal from '../Common/Modal'
 import { observer } from 'mobx-react-lite'
+import UpdateTrainerInfoForm from '../Forms/UpdateTrainerInfoForm'
 
 interface IUserCard {
   id: number
@@ -12,11 +13,13 @@ interface IUserCard {
   image_url: string
   phone: string
   email: string
+  cardType: string
 }
 
-const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email }) => {
+const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email, cardType }) => {
   
   const [showUserProperties, setShowUserProperties] = useState(false)
+  const [showTrainerUpdate, setShowTrainerUpdate] = useState(false)
 
   const onSetCoach = async () => {
     await UserService.setCoach(id)
@@ -27,6 +30,14 @@ const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email }
 
   return (
     <>
+      {showTrainerUpdate &&
+        <Modal
+          title="Информация о тренере"
+          setShowModal={setShowTrainerUpdate}
+        >
+          <UpdateTrainerInfoForm setShowModal={setShowTrainerUpdate} trainerId={id} />
+        </Modal>
+      }
       {showUserProperties &&
         <Modal
           title="Свойства"
@@ -41,7 +52,7 @@ const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email }
             Сделать тренером
           </Button>
         </Modal>}
-      <div className="flex flex-col w-[318px] h-[165px] bg-[#FFFEFE] shadow-md rounded-[10px] gap-[20px] px-[20px] py-[16px]">
+      <div className="flex flex-col w-[318px] h-[220px] bg-[#FFFEFE] shadow-md rounded-[10px] gap-[20px] px-[20px] py-[16px]">
         <div className="flex flex-row justify-between items-center">
           <div className="flex justify-start items-center gap-[10px]">
             <img className="rounded-[50px] w-[52px] h-[52px] border border-bordo object-cover" src={imageLink} alt="" />
@@ -64,6 +75,15 @@ const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email }
           <br/> 
           <span className="inline-block border-b-[1px] border-bordo">{email}</span>
         </div>
+        <div>
+          {cardType === 'Тренеры' && <Button
+            className="w-[100%] h-[40px] mx-auto text-[16px] rounded-[10px] bg-bordo text-[#FFFEFE] px-[5px]"
+            handler={()=> {
+              setShowTrainerUpdate(true)
+            }}>
+              Изменить описание
+          </Button>}
+        </div>      
       </div>
     </>
   )    

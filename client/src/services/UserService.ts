@@ -26,4 +26,42 @@ export default class UserService {
   static async setCoach (userId: number) {
     return $api.patch('/users/set/coach', { id: userId })
   }
+
+  static async getTrainerInfo (trainerId: number) {
+    return await $api.get('/users/trainer/info?id=' + trainerId)
+  }
+
+  static async createTrainerInfo(
+    trainerId: number,
+    edication: string,
+    certificates: string,
+    achievements: string,
+    experience: string,
+    directions: string
+  ) {
+    return $api.post('/users/trainer/info?id=' + trainerId, {
+      edication: edication,
+      certificates: certificates,
+      achievements: achievements,
+      experience: experience,
+      directions: directions
+    })
+  }
+
+  static async updateTrainerInfo(
+    trainerId: number,
+    edication: string,
+    certificates: string,
+    achievements: string,
+    experience: string,
+    directions: string
+  ) {
+    return $api.patch('/users/trainer/info?id=' + trainerId, {
+      edication: edication,
+      certificates: certificates,
+      achievements: achievements,
+      experience: experience,
+      directions: directions
+    })
+  }
 }
