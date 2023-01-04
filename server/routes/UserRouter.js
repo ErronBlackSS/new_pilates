@@ -21,5 +21,8 @@ router.patch('/users/set/user', UserController.setUserRole)
 router.patch('/users/set/admin', UserController.setAdminRole)
 router.get('/users/trainers', UserController.getTrainers)
 router.post('/users/photo', UserController.saveImage)
+router.get('/users/trainer/info', UserController.getTrainerInfo)
+router.post('/users/trainer/info', UserController.createTrainerInfo)
+router.patch('/users/trainer/info', UserController.updateTrainerInfo)
 
 module.exports = router

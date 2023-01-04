@@ -243,8 +243,52 @@ async function updateUserData(req, res, next) {
       UPDATE users SET name = $1, lastname = $2, email = $3, phone = $4 WHERE id = $5
     `, [name, lastname, email, phone, id])
 
-    console.log(user.rows[0], 'UpdatedUser')
     return user.rows[0]
+  } catch {
+    next(e)
+  }
+}
+
+async function getTrainerInfo(req, res, next) {
+  try {
+    const { id } = req.query
+    const trainerInfo = await pool.query(`
+      SELECT * FROM trainer_info WHERE trainer_id = $1
+    `, [id])
+    
+    res.json(trainerInfo.rows[0])
+  } catch {
+    next(e)
+  }
+}
+
+async function createTrainerInfo(req, res, next) {
+  try {
+    const { id } = req.query
+
+    const { education, certificates, achievements, experience, directions } = req.body
+
+    await pool.query(`
+      INSERT INTO trainer_info (trainer_id, education, certificates, personal_achievements, work_experience, directions)
+      VALUES ($1, $2, $3, $4, $5, $6) RETURNING * 
+    `, [id, education, certificates, achievements, experience, directions])
+
+  } catch {
+    next(e)
+  }
+}
+
+async function updateTrainerInfo(req, res, next) {
+  try {
+    const { id } = req.query
+
+    const { education, certificates, achievements, experience, directions } = req.body
+
+    await pool.query(`
+      UPDATE trainer_info SET education = $1, certificates = $2, personal_achievements = $3, work_experience = $4, directions = $5
+      WHERE trainer_id = $6
+    `, [education, certificates, achievements, experience, directions, id])
+
   } catch {
     next(e)
   }
@@ -268,5 +312,8 @@ module.exports = {
   setAdminRole,
   getTrainers,
   saveImage,
-  updateUserData
+  updateUserData,
+  getTrainerInfo,
+  createTrainerInfo,
+  updateTrainerInfo
 }
