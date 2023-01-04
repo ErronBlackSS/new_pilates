@@ -86,7 +86,7 @@ class LessonsStore {
 
   async deleteLesson(lessonId: number) {
     await LessonService.deleteLesson(lessonId)
-    this.lessons = this.lessons.filter((item) => item.id !== lessonId)
+    this.lessons = this.lessons.filter((item) => item.lesson_id !== lessonId)
   }
 
   async bookLesson(lessonId: number, userId: number) {
