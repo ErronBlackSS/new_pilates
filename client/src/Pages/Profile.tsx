@@ -19,7 +19,7 @@ const Profile = () => {
         <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
           Личные данные
         </span>
-        <div className="flex flex-row w-full justify-start">
+        <div className="flex form-flex w-full justify-start">
           <div className="flex flex-col w-full">
             <EditProfileForm
               showEditPassword={onShowEditPassword}

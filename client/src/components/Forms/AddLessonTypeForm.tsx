@@ -32,7 +32,6 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
   
   // херово но я не нашел нужный тип
   const onSubmit = async (e: any) => {
-    debugger
     e.preventDefault()
     if(!defaultValue) {
       setShowAddModal(false)

@@ -23,8 +23,6 @@ const RegistationForm: FC = () => {
   const [formSended, setFormSended] = useState(false)
   const passwordIdentity = password.value === passwordConfirm.value
 
-  console.log(name, email, password, lastname, phone, passwordConfirm, passwordIdentity, 'jopa')
-
   const formDisabled = 
     !name.validations.inputValid ||
     !email.validations.inputValid || 
@@ -56,7 +54,8 @@ const RegistationForm: FC = () => {
           :
           <div className="text-left min-w-[300px]">
             <form
-              onSubmit={onSubmit}>
+              onSubmit={onSubmit}
+            >
               <div className="mt-4 flex-col md:gap-1 xl:gap-3 align-baseline">
                 <div className="flex form-flex gap-[10px]">
                   <InputItem
@@ -129,10 +128,10 @@ const RegistationForm: FC = () => {
               {errorMessage && <div className="text-red text-[12px]">{errorMessage}</div>}
               <button
                 disabled={formDisabled}
-                onSubmit={onSubmit}
+                type="submit"
                 className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
               >
-              Зарегистрироваться
+                Зарегистрироваться
               </button>
               <div className="mt-3 text-center text-[16px] leading-[20px]">
                 <span className="text-gray">
