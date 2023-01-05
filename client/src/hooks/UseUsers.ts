@@ -22,12 +22,17 @@ export const useUsers = () => {
   const setDefaultUsers = async () => {
     UserService.fetchUsers()
       .then(res => {
+        console.log(res.data, 'data')
         setUsers(res.data)
       })
   }
 
+  const onChangeUserRole = (id: number) => {
+    const newUsers = users.filter((user) => user.id !== id)
+    setUsers(newUsers)
+  }
+
   useEffect(() => {
-    console.log(location)
     switch(location.pathname) {
     case PATHNAMES.TRAINERS:
       setTrainers()
@@ -42,6 +47,7 @@ export const useUsers = () => {
   }, [location])
 
   return {
-    users
+    users,
+    onChangeUserRole
   }
 }

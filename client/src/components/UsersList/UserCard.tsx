@@ -14,9 +14,10 @@ interface IUserCard {
   phone: string
   email: string
   cardType: string
+  onChangeUserRole: (id: number) => void
 }
 
-const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email, cardType }) => {
+const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email, cardType, onChangeUserRole }) => {
   
   const [showUserProperties, setShowUserProperties] = useState(false)
   const [showTrainerUpdate, setShowTrainerUpdate] = useState(false)
@@ -24,6 +25,7 @@ const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email, 
   const onSetCoach = async () => {
     await UserService.setCoach(id)
     setShowUserProperties(false)
+    onChangeUserRole(id)
   }
 
   const imageLink = image_url? image_url : 'http://localhost:8080/files/user_photos/sss.png'
@@ -52,7 +54,7 @@ const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email, 
             Сделать тренером
           </Button>
         </Modal>}
-      <div className="flex flex-col w-[318px] h-[220px] bg-[#FFFEFE] shadow-md rounded-[10px] gap-[20px] px-[20px] py-[16px]">
+      <div className="flex flex-col w-[320px] max-h-[220px] bg-[#FFFEFE] shadow-md rounded-[10px] gap-[20px] px-[20px] py-[16px]">
         <div className="flex flex-row justify-between items-center">
           <div className="flex justify-start items-center gap-[10px]">
             <img className="rounded-[50px] w-[52px] h-[52px] border border-bordo object-cover" src={imageLink} alt="" />

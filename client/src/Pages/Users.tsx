@@ -6,7 +6,7 @@ const Users = () => {
   const location = useLocation()
   const title = location.pathname === '/account/users' ? 'Клиенты' : 'Тренеры'
 
-  const { users } = useUsers()
+  const { users, onChangeUserRole } = useUsers()
 
   return (
     <>
@@ -21,6 +21,7 @@ const Users = () => {
           {users.map((user) => {
             return (
               <UserCard
+                onChangeUserRole={onChangeUserRole}
                 cardType={title}
                 key={user.id}
                 id={user.id}

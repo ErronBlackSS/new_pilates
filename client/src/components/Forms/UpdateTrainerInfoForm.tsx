@@ -17,7 +17,7 @@ const UpdateTrainerInfoForm : FC<IUpdateTrainerInfoForm> = ({ trainerId, setShow
 
   const getTrainerInfo = async () => {
     const resp = await UserService.getTrainerInfo(trainerId)
-
+    
     if (!resp.data) {
       setInfoExists(false)
     }
