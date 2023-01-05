@@ -23,14 +23,16 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
   const duration = useInput({initialvalue: defaultValue?.duration ?? 0, validations: { isEmpty: true }})
   const type = useInput({initialvalue: defaultValue?.type ?? '', validations: { isEmpty: true }})
   const [image, setImage] = useState(null)
+  const [imageAdded, setImageAdded] = useState(false)
 
   const formDisabled =
-    !title.validations.status ||
-    !description.validations.status ||
-    !duration.validations.status
+    !title.validations.inputValid ||
+    !description.validations.inputValid ||
+    !duration.validations.inputValid
   
   // херово но я не нашел нужный тип
   const onSubmit = async (e: any) => {
+    debugger
     e.preventDefault()
     if(!defaultValue) {
       setShowAddModal(false)
@@ -42,7 +44,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
       }
       const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value)
       if (image instanceof FormData) {
-        const createImage = LessonTypesService.saveLessonTypeImage(image, id)
+        const createImage = await LessonTypesService.saveLessonTypeImage(image, id)
         const lessonTypeData = { ...lessonType.data, image: createImage }
         onAddLessonType(lessonTypeData)
         return
@@ -81,6 +83,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
               name="uploadFile"
               onChange={(event) => {
                 setImage(event.target.files[0])
+                setImageAdded(true)
               }}
             ></input>
           </p>
@@ -129,7 +132,8 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
           onBlur={description.onBlur}
         />
         <button
-          disabled={formDisabled}
+          type="submit"
+          disabled={formDisabled || !imageAdded}
           className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
         >
           Применить

@@ -68,7 +68,6 @@ async function activate_user (userId) {
     return { message: 'Пользователь активирован' }
 }
 
-
 async function activate(activationLink) {
     const user = await UserHelpers.findOne({field: 'activation_link', value: activationLink})
     if (!user) {
