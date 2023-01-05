@@ -80,11 +80,11 @@ CREATE TABLE users_lessons_rel (
 
 CREATE TABLE trainer_info (
 	trainer_id int PRIMARY KEY,
-	education VARCHAR(511),
+	education VARCHAR(999),
 	certificates VARCHAR(999),
 	personal_achievements VARCHAR(999),
-	work_experience VARCHAR(100),
-	directions VARCHAR(301),
+	work_experience VARCHAR(999),
+	directions VARCHAR(999),
 	
 	FOREIGN KEY (trainer_id) REFERENCES users(id)
 );
