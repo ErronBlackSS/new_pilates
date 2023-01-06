@@ -18,7 +18,7 @@ const TrainerItem: FC<ITrainerItem> = ({name, lastname, image_url, education, ce
 
   const [showModalInfo, setShowModalInfo] = useState(false)
 
-  const imageLink = image_url? image_url : 'http://localhost:8080/files/user_photos/sss.png'
+  const imageLink = image_url? image_url : process.env.REACT_APP_FILE_PATH + '/user_photos/sss.png'
 
   const isBoss = (name === 'Екатерина' && lastname === 'Федоровская') ? true : false 
 

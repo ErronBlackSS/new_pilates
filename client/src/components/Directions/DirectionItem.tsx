@@ -15,7 +15,7 @@ const DirectionItem: FC<IDirectionItem> = ({ title, description, duration, image
 
   const [showModalInfo, setShowModalInfo] = useState(false)
 
-  const imageLink = image_url? image_url : process.env.FILE_PATH + '/test_yoga.png'
+  const imageLink = image_url ? image_url : process.env.REACT_APP_FILE_PATH + '/test_yoga.png'
 
   return (
     <>
@@ -49,7 +49,7 @@ const DirectionItem: FC<IDirectionItem> = ({ title, description, duration, image
           <div>
             <div className="relative w-[389px] h-[178px] mobile-below:w-[231px] mobile-below:h-[125px]">  
               <div className="absolute bottom-0">
-                <img src={imageLink} alt="2" className="rounded-[10px] w-[389px] h-[178px] object-cover mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
+                <img src={imageLink} alt="directionImage" className="rounded-[10px] w-[389px] h-[178px] object-cover mobile-below:w-[231px] mobile-below:h-[125px]"></img>    
               </div>
               <div className="absolute right-0 bottom-0 m-[5px]">
                 <Button
