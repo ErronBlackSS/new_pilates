@@ -4,12 +4,12 @@ export const NAV_LINKS = [
     text: 'Тренеры'
   },
   {
-    link: '/#directions',
-    text: 'Направления'
-  },
-  {
     link: '/#price',
     text: 'Прайс'
+  },
+  {
+    link: '/#directions',
+    text: 'Направления'
   },
   {
     link: '/#schedule',

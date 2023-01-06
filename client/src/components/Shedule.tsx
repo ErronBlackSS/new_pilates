@@ -54,7 +54,7 @@ const Shedule = () => {
             />
           </Modal>
       }
-      <div className="flex flex-row mt-[100px] mb-[70px] mobile-below:mt-[50px]">
+      <div className="flex flex-row mb-[70px]">
         <div>
           <span className="text-[44px] leading-[56px] mobile-below:text-[24px]">Расписание</span>
         </div>

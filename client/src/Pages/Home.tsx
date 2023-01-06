@@ -65,7 +65,7 @@ const Main = () => {
           </div>
           <div className="w-full px-[16px]">
             <div className="flex bg-[#FFFEFE] shadow-md mt-[52px] pl-[52px] rounded-[28px] mobile-below:pl-[12px] mobile-below:mt-[27px] mobile-below:rounded-[10px]">
-              <ul className="w-full list-none text-[20px] text-[#1B1B1B] mt-[52px] mobile-below:text-[14px] mobile-below:mt-[16px]">
+              <ul className="w-full list-none text-[20px] text-[#1B1B1B] mt-[52px] mobile-below:text-[14px] mobile-below:mt-[8px]">
                 <li className="pb-[31px] mobile-below:pb-[8px]">Уникальные направления body&mind</li>
                 <li className="py-[32px] mobile-below:py-[8px]">Занятия в формате мини-групп</li>
                 <li className="py-[32px] mobile-below:py-[8px]">Чистота и свежий воздух</li>
