@@ -5,7 +5,6 @@ import { Context } from '../index'
 import { useSideBar } from '../Hooks/UseSideBar'
 import SideBarItem from './SideBars/SideBarItem'
 import { observer } from 'mobx-react-lite'
-import IconArrow from './Common/Icons/IconArrow'
 import IconLogo from './Common/Icons/IconLogo'
 import Icon from './Icon'
 import IconArrowBack from './Common/Icons/IconArrowBack'
@@ -28,17 +27,17 @@ const SideBar = () => {
   }
 
   const toMainPage = (): void => {
-    toggle()
+    toggle(false)
     navigate('/')
   }
 
   const toProfile = (): void => {
-    toggle()
+    toggle(false)
     navigate('/account/profile')
   }
 
   useEffect(() => {
-    toggle()
+    toggle(false)
   }, [selected])
 
   return (
@@ -59,8 +58,8 @@ const SideBar = () => {
           />
         </svg>
         <div 
-          className="flex flex-col justify-center items-center gap-[10px] my-[11px] mr-[22px] cursor-pointer"
-          onClick={toggle}
+          className="flex flex-col justify-center items-center gap-[10px] my-[11px] pr-[22px] cursor-pointer"
+          onClick={() => toggle(!isToggled)}
         >
           <div className="h-[2px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
           <div className="h-[2px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
@@ -113,7 +112,7 @@ const SideBar = () => {
             </div>
           </Icon>
           <Icon
-            onClick={toggle}
+            onClick={() => toggle(false)}
           >
             <div className="flex flex-row justify-center items-center gap-[10px] cursor-pointer">
               <IconArrowBack />

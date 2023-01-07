@@ -7,8 +7,8 @@ export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
   const [isToggled, setToggled] = useState(false)
   const [menuItems, setMenuItems] = useState([])
 
-  const toggle = () => {
-    setToggled(!isToggled)
+  const toggle = (val: boolean) => {
+    setToggled(val ? val : !isToggled)
     
     if (!isToggled) {
       bodyRef.current.classList.remove('mobile-below:hidden')

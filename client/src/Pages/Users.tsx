@@ -10,7 +10,7 @@ const Users = () => {
 
   return (
     <>
-      <div className="mobile-above:pt-[50px] mobile-above:pr-[60px]">
+      <div className="w-full mobile-above:pt-[50px] mobile-above:pr-[60px]">
         <div className="flex flex-row justify-between items-center">          
           <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
             {title}
