@@ -54,9 +54,9 @@ const EditProfileForm: FC<IEditProfilePhoto> = ({curName, curLastname, curEmail,
   }
 
   return (
-    <div className="flex justify-start text-center">
+    <div className="flex  justify-start text-center">
       <div>
-        <div className="text-left w-[500px]">
+        <div className="text-left  mobile-below:overflow-x-scroll mobile-above:w-[500px]">
           <form
             onSubmit={onSubmit}>
             <div className="mt-4">
