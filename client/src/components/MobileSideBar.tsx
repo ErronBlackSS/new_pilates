@@ -67,13 +67,13 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={ 'mobile-above:h-screen mobile-below:h-[calc(100%-150px)] mobile-below:hidden fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' }
+        className={ 'mobile-above:h-screen mobile-below:h-[calc(100%-150px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' + (isToggled ? ' ' : ' hidden') }
         id="sidebar"
         ref={bodyRef}
       >
-        <div className={'flex flex-col gap-[40px] mt-[40px] justify-center ' + (isToggled ? ' items-start' : ' items-center')}>
+        <div className={'flex flex-col gap-[40px] mt-[40px] justify-center items-start'}>
           <div
-            className={'flex flex-row justify-start gap-[10px] items-center cursor-pointer ' + (isToggled ? ' rounded-[50px] bg-[#F2F2F3] w-full' : '')}
+            className={'flex flex-row justify-start gap-[10px] items-center cursor-pointer rounded-[50px] bg-[#F2F2F3] w-full'}
             onClick={toProfile}
           >
             <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo object-cover" src={user.user.image_url} alt="" />
