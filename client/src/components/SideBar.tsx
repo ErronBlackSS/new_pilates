@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom'
-import { createContext, useContext, useRef, useState } from 'react' 
+import { useContext, useRef, useState } from 'react' 
 import IconLogout from './Common/Icons/IconLogout'
 import { Context } from '../index'
 import { useSideBar } from '../Hooks/UseSideBar'
@@ -54,7 +54,6 @@ const SideBar = () => {
             return (
               <SideBarItem
                 setSelected={setSelected}
-                selected={selected}
                 key={index}
                 icon={item.icon}
                 isToggled={isToggled}

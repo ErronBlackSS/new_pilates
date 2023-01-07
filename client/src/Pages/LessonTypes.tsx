@@ -16,10 +16,6 @@ const LessonTypes = () => {
     pushLessonType,
     editLessonType,
   } = useLessonTypes()
-  
-  useEffect(() => {
-    console.log(lessonTypes)
-  }, [])
 
   return (
     <>

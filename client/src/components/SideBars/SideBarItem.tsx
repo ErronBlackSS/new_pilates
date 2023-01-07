@@ -9,10 +9,9 @@ interface ISideBarItem {
   isToggled: boolean
   icon: any
   setSelected: (path: string) => void
-  selected: string
 }
 
-const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelected, selected }) => {
+const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelected }) => {
 
   const location = useLocation()
 
@@ -35,7 +34,7 @@ const SideBarItem: FC<ISideBarItem> = ({ title, path, isToggled, icon, setSelect
     <Link
       to={path}
       className="w-full"
-      onClick={() => isCurrentLocation ?? setSelected(path)}
+      onClick={() => setSelected(path)}
     >
       <Button
         className={SideBarClasses}
