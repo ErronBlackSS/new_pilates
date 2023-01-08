@@ -54,7 +54,7 @@ const Shedule = () => {
             />
           </Modal>
       }
-      <div className="flex flex-row mb-[70px]">
+      <div className="flex form-flex mb-[70px]">
         <div>
           <span className="text-[44px] leading-[56px] mobile-below:text-[24px]">Расписание</span>
         </div>
@@ -63,9 +63,11 @@ const Shedule = () => {
           onNext={() => setCurrentWeek(getNextWeek())}
         />
       </div>
-      <SheduleTable
-        selectLesson={selectLesson}
-      />
+      <div className="overflow-x-auto">
+        <SheduleTable
+          selectLesson={selectLesson}
+        />
+      </div>
     </>
   )
 }

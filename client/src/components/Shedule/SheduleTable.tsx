@@ -9,15 +9,16 @@ interface ISheduleTable {
 }
 
 const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
+
   return (
     <table
-      className="bg-[#FFF] p-[25px] gap-[15px] border-separate overflow-y-scroll"
+      className="bg-[#FFF] w-full p-[25px] gap-[15px] border-separate overflow-hidden"
     >
       <thead>
         <tr>
           <th className="w-[155px] h-[40]"><div><p>Время</p></div></th>
           {LessonsStore.weekDays && LessonsStore.weekDays.map((day, index) => (
-            <th className="w-[155px] h-[40]" key={index}><div><p>{day}</p></div></th>
+            <th className="w-[155px] h-[40]" style={{ wordSpacing: '9999px'}} key={index}><div><p>{day}</p></div></th>
           ))}
         </tr>
       </thead>

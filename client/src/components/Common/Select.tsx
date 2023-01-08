@@ -49,7 +49,7 @@ const Select: FC<ISelect> = ({ options, label, onSelect, defaultValue }) => {
         style={{ border: '1px solid #8A8E97' }}
       >
         <div className="flex flex-row cursor-pointer justify-between items-center w-full">
-          <input value={value?.label} type="text" disabled />
+          <input className="bg-[#FFFEFE]" value={value?.label} type="text" disabled />
           <svg
             className="cursor-pointer"
             width="15"
