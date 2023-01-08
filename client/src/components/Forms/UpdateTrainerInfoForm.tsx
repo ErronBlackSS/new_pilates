@@ -17,7 +17,6 @@ const UpdateTrainerInfoForm : FC<IUpdateTrainerInfoForm> = ({ trainerId, setShow
 
   const getTrainerInfo = async () => {
     const resp = await UserService.getTrainerInfo(trainerId)
-    
     if (!resp.data) {
       setInfoExists(false)
     }
@@ -73,7 +72,7 @@ const UpdateTrainerInfoForm : FC<IUpdateTrainerInfoForm> = ({ trainerId, setShow
                 <label
                   className="block text-[12px] leading-[15px] text-[#000000]"
                 >
-                Образование
+                  Образование
                 </label>
                 <textarea
                   className="w-full h-[100px] rounded-[10px] border border-[#D9D9DA] p-[10px]"
@@ -85,7 +84,7 @@ const UpdateTrainerInfoForm : FC<IUpdateTrainerInfoForm> = ({ trainerId, setShow
                 <label
                   className="block text-[12px] leading-[15px] text-[#000000]"
                 >
-                Сертификаты
+                  Сертификаты
                 </label>
                 <textarea
                   className="w-full h-[100px] rounded-[10px] border border-[#D9D9DA] p-[10px]"
@@ -99,7 +98,7 @@ const UpdateTrainerInfoForm : FC<IUpdateTrainerInfoForm> = ({ trainerId, setShow
                 <label
                   className="block text-[12px] leading-[15px] text-[#000000]"
                 >
-                Личные достижения
+                  Личные достижения
                 </label>
                 <textarea
                   className="w-full h-[100px] rounded-[10px] border border-[#D9D9DA] p-[10px]"
@@ -111,7 +110,7 @@ const UpdateTrainerInfoForm : FC<IUpdateTrainerInfoForm> = ({ trainerId, setShow
                 <label
                   className="block text-[12px] leading-[15px] text-[#000000]"
                 >
-                Опыт
+                  Опыт
                 </label>
                 <textarea
                   className="w-full h-[100px] rounded-[10px] border border-[#D9D9DA] p-[10px]"

@@ -28,19 +28,19 @@ export default class UserService {
   }
 
   static async getTrainerInfo (trainerId: number) {
-    return await $api.get('/users/trainer/info?id=' + trainerId)
+    return $api.get('/users/trainer/info?id=' + trainerId)
   }
 
   static async createTrainerInfo(
     trainerId: number,
-    edication: string,
+    education: string,
     certificates: string,
     achievements: string,
     experience: string,
     directions: string
   ) {
     return $api.post('/users/trainer/info?id=' + trainerId, {
-      edication: edication,
+      education: education,
       certificates: certificates,
       achievements: achievements,
       experience: experience,
@@ -50,14 +50,14 @@ export default class UserService {
 
   static async updateTrainerInfo(
     trainerId: number,
-    edication: string,
+    education: string,
     certificates: string,
     achievements: string,
     experience: string,
     directions: string
   ) {
     return $api.patch('/users/trainer/info?id=' + trainerId, {
-      edication: edication,
+      education: education,
       certificates: certificates,
       achievements: achievements,
       experience: experience,
