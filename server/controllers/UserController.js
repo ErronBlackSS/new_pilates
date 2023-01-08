@@ -215,7 +215,7 @@ async function getTrainers (req, res, next) {
     
     res.json(coaches.rows)
   } catch (e) {
-    //next(e)
+    next(e)
   }
 }
 

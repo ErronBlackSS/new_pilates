@@ -100,7 +100,10 @@ function getWeekDaysWithDate(start) {
   const diff = today.getDate() - day + (day === 0 ? -6:1)
   for (let i = 0; i < 7; i++) {
     const day = new Date(today.setDate(diff + i))
-    weekDaysShedule[i] += ' ' + day.getDate() + '.' + (+day.getMonth()+1)
+    const strDay = day.getDate() > 9 ? day.getDate() : '0' + day.getDate()
+    const monthNum = Number(day.getMonth()+1)
+    const strMonth = monthNum > 9 ? monthNum : '0' + monthNum
+    weekDaysShedule[i] += ' ' + strDay + '.' + strMonth
   }
 
   return weekDaysShedule
