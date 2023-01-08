@@ -36,15 +36,17 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
     if(!defaultValue) {
       setShowAddModal(false)
       let formData = new FormData()
+      let imageAdded = false
       if(e.target[0].files[0]) {
         formData.append('file', e.target[0].files[0])
+        imageAdded = true
       } else {
         formData = null
       }
       const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value)
-      if (image instanceof FormData) {
-        const createImage = await LessonTypesService.saveLessonTypeImage(image, id)
-        const lessonTypeData = { ...lessonType.data, image: createImage }
+      if (imageAdded) {
+        const createImage = await LessonTypesService.saveLessonTypeImage(formData, lessonType.data.id)
+        const lessonTypeData = { ...lessonType.data, image_url: createImage.data }
         onAddLessonType(lessonTypeData)
         return
       }
@@ -87,19 +89,17 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
             ></input>
           </p>
         </div>
-        <div className="flex flew-row gap-[30px]">
-          <InputItem
-            label="Название"
-            type="text"
-            name="name"
-            placeholder="Введите название"
-            validations={title.validations}
-            dirty={title.isDirty}
-            defaultValue={title.value}
-            onBlur={title.onBlur}
-            onChange={title.onChange}
-          />
-        </div>
+        <InputItem
+          label="Название"
+          type="text"
+          name="name"
+          placeholder="Введите название"
+          validations={title.validations}
+          dirty={title.isDirty}
+          defaultValue={title.value}
+          onBlur={title.onBlur}
+          onChange={title.onChange}
+        />
         <div className="flex flew-row gap-[30px]">
           <InputItem
             label="Длительность"

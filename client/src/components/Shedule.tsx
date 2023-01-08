@@ -55,8 +55,8 @@ const Shedule = () => {
           </Modal>
       }
       <div className="flex form-flex mb-[70px]">
-        <div>
-          <span className="text-[44px] leading-[56px] mobile-below:text-[24px]">Расписание</span>
+        <div className="mb-[7px]">
+          <h1 className="mobile-below:ml-[19px] text-[44px] leading-[56px] mobile-below:text-[24px]">Расписание</h1>
         </div>
         <TopButtons
           onPrev={() => setCurrentWeek(getCurrentWeek())}
