@@ -125,7 +125,7 @@ const FilterButtons: FC<IFilterButtons> = ({ role, userId }) => {
   const buttons = getButtons(role)
 
   return (
-    <div className="flex justify-center items-center gap-[25px]">
+    <div className="form-flex justify-center items-center gap-[25px]">
       {buttons.map((item, index) => (
         <Button
           key={index}

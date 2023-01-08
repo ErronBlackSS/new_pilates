@@ -7,7 +7,7 @@ const LessonsList: FC = () => {
 
   return (
     <div
-      className="flex flex-col bg-[#FEFAFA] py-[25px] mt-[14px]"
+      className="flex flex-col bg-[#FEFAFA] py-[25px] mt-[14px] overflow-y-scroll"
     >
       {LessonsStore.lessons && LessonsStore.lessons.map((lesson, index) => (
         <LessonsRow 

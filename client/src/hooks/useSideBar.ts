@@ -11,10 +11,10 @@ export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
     setToggled(val)
     
     if (!isToggled) {
-      setTimeout(() => bodyRef.current.classList.add('!w-[250px]'), 100)
+      setTimeout(() => bodyRef?.current?.classList?.add('!w-[250px]'), 100)
     } else {
       bodyRef.current.classList.remove('!w-[250px]')
-      setTimeout(() => bodyRef.current.classList.add('mobile-below:hidden'), 300)
+      setTimeout(() => bodyRef?.current?.classList?.add('mobile-below:hidden'), 300)
     }
   }
 

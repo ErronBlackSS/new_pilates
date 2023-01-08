@@ -73,12 +73,12 @@ const Lessons = () => {
           <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
           Список занятий
           </span>
-          <div className="flex flex-row">
+          <div className="flex form-flex">
             <FilterButtons role={user.user.role} userId={user.user.id} />
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-end mt-[36px]">
+      <div className="w-full flex mobile-above:justify-end mt-[36px] mobile-below:justify-start">
         {user.user.role === ROLES.ADMIN && <Button
           handler={() => setShowAddModal(true)}
           color={ButtonColors.white}
