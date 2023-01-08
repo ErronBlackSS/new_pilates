@@ -8,13 +8,13 @@ export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
   const [menuItems, setMenuItems] = useState([])
 
   const toggle = (val: boolean) => {
+    console.log(val, 'wtf?')
     setToggled(val)
     
     if (!isToggled) {
-      setTimeout(() => bodyRef?.current?.classList?.add('!w-[250px]'), 100)
+      bodyRef.current.classList.add('!w-[250px]')
     } else {
       bodyRef.current.classList.remove('!w-[250px]')
-      setTimeout(() => bodyRef?.current?.classList?.add('mobile-below:hidden'), 300)
     }
   }
 

@@ -82,7 +82,7 @@ const SideBar = () => {
             </div>
           </Icon>
           <Icon
-            onClick={() => toggle(false)}
+            onClick={() => toggle(!isToggled)}
           >
             <div className="flex flex-row justify-center items-center gap-[10px] cursor-pointer">
               {isToggled ? <IconArrowBack /> : <IconArrow />}

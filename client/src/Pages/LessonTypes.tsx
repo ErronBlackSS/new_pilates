@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useLessonTypes } from '../Hooks/UseLessonTypes'
 import Modal from '../Components/Common/Modal'
 import AddLessonTypeForm from '../Components/Forms/AddLessonTypeForm'
