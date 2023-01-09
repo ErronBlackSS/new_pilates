@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import { Lesson } from '../../Types/LessonsTypes/LessonsTypes'
 
-interface ISheduleCell {
+interface IScheduleCell {
   lesson: Lesson
   selectLesson: (lesson: Lesson) => void
 }
 
-const SheduleCell: FC<ISheduleCell> = ({lesson, selectLesson}) => {
+const ScheduleCell: FC<IScheduleCell> = ({lesson, selectLesson}) => {
   return (
     <th className="border border-[#F2F2F3] w-[155px] h-[105px]">
       {
@@ -27,4 +27,4 @@ const SheduleCell: FC<ISheduleCell> = ({lesson, selectLesson}) => {
   )
 }
 
-export default SheduleCell
+export default ScheduleCell

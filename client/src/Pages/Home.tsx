@@ -1,4 +1,4 @@
-import Shedule from '../Components/Shedule'
+import Schedule from '../Components/Schedule'
 import useWindowWidth from '../Hooks/UseScreenWidth'
 import TrainersSwipe from '../Components/TrainersSwipe'
 import Directions from '../Components/Directions'
@@ -156,7 +156,7 @@ const Main = () => {
         </div>
         <Directions />
         <div id="schedule" className="w-full" ref={schedule}>
-          <Shedule />
+          <Schedule />
         </div>
 
         <div id="rules" ref={rules} className="mt-[110px] mb-[50px] mobile-below:ml-[19px] mobile-below:mb-[30px] mobile-below:mt-[50px]">

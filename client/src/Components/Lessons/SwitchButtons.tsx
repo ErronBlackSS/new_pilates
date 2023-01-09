@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import Button from '../Common/Button'
-import IconShedule from '../Common/Icons/IconShedule'
+import IconSchedule from '../Common/Icons/IconSchedule'
 import IconList from '../Common/Icons/IconList'
 import { ButtonColors } from '../../Utils/constance'
 
@@ -22,9 +22,9 @@ const SwitchButtons: FC<ISwitchButtons> = ({onSwitch}) => {
     case 0:
       return <IconList color={index === active ? 'white' : '#1B1B1B'}/>
     case 1:
-      return <IconShedule color={index === active ? 'white' : '#1B1B1B'}/>
+      return <IconSchedule color={index === active ? 'white' : '#1B1B1B'}/>
     default:
-      return <IconShedule color={index === active ? 'white' : '#1B1B1B'}/>
+      return <IconSchedule color={index === active ? 'white' : '#1B1B1B'}/>
     }
   }
 
@@ -39,7 +39,7 @@ const SwitchButtons: FC<ISwitchButtons> = ({onSwitch}) => {
       content: () => getContent(1),
       className: 'py-[2px] px-[14px]',
       color: ButtonColors.white,
-      view: 'shedule'
+      view: 'Schedule'
     }
   ]
 

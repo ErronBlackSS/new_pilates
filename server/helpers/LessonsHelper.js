@@ -88,7 +88,7 @@ function findFormattedLesson(formattedLessons, key, weekDay) {
 function getWeekDaysWithDate(start) {
   const today = new Date(start)
   const day = today.getDay()
-  const weekDaysShedule = [
+  const weekDaysSchedule = [
     'Понедельник',
     'Вторник',
     'Среда',
@@ -103,10 +103,10 @@ function getWeekDaysWithDate(start) {
     const strDay = day.getDate() > 9 ? day.getDate() : '0' + day.getDate()
     const monthNum = Number(day.getMonth()+1)
     const strMonth = monthNum > 9 ? monthNum : '0' + monthNum
-    weekDaysShedule[i] += ' ' + strDay + '.' + strMonth
+    weekDaysSchedule[i] += ' ' + strDay + '.' + strMonth
   }
 
-  return weekDaysShedule
+  return weekDaysSchedule
 }
 
 const weekDays = [

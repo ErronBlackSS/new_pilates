@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
-interface IIconShedule {
+interface IIconSchedule {
   color: string
 }
 
-const IconShedule: FC<IIconShedule> = ({ color }) => {
+const IconSchedule: FC<IIconSchedule> = ({ color }) => {
   return (
     <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13.8125 2.65622H3.1875C2.3073 2.65622 1.59375 3.36977 1.59375 4.24997V13.8125C1.59375 14.6927 2.3073 15.4062 3.1875 15.4062H13.8125C14.6927 15.4062 15.4062 14.6927 15.4062 13.8125V4.24997C15.4062 3.36977 14.6927 2.65622 13.8125 2.65622Z" stroke={color} strokeLinejoin="round"/>
@@ -23,4 +23,4 @@ const IconShedule: FC<IIconShedule> = ({ color }) => {
   )
 }
 
-export default IconShedule
+export default IconSchedule

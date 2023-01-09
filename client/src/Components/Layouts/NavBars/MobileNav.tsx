@@ -45,7 +45,7 @@ const MobileNav: FC<IMobileNav> = ({ toggleOverlay, redirectToMain }) => {
                 text={link.text} />
             )
           })}
-          <li className="nav-link block pr-2 lg:px-2 py-2 text-[20px] mx-[10px]">
+          <li className="nav-link block pr-2 lg:px-2 py-2 text-[20px] flex justify-center">
             <AuthLink />
           </li>
         </ul>
