@@ -27,6 +27,10 @@ export default class UserService {
     return $api.patch('/users/set/coach', { id: userId })
   }
 
+  static async deleteCoach (userId: number) {
+    return $api.patch('/users/set/user', {id: userId})
+  }
+
   static async getTrainerInfo (trainerId: number) {
     return await $api.get('/users/trainer/info?id=' + trainerId)
   }

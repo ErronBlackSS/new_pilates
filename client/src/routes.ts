@@ -7,6 +7,7 @@ import ResetSend from './Pages/ResetSend'
 import Profile from './Pages/Profile'
 import Lessons from './Pages/Lessons'
 import Users from './Pages/Users'
+import Trainers from './Pages/Trainers'
 import Directions from './Pages/Directions'
 import LessonTypes from './Pages/LessonTypes'
 
@@ -40,7 +41,7 @@ export const ADMIN_ROUTES = [
   },
   {
     PATH: ROUTES.TRAINERS,
-    COMPONENT: Users
+    COMPONENT: Trainers
   }
 ]
 
