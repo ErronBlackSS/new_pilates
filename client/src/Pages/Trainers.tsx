@@ -1,11 +1,11 @@
 import { useUsers } from '../Hooks/UseUsers'
-import UserCard from '../Components/UsersList/UserCard'
+import TrainerCard from '../Components/Trainers/TrainerCard'
 
-const Users = () => {
-  const title = 'Клиенты'
-
+const Trainers = () => {
+  const title = 'Тренеры'
+  
   const { users, onChangeUserRole } = useUsers()
-
+  
   return (
     <>
       <div className="w-full mobile-above:pt-[50px] mobile-above:pr-[60px]">
@@ -14,11 +14,11 @@ const Users = () => {
             {title}
           </span>
         </div>
-        
+          
         <div className="flex flex-wrap gap-[32px] my-[25px]">
           {users.map((user) => {
             return (
-              <UserCard
+              <TrainerCard
                 onChangeUserRole={onChangeUserRole}
                 key={user.id}
                 id={user.id}
@@ -37,4 +37,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Trainers
