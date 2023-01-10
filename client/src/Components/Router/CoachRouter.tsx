@@ -2,15 +2,15 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../../Pages/Home'
 import { COACH_ROUTES, PUBLIC_ROUTES, SIGN_IN_ROUTES } from '../../routes'
+import AccountLayout from '../Layouts/AccountLayout'
 import AuthLayout from '../Layouts/NavBars/AuthLayout'
 import MainNavBar from '../Layouts/NavBars/MainLayout'
-import SideBar from '../SideBar'
 
 const UserRouter = () => {
   return (
     <React.Suspense>
       <Routes>
-        <Route element={<SideBar />}>  
+        <Route element={<AccountLayout />}>  
           {COACH_ROUTES.map(({ PATH, COMPONENT }) =>
             <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}

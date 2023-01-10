@@ -9,6 +9,7 @@ import IconLogo from './Common/Icons/IconLogo'
 import Icon from './Icon'
 import IconArrowBack from './Common/Icons/IconArrowBack'
 import MainSection from './MainSection'
+import DefaultUserAvatar from './Common/DefaultUserAvatar'
 
 const MobileSideBar = () => {
   const { user } = useContext(Context)
@@ -67,7 +68,7 @@ const MobileSideBar = () => {
         </div>
       </div>
       <div
-        className={ 'h-screen h-[calc(100%-78px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' ' : ' hidden') }
+        className={ 'h-screen h-[calc(100%-78px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' w-[250px]' : ' hidden') }
         id="sidebar"
         ref={bodyRef}
       >
@@ -76,7 +77,10 @@ const MobileSideBar = () => {
             className={'flex flex-row justify-start gap-[10px] items-center cursor-pointer rounded-[50px] bg-[#F2F2F3] w-full'}
             onClick={toProfile}
           >
-            <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo object-cover" src={user.user.image_url} alt="" />
+            {user.user.image_url ? 
+              <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo object-cover" src={user.user.image_url} alt="" />
+              :
+              <DefaultUserAvatar />}
             {isToggled && <span className="text-bordo">{user.user.name}</span>}
           </div>
           {menuItems && menuItems.map((item, index) => {

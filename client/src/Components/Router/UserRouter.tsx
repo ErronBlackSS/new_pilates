@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router-dom'
 import { Context } from '../..'
 import Home from '../../Pages/Home'
 import { PUBLIC_ROUTES, SIGN_IN_ROUTES, USER_ACCOUNT_ROUTES } from '../../routes'
+import AccountLayout from '../Layouts/AccountLayout'
 import MainLayout from '../Layouts/NavBars/MainLayout'
-import SideBar from '../SideBar'
 
 const UserRouter = () => {
 
@@ -14,7 +14,7 @@ const UserRouter = () => {
   return (
     <React.Suspense>
       <Routes>
-        {user.isAuth && <Route element={<SideBar />}>  
+        {user.isAuth && <Route element={<AccountLayout />}>  
           {USER_ACCOUNT_ROUTES.map(({ PATH, COMPONENT }) =>
             <Route key={PATH} path={PATH} element={<COMPONENT />} />
           )}

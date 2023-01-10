@@ -2,6 +2,7 @@ import { FC, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../../..'
 import { ROLES } from '../../../Utils/constance'
+import DefaultUserAvatar from '../../Common/DefaultUserAvatar'
 
 
 interface IMobileNav {
@@ -45,7 +46,10 @@ const MobileView: FC<IMobileNav> = ({ toggleOverlay, redirectToMain }) => {
             className="flex px-[15px] flex-row gap-[10px] items-center cursor-pointer rounded-[50px] bg-[#F2F2F3]"
             onClick={toProfile}
           >
-            <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo object-cover" src={user.user.image_url} alt="" />
+            {user.user.image_url ? 
+              <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo object-cover" src={user.user.image_url} alt="" />
+              :
+              <DefaultUserAvatar />}
           </div>
           :
           <div
