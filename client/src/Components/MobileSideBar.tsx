@@ -10,7 +10,7 @@ import Icon from './Icon'
 import IconArrowBack from './Common/Icons/IconArrowBack'
 import MainSection from './MainSection'
 
-const SideBar = () => {
+const MobileSideBar = () => {
   const { user } = useContext(Context)
   const navigate = useNavigate()
 
@@ -67,7 +67,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={ 'h-screen h-[calc(100%-150px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' ' : ' hidden') }
+        className={ 'h-screen h-[calc(100%-78px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' ' : ' hidden') }
         id="sidebar"
         ref={bodyRef}
       >
@@ -130,4 +130,4 @@ const SideBar = () => {
   )
 }
 
-export default observer(SideBar)
+export default observer(MobileSideBar)

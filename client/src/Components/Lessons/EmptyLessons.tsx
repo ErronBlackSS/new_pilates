@@ -1,0 +1,26 @@
+import { Link } from 'react-router-dom'
+
+const EmptyLessons = () => {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="w-[144px] h-[144px] flex justify-center items-center mobile-above:hidden">
+        <img src="http://localhost:8080/files/girl.png" alt="mainImage" />
+      </div>
+      <div>
+        <p>
+          Список занятий пуст
+        </p>
+      </div>
+      <div className="mt-[52px] mobile-below:px-[16px] mobile-below:mt-[26px]">
+        <Link
+          to="/#rules"
+          className="w-[293px] h-[56px] px-[20px] py-[10px] bg-bordo text-[#FEFAFA] text-[20px] cursor-pointer rounded-[10px] mobile-below:w-[220px] mobile-below:h-[40px] mobile-below:text-[16px]"
+        >
+          Записаться на занятие
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+export default EmptyLessons
