@@ -91,7 +91,6 @@ async function saveLessonTypeImage(req, res) {
   const id = req.query.id
   const { file } = req.files
   const api_url = await LessonTypesService.saveImage(id, file)  
-  console.log(api_url, 'IMAGE API URL')
   res.json(api_url)
 }
 
