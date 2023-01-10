@@ -67,7 +67,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={ 'mobile-above:h-screen mobile-below:h-[calc(100%-150px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' + (isToggled ? ' ' : ' hidden') }
+        className={ 'h-screen h-[calc(100%-150px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' ' : ' hidden') }
         id="sidebar"
         ref={bodyRef}
       >

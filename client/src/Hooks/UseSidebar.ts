@@ -8,13 +8,12 @@ export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
   const [menuItems, setMenuItems] = useState([])
 
   const toggle = (val: boolean) => {
-    console.log(val, 'wtf?')
     setToggled(val)
     
     if (!isToggled) {
-      bodyRef.current.classList.add('!w-[250px]')
+      bodyRef?.current?.classList?.add('!w-[250px]')
     } else {
-      bodyRef.current.classList.remove('!w-[250px]')
+      bodyRef?.current?.classList?.remove('!w-[250px]')
     }
   }
 
