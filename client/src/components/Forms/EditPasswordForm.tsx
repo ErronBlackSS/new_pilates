@@ -17,9 +17,9 @@ const EditPasswordForm = () => {
   }
 
   return (
-    <div className="flex justify-center text-center">
-      <div>
-        <div className="text-left mobile-above:w-[500px]">
+    <div className="flex justify-center text-center w-full">
+      <div className="w-full">
+        <div className="text-left mobile-above:w-[500px] mobile-below:w-full">
           <form
             onSubmit={onSubmit}>
             <div className="mt-4">
