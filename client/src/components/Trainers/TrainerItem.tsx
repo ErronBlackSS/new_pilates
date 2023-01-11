@@ -63,8 +63,8 @@ const TrainerItem: FC<ITrainerItem> = ({name, lastname, image_url, education, ce
           </div>
         </Modal>}
       </div>
-      <div className="flex flex-col bg-[#FFFEFE] rounded-[10px] shadow-md w-[284px] h-[491px] mobile-below:w-[216px] mobile-below:h-[361px]">
-        <div className="relative w-[284px] mobile-below:w-[216px] mobile-below:h-[204px]">
+      <div className="flex flex-col bg-[#FFFEFE] rounded-[10px] shadow-md pb-[12px] mobile-below:pb-[10px]">
+        <div className="relative mobile-below:w-[216px]">
           <img className="w-[284px] h-[284px] rounded-t-[10px] object-cover mobile-below:w-[216px] mobile-below:h-[204px]" src={imageLink} alt="trainerImage"/>
           {isBoss &&
             <div className="flex justify-center items-center w-full h-[44px] rounded-t-[10px] absolute bg-[#464646]/70 top-0 mobile-below:h-[34px]">

@@ -7,15 +7,13 @@ export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
   const [isToggled, setToggled] = useState(false)
   const [menuItems, setMenuItems] = useState([])
 
-  const toggle = () => {
-    setToggled(!isToggled)
+  const toggle = (val: boolean) => {
+    setToggled(val)
     
     if (!isToggled) {
-      bodyRef.current.classList.remove('mobile-below:hidden')
-      setTimeout(() => bodyRef.current.classList.add('!w-[250px]'), 100)
+      bodyRef?.current?.classList?.add('!w-[250px]')
     } else {
-      bodyRef.current.classList.remove('!w-[250px]')
-      setTimeout(() => bodyRef.current.classList.add('mobile-below:hidden'), 300)
+      bodyRef?.current?.classList?.remove('!w-[250px]')
     }
   }
 

@@ -10,8 +10,9 @@ import IconLogo from './Common/Icons/IconLogo'
 import Icon from './Icon'
 import IconArrowBack from './Common/Icons/IconArrowBack'
 import MainSection from './MainSection'
+import DefaultUserAvatar from './Common/DefaultUserAvatar'
 
-const SideBar = () => {
+const MobileSideBar = () => {
   const { user } = useContext(Context)
   const navigate = useNavigate()
 
@@ -68,7 +69,7 @@ const SideBar = () => {
         </div>
       </div>
       <div
-        className={ 'mobile-above:h-screen mobile-below:h-[calc(100%-150px)] mobile-below:hidden fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center z-[100]' }
+        className={ 'h-screen h-[calc(100%-78px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' w-[250px]' : ' hidden') }
         id="sidebar"
         ref={bodyRef}
       >
@@ -77,7 +78,10 @@ const SideBar = () => {
             className={'flex flex-row justify-start gap-[10px] items-center cursor-pointer ' + (isToggled ? ' rounded-[50px] bg-[#F2F2F3] w-full' : '')}
             onClick={toProfile}
           >
-            <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo object-cover" src={user.user.image_url} alt="" />
+            {user.user.image_url ? 
+              <img className="rounded-[50px] w-[40px] h-[40px] border border-bordo object-cover" src={user.user.image_url} alt="" />
+              :
+              <DefaultUserAvatar />}
             {isToggled && <span className="text-bordo">{user.user.name}</span>}
           </div>
           {menuItems && menuItems.map((item, index) => {
@@ -131,4 +135,4 @@ const SideBar = () => {
   )
 }
 
-export default observer(SideBar)
+export default observer(MobileSideBar)
