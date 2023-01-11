@@ -61,9 +61,7 @@ async function update (req, res, next) {
       [id, title, description, global_lesson_type, duration]
     )
     const image_url = null
-    console.log(image, 'WTF?')
     if (image) {
-      console.log(image, 'WTFx2?')
       image_url = LessonTypesService.saveImage(lesson_types.rows[0].id ,image)
     }
     const lessonType = new LessonTypeDTO({...lesson_types.rows[0], image_url})
@@ -81,6 +79,8 @@ async function remove (req, res, next) {
       WHERE id = $1`, 
       [id]
     )
+    
+    LessonTypesService.deleteLessonTypeImage(id)
     res.json(lessonType.rows[0])
   } catch (e) {
     next(e)
