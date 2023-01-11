@@ -17,8 +17,12 @@ function getFormattedLessons(lessons, start) {
     const lessonStartTime = lesson.start_time.substr(0, 5)
     const lessonEndTime = lesson.end_time.substr(0, 5)
     const lessonFullTime = lessonStartTime + " - " + lessonEndTime
+    
     const lessonDate = lesson.date
-    const formattedDate = lessonDate.getFullYear() + '-' + lessonDate.getUTCDate() + '-' + (+lessonDate.getMonth())
+    const strDay = lessonDate.getDate() > 9 ? lessonDate.getDate() : '0' + lessonDate.getDate()
+    const monthNum = lessonDate.getMonth() + 1
+    const strMonth = monthNum > 9 ? monthNum : '0' + monthNum
+    const formattedDate = lessonDate.getFullYear() + '-' + strMonth + '-' + strDay
 
     if (formattedLessons[lessonFullTime]) {
       formattedLessons[lessonFullTime].lessons.push({

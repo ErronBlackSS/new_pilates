@@ -50,6 +50,7 @@ const Schedule = () => {
               description={selectedLesson.description}
               trainer={selectedLesson.trainer_name}
               freePlaces={selectedLesson.capacity}
+              date={selectedLesson.date}
               book={onBook}
             />
           </Modal>

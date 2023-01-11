@@ -5,11 +5,15 @@ interface ILessonDetail {
   trainer: string
   freePlaces: number
   time: string
+  date: string
   book: (id: number) => void
   id: number
 }
 
-const LessonDetail: FC<ILessonDetail> = ({ description, trainer, freePlaces, time, book, id }) => {
+const LessonDetail: FC<ILessonDetail> = ({ description, trainer, freePlaces, date, time, book, id }) => {
+
+  const pastLesson = new Date(date) < new Date()
+
   return (
     <div className="flex flex-col justify-center text-left gap-[20px]">
       <span className="text-[14px] font-[400] leading-[24px]">
@@ -27,8 +31,9 @@ const LessonDetail: FC<ILessonDetail> = ({ description, trainer, freePlaces, tim
       <div className="flex justify-center">
         <button
           onClick={() => { book(id) }}
-          className="max-w-[109px] px-[8px] py-[4px] cursor-pointer rounded-[10px] bg-white"
+          className={ 'max-w-[109px] px-[8px] py-[4px] cursor-pointer rounded-[10px] bg-white ' + (pastLesson && ' opacity-40') }
           style={{border: '1px solid #1B1B1B'}}
+          disabled={pastLesson}
         >
           Записаться
         </button>
