@@ -10,7 +10,7 @@ const MainSection: FC<IMainSection> = ({children, isToggled}) => {
   const [mainSectionClasses, setMainSectionClasses] = useState('')  
 
   useEffect(() => {
-    let classes = 'mobile:above:pr-[60px] transition-all duration-500' + (isToggled ? ' ml-[300px]' : ' ml-[80px]')
+    let classes = 'mobile:above:pr-[60px] mobile:below:px-[60px] transition-all duration-500' + (isToggled ? ' ml-[300px]' : ' ml-[80px]')
     
     if(isToggled === null) return
 

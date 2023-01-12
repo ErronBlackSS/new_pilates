@@ -2,15 +2,14 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useRef, useState } from 'react' 
 import IconLogout from './Common/Icons/IconLogout'
 import { Context } from '../index'
-import { useSideBar } from '../Hooks/UseSideBar'
 import SideBarItem from './SideBars/SideBarItem'
 import { observer } from 'mobx-react-lite'
-import IconArrow from './Common/Icons/IconArrow'
 import IconLogo from './Common/Icons/IconLogo'
 import Icon from './Icon'
 import IconArrowBack from './Common/Icons/IconArrowBack'
 import MainSection from './MainSection'
 import DefaultUserAvatar from './Common/DefaultUserAvatar'
+import { useSideBar } from '../Hooks/UseSideBar'
 
 const MobileSideBar = () => {
   const { user } = useContext(Context)
@@ -29,17 +28,17 @@ const MobileSideBar = () => {
   }
 
   const toMainPage = (): void => {
-    toggle()
+    toggle(false)
     navigate('/')
   }
 
   const toProfile = (): void => {
-    toggle()
+    toggle(false)
     navigate('/account/profile')
   }
 
   useEffect(() => {
-    toggle()
+    toggle(false)
   }, [selected])
 
   return (
@@ -61,7 +60,7 @@ const MobileSideBar = () => {
         </svg>
         <div 
           className="flex flex-col justify-center items-center gap-[10px] my-[11px] mr-[22px] cursor-pointer"
-          onClick={toggle}
+          onClick={() => toggle(!isToggled)}
         >
           <div className="h-[2px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
           <div className="h-[2px] w-[24px] border border-[#1B1B1B] rounded-[6px]" />
@@ -69,7 +68,7 @@ const MobileSideBar = () => {
         </div>
       </div>
       <div
-        className={ 'h-screen h-[calc(100%-78px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' w-[250px]' : ' hidden') }
+        className={ 'z-[100] h-screen h-[calc(100%-78px)] fixed flex flex-col bg-[#FFFEFE] gap-[20px] transition-all duration-500 items-center' + (isToggled ? ' w-[250px]' : ' hidden') }
         id="sidebar"
         ref={bodyRef}
       >
@@ -84,7 +83,7 @@ const MobileSideBar = () => {
               <DefaultUserAvatar />}
             {isToggled && <span className="text-bordo">{user.user.name}</span>}
           </div>
-          {menuItems && menuItems.map((item, index) => {
+          {menuItems && menuItems.map((item: any, index: number) => {
             return (
               <SideBarItem
                 setSelected={setSelected}
@@ -117,7 +116,7 @@ const MobileSideBar = () => {
             </div>
           </Icon>
           <Icon
-            onClick={toggle}
+            onClick={() => toggle(false)}
           >
             <div className="flex flex-row justify-center items-center gap-[10px] cursor-pointer">
               <IconArrowBack />

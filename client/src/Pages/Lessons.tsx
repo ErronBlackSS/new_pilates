@@ -67,8 +67,8 @@ const Lessons = () => {
   }, [])
 
   return (
-    <div className="pt-[50px] mobile-below:pr-[60px]">
-      <div className="flex flex-row mobile-below:justify-center mobile-below:items-center mobile-above:justify-between">
+    <div className="mobile-above:pt-[50px] px-[10px] mobile-above:pr-[60px]">
+      <div className="flex form-flex mobile-below:justify-center mobile-below:items-center mobile-above:justify-between">
         <div className="flex gap-[40px] items-center">
           <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
           Список занятий
@@ -79,7 +79,7 @@ const Lessons = () => {
         </div>
         
       </div>
-      <div className="w-full flex justify-end mt-[36px]">
+      <div className="w-full flex mobile-below:justify-start justify-end mt-[36px]">
         {user.user.role === ROLES.ADMIN && <Button
           handler={() => setShowAddModal(true)}
           color={ButtonColors.white}

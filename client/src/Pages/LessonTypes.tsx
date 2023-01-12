@@ -31,7 +31,7 @@ const LessonTypes = () => {
             />
           </Modal>
       }
-      <div className="mobile-below:pl-[] pt-[50px] pr-[60px]">
+      <div className="mobile-below:px-[10px] pt-[50px] pr-[60px]">
         <div className="flex flex-row justify-between items-center gap-[40px]">
           <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
             Типы занятий
@@ -46,7 +46,7 @@ const LessonTypes = () => {
         </div>
       </div>
       <div
-        className="flex flex-col bg-[#FEFAFA] mobile-above:py-[25px] mt-[14px]"
+        className="flex flex-col bg-[#FEFAFA] py-[25px] mt-[14px]"
       >
         {lessonTypes && lessonTypes.map((lessonType) => (
           <LessonTypeRow

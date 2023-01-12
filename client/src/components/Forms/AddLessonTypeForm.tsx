@@ -23,11 +23,12 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
   const duration = useInput({initialvalue: defaultValue?.duration ?? 0, validations: { isEmpty: true }})
   const type = useInput({initialvalue: defaultValue?.type ?? '', validations: { isEmpty: true }})
   const [image, setImage] = useState(null)
+  const [imageAdded, setImageAdded] = useState(false)
 
   const formDisabled =
-    !title.validations.status ||
-    !description.validations.status ||
-    !duration.validations.status
+    !title.validations.inputValid ||
+    !description.validations.inputValid ||
+    !duration.validations.inputValid
   
   // херово но я не нашел нужный тип
   const onSubmit = async (e: any) => {
@@ -35,15 +36,17 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
     if(!defaultValue) {
       setShowAddModal(false)
       let formData = new FormData()
+      let imageAdded = false
       if(e.target[0].files[0]) {
         formData.append('file', e.target[0].files[0])
+        imageAdded = true
       } else {
         formData = null
       }
       const lessonType = await LessonTypesService.create(title.value, description.value, type.value, duration.value)
-      if (image instanceof FormData) {
-        const createImage = LessonTypesService.saveLessonTypeImage(image, id)
-        const lessonTypeData = { ...lessonType.data, image: createImage }
+      if (imageAdded) {
+        const createImage = await LessonTypesService.saveLessonTypeImage(formData, lessonType.data.id)
+        const lessonTypeData = { ...lessonType.data, image_url: createImage.data }
         onAddLessonType(lessonTypeData)
         return
       }
@@ -81,23 +84,22 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
               name="uploadFile"
               onChange={(event) => {
                 setImage(event.target.files[0])
+                setImageAdded(true)
               }}
             ></input>
           </p>
         </div>
-        <div className="flex flew-row gap-[30px]">
-          <InputItem
-            label="Название"
-            type="text"
-            name="name"
-            placeholder="Введите название"
-            validations={title.validations}
-            dirty={title.isDirty}
-            defaultValue={title.value}
-            onBlur={title.onBlur}
-            onChange={title.onChange}
-          />
-        </div>
+        <InputItem
+          label="Название"
+          type="text"
+          name="name"
+          placeholder="Введите название"
+          validations={title.validations}
+          dirty={title.isDirty}
+          defaultValue={title.value}
+          onBlur={title.onBlur}
+          onChange={title.onChange}
+        />
         <div className="flex flew-row gap-[30px]">
           <InputItem
             label="Длительность"

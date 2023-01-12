@@ -8,14 +8,14 @@ const Trainers = () => {
   
   return (
     <>
-      <div className="w-full mobile-above:pt-[50px] mobile-above:pr-[60px]">
-        <div className="flex flex-row justify-between items-center">          
+      <div className="w-full flex-col mobile-above:pt-[50px] mobile-above:pr-[60px]">
+        <div className="flex flex-row mobile-below:justify-center items-center">      
           <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
             {title}
           </span>
         </div>
           
-        <div className="flex flex-wrap gap-[32px] my-[25px]">
+        <div className="flex flex-wrap gap-[32px] my-[25px] mobile-below:items-center mobile-below:justify-center">
           {users.map((user) => {
             return (
               <TrainerCard
