@@ -71,7 +71,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
       >
         <div className="w-full flex flex-row items-center gap-[28px] relative">              
           <div className="w-[180px] h-[100px] bg-[#D9D9DA] rounded-[10px]">
-            {(image || defaultValue?.image_url) && <img className="w-full h-full object-cover rounded-[10px]" src={defaultValue?.image_url ?? URL.createObjectURL(image)} alt="" />}
+            {(image || defaultValue?.image_url) && <img className="w-full h-full object-cover rounded-[10px]" src={image ? URL.createObjectURL(image) : defaultValue?.image_url} alt="" />}
           </div>
           <p>
             Добавить фотографию
@@ -129,6 +129,7 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
           onBlur={description.onBlur}
         />
         <button
+          type="submit"
           disabled={formDisabled}
           className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}
         >

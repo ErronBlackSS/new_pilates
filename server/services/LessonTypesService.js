@@ -5,10 +5,16 @@ const fs = require('fs')
 async function saveImage (id, file) {
     try {
         const fileName = file.name
-        const server_path = process.env.FILE_PATH + '/lesson_types/' + fileName
+        const imageDirPath = process.env.FILE_PATH + '/lesson_types/' + id
+        const server_path = imageDirPath + '/' + fileName
+
+        await deleteLessonTypeImage(id)
+
+        fs.mkdirSync(imageDirPath)
         file.mv(server_path)
-        const api_url = process.env.API_URL + '/files/lesson_types/' + fileName
-        
+
+        const api_url = process.env.API_URL + '/files/lesson_types/' + id + '/' + fileName
+
         await pool.query(`
           INSERT INTO lesson_type_image (lesson_type_id, image_name, image_server_path, image_url)
           VALUES ($1, $2, $3, $4) RETURNING *`,
@@ -19,6 +25,20 @@ async function saveImage (id, file) {
     } catch (e) {
         console.log(e)
     }
+}
+
+async function deleteLessonTypeImage(lessonTypeId) {
+
+  const imageDirPath = process.env.FILE_PATH + '/lesson_types/' + lessonTypeId
+
+  if(fs.existsSync(imageDirPath)) {
+    fs.rmSync(imageDirPath, { recursive: true })
+  }
+
+  await pool.query(`
+    DELETE FROM lesson_type_image WHERE lesson_type_id = $1`,
+    [lessonTypeId]
+  )
 }
 
 async function checkImageExists (id) {
@@ -37,11 +57,11 @@ async function checkImageExists (id) {
       return true
     } catch (e) {
       console.log(e)
-      //next(e)
     }
   }
 
 module.exports = {
   saveImage,
-  checkImageExists
+  checkImageExists,
+  deleteLessonTypeImage
 }
