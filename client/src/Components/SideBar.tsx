@@ -37,12 +37,21 @@ const SideBar = () => {
 
   return (
     <>
+    
       <div
         className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' }
         id="sidebar"
         ref={bodyRef}
       >
         <div className={'flex flex-col gap-[40px] mt-[40px] justify-center ' + (isToggled ? ' items-start' : ' items-center')}>
+          <Icon
+            onClick={toMainPage}
+          >
+            <div className="flex flex-row justify-center items-center gap-[10px] cursor-pointer">
+              <IconLogo />
+              {isToggled && <span>На главную</span>}
+            </div>
+          </Icon>
           <div
             className={'flex flex-row justify-start gap-[10px] items-center cursor-pointer ' + (isToggled ? ' rounded-[50px] bg-[#F2F2F3] w-full' : '')}
             onClick={toProfile}
@@ -69,14 +78,6 @@ const SideBar = () => {
         <div
           className="bottom-[25px] absolute flex flex-col gap-[40px] items-center"
         >
-          <Icon
-            onClick={toMainPage}
-          >
-            <div className="flex flex-row justify-center items-center gap-[10px] cursor-pointer">
-              <IconLogo />
-              {isToggled && <span>На главную</span>}
-            </div>
-          </Icon>
           <Icon
             onClick={logoutHandler}
           >
