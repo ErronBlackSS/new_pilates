@@ -32,7 +32,7 @@ const LessonTypes = () => {
       }
       <div className="pt-[50px] pr-[60px]">
         <div className="flex flex-row justify-between items-center gap-[40px]">
-          <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
+          <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px] mobile-below:ml-[20px]">
             Типы занятий
           </span>
           <Button

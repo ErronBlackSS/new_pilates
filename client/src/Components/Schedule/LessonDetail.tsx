@@ -33,7 +33,7 @@ const LessonDetail: FC<ILessonDetail> = ({ description, trainer, freePlaces, tim
           Записаться
         </button>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-[-10px] mb-[-5px]">
         <span className="text-[14px] max-w-[600px] font-[400] leading-[24px]">
           <span>Осталось мест: </span>
           <span>{freePlaces}</span>

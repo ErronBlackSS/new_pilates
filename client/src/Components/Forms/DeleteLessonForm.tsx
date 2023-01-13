@@ -20,7 +20,7 @@ const DeleteLessonForm: FC<IDeleteLessonForm> = ({ lessonId, setShowModal }) => 
     <div
       className="flex justify-center text-left"
     >
-      <div className="flex flex-col justify-center items-center gap-[30px]">
+      <div className="flex flex-col justify-center items-center gap-[25px]">
         <div>
           Вы уверены, что хотите удалить занятие?
         </div>

@@ -12,7 +12,7 @@ const ScheduleTable: FC<IScheduleTable> = ({selectLesson}) => {
 
   return (
     <table
-      className="bg-[#FFF] w-full p-[25px] gap-[15px] border-separate overflow-hidden"
+      className="bg-[#FFF] w-full p-[25px] gap-[15px] border-separate overflow-hidden table-fixed"
     >
       <thead>
         <tr>
