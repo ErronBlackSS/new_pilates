@@ -39,7 +39,7 @@ const SideBar = () => {
     <>
     
       <div
-        className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center' }
+        className={ 'h-screen fixed flex flex-col bg-[#FFFEFE] gap-[20px] w-[50px] transition-all duration-500 items-center z-[100]' }
         id="sidebar"
         ref={bodyRef}
       >

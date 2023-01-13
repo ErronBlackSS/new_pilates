@@ -16,7 +16,7 @@ const Profile = () => {
   return (
     <div className="bg-[#FEFAFA]">
       <div className="flex flex-col">
-        <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
+        <span className="pt-[50px] text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
           Личные данные
         </span>
         <div className="flex form-flex w-full justify-start">
