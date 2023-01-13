@@ -39,7 +39,7 @@ const SwitchButtons: FC<ISwitchButtons> = ({onSwitch}) => {
       content: () => getContent(1),
       className: 'py-[2px] px-[14px]',
       color: ButtonColors.white,
-      view: 'shedule'
+      view: 'schedule'
     }
   ]
 

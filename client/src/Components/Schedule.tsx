@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from 'react'
 import { getCurrentWeek, getNextWeek } from '../Utils/functions'
-import TopButtons from './Shedule/TopButtons'
+import TopButtons from './Schedule/TopButtons'
 import Modal from './Common/Modal'
-import LessonDetail from './Shedule/LessonDetail'
+import LessonDetail from './Schedule/LessonDetail'
 import { Context } from '..'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../Store/LessonsStore'
-import SheduleTable from './Shedule/SheduleTable'
+import SheduleTable from './Schedule/ScheduleTable'
 import { Lesson } from '../Types/LessonsTypes/LessonsTypes'
 
-const Shedule = () => {
+const Schedule = () => {
   
   const { user } = useContext(Context)
 
@@ -73,4 +73,4 @@ const Shedule = () => {
   )
 }
 
-export default observer(Shedule)
+export default observer(Schedule)
