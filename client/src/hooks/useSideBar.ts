@@ -9,7 +9,7 @@ export const useSideBar = (bodyRef: MutableRefObject<any>, role: string) => {
 
   const toggle = (val: boolean) => {
     setToggled(val)
-    
+
     if (!isToggled) {
       bodyRef?.current?.classList?.add('!w-[250px]')
     } else {
