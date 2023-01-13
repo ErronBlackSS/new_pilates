@@ -25,7 +25,7 @@ const TopButtons: FC<ITopButtons> = ({onPrev, onNext}) => {
       <div className="flex flex-row justify-center items-center mx-[20px]">
         <LessonsFilter />
       </div>
-      <div className="flex flex-row justify-center items-center gap-[20px]">
+      <div className="flex form-flex  justify-center items-center gap-[20px]">
         <button
           className={'px-[16px] py-[4px] cursor-pointer rounded-[10px] bg-white' + (currentWeek ? ' opacity-50' : '')}
           style={{border: '1px solid #1B1B1B'}}

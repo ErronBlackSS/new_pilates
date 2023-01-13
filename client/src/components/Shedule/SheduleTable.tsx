@@ -17,7 +17,7 @@ const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
         <tr>
           <th className="w-[155px] h-[40]"><div><p>Время</p></div></th>
           {LessonsStore.weekDays && LessonsStore.weekDays.map((day, index) => (
-            <th className="w-[155px] h-[40]" key={index}><div><p>{day}</p></div></th>
+            <th className="w-[155px] h-[40]" style={{wordSpacing: '99px'}} key={index}><div><p>{day}</p></div></th>
           ))}
         </tr>
       </thead>

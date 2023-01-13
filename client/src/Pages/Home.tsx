@@ -155,7 +155,7 @@ const Main = () => {
           <h1 className="text-[44px] mobile-below:text-[24px]">Направления</h1>
         </div>
         <Directions />
-        <div id="schedule" ref={schedule} className="overflow-x-hidden">
+        <div id="schedule" ref={schedule} className="overflow-x-hidden mobile-below:px-[10px]">
           <Shedule />
         </div>
 

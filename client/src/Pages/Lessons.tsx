@@ -77,7 +77,6 @@ const Lessons = () => {
             <FilterButtons role={user.user.role} userId={user.user.id} />
           </div>
         </div>
-        
       </div>
       <div className="w-full flex mobile-below:justify-start justify-end mt-[36px]">
         {user.user.role === ROLES.ADMIN && <Button
