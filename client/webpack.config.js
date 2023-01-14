@@ -9,6 +9,12 @@ module.exports = {
     filename: 'bundle.js',
     clean: true
   },
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'src'),
+    },
+    extensions: ['.ts', '.tsx', '.js'],
+  },
   module: {
     rules: [
       {
@@ -24,6 +30,21 @@ module.exports = {
           }
         ],
         exclude: /node_modules/,
+      },
+      {
+        test: /\.js$/i,
+        include: path.resolve(__dirname, 'src'),
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
+      {
+        test: /\.css$/i,
+        include: path.resolve(__dirname, 'src'),
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },

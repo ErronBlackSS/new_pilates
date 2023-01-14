@@ -22,9 +22,13 @@ const SideBar = () => {
 
   const [selected, setSelected] = useState('')
 
+  const onClickItem = (path: string) => {
+    setSelected(path)
+    if (isToggled) toggle(false)
+  }
+
   const logoutHandler = (): void => {
     user.logout()
-    console.log('logout')
     navigate('/')
   }
 
@@ -57,7 +61,7 @@ const SideBar = () => {
           {menuItems && menuItems.map((item, index) => {
             return (
               <SideBarItem
-                setSelected={setSelected}
+                setSelected={() => onClickItem(item.path)}
                 key={index}
                 icon={item.icon}
                 isToggled={isToggled}

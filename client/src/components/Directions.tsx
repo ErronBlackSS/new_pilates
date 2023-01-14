@@ -28,7 +28,7 @@ const Directions = () => {
                     <path d="M18 1L2 17L18 33" stroke="#5C5C5C" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
-                <div className="flex flex-row w-full justify-between overflow-x-scroll scrollbar-hide gap-[32px] mobile-below:gap-[20px] mobile-below:px-[16px]">   
+                <div className="flex flex-row w-full justify-start overflow-x-scroll scrollbar-hide gap-[32px] mobile-below:gap-[20px] mobile-below:px-[16px]">   
                   {lessonTypes[group].map((lType) => { 
                     return (
                       <DirectionItem

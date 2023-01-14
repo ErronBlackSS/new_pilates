@@ -13,7 +13,7 @@ const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
   const password = useInput({initialvalue: '', validations: { isEmpty: true, minLength: 6 } })
   const passwordConfirm = useInput({initialvalue: '', validations: { firstPassword: password.value, isEmpty: true, minLength: 6 } })
   const passwordIdentity = password.value === passwordConfirm.value
-  const formDisabled = !passwordIdentity || !password.validations.status || !passwordConfirm.validations.status
+  const formDisabled = !passwordIdentity || !password.validations.inputValid || !passwordConfirm.validations.inputValid
 
   const navigate = useNavigate()
 
@@ -50,6 +50,13 @@ const ResetSendForm: FC<IResetSendForm> = ({ user_id }) => {
                 onBlur={passwordConfirm.onBlur}
                 onChange={passwordConfirm.onChange}
               />
+              {!passwordIdentity && 
+                <div
+                  className="text-red text-[12px]"
+                >
+                  Пароли не совпадают
+                </div>
+              }
               <button
                 disabled={formDisabled}
                 className={ 'w-[100%] px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] ' + (formDisabled ? ' bg-bordo opacity-40' : 'bg-bordo')}

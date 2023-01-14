@@ -11,7 +11,7 @@ interface ISheduleTable {
 const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
   return (
     <table
-      className="bg-[#FFF] p-[25px] gap-[15px] border-separate overflow-y-scroll"
+      className="bg-[#FFF] table-fixed p-[25px] gap-[15px] border-separate overflow-y-scroll"
     >
       <thead>
         <tr>
