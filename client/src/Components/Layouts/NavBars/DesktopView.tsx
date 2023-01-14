@@ -16,7 +16,7 @@ const DesktopView: FC<IDesktopView> = ({ redirectToMain }) => {
             <li>
               <svg
                 onClick={redirectToMain}
-                className="cursor-pointer mr-[70px]"
+                className="cursor-pointer mr-[70px] mt-[5px]"
                 width="47"
                 height="56"
                 viewBox="0 0 47 56"

@@ -30,7 +30,7 @@ const MobileView: FC<IMobileNav> = ({ toggleOverlay, redirectToMain }) => {
       <div className="flex flex-row justify-between">
         <svg
           onClick={redirectToMain}
-          className="cursor-pointer my-[11px] ml-[22px]"
+          className="cursor-pointer my-[20px] ml-[22px]"
           width="47"
           height="56"
           viewBox="0 0 47 56"
@@ -43,7 +43,7 @@ const MobileView: FC<IMobileNav> = ({ toggleOverlay, redirectToMain }) => {
         </svg>
         {user.user.isActivated ?
           <div
-            className="flex px-[15px] flex-row gap-[10px] items-center cursor-pointer rounded-[50px] bg-[#F2F2F3]"
+            className="flex px-[15px] flex-row gap-[10px] items-center cursor-pointer rounded-[50px] bg-[#F2F2F3] my-[11px] mr-[10px]"
             onClick={toProfile}
           >
             {user.user.image_url ? 
