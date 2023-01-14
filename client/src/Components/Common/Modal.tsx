@@ -14,7 +14,7 @@ const Modal: FC<IModal> = ({ title, setShowModal, children }) => {
 
   return (
     <div 
-      className="fixed w-[100vw] h-[100vh] top-0 left-0 flex z-[100] items-center justify-center bg-[rgba(0,0,0,0.4)]"
+      className="fixed w-[100vw] h-[100vh] top-0 left-0 flex z-[100] items-center justify-center bg-[rgba(0,0,0,0.4)] mobile-below:px-[5px]"
       onClick={closeModal}
     >
       <div

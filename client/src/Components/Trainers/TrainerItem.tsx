@@ -24,45 +24,44 @@ const TrainerItem: FC<ITrainerItem> = ({name, lastname, image_url, education, ce
 
   return (
     <>
-      <div>
-        {showModalInfo && <Modal
-          title={name + ' ' + lastname}
-          setShowModal={setShowModalInfo}
-        >
-          <div className="relative flex flex-col w-[600px] gap-[25px] px-[36px] pb-[20px] text-[14px] mobile-below:w-[288px] mobile-below:text-[12px] mobile-below:px-[0px]">
-            {(education !== null) &&
+      {showModalInfo && <Modal
+        title={name + ' ' + lastname}
+        setShowModal={setShowModalInfo}
+      >
+        <div className="relative flex flex-col w-[600px] gap-[25px] px-[36px] pb-[20px] text-[14px] mobile-below:w-[288px] mobile-below:text-[12px] mobile-below:px-[0px]">
+          {(education !== null) &&
             <div className="flex flex-col gap-[8px]">
               <span className="text-bordo">Образование: </span>
               <span>{education}</span>
             </div>
-            }
-            {(certificates !== null) &&
+          }
+          {(certificates !== null) &&
             <div className="flex flex-col gap-[8px]">
               <span className="text-bordo">Сертификаты: </span>
               <span>{certificates}</span>
             </div>
-            }
-            {(personal_achievements !== null) &&
+          }
+          {(personal_achievements !== null) &&
             <div className="flex flex-col gap-[8px]">
               <span className="text-bordo">Личные достижения: </span>
               <span>{personal_achievements}</span>
             </div>
-            }
-            {(work_experience !== null) &&
+          }
+          {(work_experience !== null) &&
             <div>
               <span className="text-bordo">Опыт работы: </span>
               <span>{work_experience}</span>
             </div>
-            }
-            {(directions !== null) &&
+          }
+          {(directions !== null) &&
            <div className="flex flex-col gap-[8px]">
              <span className="text-bordo">Направления: </span>
              <span>{directions}</span>
            </div>
-            }
-          </div>
-        </Modal>}
-      </div>
+          }
+        </div>
+      </Modal>}
+
       <div className="flex flex-col bg-[#FFFEFE] rounded-[10px] shadow-md pb-[12px] mobile-below:pb-[10px]">
         <div className="relative mobile-below:w-[216px]">
           <img className="w-[284px] h-[284px] rounded-t-[10px] object-cover mobile-below:w-[216px] mobile-below:h-[204px]" src={imageLink} alt="trainerImage"/>

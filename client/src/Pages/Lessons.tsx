@@ -68,24 +68,26 @@ const Lessons = () => {
 
   return (
     <div className="mobile-above:pt-[50px] px-[10px] mobile-above:pr-[60px]">
-      <div className="flex form-flex mobile-below:justify-center mobile-below:items-center mobile-above:justify-between">
-        <div className="flex gap-[40px] items-center">
-          <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
+      <div className="flex flex-row justify-between mobile-below:flex-col">
+        <div className="flex flex-row mobile-below:justify-center mobile-below:items-center mobile-above:justify-between">
+          <div className="flex gap-[40px] items-center">
+            <span className="text-[36px] leading-[56px] text-[#1B1B1B] mobile-below:text-[22px] mobile-below:leading-[34px]">
           Список занятий
-          </span>
-          <div className="flex flex-row">
-            <FilterButtons role={user.user.role} userId={user.user.id} />
+            </span>
+            <div className="flex form-flex">
+              <FilterButtons role={user.user.role} userId={user.user.id} />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="w-full flex mobile-below:justify-start justify-end mt-[36px]">
-        {user.user.role === ROLES.ADMIN && <Button
-          handler={() => setShowAddModal(true)}
-          color={ButtonColors.white}
-          className="py-[2px] px-[14px]"
-        >
+        <div className="flex my-auto mobile-above:mr-[50px] mobile-above:justify-end mobile-below:justify-start mobile-below:ml-[18px] mobile-below:mt-[15px]">
+          {user.user.role === ROLES.ADMIN && <Button
+            handler={() => setShowAddModal(true)}
+            color={ButtonColors.white}
+            className="py-[2px] px-[14px]"
+          >
           Добавить занятие
-        </Button>}
+          </Button>}
+        </div>
       </div>
       {
         showAddModal &&

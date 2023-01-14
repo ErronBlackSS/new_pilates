@@ -1,5 +1,5 @@
 import LessonsStore from '../../Store/LessonsStore'
-import SheduleCell from './SheduleCell'
+import SheduleCell from './ScheduleCell'
 import { observer } from 'mobx-react-lite'
 import { FC } from 'react'
 import { Lesson } from '../../Types/LessonsTypes/LessonsTypes'
