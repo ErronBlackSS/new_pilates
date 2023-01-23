@@ -8,16 +8,6 @@ const UserDTO = require('../dtos/UserDTO')
 const ApiError = require('../exceptions/ApiError')
 const pool = require('../db')
 
-/*
-    {
-        "name": "Antonio",
-        "email": "antony_band@yandex.ru",
-        "phone": "18901234566",
-        "password": "wbu[fqkm",
-        "lastname": "Banderos"
-    }
-*/
-
 async function registration (name, email, phone, password, lastname) {
     const candidate = await UserHelpers.findOne({ field: 'email', value: email })
     if (candidate) {
@@ -58,6 +48,26 @@ async function resetPassword (userId, password) {
     return userDto
 }
 
+async function changeUserPassword(userId, oldPassword, newPassword) {
+    const candidate = await UserHelpers.findOne({ field: 'id', value: userId })
+    if (!candidate) {
+      throw ApiError.BadRequest('Пользователь с таким id не найден')
+    }
+
+    const isPassEquals = await bcrypt.compare(oldPassword, candidate.password)
+
+    if(!isPassEquals) {
+      throw ApiError.BadRequest('Неверный предыдущий пароль')
+    }
+
+    const hashNewPassword = await bcrypt.hash(newPassword, 5)
+    await pool.query(`
+      UPDATE users SET password = $1 WHERE id = $2
+    `, [hashNewPassword, userId])
+
+    return { status: 'success' }
+}
+
 async function activate_user (userId) {
     const user = await pool.query(`
         UPDATE users 
@@ -81,6 +91,8 @@ async function login(email, password) {
     if (!user) {
         throw ApiError.BadRequest('Пользователь с таким email не найден')
     }
+
+    console.log(user.password)
 
     const isPassEquals = await bcrypt.compare(password, user.password)
     if (!isPassEquals) {
@@ -123,5 +135,6 @@ module.exports = {
     resetSendMail,
     resetPassword,
     refresh,
-    activate_user
+    activate_user,
+    changeUserPassword
 }

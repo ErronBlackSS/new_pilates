@@ -20,6 +20,14 @@ async function getAllUsers () {
     return users.rows
 }
 
+async function checkOldPassword(userId, oldPassword) {
+    const correctPassword = await pool.query(`
+        SELECT * from users where id = $1 and password = $2
+   `, [userId, oldPassword])
+   console.log(correctPassword.rows.length, 'correct?')
+   return correctPassword.rows.length
+}
+
 async function update (user) {
   const query = helpers.parseUpdateData(user, 'users')
   const updatedUser = await pool.query(query + 'RETURNING *', [])
@@ -58,5 +66,6 @@ module.exports = {
     update,
     getUserByResetToken,
     checkImageExists,
-    deleteImage
+    deleteImage,
+    checkOldPassword
 }

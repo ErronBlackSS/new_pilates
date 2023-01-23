@@ -219,11 +219,18 @@ async function getTrainers (req, res, next) {
   }
 }
 
-// SELECT users.id, users.email, users.role, users.name, users.lastname, users.phone, user_photo.image_url, trainer_info.*
-// FROM users 
-// LEFT JOIN user_photo ON user_photo.user_id = users.id      
-// LEFT JOIN trainer_info ON trainer_info.trainer_id = users.id
-// WHERE role = $1
+async function changeUserPassword (req, res, next) {
+  try {
+    const userId = req.query.id
+    const { oldPassword, newPassword } = req.body
+
+    const newPasswordSetted = await UserService.changeUserPassword(userId, oldPassword, newPassword)
+    
+    res.json(newPasswordSetted)
+  } catch (e) {
+    next(e)
+  }
+}
 
 async function getUserByResetToken (req, res, next) {
   try {
@@ -315,5 +322,6 @@ module.exports = {
   updateUserData,
   getTrainerInfo,
   createTrainerInfo,
-  updateTrainerInfo
+  updateTrainerInfo,
+  changeUserPassword
 }
