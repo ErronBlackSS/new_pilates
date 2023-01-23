@@ -10,7 +10,7 @@ const ResetForm: FC = () => {
   const { user } = useContext(Context)
 
   const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
-  const formDisabled = !email.validations.inputValid
+  const formDisabled = !email.validations.inputValid?.status
   const [errorMessage, setErrorMessage] = useState('')
   const [formSended, setFormSended] = useState(false)
 

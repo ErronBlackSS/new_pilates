@@ -14,7 +14,7 @@ const LoginForm: FC = () => {
   const email = useInput({initialvalue: '', validations: {isEmpty: true, isEmail: true}})
   const password = useInput({initialvalue: '', validations: {isEmpty: true, minLength: 6}})
   const [errorMessage, setErrorMessage] = useState('')
-  const formDisabled = !email.validations.inputValid || !password.validations.inputValid
+  const formDisabled = !email.validations.inputValid?.status || !password.validations.inputValid?.status
   const navigate = useNavigate()
 
   const onSubmit = async (e: React.SyntheticEvent) => {

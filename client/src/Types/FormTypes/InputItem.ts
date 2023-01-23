@@ -7,18 +7,6 @@ export interface IValidation {
   [validation: string]: string | boolean | number
 }
 
-/*export interface IValidation {
-  isEmptyError?: IValidator
-  minLengthError?: IValidator
-  maxLengthError?: IValidator
-  nameError?: IValidator
-  lastNameError?: IValidator
-  emailError?: IValidator
-  phoneError?: IValidator
-  inputValid?: boolean
-  isEmpty?: boolean
-}*/
-  
 export interface IValidator {
   status: boolean
   message: string

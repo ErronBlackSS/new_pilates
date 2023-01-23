@@ -1,4 +1,4 @@
-import { useState, FC, FormEvent } from 'react'
+import { useState, FC } from 'react'
 import { useInput } from '../../Hooks/UseInput'
 import LessonTypesService from '../../Services/LessonTypesService'
 import { ILessonTypesFields } from '../../Types/LessonsTypes/LessonsTypes'
@@ -23,12 +23,11 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
   const duration = useInput({initialvalue: defaultValue?.duration ?? 0, validations: { isEmpty: true }})
   const type = useInput({initialvalue: defaultValue?.type ?? '', validations: { isEmpty: true }})
   const [image, setImage] = useState(null)
-  const [imageAdded, setImageAdded] = useState(false)
 
   const formDisabled =
-    !title.validations.inputValid ||
-    !description.validations.inputValid ||
-    !duration.validations.inputValid
+    !title.validations.inputValid?.status ||
+    !description.validations.inputValid?.status ||
+    !duration.validations.inputValid?.status
   
   // херово но я не нашел нужный тип
   const onSubmit = async (e: any) => {
@@ -84,7 +83,6 @@ const AddLessonTypeForm: FC<IAddLessonTypeForm> = ({ onAddLessonType, onEditLess
               name="uploadFile"
               onChange={(event) => {
                 setImage(event.target.files[0])
-                setImageAdded(true)
               }}
             ></input>
           </p>

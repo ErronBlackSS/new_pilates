@@ -25,11 +25,11 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
         value.length > validations[validation] ? setMaxLengthError(MAX_LENGTH_ERROR) : setMaxLengthError(DEFAULT)
         break
       case 'isName':
-        const nameRegExp = /^([ \u00c0-\u01ffа-яёА-ЯЁ'\-]|[ \u00c0-\u01ffa-zA-Z'\-])+$/
+        const nameRegExp = /^([ \u00c0-\u01ffа-яёА-ЯЁ'-]|[ \u00c0-\u01ffa-zA-Z'-])+$/
         nameRegExp.test(String(value)) ? setNameError(DEFAULT) : setNameError(NAME_ERROR)
         break
       case 'isLastName':
-        const lastNameRegExp = /^([ \u00c0-\u01ffа-яёА-ЯЁ'\-]|[ \u00c0-\u01ffa-zA-Z'\-])+$/
+        const lastNameRegExp = /^([ \u00c0-\u01ffа-яёА-ЯЁ'-]|[ \u00c0-\u01ffa-zA-Z'-])+$/
         lastNameRegExp.test(String(value)) ? setLastNameError(DEFAULT) : setLastNameError(LASTNAME_ERROR)
         break
       case 'isEmail':
@@ -58,7 +58,7 @@ export const useValidation = ({ value, validations }: IUseValidation ) => {
     ) {
       setInputValid({ status: false, message: 'Incorrect' })
     } else {
-      setInputValid({ status: false, message: 'Incorrect' })
+      setInputValid({ status: true, message: 'Correct' })
     }
   }, [isEmptyError, minLengthError, maxLengthError, nameError, lastNameError, emailError, phoneError])
 

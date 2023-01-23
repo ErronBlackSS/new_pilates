@@ -5,7 +5,7 @@ const InputItem: FC<InputItemProps> = ( { label, type, name, placeholder, valida
   
   const errors: any[] = []
   Object.keys(validations).forEach((key: string) => { 
-    if(validations[key]?.status === true && dirty) errors.push(validations[key])
+    if(validations[key]?.status === true && dirty && key !== 'inputValid') errors.push(validations[key])
   })
 
   return (

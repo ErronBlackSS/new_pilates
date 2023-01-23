@@ -68,4 +68,15 @@ export default class UserService {
       directions: directions
     })
   }
+
+  static async changeUserPassword(
+    userId: number,
+    oldPassword: string,
+    newPassword: string,
+  ) {
+    return $api.patch('/users/changePassword?id=' + userId, {
+      oldPassword,
+      newPassword
+    })
+  }
 }

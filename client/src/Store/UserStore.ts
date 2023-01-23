@@ -54,6 +54,15 @@ export default class UserStore {
     }
   }
 
+  async changePassword(userId: number, oldPassword: string, newPassword: string) {
+    try {
+      await UserService.changeUserPassword(userId, oldPassword, newPassword)
+      return { status: RESPONSE_STATUSES.SUCCESS }
+    } catch (e) {
+      return { status: RESPONSE_STATUSES.ERROR, message: e.response?.data?.message }
+    }
+  }
+
   async registration(name: string, lastname: string, phone: string, email: string, password: string) {
     try {
       const response = await AuthService.registration(name, lastname, phone, email, password)

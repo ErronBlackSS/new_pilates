@@ -40,12 +40,21 @@ module.exports = {
             presets: ['@babel/preset-env'],
           },
         },
+        exclude: /node_modules/,
       },
       {
-        test: /\.css$/i,
-        include: path.resolve(__dirname, 'src'),
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
+        test: /\.(sass|less|css)$/,
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          { loader: 'postcss-loader' }
+        ]
+      }
     ],
   },
 }

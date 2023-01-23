@@ -24,10 +24,10 @@ const EditProfileForm: FC<IEditProfilePhoto> = ({curName, curLastname, curEmail,
   const phone = useInput({initialvalue: curPhone, validations: { isEmpty: true, isPhone: true } })
 
   const formDisabled = 
-    !name.validations.inputValid ||
-    !email.validations.inputValid || 
-    !lastname.validations.inputValid || 
-    !phone.validations.inputValid
+    !name.validations.inputValid?.status ||
+    !email.validations.inputValid?.status || 
+    !lastname.validations.inputValid?.status || 
+    !phone.validations.inputValid?.status
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault()

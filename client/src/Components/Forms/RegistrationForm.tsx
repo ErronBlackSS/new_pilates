@@ -24,12 +24,12 @@ const RegistationForm: FC = () => {
   const passwordIdentity = password.value === passwordConfirm.value
 
   const formDisabled = 
-    !name.validations.inputValid ||
-    !email.validations.inputValid || 
-    !password.validations.inputValid || 
-    !lastname.validations.inputValid || 
-    !phone.validations.inputValid || 
-    !passwordConfirm.validations.inputValid || 
+    !name.validations.inputValid?.status ||
+    !email.validations.inputValid?.status || 
+    !password.validations.inputValid?.status || 
+    !lastname.validations.inputValid?.status || 
+    !phone.validations.inputValid?.status || 
+    !passwordConfirm.validations.inputValid?.status || 
     !passwordIdentity
 
   const onSubmit = async (e: React.SyntheticEvent) => {
