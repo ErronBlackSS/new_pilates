@@ -1,7 +1,7 @@
 const pool = require('../db')
 const helpers = require('../helpers/general')
 const LessonTypeHelper = require('../helpers/LessonTypeHelper')
-const LessonTypesService = require('../Services/LessonTypesService')
+const LessonTypesService = require('../services/LessonTypesService')
 const LessonTypeDTO = require('../dtos/LessonTypeDTO')
 const fs = require('fs')
 

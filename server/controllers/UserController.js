@@ -1,4 +1,4 @@
-const UserService = require('../Services/UserService')
+const UserService = require('../services/UserService')
 const UserHelpers = require('../helpers/UserHelpers')
 const { validationResult } = require('express-validator')
 const ApiError = require('../exceptions/ApiError')
@@ -166,7 +166,7 @@ async function saveImage (req, res, next) {
 
     const currentPhoto = await UserHelpers.checkImageExists(id)
 
-    if (currentPhoto?.image_server_path) {
+    if (currentPhoto) {
       fs.unlink(currentPhoto.image_server_path, (err) => {
         if (err) {
           console.log(err)
@@ -251,7 +251,7 @@ async function updateUserData(req, res, next) {
     `, [name, lastname, email, phone, id])
 
     return user.rows[0]
-  } catch {
+  } catch(e) {
     next(e)
   }
 }
@@ -264,7 +264,7 @@ async function getTrainerInfo(req, res, next) {
     `, [id])
     
     res.json(trainerInfo.rows[0])
-  } catch {
+  } catch(e) {
     next(e)
   }
 }
@@ -280,7 +280,7 @@ async function createTrainerInfo(req, res, next) {
       VALUES ($1, $2, $3, $4, $5, $6) RETURNING * 
     `, [id, education, certificates, achievements, experience, directions])
 
-  } catch {
+  } catch(e) {
     next(e)
   }
 }
@@ -296,7 +296,7 @@ async function updateTrainerInfo(req, res, next) {
       WHERE trainer_id = $6
     `, [education, certificates, achievements, experience, directions, id])
 
-  } catch {
+  } catch(e) {
     next(e)
   }
 }

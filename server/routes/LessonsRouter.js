@@ -1,8 +1,8 @@
 const Router = require('express')
 const router = new Router()
 const LessonController = require('../controllers/LessonsController')
-const AdminLessonsService = require('../Services/AdminLessonsService')
-const UserLessonsService = require('../Services/UserLessonsService')
+const AdminLessonsService = require('../services/AdminLessonsService')
+const UserLessonsService = require('../services/UserLessonsService')
 // TODO: Надо разделить получение занятий на lessons и shedule
 
 router.get('/lessons', LessonController.getAll)
