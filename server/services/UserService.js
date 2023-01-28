@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
-const MailService = require('./MailService')
+const MailService = require('./mailService')
 const TokenService = require('./TokenService')
 const UserHelpers = require('../helpers/UserHelpers')
 const ResetService = require('./ResetService')
