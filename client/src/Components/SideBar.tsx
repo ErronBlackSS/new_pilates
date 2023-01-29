@@ -11,6 +11,8 @@ import Icon from './Icon'
 import IconArrowBack from './Common/Icons/IconArrowBack'
 import MainSection from './MainSection'
 import DefaultUserAvatar from './Common/DefaultUserAvatar'
+import LogoutForm from './Forms/LogoutForm'
+import Modal from './Common/Modal'
 
 const SideBar = () => {
   const { user } = useContext(Context)
@@ -19,17 +21,14 @@ const SideBar = () => {
   const bodyRef = useRef(null)
 
   const { toggle, isToggled, menuItems } = useSideBar(bodyRef, user.user.role)
+  
+  const [showModalLogout, setShowModalLogout] = useState(false)
 
   const [selected, setSelected] = useState('')
 
   const onClickItem = (path: string) => {
     setSelected(path)
     if (isToggled) toggle(false)
-  }
-
-  const logoutHandler = (): void => {
-    user.logout()
-    navigate('/')
   }
 
   const toMainPage = (): void => {
@@ -83,13 +82,21 @@ const SideBar = () => {
           className="bottom-[25px] absolute flex flex-col gap-[40px] items-center"
         >
           <Icon
-            onClick={logoutHandler}
+            onClick={() => {
+              setShowModalLogout(true)
+            }}
           >
             <div className="flex flex-row justify-center items-center gap-[10px] cursor-pointer">
               <IconLogout />
               {isToggled && <span>Выйти из аккаунта</span>}
             </div>
           </Icon>
+          {showModalLogout && <Modal
+            title="Выйти"
+            setShowModal={setShowModalLogout}
+          >
+            <LogoutForm setShowModal={setShowModalLogout}/>
+          </Modal>}
           <Icon
             onClick={() => toggle(!isToggled)}
           >
