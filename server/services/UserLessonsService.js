@@ -1,7 +1,7 @@
 const pool = require('../db')
 const LessonsHelper = require('../helpers/LessonsHelper')
 
-async function getLessonsForUserOnThisWeek(req, res) {
+async function getUserLessonsCurrentWeek(req, res) {
   try {    
     const user_id = req.query.user_id
     const { start, end } = req.query.week
@@ -23,7 +23,7 @@ async function getLessonsForUserOnThisWeek(req, res) {
   }
 }
 
-async function getLessonsForUserForTheFuture(req, res) {
+async function getUserPlannedLessons(req, res) {
   try {    
     const { user_id } = req.query
     const lessons = await pool.query(`
@@ -41,7 +41,7 @@ async function getLessonsForUserForTheFuture(req, res) {
   }
 }
 
-async function getLessonsForUserForThePast(req, res) {
+async function getUserHistoryLessons(req, res) {
   try {
     const { user_id } = req.query
     
@@ -62,7 +62,7 @@ async function getLessonsForUserForThePast(req, res) {
 }
 
 module.exports = {
-  getLessonsForUserOnThisWeek,
-  getLessonsForUserForTheFuture,
-  getLessonsForUserForThePast
+  getUserLessonsCurrentWeek,
+  getUserPlannedLessons,
+  getUserHistoryLessons
 }

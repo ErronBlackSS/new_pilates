@@ -2,7 +2,7 @@ export interface Lessons {
   lessons: Lessons[]
 }
 
-export interface ILessonShedule {
+export interface ILessonSchedule {
   time: string
   lessons: Lesson
 }
