@@ -16,6 +16,7 @@ export const Context = createContext<State>({
 
 const container = document.getElementById('app')
 const root = createRoot(container)
+console.log(process.env, 'config')
 
 root.render(
   <Context.Provider value={{
