@@ -1,23 +1,23 @@
 import LessonsStore from '../../Store/LessonsStore'
-import SheduleCell from './ScheduleCell'
+import ScheduleCell from './ScheduleCell'
 import { observer } from 'mobx-react-lite'
 import { FC } from 'react'
 import { Lesson } from '../../Types/LessonsTypes/LessonsTypes'
 
-interface ISheduleTable {
+interface IScheduleTable {
   selectLesson?: (lesson: Lesson) => void
 }
 
-const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
+const ScheduleTable: FC<IScheduleTable> = ({selectLesson}) => {
   return (
     <table
-      className="bg-[#FFF] table-fixed p-[25px] gap-[15px] border-separate overflow-y-scroll"
+      className="bg-[#FFF] w-[155px] h-[40px] table-fixed p-[25px] gap-[15px] border-separate overflow-y-scroll"
     >
       <thead>
         <tr>
-          <th className="w-[155px] h-[40]"><div><p>Время</p></div></th>
+          <th className="w-[155px] h-[40px]"><div><p>Время</p></div></th>
           {LessonsStore.weekDays && LessonsStore.weekDays.map((day, index) => (
-            <th className="w-[155px] h-[40]" style={{wordSpacing: '99px'}} key={index}><div><p>{day}</p></div></th>
+            <th className="w-[155px] h-[40px]" style={{wordSpacing: '99px'}} key={index}><div><p>{day}</p></div></th>
           ))}
         </tr>
       </thead>
@@ -30,7 +30,7 @@ const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
               </div>
             </th>
             {day.lessons && Object.values(day.lessons).map((lesson: Lesson, index) => (      
-              <SheduleCell
+              <ScheduleCell
                 key={index}
                 lesson={lesson}
                 selectLesson={selectLesson}
@@ -43,4 +43,4 @@ const SheduleTable: FC<ISheduleTable> = ({selectLesson}) => {
   )
 }
 
-export default observer(SheduleTable)
+export default observer(ScheduleTable)

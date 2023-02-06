@@ -17,9 +17,9 @@ router.get('/lessons/week', LessonController.getLessonsByDate)
 // Trainer
 
 // User
-router.get('/lessons/user', UserLessonsService.getLessonsForUserOnThisWeek)
-router.get('/lessons/user/planned', UserLessonsService.getLessonsForUserForTheFuture)
-router.get('/lessons/user/history', UserLessonsService.getLessonsForUserForThePast)
+router.get('/lessons/user', UserLessonsService.getUserLessonsCurrentWeek)
+router.get('/lessons/user/planned', UserLessonsService.getUserPlannedLessons)
+router.get('/lessons/user/history', UserLessonsService.getUserHistoryLessons)
 
 // Admin
 router.get('/lessons/week/list', AdminLessonsService.getLessonsCurrentWeek)

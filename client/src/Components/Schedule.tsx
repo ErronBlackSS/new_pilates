@@ -6,7 +6,7 @@ import LessonDetail from './Schedule/LessonDetail'
 import { Context } from '..'
 import { observer } from 'mobx-react-lite'
 import LessonsStore from '../Store/LessonsStore'
-import SheduleTable from './Schedule/ScheduleTable'
+import ScheduleTable from './Schedule/ScheduleTable'
 import { Lesson } from '../Types/LessonsTypes/LessonsTypes'
 
 const Schedule = () => {
@@ -65,7 +65,7 @@ const Schedule = () => {
         />
       </div>
       <div className="overflow-y-scroll w-full">
-        <SheduleTable
+        <ScheduleTable
           selectLesson={selectLesson}
         />
       </div>

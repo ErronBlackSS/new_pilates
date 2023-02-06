@@ -52,26 +52,8 @@ async function getHistoryLessons(req, res) {
   }
 }
 
-async function getLessonsByDate(req, res) {
-  try {
-    const { start, end } = req.query.week
-    const lessons = await pool.query(`
-      select users."name", lessons.id as lesson_id, users.id as trainer_id, lesson_types.description as description, lesson_types.title, lessons.date, lessons.start_time, lessons.end_time, lessons.capacity, lessons.occupied
-      from lessons
-      left join users on lessons.coach_id = users.id
-      left join lesson_types on lessons.lesson_type_id = lesson_types.id
-      where lessons.date BETWEEN $1 and $2`,
-    [start, end])
-
-    res.json(lessons.rows)
-  } catch (e) {
-    console.log(e)
-  }
-}
-
 module.exports = {
   getLessonsCurrentWeek,
-  getLessonsByDate,
   getPlannedLessons,
   getHistoryLessons
 }

@@ -35,7 +35,7 @@ const EditPasswordForm = () => {
   }
 
   return (
-    <div className="flex justify-center text-center w-full">
+    <div className="flex justify-center text-center w-full mobile-below:mx-[5px]">
       <div className="w-full">
         <div className="text-left mobile-above:w-[500px] mobile-below:w-full">
           <form
@@ -86,7 +86,7 @@ const EditPasswordForm = () => {
 
               <button
                 disabled={formDisabled}
-                className={ 'w-full px-6 py-2 mt-4 text-[#fff] cursor-pointer rounded-[10px] bg-bordo' + (formDisabled ? ' opacity-40' : '')}
+                className={ 'w-full px-6 py-2 my-4 text-[#fff] cursor-pointer rounded-[10px] bg-bordo' + (formDisabled ? ' opacity-40' : '')}
               >
                 Сохранить изменения
               </button>
