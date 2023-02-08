@@ -8,11 +8,22 @@ const LessonTypesRouter = require('./routes/LessonTypesRouter')
 const ErrorMiddleware = require('./middlewares/ErrorMiddleware')
 const fileUpload = require("express-fileupload")
 const cookieParser = require('cookie-parser')
+const fs = require('fs')
+const http = require('http')
+const https = require('https')
 const app = express()
 
+var options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/1216649-cu21564.tw1.ru/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/1216649-cu21564.tw1.ru/cert.pem'),
+};
+
+console.log(process.env, 'config file')
 app.use(express.json())
 app.use(cookieParser())
 app.use(fileUpload({}))
+
+console.log(process.env.CLIENT_URL, 'client url');
 
 app.use(cors({
     credentials: true,
@@ -25,12 +36,14 @@ app.use('/api', LessonsRouter)
 app.use('/api', LessonTypesRouter)
 app.use(ErrorMiddleware);
 
-const start = async () => {
-    try {
-        app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
-    } catch (e) {
-        console.log(e)
-    }
-}
+var server = https.createServer(options, app).listen(PORT)
 
-start()
+//const start = async () => {
+//    try {
+//        app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+//   } catch (e) {
+//        console.log(e)
+//    }
+//}
+
+//start()
