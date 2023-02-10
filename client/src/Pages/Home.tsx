@@ -4,6 +4,7 @@ import TrainersSwipe from '../Components/TrainersSwipe'
 import Directions from '../Components/Directions'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import { ENV } from '../Utils/environment'
 
 const Main = () => {
   const windowWidth = useWindowWidth()
@@ -47,7 +48,7 @@ const Main = () => {
                   </span>
                 </div>
                 <div className="w-[144px] h-[144px] flex justify-center items-center mobile-above:hidden">
-                  <img src="http://localhost:8080/files/girl.png" alt="mainImage" />
+                  <img src={ENV.REACT_APP_FILE_PATH + '/girl.png'} alt="mainImage" />
                 </div>
               </div>
               <div className="w-[434px] mt-[28px] mobile-below:w-[190px] mobile-below:h-[40px] mobile-below:ml-[16px] mobile-below:mt-[0px]">
@@ -73,7 +74,7 @@ const Main = () => {
                 <li className="pt-[32px] pb-[52px] mobile-below:pt-[8px] mobile-below:pb-[8px]">Абонементы без ограничения сроков</li>
               </ul>         
               <div className="w-full flex items-center mobile-below:hidden">
-                <img src="http://localhost:8080/files/girl.png" alt="mainImage" />
+                <img src={ENV.REACT_APP_FILE_PATH + '/girl.png'} alt="mainImage" />
               </div>
             </div>
           </div>
@@ -184,7 +185,7 @@ const Main = () => {
           </div>
           <div className="w-full mobile-below:hidden">
             <div >
-              <img className="m-auto" src="http://localhost:8080/files/girl.png" alt="mainImage" />
+              <img className="m-auto" src={ENV.REACT_APP_FILE_PATH + '/girl.png'} alt="mainImage" />
             </div>
           </div>
         </div>

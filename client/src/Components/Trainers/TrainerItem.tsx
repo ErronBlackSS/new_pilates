@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+import { ENV } from '../../Utils/environment'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import Modal from '../Common/Modal'
@@ -18,7 +19,7 @@ const TrainerItem: FC<ITrainerItem> = ({name, lastname, image_url, education, ce
 
   const [showModalInfo, setShowModalInfo] = useState(false)
 
-  const imageLink = image_url? image_url : process.env.REACT_APP_FILE_PATH + '/user_photos/sss.png'
+  const imageLink = image_url? image_url : ENV.REACT_APP_FILE_PATH + '/user_photos/sss.png'
 
   const isBoss = (name === 'Екатерина' && lastname === 'Федоровская') ? true : false 
 

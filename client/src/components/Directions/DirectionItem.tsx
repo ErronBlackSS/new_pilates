@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import Modal from '../Common/Modal'
-
+import { REACT_APP_FILE_PATH } from '../..'
 interface IDirectionItem {
   title: string
   description: string
@@ -15,7 +15,7 @@ const DirectionItem: FC<IDirectionItem> = ({ title, description, duration, image
 
   const [showModalInfo, setShowModalInfo] = useState(false)
 
-  const imageLink = image_url ? image_url : process.env.REACT_APP_FILE_PATH + '/test_yoga.png'
+  const imageLink = image_url ? image_url : REACT_APP_FILE_PATH + '/test_yoga.png'
 
   return (
     <>

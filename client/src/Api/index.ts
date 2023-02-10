@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { AuthResponse } from '../Types/ResponseTypes/AuthResponse'
+import { ENV } from '../Utils/environment'
 
-export const API_URL = 'http://176.57.218.115:8080/api'
+console.log(ENV)
 
 const $api = axios.create({
   withCredentials: true,
-  baseURL: API_URL
+  baseURL: ENV.API_URL
 })
 
 $api.interceptors.request.use((config) => {
@@ -20,7 +21,7 @@ $api.interceptors.response.use((config) => {
   if (error.response.status === 401 && error.config && !error.config._isRetry) {
     originalRequest._isRetry = true
     try {
-      const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true})
+      const response = await axios.get<AuthResponse>(`${ENV.API_URL}/refresh`, {withCredentials: true})
       localStorage.setItem('token', response.data.accessToken)
       return $api.request(originalRequest)
     } catch (e) {

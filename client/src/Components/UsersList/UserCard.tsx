@@ -4,6 +4,7 @@ import { ButtonColors } from '../../Utils/constance'
 import Button from '../Common/Button'
 import Modal from '../Common/Modal'
 import { observer } from 'mobx-react-lite'
+import { ENV } from '../../Utils/environment'
 
 interface IUserCard {
   id: number
@@ -25,15 +26,13 @@ const UserCard: FC<IUserCard> = ({ id, name, lastname, image_url, phone, email, 
     onChangeUserRole(id)
   }
 
-  const imageLink = image_url? image_url : 'http://localhost:8080/files/user_photos/sss.png'
-
+  const imageLink = image_url? image_url : `'${ENV.REACT_APP_FILE_PATH}/user_photos/sss.png'`
   return (
     <>
       {showUserProperties &&
         <Modal
           title="Свойства"
           setShowModal={setShowUserProperties}
-
         >
           <Button
             className="w-[300px]"

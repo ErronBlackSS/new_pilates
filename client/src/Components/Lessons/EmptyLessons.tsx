@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
+import { ENV } from '../../Utils/environment'
 
 const EmptyLessons = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-[20px]">
       <div className="w-[144px] h-[144px] flex justify-center items-center">
-        <img src="http://localhost:8080/files/girl.png" alt="mainImage" />
+        <img src={`${ENV.REACT_APP_FILE_PATH}/girl.png'`} alt="mainImage" />
       </div>
       <div>
         <p>

@@ -5,7 +5,7 @@ import Button from '../Common/Button'
 import Modal from '../Common/Modal'
 import { observer } from 'mobx-react-lite'
 import UpdateTrainerInfoForm from '../Forms/UpdateTrainerInfoForm'
-
+import { ENV } from '../../Utils/environment'
 interface ITrainerCard {
     id: number
     name: string
@@ -27,7 +27,7 @@ const TrainerCard: FC<ITrainerCard> = ({ id, name, lastname, image_url, phone, e
     onChangeUserRole(id)
   }
   
-  const imageLink = image_url? image_url : 'http://localhost:8080/files/user_photos/sss.png'
+  const imageLink = image_url? image_url : `'${ENV.REACT_APP_FILE_PATH}/user_photos/sss.png'`
   
   return (
     <>
