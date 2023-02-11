@@ -70,7 +70,7 @@ export default class UserStore {
       localStorage.setItem('token', response.data.accessToken)
       this.setAuth(true)
       this.setUser(response.data.user)
-      return { status: RESPONSE_STATUSES.SUCCESS }
+      return { status: RESPONSE_STATUSES.SUCCESS, activate_link: response.data.activate_link }
     } catch (e) {
       return { status: RESPONSE_STATUSES.ERROR, message: e.response?.data?.message }
     }

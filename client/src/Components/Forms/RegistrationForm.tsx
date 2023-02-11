@@ -21,6 +21,7 @@ const RegistationForm: FC = () => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const [formSended, setFormSended] = useState(false)
+  const [activateLink, setActivateLink] = useState('')
   const passwordIdentity = password.value === passwordConfirm.value
 
   const formDisabled = 
@@ -37,6 +38,7 @@ const RegistationForm: FC = () => {
     const response = await user.registration(name.value, lastname.value, phone.value, email.value, password.value)
     if (response.status === RESPONSE_STATUSES.SUCCESS) {
       setFormSended(true)
+      setActivateLink(response.activate_link)
     } else {
       setErrorMessage(response.message)
     }
@@ -49,7 +51,7 @@ const RegistationForm: FC = () => {
           <div
             className="w-[300px] h-[300px] flex flex-col justify-center items-center"
           >
-            Вам на почту отправленно письмо с подтверждением
+            Для активации аккаунта перейдите по ссылке - <a href={activateLink}> Активировать </a>
           </div>
           :
           <div className="text-left min-w-[300px]">
